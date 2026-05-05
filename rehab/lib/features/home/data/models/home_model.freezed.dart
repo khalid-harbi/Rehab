@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'sign_up_model.dart';
+part of 'home_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'sign_up_model.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$SignUpModel {
+mixin _$HomeModel {
 
  int get id; String get firstName; String get lastName;
-/// Create a copy of SignUpModel
+/// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SignUpModelCopyWith<SignUpModel> get copyWith => _$SignUpModelCopyWithImpl<SignUpModel>(this as SignUpModel, _$identity);
+$HomeModelCopyWith<HomeModel> get copyWith => _$HomeModelCopyWithImpl<HomeModel>(this as HomeModel, _$identity);
 
-  /// Serializes this SignUpModel to a JSON map.
+  /// Serializes this HomeModel to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
 
 @override
 String toString() {
-  return 'SignUpModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'HomeModel(id: $id, firstName: $firstName, lastName: $lastName)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SignUpModelCopyWith<$Res>  {
-  factory $SignUpModelCopyWith(SignUpModel value, $Res Function(SignUpModel) _then) = _$SignUpModelCopyWithImpl;
+abstract mixin class $HomeModelCopyWith<$Res>  {
+  factory $HomeModelCopyWith(HomeModel value, $Res Function(HomeModel) _then) = _$HomeModelCopyWithImpl;
 @useResult
 $Res call({
  int id, String firstName, String lastName
@@ -56,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$SignUpModelCopyWithImpl<$Res>
-    implements $SignUpModelCopyWith<$Res> {
-  _$SignUpModelCopyWithImpl(this._self, this._then);
+class _$HomeModelCopyWithImpl<$Res>
+    implements $HomeModelCopyWith<$Res> {
+  _$HomeModelCopyWithImpl(this._self, this._then);
 
-  final SignUpModel _self;
-  final $Res Function(SignUpModel) _then;
+  final HomeModel _self;
+  final $Res Function(HomeModel) _then;
 
-/// Create a copy of SignUpModel
+/// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
   return _then(_self.copyWith(
@@ -77,8 +77,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [SignUpModel].
-extension SignUpModelPatterns on SignUpModel {
+/// Adds pattern-matching-related methods to [HomeModel].
+extension HomeModelPatterns on HomeModel {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -91,10 +91,10 @@ extension SignUpModelPatterns on SignUpModel {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SignUpModel value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _HomeModel value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SignUpModel() when $default != null:
+case _HomeModel() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -113,10 +113,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SignUpModel value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _HomeModel value)  $default,){
 final _that = this;
 switch (_that) {
-case _SignUpModel():
+case _HomeModel():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -134,10 +134,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SignUpModel value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _HomeModel value)?  $default,){
 final _that = this;
 switch (_that) {
-case _SignUpModel() when $default != null:
+case _HomeModel() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -157,7 +157,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SignUpModel() when $default != null:
+case _HomeModel() when $default != null:
 return $default(_that.id,_that.firstName,_that.lastName);case _:
   return orElse();
 
@@ -178,7 +178,7 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)  $default,) {final _that = this;
 switch (_that) {
-case _SignUpModel():
+case _HomeModel():
 return $default(_that.id,_that.firstName,_that.lastName);case _:
   throw StateError('Unexpected subclass');
 
@@ -198,7 +198,7 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String firstName,  String lastName)?  $default,) {final _that = this;
 switch (_that) {
-case _SignUpModel() when $default != null:
+case _HomeModel() when $default != null:
 return $default(_that.id,_that.firstName,_that.lastName);case _:
   return null;
 
@@ -210,28 +210,28 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _SignUpModel implements SignUpModel {
-  const _SignUpModel({required this.id, required this.firstName, required this.lastName});
-  factory _SignUpModel.fromJson(Map<String, dynamic> json) => _$SignUpModelFromJson(json);
+class _HomeModel implements HomeModel {
+  const _HomeModel({required this.id, required this.firstName, required this.lastName});
+  factory _HomeModel.fromJson(Map<String, dynamic> json) => _$HomeModelFromJson(json);
 
 @override final  int id;
 @override final  String firstName;
 @override final  String lastName;
 
-/// Create a copy of SignUpModel
+/// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SignUpModelCopyWith<_SignUpModel> get copyWith => __$SignUpModelCopyWithImpl<_SignUpModel>(this, _$identity);
+_$HomeModelCopyWith<_HomeModel> get copyWith => __$HomeModelCopyWithImpl<_HomeModel>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$SignUpModelToJson(this, );
+  return _$HomeModelToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignUpModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -240,15 +240,15 @@ int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
 
 @override
 String toString() {
-  return 'SignUpModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'HomeModel(id: $id, firstName: $firstName, lastName: $lastName)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SignUpModelCopyWith<$Res> implements $SignUpModelCopyWith<$Res> {
-  factory _$SignUpModelCopyWith(_SignUpModel value, $Res Function(_SignUpModel) _then) = __$SignUpModelCopyWithImpl;
+abstract mixin class _$HomeModelCopyWith<$Res> implements $HomeModelCopyWith<$Res> {
+  factory _$HomeModelCopyWith(_HomeModel value, $Res Function(_HomeModel) _then) = __$HomeModelCopyWithImpl;
 @override @useResult
 $Res call({
  int id, String firstName, String lastName
@@ -259,17 +259,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$SignUpModelCopyWithImpl<$Res>
-    implements _$SignUpModelCopyWith<$Res> {
-  __$SignUpModelCopyWithImpl(this._self, this._then);
+class __$HomeModelCopyWithImpl<$Res>
+    implements _$HomeModelCopyWith<$Res> {
+  __$HomeModelCopyWithImpl(this._self, this._then);
 
-  final _SignUpModel _self;
-  final $Res Function(_SignUpModel) _then;
+  final _HomeModel _self;
+  final $Res Function(_HomeModel) _then;
 
-/// Create a copy of SignUpModel
+/// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
-  return _then(_SignUpModel(
+  return _then(_HomeModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable

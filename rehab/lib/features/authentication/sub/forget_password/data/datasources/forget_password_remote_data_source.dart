@@ -1,33 +1,23 @@
 import 'package:injectable/injectable.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:rehab/core/services/local_keys_service.dart';
-import 'package:rehab/features/authentication/sub/forget_password/data/models/forget_password_model.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseForgetPasswordRemoteDataSource {
-  Future<ForgetPasswordModel> getForgetPassword();
+  Future<void> sendResetPasswordEmail(String email);
 }
-
 
 @LazySingleton(as: BaseForgetPasswordRemoteDataSource)
 class ForgetPasswordRemoteDataSource implements BaseForgetPasswordRemoteDataSource {
- 
   final SupabaseClient _supabase;
-  final LocalKeysService _localKeysService;
-  
-  
 
-   ForgetPasswordRemoteDataSource(this._localKeysService, this._supabase);
+  ForgetPasswordRemoteDataSource(this._supabase);
 
-
-
-    @override
-  Future<ForgetPasswordModel> getForgetPassword() async {
+  @override
+  Future<void> sendResetPasswordEmail(String email) async {
     try {
-      return ForgetPasswordModel(id: 1, firstName: "Last Name", lastName: "First Name");
+      await _supabase.auth.resetPasswordForEmail(email);
     } catch (error) {
-     throw FailureExceptions.getException(error);
+      throw FailureExceptions.getException(error);
     }
   }
 }

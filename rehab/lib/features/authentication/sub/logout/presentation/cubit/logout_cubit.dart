@@ -11,17 +11,11 @@ class LogoutCubit extends Cubit<LogoutState> {
     final result = await _logoutUseCase.getLogout();
     result.when(
       (success) {
-        //here is when success result
+        emit(LogoutSuccessState());
       },
       (whenError) {
-       //here is when error result
+        emit(LogoutErrorState(message: whenError.message));
       },
     );
-  }
-
-  @override
-  Future<void> close() {
-    //here is when close cubit
-    return super.close();
   }
 }

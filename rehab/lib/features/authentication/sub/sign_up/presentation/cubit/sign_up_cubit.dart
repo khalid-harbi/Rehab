@@ -7,21 +7,24 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   SignUpCubit(this._signUpUseCase) : super(SignUpInitialState());
 
-  Future<void> getSignUpMethod() async {
-    final result = await _signUpUseCase.getSignUp();
+  Future<void> getSignUpMethod({
+    required String username,
+    required String email,
+    required String password,
+  }) async {
+    emit(SignUpLoadingState());
+    final result = await _signUpUseCase.getSignUp(
+      email: email,
+      password: password,
+      name: username,
+    );
     result.when(
       (success) {
-        //here is when success result
+        emit(SignUpSuccessState());
       },
       (whenError) {
-       //here is when error result
+        emit(SignUpErrorState(message: whenError.message));
       },
     );
-  }
-
-  @override
-  Future<void> close() {
-    //here is when close cubit
-    return super.close();
   }
 }

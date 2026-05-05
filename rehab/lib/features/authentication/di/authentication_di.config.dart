@@ -11,7 +11,6 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:rehab/core/services/local_keys_service.dart' as _i13;
 import 'package:rehab/features/authentication/data/datasources/authentication_remote_data_source.dart'
     as _i232;
 import 'package:rehab/features/authentication/data/repositories/authentication_repository_data.dart'
@@ -62,43 +61,26 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i65.BaseLoginRemoteDataSource>(
-      () => _i65.LoginRemoteDataSource(
-        gh<_i13.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
-      ),
+      () => _i65.LoginRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
     gh.lazySingleton<_i222.BaseForgetPasswordRemoteDataSource>(
-      () => _i222.ForgetPasswordRemoteDataSource(
-        gh<_i13.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
-      ),
+      () => _i222.ForgetPasswordRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
     gh.lazySingleton<_i11.BaseLogoutRemoteDataSource>(
-      () => _i11.LogoutRemoteDataSource(
-        gh<_i13.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
-      ),
+      () => _i11.LogoutRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
     gh.lazySingleton<_i812.LoginRepositoryDomain>(
       () => _i164.LoginRepositoryData(gh<_i65.BaseLoginRemoteDataSource>()),
     );
+    gh.lazySingleton<_i844.BaseSignUpRemoteDataSource>(
+      () => _i844.SignUpRemoteDataSource(gh<_i454.SupabaseClient>()),
+    );
     gh.lazySingleton<_i232.BaseAuthRemoteDataSource>(
       () => _i232.AuthRemoteDataSource(gh<_i454.SupabaseClient>()),
-    );
-    gh.lazySingleton<_i844.BaseSignUpRemoteDataSource>(
-      () => _i844.SignUpRemoteDataSource(
-        gh<_i13.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
-      ),
     );
     gh.lazySingleton<_i269.ForgetPasswordRepositoryDomain>(
       () => _i781.ForgetPasswordRepositoryData(
         gh<_i222.BaseForgetPasswordRemoteDataSource>(),
-      ),
-    );
-    gh.lazySingleton<_i909.ForgetPasswordUseCase>(
-      () => _i909.ForgetPasswordUseCase(
-        gh<_i269.ForgetPasswordRepositoryDomain>(),
       ),
     );
     gh.lazySingleton<_i781.LogoutRepositoryDomain>(
@@ -106,6 +88,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i823.LoginUseCase>(
       () => _i823.LoginUseCase(gh<_i812.LoginRepositoryDomain>()),
+    );
+    gh.lazySingleton<_i909.ForgetPasswordUseCase>(
+      () => _i909.ForgetPasswordUseCase(
+        gh<_i269.ForgetPasswordRepositoryDomain>(),
+      ),
     );
     gh.lazySingleton<_i956.SignUpRepositoryDomain>(
       () => _i579.SignUpRepositoryData(gh<_i844.BaseSignUpRemoteDataSource>()),

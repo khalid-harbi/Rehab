@@ -3,25 +3,22 @@ import 'package:rehab/features/authentication/sub/forget_password/domain/use_cas
 import 'package:rehab/features/authentication/sub/forget_password/presentation/cubit/forget_password_state.dart';
 
 class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
-  final ForgetPasswordUseCase _forgetPasswordUseCase;
+  final ForgetPasswordUseCase _useCase;
 
-  ForgetPasswordCubit(this._forgetPasswordUseCase) : super(ForgetPasswordInitialState());
+  ForgetPasswordCubit(this._useCase) : super(ForgetPasswordInitial());
 
-  Future<void> getForgetPasswordMethod() async {
-    final result = await _forgetPasswordUseCase.getForgetPassword();
+  Future<void> sendResetPasswordEmail(String email) async {
+    emit(ForgetPasswordLoading());
+
+    final result = await _useCase.call(email);
+
     result.when(
       (success) {
-        //here is when success result
+        emit(ForgetPasswordSuccess());
       },
-      (whenError) {
-       //here is when error result
+      (error) {
+        emit(ForgetPasswordError(message: error.message));
       },
     );
-  }
-
-  @override
-  Future<void> close() {
-    //here is when close cubit
-    return super.close();
   }
 }

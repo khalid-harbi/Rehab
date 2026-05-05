@@ -4,7 +4,6 @@ import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/features/authentication/domain/entities/authentication_entity.dart';
 import 'package:rehab/features/authentication/domain/repositories/authentication_repository_domain.dart';
 
-
 @lazySingleton
 class AuthUseCase {
   final AuthRepositoryDomain _repositoryData;

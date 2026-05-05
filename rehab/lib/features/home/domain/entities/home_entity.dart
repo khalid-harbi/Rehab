@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-class LogoutEntity extends Equatable {
+class HomeEntity extends Equatable {
   final int id;
   final String firstName;
   final String lastName;
 
-  const LogoutEntity({
+  const HomeEntity({
     required this.id,
     required this.firstName,
     required this.lastName,

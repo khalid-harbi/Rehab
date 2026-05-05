@@ -1,33 +1,26 @@
 import 'package:injectable/injectable.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:rehab/core/services/local_keys_service.dart';
-import 'package:rehab/features/authentication/sub/login/data/models/login_model.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseLoginRemoteDataSource {
-  Future<LoginModel> getLogin();
+  Future<void> getLogin({required String email, required String password});
 }
-
 
 @LazySingleton(as: BaseLoginRemoteDataSource)
 class LoginRemoteDataSource implements BaseLoginRemoteDataSource {
- 
   final SupabaseClient _supabase;
-  final LocalKeysService _localKeysService;
-  
-  
 
-   LoginRemoteDataSource(this._localKeysService, this._supabase);
+  LoginRemoteDataSource(this._supabase);
 
-
-
-    @override
-  Future<LoginModel> getLogin() async {
+  @override
+  Future<void> getLogin({
+    required String email,
+    required String password,
+  }) async {
     try {
-      return LoginModel(id: 1, firstName: "Last Name", lastName: "First Name");
+      await _supabase.auth.signInWithPassword(password: password, email: email);
     } catch (error) {
-     throw FailureExceptions.getException(error);
+      throw FailureExceptions.getException(error);
     }
   }
 }

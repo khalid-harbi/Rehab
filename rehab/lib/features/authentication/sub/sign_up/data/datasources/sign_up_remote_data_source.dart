@@ -1,33 +1,38 @@
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:rehab/core/services/local_keys_service.dart';
-import 'package:rehab/features/authentication/sub/sign_up/data/models/sign_up_model.dart';
-import 'package:rehab/core/errors/network_exceptions.dart';
-
 
 abstract class BaseSignUpRemoteDataSource {
-  Future<SignUpModel> getSignUp();
+  Future<bool> getSignUp({
+    required String name,
+    required String email,
+    required String password,
+  });
 }
-
 
 @LazySingleton(as: BaseSignUpRemoteDataSource)
 class SignUpRemoteDataSource implements BaseSignUpRemoteDataSource {
- 
   final SupabaseClient _supabase;
-  final LocalKeysService _localKeysService;
-  
-  
+  SignUpRemoteDataSource(this._supabase);
 
-   SignUpRemoteDataSource(this._localKeysService, this._supabase);
+  @override
+  Future<bool> getSignUp({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    final authResponse = await _supabase.auth.signUp(
+      password: password,
+      email: email,
+    );
 
+    final user = authResponse.user;
 
-
-    @override
-  Future<SignUpModel> getSignUp() async {
-    try {
-      return SignUpModel(id: 1, firstName: "Last Name", lastName: "First Name");
-    } catch (error) {
-     throw FailureExceptions.getException(error);
+    if (user == null) {
+      throw Exception("User is null (maybe email confirmation required)");
     }
+
+    await _supabase.from('profiles').insert({"id": user.id, "name": name});
+
+    return true;
   }
 }

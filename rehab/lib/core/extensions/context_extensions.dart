@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rehab/core/constants/app_colors.dart';
+import 'package:rehab/features/authentication/sub/logout/presentation/cubit/logout_cubit.dart';
 import 'package:sizer/sizer.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 
@@ -19,6 +21,46 @@ extension ContextExtensions on BuildContext {
 
   void hideLoading() {
     LoadingWidgetOverlay().hide();
+  }
+
+  void showLogoutDialog(BuildContext context, LogoutCubit cubit) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: AppColors.background,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Text(
+          "تسجيل الخروج",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        content: const Text(
+          "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+          style: TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text("إلغاء", style: TextStyle(color: Colors.grey)),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.redAccent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            onPressed: () {
+              Navigator.pop(dialogContext);
+              cubit.getLogoutMethod();
+            },
+            child: const Text(
+              "تسجيل الخروج",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void showBottomSheet({required Widget widget, double? height, Color? color}) {
