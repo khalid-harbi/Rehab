@@ -10,21 +10,27 @@ abstract class AppTextTheme {
       fontWeight: FontWeight.w600,
       color: AppColors.textPrimary,
     ),
-
     titleMedium: TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w500,
       color: AppColors.textPrimary,
     ),
+    bodyLarge: TextStyle(fontSize: 16, color: AppColors.textPrimary),
+    bodyMedium: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+  );
 
-    bodyLarge: TextStyle(
-      fontSize: 16,
-      color: AppColors.textPrimary,
+  static const TextTheme darkTextTheme = TextTheme(
+    titleLarge: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
     ),
-
-    bodyMedium: TextStyle(
-      fontSize: 14,
-      color: AppColors.textSecondary,
+    titleMedium: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: Colors.white,
     ),
+    bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
+    bodyMedium: TextStyle(fontSize: 14, color: Colors.white70),
   );
 }

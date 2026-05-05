@@ -37,7 +37,7 @@ class MainApp extends StatelessWidget {
           locale: context.locale,
           // themeMode: state.themeMode,
           theme: AppTheme.lightTheme,
-          darkTheme: ThemeData.dark(),
+          darkTheme: AppTheme.darkTheme,
           debugShowCheckedModeBanner: true,
         );
       },
