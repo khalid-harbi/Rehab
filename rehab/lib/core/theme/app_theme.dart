@@ -92,7 +92,7 @@ abstract class AppTheme {
       onSurface: Colors.white,
     ),
 
-    scaffoldBackgroundColor: AppColors.neutral,
+    scaffoldBackgroundColor: AppColors.darkBackground,
 
     textTheme: AppTextTheme.darkTextTheme,
 
@@ -149,9 +149,10 @@ abstract class AppTheme {
 
     // Cards
     cardTheme: CardThemeData(
-      color: const Color(0xFF3D3025),
+      color: AppColors.border,
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
+
   );
 }

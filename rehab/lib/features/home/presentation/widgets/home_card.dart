@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
 class HomeCard extends StatelessWidget {
@@ -10,7 +11,7 @@ class HomeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push('/home-details', extra: home);
+        context.push(Routes.homeDetails, extra: home);
       },
       child: Card(
         elevation: 4,
