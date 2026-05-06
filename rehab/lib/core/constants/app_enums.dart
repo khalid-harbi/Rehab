@@ -1,3 +1,4 @@
+enum UserRole { owner, user }
 
 enum LoadingState { initial, loading, success, error }
 

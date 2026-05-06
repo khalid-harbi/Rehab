@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/constants/app_colors.dart';
+import 'package:rehab/core/constants/app_enums.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/utils/validators.dart';
@@ -35,6 +36,11 @@ class LoginFeatureScreen extends HookWidget {
               context.showLoading();
               break;
             case LoginSuccessState _:
+            if (state.role == UserRole.owner) {
+              // context.go(Routes.owner);
+            } else if (state.role == UserRole.user) {
+              // context.go(Routes.user);
+            }
               context.go(Routes.home);
               break;
             case LoginErrorState _:
