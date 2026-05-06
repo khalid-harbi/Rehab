@@ -20,6 +20,8 @@ import 'package:rehab/features/home/domain/repositories/home_repository_domain.d
     as _i836;
 import 'package:rehab/features/home/domain/use_cases/home_use_case.dart'
     as _i554;
+import 'package:rehab/features/home/presentation/cubit/home_cubit.dart'
+    as _i481;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -41,6 +43,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i554.HomeUseCase>(
       () => _i554.HomeUseCase(gh<_i836.HomeRepositoryDomain>()),
     );
+    gh.factory<_i481.HomeCubit>(() => _i481.HomeCubit(gh<_i554.HomeUseCase>()));
     return this;
   }
 }

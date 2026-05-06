@@ -11,13 +11,13 @@ _HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => _HomeModel(
   title: json['title'] as String,
   city: json['city'] as String,
   district: json['district'] as String,
-  imageUrl: json['imageUrl'] as String,
+  imageUrl: json['image_url'] as String,
   price: (json['price'] as num).toDouble(),
   rating: (json['rating'] as num).toDouble(),
   rooms: (json['rooms'] as num).toInt(),
   bathrooms: (json['bathrooms'] as num).toInt(),
   description: json['description'] as String,
-  isAvailable: json['isAvailable'] as bool,
+  isAvailable: json['is_available'] as bool,
 );
 
 Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
@@ -26,11 +26,11 @@ Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
       'title': instance.title,
       'city': instance.city,
       'district': instance.district,
-      'imageUrl': instance.imageUrl,
+      'image_url': instance.imageUrl,
       'price': instance.price,
       'rating': instance.rating,
       'rooms': instance.rooms,
       'bathrooms': instance.bathrooms,
       'description': instance.description,
-      'isAvailable': instance.isAvailable,
+      'is_available': instance.isAvailable,
     };

@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'routers.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,12 +39,15 @@ class AppRouter {
   ),
 
   GoRoute(
-    path: Routes.homeDetails,
-    builder: (context, state) => BlocProvider(
-          create: (context) => HomeDetailsCubit(GetIt.I.get()),
-          child: const HomeDetailsFeatureScreen(),
-        ),
-  ),
+  path: Routes.homeDetails,
+  builder: (context, state) {
+    final home = state.extra as HomeEntity;
+    return BlocProvider(
+      create: (context) => HomeDetailsCubit(GetIt.I.get()),
+      child: HomeDetailsFeatureScreen(home: home),
+    );
+  },
+),
 ],
 
     errorBuilder: (context, state) =>

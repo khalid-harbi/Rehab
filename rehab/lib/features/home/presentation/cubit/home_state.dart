@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:rehab/core/errors/failure.dart';
+import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
 abstract class HomeState extends Equatable {
   const HomeState();
@@ -8,11 +10,18 @@ abstract class HomeState extends Equatable {
 }
 
 class HomeInitialState extends HomeState {}
-class HomeSuccessState extends HomeState {}
+class HomeLoadingState extends HomeState {}
+class HomeSuccessState extends HomeState {
+  final List<HomeEntity> homes;
+
+  HomeSuccessState(this.homes);
+}
 
 class HomeErrorState extends HomeState {
   final String message;
-  const HomeErrorState({required this.message});
+
+  const HomeErrorState(this.message);
+
   @override
   List<Object?> get props => [message];
 }
