@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rehab/features/auth/di/auth_di.dart';
 import 'package:rehab/features/home/di/home_di.dart';
 import 'package:rehab/features/profile/di/profile_di.dart';
+import 'package:rehab/features/users/di/users_di.dart';
 
 @InjectableInit(
   initializerName: 'init',
@@ -17,4 +18,5 @@ Future<void> configureDependencies() async {
   configureHome(getIt);
   configureAuth(getIt);
     configureProfile(getIt);
+    configureUsers(getIt);
 }

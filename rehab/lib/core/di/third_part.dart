@@ -19,4 +19,3 @@ abstract class ThirdPartyConfig {
       FlutterSecureStorage(aOptions: _getAndroidOptions());
   //----------------------------------------------------------------------------
 }
-

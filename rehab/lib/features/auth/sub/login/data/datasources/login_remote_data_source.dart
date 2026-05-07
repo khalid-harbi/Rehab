@@ -23,7 +23,7 @@ class LoginRemoteDataSource implements BaseLoginRemoteDataSource {
       final response = await _supabase.auth.signInWithPassword(password: password, email: email);
       // todo: add role
        final data = await _supabase
-          .from('users')
+          .from('profiles')
           .select('role')
           .eq('id', response.user!.id)
           .single();

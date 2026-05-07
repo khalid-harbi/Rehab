@@ -41,7 +41,7 @@ class LoginFeatureScreen extends HookWidget {
             } else if (state.role == UserRole.user) {
               // context.go(Routes.user);
             }
-              context.go(Routes.home);
+              context.go(Routes.users);
               break;
             case LoginErrorState _:
               context.showSnackBar(state.message, isError: true);

@@ -15,11 +15,14 @@ import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart'
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/profile_feature_screen.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:rehab/features/users/presentation/pages/users_feature_screen.dart';
+import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
+
 
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.profile,
+    initialLocation: Routes.splash,
     routes: [
       GoRoute(
         path: Routes.splash,
@@ -32,7 +35,7 @@ class AppRouter {
                   switch (state) {
                     case AuthSuccessState _:
                       if (state.isLogin) {
-                        context.go(Routes.home);
+                        context.go(Routes.users);
                         return;
                       }
                       context.go(Routes.signUp);
@@ -77,6 +80,14 @@ class AppRouter {
     builder: (context, state) => BlocProvider(
           create: (context) => ProfileCubit(GetIt.I.get()),
           child: const ProfileFeatureScreen(),
+        ),
+  ),
+
+  GoRoute(
+    path: Routes.users,
+    builder: (context, state) => BlocProvider(
+          create: (context) => UsersCubit(GetIt.I.get()),
+          child: const UsersFeatureScreen(),
         ),
   ),
 ],
