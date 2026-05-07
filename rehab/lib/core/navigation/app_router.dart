@@ -8,6 +8,9 @@ import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart'
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
+import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
+import 'package:rehab/features/booking/presentation/cubit/booking_cubit.dart';
+
 
 
 
@@ -46,6 +49,14 @@ class AppRouter {
       create: (context) => HomeDetailsCubit(GetIt.I.get()),
       child: HomeDetailsFeatureScreen(home: home),
     );
+  },
+),
+
+ GoRoute(
+  path: Routes.booking,
+  builder: (context, state) {
+    final home = state.extra as HomeEntity;
+    return BookingFeatureScreen(home: home);
   },
 ),
 ],
