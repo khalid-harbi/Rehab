@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rehab/core/constants/app_colors.dart';
-import 'package:rehab/features/authentication/sub/logout/presentation/cubit/logout_cubit.dart';
+import 'package:rehab/features/auth/sub/logout/presentation/cubit/logout_cubit.dart';
 import 'package:sizer/sizer.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 
