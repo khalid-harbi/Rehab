@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
+import 'package:rehab/core/widgets/root_shell.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_state.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_cubit.dart';
@@ -35,7 +36,7 @@ class AppRouter {
                   switch (state) {
                     case AuthSuccessState _:
                       if (state.isLogin) {
-                        context.go(Routes.users);
+                        context.go(Routes.home);
                         return;
                       }
                       context.go(Routes.signUp);
@@ -67,13 +68,17 @@ class AppRouter {
           child: const SignUpFeatureScreen(),
         ),
       ),
-      GoRoute(
+       GoRoute(
         path: Routes.home,
-        builder: (context, state) => BlocProvider(
-          create: (context) => HomeCubit(GetIt.I.get()),
-          child: const HomeFeatureScreen(),
-        ),
+        builder: (context, state) => const RootShell(),
       ),
+      // GoRoute(
+      //   path: Routes.home,
+      //   builder: (context, state) => BlocProvider(
+      //     create: (context) => HomeCubit(GetIt.I.get()),
+      //     child: const HomeFeatureScreen(),
+      //   ),
+      // ),
     
   GoRoute(
     path: Routes.profile,

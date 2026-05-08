@@ -1,5 +1,7 @@
 enum UserRole { owner, user }
 
+enum SelectedTab { home, chat, users, profile }
+
 enum LoadingState { initial, loading, success, error }
 
 enum NetworkStatus { connected, disconnected, unknown }
