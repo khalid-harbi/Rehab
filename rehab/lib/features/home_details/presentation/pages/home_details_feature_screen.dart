@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/home_details/presentation/widgets/booking_bar.dart';
 import 'package:rehab/features/home_details/presentation/widgets/facility_card.dart';
@@ -96,7 +95,7 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
 
                   SectionTitle(title: 'المرافق المميزة'),
 

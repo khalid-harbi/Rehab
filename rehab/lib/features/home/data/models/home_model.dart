@@ -6,20 +6,17 @@ part 'home_model.g.dart';
 @freezed
 abstract class HomeModel with _$HomeModel {
   const factory HomeModel({
-   required String id,
+   required int id,
     required String title,
     required String city,
     required String district,
-
     @JsonKey(name: 'image_url')
     required String imageUrl,
-
     required double price,
     required double rating,
     required int rooms,
     required int bathrooms,
     required String description,
-
     @JsonKey(name: 'is_available')
     required bool isAvailable,
     
