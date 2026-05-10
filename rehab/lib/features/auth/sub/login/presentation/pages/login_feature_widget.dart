@@ -12,6 +12,7 @@ import 'package:rehab/features/auth/sub/forget_password/presentation/pages/forge
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_cubit.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_state.dart';
 import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginFeatureScreen extends HookWidget {
   const LoginFeatureScreen({super.key});
@@ -31,10 +32,10 @@ class LoginFeatureScreen extends HookWidget {
             switch (state) {
               case LoginLoadingState _:
                 context.showLoading();
-        
+
               case LoginSuccessState _:
                 // if (state.role == UserRole.owner) {
-                  // context.go(Routes.owner);
+                // context.go(Routes.owner);
                 // } else if (state.role == UserRole.user) {
                 //   // context.go(Routes.user);
                 // }
@@ -53,12 +54,18 @@ class LoginFeatureScreen extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Gap(5.h),
-                    const Text(
-                      "مرحبا بعودتك",
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                    Align(
+                      alignment: AlignmentDirectional.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "welcomeBack".tr(),
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
                     const Text(
@@ -66,7 +73,7 @@ class LoginFeatureScreen extends HookWidget {
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     Gap(6.h),
-        
+
                     TextFieldWidget(
                       label: "البريد الإلكتروني",
                       controller: emailController,
@@ -74,7 +81,7 @@ class LoginFeatureScreen extends HookWidget {
                       icon: Icons.email_outlined,
                       validator: Validators.validateRequired,
                     ),
-        
+
                     Gap(2.h),
                     // todo : add visible and non visible beside the password
                     TextFieldWidget(
@@ -85,7 +92,7 @@ class LoginFeatureScreen extends HookWidget {
                       isPassword: true,
                       validator: Validators.validateRequired,
                     ),
-        
+
                     TextButton(
                       onPressed: () {
                         showModalBottomSheet(
@@ -131,9 +138,9 @@ class LoginFeatureScreen extends HookWidget {
                         ),
                       ),
                     ),
-        
+
                     Gap(3.h),
-        
+
                     // Row(
                     //   mainAxisAlignment: MainAxisAlignment.center,
                     //   children: [

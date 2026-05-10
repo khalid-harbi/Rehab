@@ -1,9 +1,10 @@
 import 'package:injectable/injectable.dart';
+import 'package:rehab/features/home/data/models/home_model.dart';
 import 'package:rehab/features/users/data/models/users_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseSearchRemoteDataSource {
-  Future<List<UsersModel>> search({required String name});
+  Future<List<HomeModel>> search({required String title});
 }
 
 @LazySingleton(as: BaseSearchRemoteDataSource)
@@ -13,15 +14,15 @@ class SearchRemoteDataSource implements BaseSearchRemoteDataSource {
   SearchRemoteDataSource(this._supabase);
 
   @override
-  Future<List<UsersModel>> search({required String name}) async {
+  Future<List<HomeModel>> search({required String title}) async {
     final items = await _supabase
-        .from('profiles')
+        .from('home')
         .select()
-        .like('name', '$name%');
+        .like('title', '$title%');
 
-    List<UsersModel> products = List.from(
+    List<HomeModel> homes = List.from(
       items,
-    ).map((item) => UsersModel.fromJson(item)).toList();
-    return products;
+    ).map((e) => HomeModel.fromJson(e)).toList();
+    return homes;
   }
 }

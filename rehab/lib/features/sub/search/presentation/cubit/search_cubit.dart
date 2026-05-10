@@ -7,14 +7,14 @@ class SearchCubit extends Cubit<SearchState> {
 
   SearchCubit(this._searchUseCase) : super(SearchInitialState());
 
-  Future<void> getSearchMethod({required String name}) async {
+  Future<void> getSearchMethod({required String title}) async {
     emit(SearchLoadingState());
 
-    final result = await _searchUseCase.search(name: name);
+    final result = await _searchUseCase.search(title: title);
 
     result.when(
       (success) async {
-        emit(SearchSuccessState(items: success));
+        emit(SearchSuccessState(homes: success));
       },
       (whenError) {
         emit(SearchErrorState(message: whenError.message));

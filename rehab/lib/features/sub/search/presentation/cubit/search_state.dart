@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:rehab/features/users/domain/entities/users_entity.dart';
+import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
 abstract class SearchState extends Equatable {
   const SearchState();
@@ -13,11 +13,11 @@ class SearchLoadingState extends SearchState {}
 class SearchInitialState extends SearchState {}
 
 class SearchSuccessState extends SearchState {
-  final List<UsersEntity> items;
+  final List<HomeEntity> homes;
 
-  const SearchSuccessState({required this.items});
+  const SearchSuccessState({required this.homes});
   @override
-  List<Object?> get props => [items];
+  List<Object?> get props => [homes];
 }
 
 class SearchErrorState extends SearchState {
