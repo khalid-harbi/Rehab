@@ -33,8 +33,7 @@ class _BookingFeatureScreenState extends State<BookingFeatureScreen> {
 
     return Scaffold(
       backgroundColor: colors.surface,
-      body: SafeArea(
-        child: Column(
+      body: Column(
           children: [
             Container(
               padding: const EdgeInsets.all(20),
@@ -58,6 +57,7 @@ class _BookingFeatureScreenState extends State<BookingFeatureScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      const SizedBox(height: 20),
                       Text(
                         'إتمام الحجز',
                         style: theme.textTheme.titleLarge?.copyWith(
@@ -210,7 +210,6 @@ class _BookingFeatureScreenState extends State<BookingFeatureScreen> {
                         ),
           ],
         ),
-      ),
     );
   }
 }
