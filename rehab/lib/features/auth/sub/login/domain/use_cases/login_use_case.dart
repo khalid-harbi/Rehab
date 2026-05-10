@@ -10,7 +10,7 @@ class LoginUseCase {
 
   LoginUseCase(this._repositoryData);
 
-  Future<Result<UserRole, Failure>> getLogin({
+  Future<Result<void, Failure>> getLogin({
     required String email,
     required String password,
   }) async {

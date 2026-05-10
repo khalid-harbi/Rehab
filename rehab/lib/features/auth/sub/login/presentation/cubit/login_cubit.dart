@@ -20,8 +20,8 @@ class LoginCubit extends Cubit<LoginState> {
     );
     result.when(
       (success) {
-        // emit(LoginSuccessState());
-        emit(LoginSuccessState(role: success));
+        emit(LoginSuccessState());
+        // emit(LoginSuccessState(role: success));
       },
       (whenError) {
         emit(LoginErrorState(message: whenError.message));

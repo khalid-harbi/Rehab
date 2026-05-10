@@ -13,8 +13,9 @@ class LoginInitialState extends LoginState {}
 class LoginLoadingState extends LoginState {}
 
 class LoginSuccessState extends LoginState {
-  final UserRole role;
-  const LoginSuccessState({required this.role});
+  // final UserRole role;
+  // const LoginSuccessState({required this.role});
+  const LoginSuccessState();
 }
 
 class LoginErrorState extends LoginState {

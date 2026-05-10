@@ -35,12 +35,12 @@ class LoginFeatureScreen extends HookWidget {
                 context.showLoading();
         
               case LoginSuccessState _:
-                if (state.role == UserRole.owner) {
+                // if (state.role == UserRole.owner) {
                   // context.go(Routes.owner);
-                } else if (state.role == UserRole.user) {
-                  // context.go(Routes.user);
-                }
-                context.go(Routes.users);
+                // } else if (state.role == UserRole.user) {
+                //   // context.go(Routes.user);
+                // }
+                context.go(Routes.home);
               case LoginErrorState _:
                 context.showSnackBar(state.message, isError: true);
               default:
@@ -79,14 +79,14 @@ class LoginFeatureScreen extends HookWidget {
         
                     Gap(2.h),
                     // todo : add visible and non visible beside the password
-                    // TextFieldWidget(
-                    //   label: "كلمة المرور",
-                    //   controller: passwordController,
-                    //   hint: "••••••••",
-                    //   icon: Icons.lock_outline,
-                    //   isPassword: true,
-                    //   validator: Validators.validateRequired,
-                    // ),
+                    TextFieldWidget(
+                      label: "كلمة المرور",
+                      controller: passwordController,
+                      hint: "••••••••",
+                      icon: Icons.lock_outline,
+                      isPassword: true,
+                      validator: Validators.validateRequired,
+                    ),
         
                     TextButton(
                       onPressed: () {
@@ -105,7 +105,7 @@ class LoginFeatureScreen extends HookWidget {
                       ),
                     ),
                     Gap(4.h),
-                    OtpFeatureWidget(email: emailController.text),
+                    // OtpFeatureWidget(email: emailController.text),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.success,
