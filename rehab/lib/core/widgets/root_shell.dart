@@ -23,7 +23,7 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
 
   final List<Widget> _pages = [
     BlocProvider(
-      create: (context) => HomeCubit(GetIt.I.get()), //! leen's feature
+      create: (context) => GetIt.I<HomeCubit>()..getHomeMethod(),
       child: const HomeFeatureScreen(),
     ),
 
@@ -73,7 +73,7 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
           CrystalNavigationBarItem(
             icon: Icons.chat,
             unselectedIcon: Icons.chat_outlined,
-            selectedColor: AppColors.info,
+            selectedColor: AppColors.primary,
           ),
           CrystalNavigationBarItem(
             icon: Icons.people,

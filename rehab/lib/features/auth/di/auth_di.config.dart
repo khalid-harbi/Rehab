@@ -83,11 +83,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.BaseForgetPasswordRemoteDataSource>(
       () => _i1033.ForgetPasswordRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
-    gh.lazySingleton<_i5.BaseOtpRemoteDataSource>(
-      () => _i5.OtpRemoteDataSource(gh<_i454.SupabaseClient>()),
-    );
     gh.lazySingleton<_i330.BaseAuthRemoteDataSource>(
       () => _i330.AuthRemoteDataSource(gh<_i454.SupabaseClient>()),
+    );
+    gh.lazySingleton<_i5.BaseOtpRemoteDataSource>(
+      () => _i5.OtpRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
     gh.lazySingleton<_i168.BaseSignUpRemoteDataSource>(
       () => _i168.SignUpRemoteDataSource(gh<_i454.SupabaseClient>()),

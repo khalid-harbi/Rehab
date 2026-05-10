@@ -93,11 +93,11 @@ class SignUpFeatureScreen extends HookWidget {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.success,
+                      backgroundColor: AppColors.primary,
                       foregroundColor: Colors.white,
                       minimumSize: Size(double.infinity, 60),
                       elevation: 8,
-                      shadowColor: AppColors.success.withAlpha(40),
+                      shadowColor: AppColors.primary.withAlpha(40),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),

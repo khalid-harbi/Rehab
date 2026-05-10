@@ -7,18 +7,36 @@ part 'home_model.g.dart';
 abstract class HomeModel with _$HomeModel {
   const factory HomeModel({
     required int id,
-    required String firstName,
-    required String lastName,
-    
+    required String title,
+    required String city,
+    required String district,
+    @JsonKey(name: 'image_url') required String imageUrl,
+    required double price,
+    required double rating,
+    required int rooms,
+    required int bathrooms,
+    required String description,
+    @JsonKey(name: 'is_available') required bool isAvailable,
   }) = _HomeModel;
 
-  factory HomeModel.fromJson(Map<String, Object?> json) => _$HomeModelFromJson(json);
+  factory HomeModel.fromJson(Map<String, Object?> json) =>
+      _$HomeModelFromJson(json);
 }
-
-
 
 extension HomeModelMapper on HomeModel {
   HomeEntity toEntity() {
-    return HomeEntity(id: id, firstName: firstName, lastName: lastName);
+    return HomeEntity(
+      id: id,
+      title: title,
+      city: city,
+      district: district,
+      imageUrl: imageUrl,
+      price: price,
+      rating: rating,
+      rooms: rooms,
+      bathrooms: bathrooms,
+      description: description,
+      isAvailable: isAvailable,
+    );
   }
-  }
+}

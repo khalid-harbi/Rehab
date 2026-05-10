@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:rehab/core/constants/app_enums.dart';
 
 abstract class LoginState extends Equatable {
   const LoginState();
