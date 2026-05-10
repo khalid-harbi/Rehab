@@ -17,13 +17,7 @@ class PropertyCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors.surface,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.secondary,
-            blurRadius: 7,
-           
-          ),
-        ],
+        boxShadow: [BoxShadow(color: AppColors.secondary, blurRadius: 7)],
       ),
       child: Row(
         textDirection: TextDirection.rtl,
@@ -54,10 +48,8 @@ class PropertyCard extends StatelessWidget {
                   style: textTheme.bodySmall,
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  'مؤثثة',
-                  style: TextStyle(color: colors.primary),
-                ),
+                Text('مؤثثة', style: TextStyle(color: colors.primary)),
+                
               ],
             ),
           ),

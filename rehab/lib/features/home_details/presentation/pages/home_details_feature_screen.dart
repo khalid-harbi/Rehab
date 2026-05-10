@@ -95,11 +95,9 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
 
                   SectionTitle(title: 'المرافق المميزة'),
-
-                  const SizedBox(height: 4),
 
                   GridView.count(
                     shrinkWrap: true,

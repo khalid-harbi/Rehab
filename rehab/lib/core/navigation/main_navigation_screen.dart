@@ -15,9 +15,11 @@ class MainNavigationScreen extends HookWidget {
     final pages = const [
       HomeFeatureScreen(),
       Center(child: Text('المفضلة')),
-      Center(child: Text('حسابي')),
+      Center(child: Text('تطابق')),
+      Center(child: Text('الحجوزات')),
+      Center(child: Text('الحساب')),
     ];
-
+    
     return Scaffold(
       body: pages[selectedIndex.value],
       bottomNavigationBar: CurvedNavigationBar(
@@ -29,7 +31,10 @@ class MainNavigationScreen extends HookWidget {
         items: const [
           Icon(Icons.home_outlined, color: Colors.white),
           Icon(Icons.favorite_border, color: Colors.white),
+          Icon(Icons.people_alt_outlined, color:Colors.white),
+          Icon(Icons.date_range_outlined, color: Colors.white),
           Icon(Icons.person_outline, color: Colors.white),
+
         ],
         onTap: (index) {
           selectedIndex.value = index;
