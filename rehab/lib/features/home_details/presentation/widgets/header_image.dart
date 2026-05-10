@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
-import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home_details/presentation/widgets/circle_icone_buttom.dart';
 
 class HeaderImage extends StatelessWidget {

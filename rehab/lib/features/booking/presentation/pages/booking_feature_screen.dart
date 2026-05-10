@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
-import 'package:rehab/core/theme/app_theme.dart';
 import 'package:rehab/features/booking/presentation/widgets/mounth_buttom.dart';
 import 'package:rehab/features/booking/presentation/widgets/price_row.dart';
 import 'package:rehab/features/booking/presentation/widgets/property_card.dart';

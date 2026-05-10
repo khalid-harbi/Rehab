@@ -5,14 +5,10 @@ import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'routers.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
-import 'package:rehab/features/booking/presentation/cubit/booking_cubit.dart';
-
-
 
 
 class AppRouter {
