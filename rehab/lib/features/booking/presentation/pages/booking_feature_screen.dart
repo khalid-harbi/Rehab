@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/constants/app_colors.dart';
+import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/core/theme/app_theme.dart';
 import 'package:rehab/features/booking/presentation/widgets/mounth_buttom.dart';
 import 'package:rehab/features/booking/presentation/widgets/price_row.dart';
 import 'package:rehab/features/booking/presentation/widgets/property_card.dart';
@@ -44,7 +47,7 @@ class _BookingFeatureScreenState extends State<BookingFeatureScreen> {
               child: Row(
                 children: [
                   CircleAvatar(
-                    backgroundColor: Colors.white.withOpacity(.25),
+                    backgroundColor: Colors.white.withAlpha(26),
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back_ios_new),
                       color: Colors.white,
@@ -93,7 +96,7 @@ class _BookingFeatureScreenState extends State<BookingFeatureScreen> {
                       textAlign: TextAlign.right,
                       readOnly: true,
                       decoration: const InputDecoration(
-                        hintText: 'خمس / رمضان / هجري',
+                        hintText: 'اليوم / الشهر / السنة',
                         suffixIcon: Icon(Icons.calendar_month_outlined),
                         prefixIcon: Icon(Icons.calendar_today_outlined),
                       ),
@@ -150,7 +153,7 @@ class _BookingFeatureScreenState extends State<BookingFeatureScreen> {
                     Container(
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
-                        color: colors.primary.withOpacity(.06),
+                        color: colors.primary.withAlpha(26),
                         borderRadius: BorderRadius.circular(18),
                       ),
                       child: Column(
@@ -181,16 +184,30 @@ class _BookingFeatureScreenState extends State<BookingFeatureScreen> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('التالي'),
-                ),
-              ),
-            ),
+                          Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              onPressed: () =>
+                                  context.showPaymentBottomSheet(context),
+                              child: const Text(
+                                'ادفع',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
           ],
         ),
       ),

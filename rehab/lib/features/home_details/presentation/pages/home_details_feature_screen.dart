@@ -115,7 +115,7 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                       ),
                       FacilityCard(
                         icon: Icons.bathtub_outlined,
-                        title: '${home.bathrooms} حمام',
+                        title: '${home.bathrooms} دورات مياه',
                       ),
                       const FacilityCard(
                         icon: Icons.wifi_outlined,

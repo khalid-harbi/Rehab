@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
 class PropertyCard extends StatelessWidget {
@@ -18,9 +19,9 @@ class PropertyCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: Colors.black,
-            blurRadius: 18,
-            offset: const Offset(0, 8),
+            color: AppColors.secondary,
+            blurRadius: 7,
+           
           ),
         ],
       ),

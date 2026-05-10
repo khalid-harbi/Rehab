@@ -20,7 +20,7 @@ class BookingBar extends StatelessWidget {
         color: colors.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(.08),
+            color: Colors.black.withAlpha(50),
             blurRadius: 18,
             offset: const Offset(0, -4),
           ),
