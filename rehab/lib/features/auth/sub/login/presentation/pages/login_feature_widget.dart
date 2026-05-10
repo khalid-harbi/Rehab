@@ -12,8 +12,8 @@ import 'package:rehab/features/auth/presentation/widgets/auth_widget.dart';
 import 'package:rehab/features/auth/sub/forget_password/presentation/pages/forget_password_feature_widget.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_cubit.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_state.dart';
+import 'package:rehab/features/auth/sub/otp/presentation/pages/otp_feature_widget.dart';
 import 'package:sizer/sizer.dart';
-
 
 class LoginFeatureScreen extends HookWidget {
   const LoginFeatureScreen({super.key});
@@ -26,139 +26,137 @@ class LoginFeatureScreen extends HookWidget {
     final globalKey = GlobalKey<FormState>();
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
-      body: BlocListener<LoginCubit, LoginState>(
-        listener: (context, state) {
-          context.hideLoading();
-          switch (state) {
-            case LoginLoadingState _:
-              context.showLoading();
-              break;
-            case LoginSuccessState _:
-            if (state.role == UserRole.owner) {
-              // context.go(Routes.owner);
-            } else if (state.role == UserRole.user) {
-              // context.go(Routes.user);
+      body: SafeArea(
+        child: BlocListener<LoginCubit, LoginState>(
+          listener: (context, state) {
+            context.hideLoading();
+            switch (state) {
+              case LoginLoadingState _:
+                context.showLoading();
+        
+              case LoginSuccessState _:
+                if (state.role == UserRole.owner) {
+                  // context.go(Routes.owner);
+                } else if (state.role == UserRole.user) {
+                  // context.go(Routes.user);
+                }
+                context.go(Routes.users);
+              case LoginErrorState _:
+                context.showSnackBar(state.message, isError: true);
+              default:
             }
-              context.go(Routes.users);
-              break;
-            case LoginErrorState _:
-              context.showSnackBar(state.message, isError: true);
-              break;
-            default:
-          }
-        },
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.sp),
-            child: Form(
-              key: globalKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Gap(5.h),
-                  const Text(
-                    "مرحبا بعودتك",
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const Text(
-                    "قم بتسجيل الدخول للمتابعة",
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
-                  ),
-                  Gap(6.h),
-
-                  TextFieldWidget(
-                    label: "البريد الإلكتروني",
-                    controller: emailController,
-                    hint: "example@mail.com",
-                    icon: Icons.email_outlined,
-                    validator: Validators.validateRequired,
-                  ),
-
-                  Gap(2.h),
-                  // todo : add visible and non visible beside the password
-                  TextFieldWidget(
-                    label: "كلمة المرور",
-                    controller: passwordController,
-                    hint: "••••••••",
-                    icon: Icons.lock_outline,
-                    isPassword: true,
-                    validator: Validators.validateRequired,
-                  ),
-
-                  TextButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (_) => const ForgetPasswordFeatureWidget(),
-                      );
-                    },
-                    child: const Text(
-                      "نسيت كلمة المرور ؟",
+          },
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.sp),
+              child: Form(
+                key: globalKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gap(5.h),
+                    const Text(
+                      "مرحبا بعودتك",
                       style: TextStyle(
-                        color: AppColors.success,
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                  ),
-                  Gap(4.h),
-
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.success,
-                      foregroundColor: Colors.white,
-                      minimumSize: Size(double.infinity, 60),
-                      elevation: 8,
-                      shadowColor: AppColors.success.withAlpha(40),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
+                    const Text(
+                      "قم بتسجيل الدخول للمتابعة",
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
-                    onPressed: () {
-                      if (globalKey.currentState!.validate()) {
-                        cubit.getLoginMethod(
-                          email: emailController.text,
-                          password: passwordController.text,
+                    Gap(6.h),
+        
+                    TextFieldWidget(
+                      label: "البريد الإلكتروني",
+                      controller: emailController,
+                      hint: "example@mail.com",
+                      icon: Icons.email_outlined,
+                      validator: Validators.validateRequired,
+                    ),
+        
+                    Gap(2.h),
+                    // todo : add visible and non visible beside the password
+                    // TextFieldWidget(
+                    //   label: "كلمة المرور",
+                    //   controller: passwordController,
+                    //   hint: "••••••••",
+                    //   icon: Icons.lock_outline,
+                    //   isPassword: true,
+                    //   validator: Validators.validateRequired,
+                    // ),
+        
+                    TextButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (_) => const ForgetPasswordFeatureWidget(),
                         );
-                      }
-                    },
-                    child: const Text(
-                      "تسجيل الدخول",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-
-                  Gap(3.h),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "ليس لديك حساب؟",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      TextButton(
-                        onPressed: () => context.push(Routes.signUp),
-                        child: const Text(
-                          "سجل الان",
-                          style: TextStyle(
-                            color: AppColors.success,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      },
+                      child: const Text(
+                        "نسيت كلمة المرور ؟",
+                        style: TextStyle(
+                          color: AppColors.success,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Gap(4.h),
+                    OtpFeatureWidget(email: emailController.text),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.success,
+                        foregroundColor: Colors.white,
+                        minimumSize: Size(double.infinity, 60),
+                        elevation: 8,
+                        shadowColor: AppColors.success.withAlpha(40),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                      onPressed: () {
+                        if (globalKey.currentState!.validate()) {
+                          cubit.getLoginMethod(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                        }
+                      },
+                      child: const Text(
+                        "تسجيل الدخول",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+        
+                    Gap(3.h),
+        
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     const Text(
+                    //       "ليس لديك حساب؟",
+                    //       style: TextStyle(color: Colors.grey),
+                    //     ),
+                    //     TextButton(
+                    //       onPressed: () => context.push(Routes.signUp),
+                    //       child: const Text(
+                    //         "سجل الان",
+                    //         style: TextStyle(
+                    //           color: AppColors.success,
+                    //           fontWeight: FontWeight.bold,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                  ],
+                ),
               ),
             ),
           ),

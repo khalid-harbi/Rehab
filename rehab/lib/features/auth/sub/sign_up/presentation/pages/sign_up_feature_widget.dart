@@ -24,25 +24,19 @@ class SignUpFeatureScreen extends HookWidget {
     final globalKey = GlobalKey<FormState>();
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: const BackButton(color: Colors.black),
-      ),
       body: BlocListener<SignUpCubit, SignUpState>(
         listener: (context, state) {
           context.hideLoading();
           switch (state) {
             case SignUpLoadingState _:
               context.showLoading();
-              break;
+
             case SignUpSuccessState _:
               context.go(Routes.home);
-              break;
+
             case SignUpErrorState _:
               context.showSnackBar(state.message, isError: true);
-              break;
+
             default:
           }
         },
@@ -56,7 +50,7 @@ class SignUpFeatureScreen extends HookWidget {
                 children: [
                   Gap(2.h),
                   const Text(
-                    "تسجيل الدخول",
+                    "إنشاء حساب",
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -64,7 +58,7 @@ class SignUpFeatureScreen extends HookWidget {
                     ),
                   ),
                   const Text(
-                    "رتّب مشترياتك وشاركها مع من تحب",
+                    " انشئ حسابك وانضم إلينا",
                     style: TextStyle(fontSize: 20, color: Colors.grey),
                   ),
                   Gap(5.h),
@@ -128,25 +122,25 @@ class SignUpFeatureScreen extends HookWidget {
 
                   Gap(3.h),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "لديك حساب بالفعل؟ ",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      TextButton(
-                        onPressed: () => context.push(Routes.login),
-                        child: const Text(
-                          "تسجيل الدخول",
-                          style: TextStyle(
-                            color: AppColors.success,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     const Text(
+                  //       "لديك حساب بالفعل؟ ",
+                  //       style: TextStyle(color: Colors.grey),
+                  //     ),
+                  //     TextButton(
+                  //       onPressed: () => context.push(Routes.login),
+                  //       child: const Text(
+                  //         "تسجيل الدخول",
+                  //         style: TextStyle(
+                  //           color: AppColors.success,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

@@ -7,19 +7,10 @@ import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/widgets/root_shell.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_state.dart';
+import 'package:rehab/features/auth/presentation/pages/auth_feature_screen.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_cubit.dart';
-import 'package:rehab/features/auth/sub/login/presentation/pages/login_feature_widget.dart';
 import 'package:rehab/features/auth/sub/sign_up/presentation/cubit/sign_up_cubit.dart';
-import 'package:rehab/features/auth/sub/sign_up/presentation/pages/sign_up_feature_widget.dart';
 import 'routers.dart';
-import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart';
-import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
-import 'package:rehab/features/profile/presentation/pages/profile_feature_screen.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
-import 'package:rehab/features/users/presentation/pages/users_feature_screen.dart';
-import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
-
-
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -37,13 +28,10 @@ class AppRouter {
                     case AuthSuccessState _:
                       if (state.isLogin) {
                         context.go(Routes.home);
-                        return;
                       }
-                      context.go(Routes.signUp);
-                      break;
+                      context.go(Routes.auth);
                     case AuthErrorState _:
-                      context.showSnackBar(state.message);
-                      break;
+                      context.showSnackBar(state.message, isError: true);
                     default:
                   }
                 },
@@ -54,21 +42,35 @@ class AppRouter {
         }, // SplashScreen
       ),
       GoRoute(
-        path: Routes.login,
-        builder: (context, state) => BlocProvider(
-          create: (context) => LoginCubit(GetIt.I.get()),
-          child: const LoginFeatureScreen(),
-        ),
+        path: Routes.auth,
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => GetIt.I<AuthCubit>()),
+              BlocProvider(create: (context) => GetIt.I<LoginCubit>()),
+              BlocProvider(create: (context) => GetIt.I<SignUpCubit>()),
+            ],
+            child: const AuthFeatureScreen(),
+          );
+        },
       ),
 
+      // GoRoute(
+      //   path: Routes.login,
+      //   builder: (context, state) => BlocProvider(
+      //     create: (context) => LoginCubit(GetIt.I.get()),
+      //     child: const LoginFeatureScreen(),
+      //   ),
+      // ),
+
+      // GoRoute(
+      //   path: Routes.signUp,
+      //   builder: (context, state) => BlocProvider(
+      //     create: (context) => SignUpCubit(GetIt.I.get()),
+      //     child: const SignUpFeatureScreen(),
+      //   ),
+      // ),
       GoRoute(
-        path: Routes.signUp,
-        builder: (context, state) => BlocProvider(
-          create: (context) => SignUpCubit(GetIt.I.get()),
-          child: const SignUpFeatureScreen(),
-        ),
-      ),
-       GoRoute(
         path: Routes.home,
         builder: (context, state) => const RootShell(),
       ),
@@ -79,23 +81,23 @@ class AppRouter {
       //     child: const HomeFeatureScreen(),
       //   ),
       // ),
-    
-  GoRoute(
-    path: Routes.profile,
-    builder: (context, state) => BlocProvider(
-          create: (context) => ProfileCubit(GetIt.I.get()),
-          child: const ProfileFeatureScreen(),
-        ),
-  ),
 
-  GoRoute(
-    path: Routes.users,
-    builder: (context, state) => BlocProvider(
-          create: (context) => UsersCubit(GetIt.I.get()),
-          child: const UsersFeatureScreen(),
-        ),
-  ),
-],
+      // GoRoute(
+      //   path: Routes.profile,
+      //   builder: (context, state) => BlocProvider(
+      //         create: (context) => ProfileCubit(GetIt.I.get()),
+      //         child: const ProfileFeatureScreen(),
+      //       ),
+      // ),
+
+      // GoRoute(
+      //   path: Routes.users,
+      //   builder: (context, state) => BlocProvider(
+      //         create: (context) => UsersCubit(GetIt.I.get()),
+      //         child: const UsersFeatureScreen(),
+      //       ),
+      // ),
+    ],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),

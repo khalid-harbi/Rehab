@@ -27,13 +27,13 @@ class LogoutFeatureWidget extends StatelessWidget {
                   switch (state) {
                     case LogoutLoadingState _:
                       context.showLoading();
-                      break;
+  
                     case LogoutSuccessState _:
-                      context.go(Routes.login);
-                      break;
+                      context.go(Routes.auth);
+ 
                     case LogoutErrorState _:
                       context.showSnackBar(state.message, isError: true);
-                      break;
+        
                     default:
                   }
                 },

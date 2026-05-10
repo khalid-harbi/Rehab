@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:rehab/features/auth/sub/login/domain/use_cases/login_use_case.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_state.dart';
 
+@injectable
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase _loginUseCase;
 
