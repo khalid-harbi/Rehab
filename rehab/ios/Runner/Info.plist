@@ -18,7 +18,6 @@
 	<string>rehab</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-<<<<<<< HEAD
 	<key>CFBundleURLTypes</key>
 <array>
   <dict>
@@ -28,8 +27,6 @@
     </array>
   </dict>
 </array>
-=======
->>>>>>> leen
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>

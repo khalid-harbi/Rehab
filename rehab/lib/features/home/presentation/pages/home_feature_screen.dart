@@ -28,18 +28,26 @@ class HomeFeatureScreen extends StatelessWidget {
             if (state is HomeSuccessState) {
               final homes = state.homes;
 
-              return ListView.builder(
-                itemCount: homes.length,
-                itemBuilder: (context, index) {
-                  final home = homes[index];
-
-                  return HomeCard(home: home);
-                  
-                },
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // SearchFeatureWidget()
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: homes.length,
+                      itemBuilder: (context, index) {
+                        final home = homes[index];
+                    
+                        return HomeCard(home: home);
+                        
+                      },
+                    ),
+                  ],
+                ),
               );
             }
 
-            return const SizedBox();
+            return const SizedBox.shrink();
           },
         ),
     );
