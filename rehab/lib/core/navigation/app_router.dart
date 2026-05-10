@@ -1,14 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:rehab/core/navigation/main_navigation_screen.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'routers.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
-
+import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
 
 
 class AppRouter {
@@ -25,18 +25,11 @@ class AppRouter {
   GoRoute(
     path: Routes.home,
     builder: (context, state) => BlocProvider(
-          create: (context) => HomeCubit(GetIt.I.get()),
-          child: const HomeFeatureScreen(),
+          create: (context) => GetIt.I<HomeCubit>()..getHomeMethod(),
+          child: const MainNavigationScreen(),
         ),
   ),
 
-  GoRoute(
-    path: Routes.home,
-    builder: (context, state) => BlocProvider(
-          create: (context) => HomeCubit(GetIt.I.get()),
-          child: const HomeFeatureScreen(),
-        ),
-  ),
 
   GoRoute(
   path: Routes.homeDetails,
@@ -46,6 +39,14 @@ class AppRouter {
       create: (context) => HomeDetailsCubit(GetIt.I.get()),
       child: HomeDetailsFeatureScreen(home: home),
     );
+  },
+),
+
+ GoRoute(
+  path: Routes.booking,
+  builder: (context, state) {
+    final home = state.extra as HomeEntity;
+    return BookingFeatureScreen(home: home);
   },
 ),
 ],

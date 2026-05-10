@@ -3,6 +3,7 @@ import 'package:rehab/core/di/configure_dependencies.config.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rehab/features/home/di/home_di.dart';
 import 'package:rehab/features/home_details/di/home_details_di.dart';
+import 'package:rehab/features/booking/di/booking_di.dart';
 
 @InjectableInit(
   initializerName: 'init', 
@@ -16,4 +17,5 @@ Future<void> configureDependencies() async {
   getIt.init();
     configureHome(getIt);
     configureHomeDetails(getIt);
+    configureBooking(getIt);
 }

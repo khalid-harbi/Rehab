@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class HomeEntity extends Equatable {
-  final String id;
+  final int id;
   final String title;
   final String city;
   final String district;

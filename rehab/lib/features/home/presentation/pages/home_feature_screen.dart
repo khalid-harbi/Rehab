@@ -10,9 +10,7 @@ class HomeFeatureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIt.instance<HomeCubit>()..getHomeMethod(),
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(title: const Text('Home')),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
@@ -45,7 +43,6 @@ class HomeFeatureScreen extends StatelessWidget {
             return const SizedBox();
           },
         ),
-      ),
     );
   }
 }
