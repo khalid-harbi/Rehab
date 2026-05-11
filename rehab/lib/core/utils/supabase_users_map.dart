@@ -11,7 +11,7 @@ Future<Map<String, String>> loadUsersNameMap(
   if (userIds.isEmpty) return {};
 
   final response = await client
-      .from('users')
+      .from('profiles')
       .select('id,name')
       .inFilter('id', userIds.toList());
 

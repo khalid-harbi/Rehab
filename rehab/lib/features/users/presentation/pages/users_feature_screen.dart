@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
+import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_state.dart';
 import 'package:rehab/features/users/presentation/widgets/users_widget.dart';
@@ -13,6 +14,9 @@ class UsersFeatureScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ===================================================================
+    final cubit = context.read<UsersCubit>();
+    // ===================================================================
     return Scaffold(
       appBar: AppBar(title: const Text('Matching')),
       body: Padding(
@@ -25,9 +29,13 @@ class UsersFeatureScreen extends HookWidget {
           listener: (context, state) async {
             if (state is UsersRoomCreatedState) {
               await context.push(Routes.conversation, extra: state.room);
+
+              // Refresh users when coming back
               if (context.mounted) {
-                context.pop(true);
+                await cubit.loadedUser();
               }
+              // Refresh rooms
+              context.read<ChatCubit>().fetchRooms();
             } else if (state is UsersErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("حدث خطأ: ${state.message}")),
@@ -38,6 +46,9 @@ class UsersFeatureScreen extends HookWidget {
             builder: (context, state) {
               switch (state) {
                 case UsersInitialState _:
+                  return const LoadingWidget();
+
+                case UsersLoadingState _:
                   return const LoadingWidget();
 
                 case UsersSuccessState _:
@@ -62,8 +73,11 @@ class UsersFeatureScreen extends HookWidget {
                 case UsersErrorState _:
                   return Center(child: Text(state.message));
 
+                case UsersRoomCreatedState _:
+                  return const LoadingWidget();
+
                 default:
-                  return const SizedBox.shrink();
+                  return const LoadingWidget();
               }
             },
           ),

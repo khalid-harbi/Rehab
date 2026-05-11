@@ -35,12 +35,9 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
       child: const HomeFeatureScreen(),
     ),
 
+    const ChatFeatureScreen(),
     BlocProvider(
-      create: (context) => ChatCubit(GetIt.I.get()),
-      child: const ChatFeatureScreen(),
-    ),
-    BlocProvider(
-      create: (context) => UsersCubit(GetIt.I.get()), //! khalid's feature
+      create: (context) => UsersCubit(GetIt.I.get()),
       child: const UsersFeatureScreen(),
     ),
 
@@ -52,48 +49,51 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
+    return BlocProvider(
+      create: (context) => ChatCubit(GetIt.I.get())..fetchRooms(),
+      child: Scaffold(
+        extendBody: true,
 
-      body: IndexedStack(
-        index: SelectedTab.values.indexOf(_selectedTab),
-        children: _pages,
-      ),
+        body: IndexedStack(
+          index: SelectedTab.values.indexOf(_selectedTab),
+          children: _pages,
+        ),
 
-      bottomNavigationBar: CrystalNavigationBar(
-        currentIndex: SelectedTab.values.indexOf(_selectedTab),
-        height: 10,
-        unselectedItemColor: Colors.black,
-        borderWidth: 2,
-        outlineBorderColor: Colors.transparent,
-        backgroundColor: Colors.white,
-        onTap: (i) {
-          setState(() {
-            _selectedTab = SelectedTab.values[i];
-          });
-        },
-        items: [
-          CrystalNavigationBarItem(
-            icon: Icons.home,
-            unselectedIcon: Icons.home_outlined,
-            selectedColor: AppColors.primary,
-          ),
-          CrystalNavigationBarItem(
-            icon: Icons.chat,
-            unselectedIcon: Icons.chat_outlined,
-            selectedColor: AppColors.primary,
-          ),
-          CrystalNavigationBarItem(
-            icon: Icons.people,
-            unselectedIcon: Icons.people_outline,
-            selectedColor: Colors.amber,
-          ),
-          CrystalNavigationBarItem(
-            icon: Icons.person,
-            unselectedIcon: Icons.person_outline,
-            selectedColor: AppColors.error,
-          ),
-        ],
+        bottomNavigationBar: CrystalNavigationBar(
+          currentIndex: SelectedTab.values.indexOf(_selectedTab),
+          height: 10,
+          unselectedItemColor: Colors.black,
+          borderWidth: 2,
+          outlineBorderColor: Colors.transparent,
+          backgroundColor: Colors.white,
+          onTap: (i) {
+            setState(() {
+              _selectedTab = SelectedTab.values[i];
+            });
+          },
+          items: [
+            CrystalNavigationBarItem(
+              icon: Icons.home,
+              unselectedIcon: Icons.home_outlined,
+              selectedColor: AppColors.primary,
+            ),
+            CrystalNavigationBarItem(
+              icon: Icons.chat,
+              unselectedIcon: Icons.chat_outlined,
+              selectedColor: AppColors.primary,
+            ),
+            CrystalNavigationBarItem(
+              icon: Icons.people,
+              unselectedIcon: Icons.people_outline,
+              selectedColor: Colors.amber,
+            ),
+            CrystalNavigationBarItem(
+              icon: Icons.person,
+              unselectedIcon: Icons.person_outline,
+              selectedColor: AppColors.error,
+            ),
+          ],
+        ),
       ),
     );
   }

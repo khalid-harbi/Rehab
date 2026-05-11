@@ -5,7 +5,9 @@ import 'package:rehab/features/chat/presentation/cubit/chat_state.dart';
 class ChatCubit extends Cubit<ChatState> {
   final ChatUseCase _chatUseCase;
 
-  ChatCubit(this._chatUseCase) : super(ChatInitialState());
+  ChatCubit(this._chatUseCase) : super(ChatInitialState()) {
+    fetchRooms();
+  }
 
   // ===================================================================
   // ===================================================================
