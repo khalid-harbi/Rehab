@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,10 @@ import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'routers.dart';
+import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
+import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
+import 'package:rehab/features/conversation/presentation/pages/conversation_feature_screen.dart';
+import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -96,40 +101,31 @@ class AppRouter {
         path: Routes.home,
         builder: (context, state) => const RootShell(),
       ),
+
+      GoRoute(
+        path: Routes.chat,
+        builder: (context, state) => BlocProvider(
+          create: (context) => ChatCubit(GetIt.I.get()),
+          child: const ChatFeatureScreen(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.conversation,
+        builder: (context, state) {
+          // ensure extra is a Room object to avoid null errors
+          if (state.extra is types.Room) {
+            final room = state.extra as types.Room;
+            return BlocProvider(
+              create: (context) =>
+                  ConversationCubit(GetIt.I.get())..listenToMessages(room),
+              child: ConversationFeatureScreen(room: room),
+            );
+          }
+          // If no room is passed
+          return SizedBox.shrink();
+        },
       
-      //================ leen
-      // GoRoute(
-      //   path: Routes.home,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => GetIt.I<HomeCubit>()..getHomeMethod(),
-      //     child: const MainNavigationScreen(),
-      //   ),
-      // ),
-      //===================== leen 
-
-      // GoRoute(
-      //   path: Routes.home,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => HomeCubit(GetIt.I.get()),
-      //     child: const HomeFeatureScreen(),
-      //   ),
-      // ),
-
-      // GoRoute(
-      //   path: Routes.profile,
-      //   builder: (context, state) => BlocProvider(
-      //         create: (context) => ProfileCubit(GetIt.I.get()),
-      //         child: const ProfileFeatureScreen(),
-      //       ),
-      // ),
-
-      // GoRoute(
-      //   path: Routes.users,
-      //   builder: (context, state) => BlocProvider(
-      //         create: (context) => UsersCubit(GetIt.I.get()),
-      //         child: const UsersFeatureScreen(),
-      //       ),
-      // ),
+      ),
     ],
 
     errorBuilder: (context, state) =>

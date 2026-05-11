@@ -8,6 +8,8 @@ class UsersCubit extends Cubit<UsersState> {
   UsersCubit(this._usersUseCase) : super(UsersInitialState()) {
     loadedUser();
   }
+  // ===================================================================
+  // ===================================================================
 
   Future<void> loadedUser() async {
     final result = await _usersUseCase.loadUsers();
@@ -18,6 +20,20 @@ class UsersCubit extends Cubit<UsersState> {
       (whenError) {
         emit(UsersErrorState(message: whenError.message));
       },
+    );
+  }
+
+  // ===================================================================
+  // ===================================================================
+
+  Future<void> createRoom(String otherUserId) async {
+    // loading state
+    emit(UsersLoadingState());
+    final result = await _usersUseCase.createRoom(otherUserId);
+    // ----------------
+    result.when(
+      (room) => emit(UsersRoomCreatedState(room)),
+      (error) => emit(UsersErrorState(message: error.toString())),
     );
   }
 }

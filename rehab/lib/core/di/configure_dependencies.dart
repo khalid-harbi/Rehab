@@ -8,6 +8,8 @@ import 'package:rehab/features/home_details/di/home_details_di.dart';
 import 'package:rehab/features/profile/di/profile_di.dart';
 import 'package:rehab/features/users/di/users_di.dart';
 import 'package:rehab/features/sub/search/di/search_di.dart';
+import 'package:rehab/features/chat/di/chat_di.dart';
+import 'package:rehab/features/conversation/di/conversation_di.dart';
 
 @InjectableInit(
   initializerName: 'init',
@@ -25,4 +27,6 @@ Future<void> configureDependencies() async {
   configureSearchSub(getIt);
   configureHomeDetails(getIt);
   configureBooking(getIt);
+    configureChat(getIt);
+    configureConversation(getIt);
 }
