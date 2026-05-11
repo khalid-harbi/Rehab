@@ -1,4 +1,13 @@
 {
-   "data":"Data",
-   "welcomeBack":"welcome Back"
+   "hi":"Hi",
+   "howAreYou":" How are you today?",
+   "welcomeBack":"welcome Back",
+   "profile":"Profile",
+   "favorites":"Favorites",
+   "bookings":"My Bookings",
+    "darkMode":"Dark Mode",
+   "language":"Language",
+    "settings":"Settings",
+   "help&support":"Help & Support",
+    "logout":"Logout"
 }

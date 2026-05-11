@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
@@ -17,7 +18,7 @@ class ProfileWidget extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: icon,
-        title: Text(title),
+        title: Text(title.tr()),
         trailing: action ?? Icon(Icons.arrow_forward_ios),
         onTap: onTap,
         tileColor: Theme.of(context).cardColor,

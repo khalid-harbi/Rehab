@@ -1,13 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/features/auth/sub/logout/presentation/cubit/logout_cubit.dart';
 import 'package:rehab/features/auth/sub/logout/presentation/cubit/logout_state.dart';
-import 'package:sizer/sizer.dart';
 
 class LogoutFeatureWidget extends StatelessWidget {
   const LogoutFeatureWidget({super.key});
@@ -41,7 +40,7 @@ class LogoutFeatureWidget extends StatelessWidget {
                 child: Card(
                   child: ListTile(
                     leading: Icon(Icons.logout_sharp, color: Colors.red),
-                    title: Text("Logout"),
+                    title: Text("logout".tr()),
                     onTap: () => context.showLogoutDialog(context, cubit),
                     tileColor: Theme.of(context).cardColor,
                     shape: RoundedRectangleBorder(
@@ -49,16 +48,6 @@ class LogoutFeatureWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                //  Row(
-                //   children: [
-                //     Icon(Icons.logout_rounded, color: Colors.red, size: 30),
-                //     Gap(5.sw),
-                //     const Text(
-                //       "تسجيل الخروج",
-                //       style: TextStyle(fontSize: 20),
-                //     ),
-                //   ],
-                // ),
               ),
             ],
           );

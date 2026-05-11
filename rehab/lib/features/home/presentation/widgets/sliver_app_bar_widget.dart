@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -17,22 +18,45 @@ class SliverAppBarWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final cubit = context.read<SearchCubit>();
+    // Timer? timer;
+    // final controllerSearch = useTextEditingController();
+
+    // controllerSearch.addListener(() async {
+    //   if (timer != null) {
+    //     timer!.cancel();
+    //   }
+
+    //   timer = Timer.periodic(Duration(milliseconds: 500), (timer) async {
+    //     if (timer.tick == 1) {
+    //       cubit.getSearchMethod(title: controllerSearch.text);
+    //       timer.cancel();
+    //     }
+    //   });
+    // });
     final cubit = context.read<SearchCubit>();
-    Timer? timer;
     final controllerSearch = useTextEditingController();
 
-    controllerSearch.addListener(() async {
-      if (timer != null) {
-        timer!.cancel();
+    Timer? timer;
+
+    useEffect(() {
+      cubit.getSearchMethod(title: "");
+
+      void listener() {
+        timer?.cancel();
+
+        timer = Timer(const Duration(milliseconds: 500), () {
+          cubit.getSearchMethod(title: controllerSearch.text);
+        });
       }
 
-      timer = Timer.periodic(Duration(milliseconds: 500), (timer) async {
-        if (timer.tick == 1) {
-          cubit.getSearchMethod(title: controllerSearch.text);
-          timer.cancel();
-        }
-      });
-    });
+      controllerSearch.addListener(listener);
+
+      return () {
+        timer?.cancel();
+        controllerSearch.removeListener(listener);
+      };
+    }, []);
     return SliverAppBar(
       actions: [
         Align(
@@ -109,65 +133,59 @@ class SliverAppBarWidget extends HookWidget {
                                 child: BlocProvider(
                                   create: (context) =>
                                       ProfileCubit(GetIt.I.get()),
-                                  child:
-                                      BlocBuilder<ProfileCubit, ProfileState>(
-                                        builder: (context, state) {
-                                          if (state is ProfileLoadingState) {
-                                            return const Center(
-                                              child: LoadingWidget(),
-                                            );
-                                          }
+                                  child: BlocBuilder<ProfileCubit, ProfileState>(
+                                    builder: (context, state) {
+                                      if (state is ProfileLoadingState) {
+                                        return const Center(
+                                          child: LoadingWidget(),
+                                        );
+                                      }
 
-                                          if (state is ProfileSuccessState) {
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "اهلا, ${state.profile.name}",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: .bold,
-                                                    fontSize: 24,
-                                                  ),
-                                                ),
-                                                const Text(
-                                                  "كيف حالك اليوم؟",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: .bold,
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          }
-
-                                          if (state is ProfileErrorState) {
-                                            return Center(
-                                              child: Text(
-                                                'Error: ${state.message}',
-                                                style: const TextStyle(
-                                                  color: Colors.red,
-                                                ),
+                                      if (state is ProfileSuccessState) {
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${"hi".tr()} ${state.profile.name}",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 24,
                                               ),
-                                            );
-                                          }
+                                            ),
+                                            Text(
+                                              "howAreYou".tr(),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
 
-                                          return const SizedBox.shrink();
-                                        },
-                                      ),
+                                      if (state is ProfileErrorState) {
+                                        return Center(
+                                          child: Text(
+                                            'Error: ${state.message}',
+                                            style: const TextStyle(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        );
+                                      }
+
+                                      return const SizedBox.shrink();
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                           Gap(2.sh),
                           SearchBar(controller: controllerSearch),
-                          // BlocProvider(
-                          //   create: (_) => SearchCubit(GetIt.I.get()),
-                          //   child: SearchFeatureWidget(),
-                          // ),
-                          // const LastAddedListWidget(),
                         ],
                       ),
                     ),
