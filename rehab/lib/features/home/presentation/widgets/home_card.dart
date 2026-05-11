@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
@@ -12,7 +13,7 @@ class HomeCard extends StatelessWidget {
     final theme = Theme.of(context);
     return InkWell(
       onTap: () {
-        context.push('/home-details', extra: home);
+        context.push(Routes.homeDetails, extra: home);
       },
 
       child: Card(
