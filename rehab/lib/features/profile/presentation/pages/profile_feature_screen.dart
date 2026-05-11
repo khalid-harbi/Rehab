@@ -4,9 +4,11 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/navigation/routers.dart';
+import 'package:rehab/features/auth/sub/logout/presentation/cubit/logout_cubit.dart';
 import 'package:rehab/features/auth/sub/logout/presentation/pages/logout_feature_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
+import 'package:rehab/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfileFeatureScreen extends StatelessWidget {
@@ -37,61 +39,85 @@ class ProfileFeatureScreen extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is ProfileSuccessState) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: CircleAvatar(
-                            radius: 30.sp,
-                            child: IconButton(
-                              onPressed: () {
-                                context.go(Routes.profile);
-                              },
-                              icon: Icon(Icons.person, size: 30.sp),
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: CircleAvatar(
+                              radius: 30.sp,
+                              child: IconButton(
+                                onPressed: () {
+                                  context.go(Routes.profile);
+                                },
+                                icon: Icon(Icons.person, size: 30.sp),
+                              ),
                             ),
                           ),
-                        ),
-                        Gap(3.sh),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          height: 30.sh,
-                          width: double.infinity,
 
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              spacing: 2.sh,
-                              children: [
-                                Text(
-                                  state.profile.name,
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: .bold,
-                                  ),
-                                ),
-
-                                Gap(5.sh),
-                                // Text(
-                                //   "عضو منذ: ${Formatters.formatFullDate(state.profile.createdAt)}",
-                                //   style: const TextStyle(
-                                //     color: AppColors.textSecondary,
-                                //     fontSize: 14,
-                                //   ),
-                                // ),
-                              ],
+                          Text(
+                            state.profile.name,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                      ],
+
+                          // Text(
+                          //   "عضو منذ: ${Formatters.formatFullDate(state.profile.createdAt)}",
+                          //   style: const TextStyle(
+                          //     color: AppColors.textSecondary,
+                          //     fontSize: 14,
+                          //   ),
+                          // ),
+                          ProfileWidget(
+                            icon: Icon(Icons.favorite),
+                            title: "Favorites",
+
+                            // onTap: () => context.push(Routes.),
+                          ),
+                          ProfileWidget(
+                            icon: Icon(Icons.attach_money),
+                            title: "My Bookings",
+                          ),
+
+                          ProfileWidget(
+                            icon: Icon(Icons.dark_mode_outlined),
+                            title: "Dark Mode",
+                            // action: BlocBuilder<ThemeSwitcherCubit, bool>(
+                            //   builder: (context, state) {
+                            //     return Switch(
+                            //       value: !state,
+                            //       onChanged: (value) {
+                            //         context.read<ThemeSwitcherCubit>().toggle();
+                            //       },
+                            //     );
+                            //   },
+                            // ),
+                          ),
+                          ProfileWidget(
+                            icon: Icon(Icons.language),
+                            title: "Language",
+                          ),
+
+                          ProfileWidget(
+                            icon: Icon(Icons.settings),
+                            title: "Settings",
+                          ),
+                          Gap(2.sh),
+                          ProfileWidget(
+                            icon: Icon(Icons.support_agent_outlined),
+                            title: "Help & Support",
+                          ),
+
+                          LogoutFeatureWidget(),
+                        ],
+                      ),
                     );
                   }
                   return const SizedBox.shrink();
                 },
               ),
-              Gap(10.sh),
-              LogoutFeatureWidget(),
             ],
           ),
         ),

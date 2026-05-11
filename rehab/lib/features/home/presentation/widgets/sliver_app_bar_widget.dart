@@ -17,28 +17,22 @@ class SliverAppBarWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-      final controllerSearch = useTextEditingController();
-
     final cubit = context.read<SearchCubit>();
+    Timer? timer;
+    final controllerSearch = useTextEditingController();
 
-    useEffect(() {
-      Timer? timer;
-
-      void listener() {
-        timer?.cancel();
-
-        timer = Timer(const Duration(milliseconds: 500), () {
-          cubit.getSearchMethod(title: controllerSearch.text);
-        });
+    controllerSearch.addListener(() async {
+      if (timer != null) {
+        timer!.cancel();
       }
 
-      controllerSearch.addListener(listener);
-
-      return () {
-        controllerSearch.removeListener(listener);
-        timer?.cancel();
-      };
-    }, [controllerSearch]);
+      timer = Timer.periodic(Duration(milliseconds: 500), (timer) async {
+        if (timer.tick == 1) {
+          cubit.getSearchMethod(title: controllerSearch.text);
+          timer.cancel();
+        }
+      });
+    });
     return SliverAppBar(
       actions: [
         Align(
@@ -172,7 +166,7 @@ class SliverAppBarWidget extends HookWidget {
                           // BlocProvider(
                           //   create: (_) => SearchCubit(GetIt.I.get()),
                           //   child: SearchFeatureWidget(),
-                          // ), 
+                          // ),
                           // const LastAddedListWidget(),
                         ],
                       ),

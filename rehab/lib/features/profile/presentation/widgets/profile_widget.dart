@@ -1,10 +1,28 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
-  const ProfileWidget({super.key});
+  const ProfileWidget({
+    super.key,
+    required this.icon,
+    required this.title,
+    this.action, this.onTap,
+  });
+  final Widget icon;
+  final String title;
+  final Widget? action;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Card(
+      child: ListTile(
+        leading: icon,
+        title: Text(title),
+        trailing: action ?? Icon(Icons.arrow_forward_ios),
+        onTap: onTap,
+        tileColor: Theme.of(context).cardColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    );
   }
-  }
+}
