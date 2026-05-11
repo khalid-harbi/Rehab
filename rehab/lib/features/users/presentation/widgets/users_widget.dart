@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/core/constants/app_colors.dart' show AppColors;
+import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 
 class UsersWidget extends StatelessWidget {
+  final String id;
   final String name;
   final DateTime cratedAt;
-  const UsersWidget({super.key, required this.name, required this.cratedAt});
+  const UsersWidget({
+    super.key,
+    required this.id,
+    required this.name,
+    required this.cratedAt,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // ===================================================================
+    final cubit = context.read<UsersCubit>();
+    // ===================================================================
     return Center(
       child: Container(
         margin: const EdgeInsets.all(16),
@@ -65,7 +76,9 @@ class UsersWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  cubit.createRoom(id);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.background,
                   foregroundColor: Colors.black,

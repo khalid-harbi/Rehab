@@ -9,4 +9,6 @@ class Routes {
   static const String users = '/users';
   static const String homeDetails = '/home-details';
   static const String booking = '/booking';
+  static const String chat = '/chat';
+  static const String conversation = '/conversation';
 }

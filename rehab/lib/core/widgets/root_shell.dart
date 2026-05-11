@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/constants/app_enums.dart';
+import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
+import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
@@ -34,11 +36,11 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
     ),
 
     BlocProvider(
-      create: (context) => UsersCubit(GetIt.I.get()), //! khalid's feature
-      child: const UsersFeatureScreen(),
+      create: (context) => ChatCubit(GetIt.I.get()),
+      child: const ChatFeatureScreen(),
     ),
     BlocProvider(
-      create: (context) => UsersCubit(GetIt.I.get()),
+      create: (context) => UsersCubit(GetIt.I.get()), //! khalid's feature
       child: const UsersFeatureScreen(),
     ),
 
