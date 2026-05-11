@@ -27,42 +27,38 @@ class LogoutFeatureWidget extends StatelessWidget {
                   switch (state) {
                     case LogoutLoadingState _:
                       context.showLoading();
-  
+
                     case LogoutSuccessState _:
                       context.go(Routes.auth);
- 
+
                     case LogoutErrorState _:
                       context.showSnackBar(state.message, isError: true);
-        
+
                     default:
                   }
                 },
-                child: ElevatedButton(
-                  onPressed: () => context.showLogoutDialog(context, cubit),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFFEBEE),
-                    foregroundColor: const Color(0xFFD32F2F),
-                    elevation: 0,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+
+                child: Card(
+                  child: ListTile(
+                    leading: Icon(Icons.logout_sharp, color: Colors.red),
+                    title: Text("Logout"),
+                    onTap: () => context.showLogoutDialog(context, cubit),
+                    tileColor: Theme.of(context).cardColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: const BorderSide(
-                        color: Color(0xFFFFCDD2),
-                        width: 1,
-                      ),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.logout_rounded, color: Colors.red, size: 30),
-                      Gap(5.sw),
-                      const Text(
-                        "تسجيل الخروج",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
-                  ),
                 ),
+                //  Row(
+                //   children: [
+                //     Icon(Icons.logout_rounded, color: Colors.red, size: 30),
+                //     Gap(5.sw),
+                //     const Text(
+                //       "تسجيل الخروج",
+                //       style: TextStyle(fontSize: 20),
+                //     ),
+                //   ],
+                // ),
               ),
             ],
           );

@@ -10,11 +10,16 @@ import 'package:rehab/features/auth/presentation/cubit/auth_state.dart';
 import 'package:rehab/features/auth/presentation/pages/auth_feature_screen.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_cubit.dart';
 import 'package:rehab/features/auth/sub/sign_up/presentation/cubit/sign_up_cubit.dart';
+import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
+import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
+import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'routers.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.splash,
+
     routes: [
       GoRoute(
         path: Routes.splash,
@@ -54,7 +59,24 @@ class AppRouter {
           );
         },
       ),
+      GoRoute(
+        path: Routes.homeDetails,
+        builder: (context, state) {
+          final home = state.extra as HomeEntity;
+          return BlocProvider(
+            create: (context) => HomeDetailsCubit(GetIt.I.get()),
+            child: HomeDetailsFeatureScreen(home: home),
+          );
+        },
+      ),
 
+      GoRoute(
+        path: Routes.booking,
+        builder: (context, state) {
+          final home = state.extra as HomeEntity;
+          return BookingFeatureScreen(home: home);
+        },
+      ),
       // GoRoute(
       //   path: Routes.login,
       //   builder: (context, state) => BlocProvider(
@@ -74,6 +96,17 @@ class AppRouter {
         path: Routes.home,
         builder: (context, state) => const RootShell(),
       ),
+      
+      //================ leen
+      // GoRoute(
+      //   path: Routes.home,
+      //   builder: (context, state) => BlocProvider(
+      //     create: (context) => GetIt.I<HomeCubit>()..getHomeMethod(),
+      //     child: const MainNavigationScreen(),
+      //   ),
+      // ),
+      //===================== leen 
+
       // GoRoute(
       //   path: Routes.home,
       //   builder: (context, state) => BlocProvider(

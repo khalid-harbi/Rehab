@@ -43,7 +43,7 @@ class TextFieldWidget extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-            prefixIcon: Icon(icon, color: AppColors.success,),
+            prefixIcon: Icon(icon, color: AppColors.primary,),
             filled: true,
             fillColor: const Color(0xFFF5F5F5),
             border: OutlineInputBorder(

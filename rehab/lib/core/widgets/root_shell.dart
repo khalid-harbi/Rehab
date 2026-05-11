@@ -8,6 +8,7 @@ import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/profile_feature_screen.dart';
+import 'package:rehab/features/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/pages/users_feature_screen.dart';
 
@@ -22,8 +23,13 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
   SelectedTab _selectedTab = SelectedTab.home;
 
   final List<Widget> _pages = [
-    BlocProvider(
-      create: (context) => HomeCubit(GetIt.I.get()), //! leen's feature
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetIt.I<HomeCubit>()..getHomeMethod(),
+        ),
+        BlocProvider(create: (context) => SearchCubit(GetIt.I.get())),
+      ],
       child: const HomeFeatureScreen(),
     ),
 
@@ -73,7 +79,7 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
           CrystalNavigationBarItem(
             icon: Icons.chat,
             unselectedIcon: Icons.chat_outlined,
-            selectedColor: AppColors.info,
+            selectedColor: AppColors.primary,
           ),
           CrystalNavigationBarItem(
             icon: Icons.people,

@@ -49,7 +49,7 @@ class ForgetPasswordFeatureWidget extends HookWidget {
                     const Icon(
                       Icons.lock_reset_rounded,
                       size: 80,
-                      color: AppColors.success,
+                      color: AppColors.primary,
                     ),
                     const SizedBox(height: 24),
           
@@ -98,7 +98,7 @@ class ForgetPasswordFeatureWidget extends HookWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        backgroundColor: AppColors.success,
+                        backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                       ),
                       child: const Text(

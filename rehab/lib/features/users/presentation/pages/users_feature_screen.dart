@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_state.dart';
+import 'package:rehab/features/users/presentation/widgets/users_widget.dart';
 
 // class UsersFeatureScreen extends HookWidget {
 //   const UsersFeatureScreen({super.key});
@@ -80,14 +81,9 @@ class UsersFeatureScreen extends HookWidget {
                         itemCount: state.users.length,
 
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: const Icon(Icons.person),
-
-                            title: Text(state.users[index].name),
-
-                            subtitle: Text(
-                              state.users[index].createdAt.toString(),
-                            ),
+                          return UsersWidget(
+                            name: (state.users[index].name),
+                            cratedAt: (state.users[index].createdAt),
                           );
                         },
                       ),
