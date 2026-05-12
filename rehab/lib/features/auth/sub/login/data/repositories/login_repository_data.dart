@@ -13,19 +13,15 @@ class LoginRepositoryData implements LoginRepositoryDomain {
   LoginRepositoryData(this.remoteDataSource);
 
   @override
-  Future<Result<void, Failure>> getLogin({
+  Future<Result<UserRole, Failure>> getLogin({
     required String email,
     required String password,
   }) async {
     try {
-    //  final role = await remoteDataSource.getLogin(email: email, password: password);
-    //   // return Success(null);
-    //   return Success();
-     final role = await remoteDataSource.getLogin(
+      final role = await remoteDataSource.getLogin(
         email: email,
         password: password,
       );
-
       return Success(role);
     } on Failure catch (error) {
       return Error(error);

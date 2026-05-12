@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
+import 'package:rehab/core/constants/app_enums.dart';
 import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/features/auth/sub/login/domain/repositories/login_repository_domain.dart';
 
@@ -9,7 +10,7 @@ class LoginUseCase {
 
   LoginUseCase(this._repositoryData);
 
-  Future<Result<void, Failure>> getLogin({
+  Future<Result<UserRole, Failure>> getLogin({
     required String email,
     required String password,
   }) async {
