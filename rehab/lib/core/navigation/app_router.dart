@@ -20,6 +20,9 @@ import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart'
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/conversation/presentation/pages/conversation_feature_screen.dart';
 import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
+import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
+import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
+
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -124,9 +127,16 @@ class AppRouter {
           // If no room is passed
           return SizedBox.shrink();
         },
-      
       ),
-    ],
+    
+  GoRoute(
+    path: Routes.lifestyle,
+    builder: (context, state) => BlocProvider(
+          create: (context) => LifestyleCubit(GetIt.I.get()),
+          child: const LifestyleFeatureScreen(),
+        ),
+  ),
+],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),
