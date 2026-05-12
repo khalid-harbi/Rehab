@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
@@ -18,7 +16,7 @@ class HomeFeatureScreen extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is HomeLoadingState) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: LoadingWidget());
         }
 
         if (state is HomeErrorState) {
@@ -54,7 +52,6 @@ class HomeFeatureScreen extends StatelessWidget {
                               itemCount: state.homes.length,
                               itemBuilder: (context, index) {
                                 final home = state.homes[index];
-
                                 return HomeCard(home: home);
                               },
                             );
