@@ -22,19 +22,87 @@ class OwnerFeatureScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
 
               children: [
-                Text(
-                  'لوحة التحكم',
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
+              Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    theme.colorScheme.primary,
+                    theme.colorScheme.primary.withAlpha(200),
+                  ],
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'لوحة التحكم',
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 6),
+                  const SizedBox(height: 6),
 
-                Text(
-                  'نظرة عامة على عقاراتك',
-                  style: theme.textTheme.bodyMedium,
-                ),
+                  Text(
+                    'مرحبا ',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontSize: 18,
+                      color: Colors.white.withAlpha(200),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withAlpha(100),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'الأرباح الشهرية',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                fontSize: 20,
+                                color: Colors.white.withAlpha(200),
+                              ),
+                            ),
+
+                            const SizedBox(height: 6),
+
+                            Text(
+                              '5,000 ريال',
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const Icon(
+                          Icons.trending_up,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
                 const SizedBox(height: 24),
 
                 GridView.count(

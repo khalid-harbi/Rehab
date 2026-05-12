@@ -31,7 +31,6 @@ class AppRouter {
         ),
   ),
 
-
   GoRoute(
   path: Routes.homeDetails,
   builder: (context, state) {
