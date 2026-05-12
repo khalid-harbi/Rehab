@@ -24,6 +24,10 @@ class LifestyleOptionsBody extends StatelessWidget {
     return code == 'ar' ? ar : en;
   }
 
+  // ==================================================================
+  // ==================================================================
+  // ==================================================================
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
