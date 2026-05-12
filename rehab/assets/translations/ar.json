@@ -1,5 +1,17 @@
 {
-   "data":"البيانات",
-   "welcomeBack":"مرحبا بعودتك"
+   "hi":" اهلا",
+      "howAreYou":" كيف حالك اليوم؟",
+   "welcomeBack":"مرحبا بعودتك",
+   "profile":"حسابي",
+   "favorites":" المفضلة",
+   "bookings":"حجوزاتي",
+    "darkMode":" الوضع الداكن",
+   "language":"اللغة",
+    "settings":" الإعدادات",
+   "help&support":"مساعدة ودعم",
+    "logout":" تسجيل الخروج"
+
+
+
 }
 

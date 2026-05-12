@@ -135,27 +135,27 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-          // Positioned(
-          //   bottom: 20,
-          //   right: 20,
-          //   child: Container(
-          //     padding: const EdgeInsets.all(8),
-          //     decoration: BoxDecoration(
-          //       color: Colors.black.withAlpha(102),
-          //       borderRadius: BorderRadius.circular(15),
-          //     ),
-          //     child: const Row(
-          //       children: [
-          //         Icon(Icons.check_box, color: Colors.blue, size: 16),
-          //         SizedBox(width: 5),
-          //         Text(
-          //           'Things',
-          //           style: TextStyle(color: Colors.white, fontSize: 12),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.black.withAlpha(102),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: const Row(
+                children: [
+                 Icon(Icons.handshake, color: Colors.red, size: 16),
+                  SizedBox(width: 5),
+                  Text(
+                    'Matches: 75%',
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

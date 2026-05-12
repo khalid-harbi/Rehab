@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/navigation/routers.dart';
-import 'package:rehab/features/auth/sub/logout/presentation/cubit/logout_cubit.dart';
 import 'package:rehab/features/auth/sub/logout/presentation/pages/logout_feature_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
@@ -17,7 +17,7 @@ class ProfileFeatureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('حسابي', style: TextStyle(fontSize: 36)),
+        title: Text("profile".tr(), style: TextStyle(fontSize: 36)),
         centerTitle: false,
       ),
       body: Center(
@@ -72,18 +72,18 @@ class ProfileFeatureScreen extends StatelessWidget {
                           // ),
                           ProfileWidget(
                             icon: Icon(Icons.favorite),
-                            title: "Favorites",
+                            title: "favorites",
 
                             // onTap: () => context.push(Routes.),
                           ),
                           ProfileWidget(
                             icon: Icon(Icons.attach_money),
-                            title: "My Bookings",
+                            title: "bookings",
                           ),
 
                           ProfileWidget(
                             icon: Icon(Icons.dark_mode_outlined),
-                            title: "Dark Mode",
+                            title: "darkMode",
                             // action: BlocBuilder<ThemeSwitcherCubit, bool>(
                             //   builder: (context, state) {
                             //     return Switch(
@@ -97,17 +97,17 @@ class ProfileFeatureScreen extends StatelessWidget {
                           ),
                           ProfileWidget(
                             icon: Icon(Icons.language),
-                            title: "Language",
+                            title: "language",
                           ),
 
                           ProfileWidget(
                             icon: Icon(Icons.settings),
-                            title: "Settings",
+                            title: "settings",
                           ),
                           Gap(2.sh),
                           ProfileWidget(
                             icon: Icon(Icons.support_agent_outlined),
-                            title: "Help & Support",
+                            title: "help&support",
                           ),
 
                           LogoutFeatureWidget(),
