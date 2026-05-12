@@ -37,6 +37,7 @@ part 'lifestyle_option_model.g.dart';
 
 @freezed
 abstract class LifestyleOptionModel with _$LifestyleOptionModel {
+  @JsonSerializable(fieldRename: .snake)
   const factory LifestyleOptionModel({
     required String id,
     required String titleEn,

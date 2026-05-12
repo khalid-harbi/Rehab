@@ -10,8 +10,8 @@ _LifestyleOptionModel _$LifestyleOptionModelFromJson(
   Map<String, dynamic> json,
 ) => _LifestyleOptionModel(
   id: json['id'] as String,
-  titleEn: json['titleEn'] as String,
-  titleAr: json['titleAr'] as String,
+  titleEn: json['title_en'] as String,
+  titleAr: json['title_ar'] as String,
   slug: json['slug'] as String,
 );
 
@@ -19,7 +19,7 @@ Map<String, dynamic> _$LifestyleOptionModelToJson(
   _LifestyleOptionModel instance,
 ) => <String, dynamic>{
   'id': instance.id,
-  'titleEn': instance.titleEn,
-  'titleAr': instance.titleAr,
+  'title_en': instance.titleEn,
+  'title_ar': instance.titleAr,
   'slug': instance.slug,
 };

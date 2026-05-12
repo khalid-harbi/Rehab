@@ -209,8 +209,8 @@ return $default(_that.id,_that.optionId,_that.valueEn,_that.valueAr);case _:
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(fieldRename: .snake)
 class _LifestyleChoiceModel implements LifestyleChoiceModel {
   const _LifestyleChoiceModel({required this.id, required this.optionId, required this.valueEn, required this.valueAr});
   factory _LifestyleChoiceModel.fromJson(Map<String, dynamic> json) => _$LifestyleChoiceModelFromJson(json);
