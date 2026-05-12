@@ -12,4 +12,5 @@ class Routes {
   static const String chat = '/chat';
   static const String conversation = '/conversation';
   static const String owner = '/owner';
+  static const String lifestyle = '/lifestyle';
 }

@@ -22,6 +22,9 @@ import 'package:rehab/features/home_details/presentation/pages/home_details_feat
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
+import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
+import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
+
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -139,8 +142,17 @@ class AppRouter {
           create: (context) => OwnerCubit(GetIt.I.get()),
           child: const OwnerNavigationScreen(),
         ),
+
       ),
-    ],
+    
+  GoRoute(
+    path: Routes.lifestyle,
+    builder: (context, state) => BlocProvider(
+          create: (context) => LifestyleCubit(GetIt.I.get()),
+          child: const LifestyleFeatureScreen(),
+        ),
+  ),
+],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),

@@ -73,27 +73,20 @@ class ProfileFeatureScreen extends StatelessWidget {
                           ProfileWidget(
                             icon: Icon(Icons.favorite),
                             title: "favorites",
-
-                            // onTap: () => context.push(Routes.),
                           ),
                           ProfileWidget(
                             icon: Icon(Icons.attach_money),
                             title: "bookings",
                           ),
+                          ProfileWidget(
+                            icon: Icon(Icons.interests_outlined),
+                            title: "lifestyle",
+                            onTap: () => context.push(Routes.lifestyle),
+                          ),
 
                           ProfileWidget(
                             icon: Icon(Icons.dark_mode_outlined),
                             title: "darkMode",
-                            // action: BlocBuilder<ThemeSwitcherCubit, bool>(
-                            //   builder: (context, state) {
-                            //     return Switch(
-                            //       value: !state,
-                            //       onChanged: (value) {
-                            //         context.read<ThemeSwitcherCubit>().toggle();
-                            //       },
-                            //     );
-                            //   },
-                            // ),
                           ),
                           ProfileWidget(
                             icon: Icon(Icons.language),
