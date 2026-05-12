@@ -10,6 +10,7 @@ import 'package:rehab/features/users/di/users_di.dart';
 import 'package:rehab/features/sub/search/di/search_di.dart';
 import 'package:rehab/features/chat/di/chat_di.dart';
 import 'package:rehab/features/conversation/di/conversation_di.dart';
+import 'package:rehab/features/owner/di/owner_di.dart';
 import 'package:rehab/features/lifestyle/di/lifestyle_di.dart';
 
 @InjectableInit(
@@ -30,5 +31,6 @@ Future<void> configureDependencies() async {
   configureBooking(getIt);
   configureChat(getIt);
   configureConversation(getIt);
-    configureLifestyle(getIt);
+  configureOwner(getIt);
+  configureLifestyle(getIt);
 }

@@ -4,29 +4,32 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/core/navigation/owner_navigation_screen.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
+import 'package:rehab/core/widgets/owner_root_shell.dart';
 import 'package:rehab/core/widgets/root_shell.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_state.dart';
 import 'package:rehab/features/auth/presentation/pages/auth_feature_screen.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_cubit.dart';
 import 'package:rehab/features/auth/sub/sign_up/presentation/cubit/sign_up_cubit.dart';
-import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
-import 'package:rehab/features/home/domain/entities/home_entity.dart';
-import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
-import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
-import 'routers.dart';
-import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
-import 'package:rehab/features/conversation/presentation/pages/conversation_feature_screen.dart';
+import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
+import 'package:rehab/features/conversation/presentation/pages/conversation_feature_screen.dart';
+import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'routers.dart';
+import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
+import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
+import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
+import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
 
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.splash,
+    initialLocation: Routes.owner,
 
     routes: [
       GoRoute(
@@ -85,21 +88,7 @@ class AppRouter {
           return BookingFeatureScreen(home: home);
         },
       ),
-      // GoRoute(
-      //   path: Routes.login,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => LoginCubit(GetIt.I.get()),
-      //     child: const LoginFeatureScreen(),
-      //   ),
-      // ),
 
-      // GoRoute(
-      //   path: Routes.signUp,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => SignUpCubit(GetIt.I.get()),
-      //     child: const SignUpFeatureScreen(),
-      //   ),
-      // ),
       GoRoute(
         path: Routes.home,
         builder: (context, state) => const RootShell(),
@@ -127,6 +116,42 @@ class AppRouter {
           // If no room is passed
           return SizedBox.shrink();
         },
+      ),
+
+      GoRoute(
+        path: Routes.homeDetails,
+        builder: (context, state) {
+          final home = state.extra as HomeEntity;
+          return BlocProvider(
+            create: (context) => HomeDetailsCubit(GetIt.I.get()),
+            child: HomeDetailsFeatureScreen(home: home),
+          );
+        },
+      ),
+
+      GoRoute(
+        path: Routes.booking,
+        builder: (context, state) {
+          final home = state.extra as HomeEntity;
+          return BookingFeatureScreen(home: home);
+        },
+      ),
+
+      // GoRoute(
+      //   path: Routes.owner,
+      //   builder: (context, state) => BlocProvider(
+      //     create: (context) => OwnerCubit(GetIt.I.get()),
+      //     child: const OwnerNavigationScreen(),
+      //   ),
+
+      // ),
+      GoRoute(
+        path: Routes.owner,
+        builder: (context, state) => BlocProvider(
+          create: (context) => OwnerCubit(GetIt.I.get()),
+          child: const OwnerRootShell(),
+        ),
+
       ),
     
   GoRoute(
