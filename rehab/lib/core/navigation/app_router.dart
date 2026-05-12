@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/navigation/owner_navigation_screen.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
+import 'package:rehab/core/widgets/owner_root_shell.dart';
 import 'package:rehab/core/widgets/root_shell.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_state.dart';
@@ -28,7 +29,7 @@ import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.splash,
+    initialLocation: Routes.owner,
 
     routes: [
       GoRoute(
@@ -136,11 +137,19 @@ class AppRouter {
         },
       ),
 
+      // GoRoute(
+      //   path: Routes.owner,
+      //   builder: (context, state) => BlocProvider(
+      //     create: (context) => OwnerCubit(GetIt.I.get()),
+      //     child: const OwnerNavigationScreen(),
+      //   ),
+
+      // ),
       GoRoute(
         path: Routes.owner,
         builder: (context, state) => BlocProvider(
           create: (context) => OwnerCubit(GetIt.I.get()),
-          child: const OwnerNavigationScreen(),
+          child: const OwnerRootShell(),
         ),
 
       ),
