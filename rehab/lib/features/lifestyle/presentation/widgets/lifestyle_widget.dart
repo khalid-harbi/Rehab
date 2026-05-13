@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rehab/core/widgets/localization_helper.dart';
 import 'package:rehab/features/lifestyle/domain/entities/lifestyle_entity.dart';
 
 typedef OnSelectChoice = void Function(String optionId, String choiceId);
@@ -18,11 +19,6 @@ class LifestyleOptionsBody extends StatelessWidget {
   final String? saveError;
   final OnSelectChoice onSelectChoice;
   final VoidCallback onSave;
-
-  String _titleForLocale(BuildContext context, String en, String ar) {
-    final code = Localizations.localeOf(context).languageCode;
-    return code == 'ar' ? ar : en;
-  }
 
   // ==================================================================
   // ==================================================================
@@ -48,7 +44,7 @@ class LifestyleOptionsBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _titleForLocale(context, option.titleEn, option.titleAr),
+                    titleForLocale(context, option.titleEn, option.titleAr),
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -65,17 +61,18 @@ class LifestyleOptionsBody extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
-                      children: choices.map((c) {
-                        final label = _titleForLocale(
+                      children: choices.map((choice) {
+                        final label = titleForLocale(
                           context,
-                          c.valueEn,
-                          c.valueAr,
+                          choice.valueEn,
+                          choice.valueAr,
                         );
-                        final selected = selectedId == c.id;
+                        final selected = selectedId == choice.id;
                         return ChoiceChip(
                           label: Text(label),
                           selected: selected,
-                          onSelected: (_) => onSelectChoice(option.id, c.id),
+                          onSelected: (_) =>
+                              onSelectChoice(option.id, choice.id),
                           selectedColor: theme.colorScheme.primaryContainer,
                           labelStyle: TextStyle(
                             color: selected

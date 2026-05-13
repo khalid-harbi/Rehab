@@ -5,7 +5,7 @@ Future<bool?> showDeleteRoomConfirmationDialog(BuildContext context) {
     context: context,
     builder: (dialogContext) => AlertDialog(
       title: const Text("حذف المحادثة"),
-      content: const Text("سيتم إخفاء المحادثة من قائمتك فقط."),
+      content: const Text("سيتم إخفاء المحادثة من قائمتك فقط"),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(dialogContext, false),

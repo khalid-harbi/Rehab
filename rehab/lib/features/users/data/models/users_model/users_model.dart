@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rehab/features/users/data/models/user_answers_model/user_answers_model.dart';
 import 'package:rehab/features/users/domain/entities/users_entity.dart';
 part 'users_model.freezed.dart';
 part 'users_model.g.dart';
@@ -10,6 +11,8 @@ abstract class UsersModel with _$UsersModel {
     required String id,
     required String name,
     required DateTime createdAt,
+    @Default([]) List<UserAnswersModel> answers,
+    @Default(0) int matchPercentage, 
   }) = _UsersModel;
 
   factory UsersModel.fromJson(Map<String, Object?> json) =>
@@ -22,6 +25,8 @@ extension UsersModelMapper on UsersModel {
       id: id,
       name: name,
       createdAt: createdAt,
+      answers: answers.map((a) => a.toEntity()).toList(),
+      matchPercentage: matchPercentage,
     );
   }
 }
