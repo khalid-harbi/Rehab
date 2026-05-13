@@ -37,8 +37,11 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
     ),
 
     const ChatFeatureScreen(),
-    BlocProvider(
-      create: (context) => UsersCubit(GetIt.I.get()),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
+        BlocProvider(create: (context) => ProfileCubit(GetIt.I.get())),
+      ],
       child: const UsersFeatureScreen(),
     ),
 

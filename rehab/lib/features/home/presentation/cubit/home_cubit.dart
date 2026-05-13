@@ -23,4 +23,34 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  Future<void> applyFilter({
+    double? minPrice,
+    double? maxPrice,
+    String? city,
+    double? minRating,
+    double? maxRating,
+    int? rooms,
+    int? bathrooms,
+  }) async {
+    emit(HomeLoadingState());
+
+    final result = await _homeUseCase.filter(
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      city: city,
+      minRating: minRating,
+      rooms: rooms,
+      bathrooms: bathrooms,
+    );
+
+    result.when(
+      (success) {
+        emit(HomeSuccessState(success));
+      },
+      (error) {
+        emit(HomeErrorState(error.message));
+      },
+    );
+  }
 }

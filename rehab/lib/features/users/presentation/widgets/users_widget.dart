@@ -1,7 +1,11 @@
+import 'package:any_image_view/any_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/core/constants/app_colors.dart' show AppColors;
+import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
+import 'package:sizer/sizer.dart';
 
 class UsersWidget extends StatelessWidget {
   final String id;
@@ -123,17 +127,26 @@ class ProfileHeader extends StatelessWidget {
           Positioned(
             bottom: 0,
             left: 24,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: const BoxDecoration(
-                color: Color(0xFF1A1A1A),
-                shape: BoxShape.circle,
-              ),
-              child: const CircleAvatar(
-                radius: 35,
-                backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=a'),
-              ),
+            child: BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, state) {
+                if (state is ProfileSuccessState) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(50.sp),
+                    child: AnyImageView(
+                      imagePath:
+                         state.profile.imageUrl??
+                          "https://placeholder.com/user.png",
+                      width: 40.sp,
+                      height: 40.sp,
+                      fit: BoxFit.cover,
+                      errorWidget: Icon(Icons.person, size: 30.sp),
+                    ),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
             ),
+           
           ),
           Positioned(
             bottom: 20,
@@ -146,7 +159,7 @@ class ProfileHeader extends StatelessWidget {
               ),
               child: const Row(
                 children: [
-                 Icon(Icons.handshake, color: Colors.red, size: 16),
+                  Icon(Icons.handshake, color: Colors.red, size: 16),
                   SizedBox(width: 5),
                   Text(
                     'Matches: 75%',

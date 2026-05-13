@@ -16,6 +16,8 @@ class HomeSuccessState extends HomeState {
   final List<HomeEntity> homes;
 
   const HomeSuccessState(this.homes);
+  @override
+  List<Object?> get props => [homes];
 }
 
 class HomeErrorState extends HomeState {
