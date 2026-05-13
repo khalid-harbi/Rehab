@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
-import 'package:rehab/core/navigation/owner_navigation_screen.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/widgets/owner_root_shell.dart';
 import 'package:rehab/core/widgets/root_shell.dart';
@@ -26,10 +25,9 @@ import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
 
-
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.owner,
+    initialLocation: Routes.splash,
 
     routes: [
       GoRoute(
@@ -151,17 +149,16 @@ class AppRouter {
           create: (context) => OwnerCubit(GetIt.I.get()),
           child: const OwnerRootShell(),
         ),
-
       ),
-    
-  GoRoute(
-    path: Routes.lifestyle,
-    builder: (context, state) => BlocProvider(
+
+      GoRoute(
+        path: Routes.lifestyle,
+        builder: (context, state) => BlocProvider(
           create: (context) => LifestyleCubit(GetIt.I.get()),
           child: const LifestyleFeatureScreen(),
         ),
-  ),
-],
+      ),
+    ],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),

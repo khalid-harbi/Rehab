@@ -146,11 +146,11 @@ class ProfileHeader extends StatelessWidget {
               ),
               child: const Row(
                 children: [
-                 Icon(Icons.handshake, color: Colors.red, size: 16),
+                  Icon(Icons.favorite, color: Colors.red, size: 24),
                   SizedBox(width: 5),
                   Text(
-                    'Matches: 75%',
-                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    '75%',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
               ),
