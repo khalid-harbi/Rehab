@@ -1,6 +1,6 @@
 {
    "hi":" اهلا",
-      "howAreYou":" كيف حالك اليوم؟",
+   "howAreYou":" كيف حالك اليوم؟",
    "welcomeBack":"مرحبا بعودتك",
    "profile":"حسابي",
    "favorites":" المفضلة",
@@ -10,6 +10,12 @@
    "language":"اللغة",
     "settings":" الإعدادات",
    "help&support":"مساعدة ودعم",
+   "memberSinceToday": "'عضو منذ اليوم",
+   "memberFor": "عضو منذ",
+   "day": "يوم",
+   "month": "شهر",
+   "and": "و",
+   "year": "سنة",
     "logout":" تسجيل الخروج"
 
 
