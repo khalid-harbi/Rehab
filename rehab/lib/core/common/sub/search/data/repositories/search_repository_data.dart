@@ -4,8 +4,8 @@ import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/features/home/data/models/home_model.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
-import 'package:rehab/features/sub/search/data/datasources/search_remote_data_source.dart';
-import 'package:rehab/features/sub/search/domain/repositories/search_repository_domain.dart';
+import 'package:rehab/core/common/sub/search/data/datasources/search_remote_data_source.dart';
+import 'package:rehab/core/common/sub/search/domain/repositories/search_repository_domain.dart';
 
 @LazySingleton(as: SearchRepositoryDomain)
 class SearchRepositoryData implements SearchRepositoryDomain {

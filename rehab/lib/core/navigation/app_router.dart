@@ -3,6 +3,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:rehab/core/common/sub/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/widgets/owner_root_shell.dart';
@@ -24,6 +25,7 @@ import 'package:rehab/features/booking/presentation/pages/booking_feature_screen
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
+
 
 
 class AppRouter {
@@ -73,13 +75,19 @@ class AppRouter {
         path: Routes.homeDetails,
         builder: (context, state) {
           final home = state.extra as HomeEntity;
-          return BlocProvider(
-            create: (context) => HomeDetailsCubit(GetIt.I.get()),
-            child: HomeDetailsFeatureScreen(home: home),
-          );
-        },
-      ),
-
+          return MultiBlocProvider(
+  providers: [
+    BlocProvider(
+      create: (context) => HomeDetailsCubit(GetIt.I.get()),
+    ),
+    BlocProvider(
+      create: (context) => GetIt.I<FavoritesCubit>(),
+    ),
+  ],
+  child: HomeDetailsFeatureScreen(home: home),
+);
+      },),
+      
       GoRoute(
         path: Routes.booking,
         builder: (context, state) {
@@ -89,9 +97,12 @@ class AppRouter {
       ),
 
       GoRoute(
-        path: Routes.home,
-        builder: (context, state) => const RootShell(),
-      ),
+  path: Routes.home,
+  builder: (context, state) => BlocProvider(
+    create: (context) => GetIt.I<FavoritesCubit>(),
+    child: const RootShell(),
+  ),
+),
 
       GoRoute(
         path: Routes.chat,
@@ -160,6 +171,8 @@ class AppRouter {
           child: const LifestyleFeatureScreen(),
         ),
   ),
+
+
 ],
 
     errorBuilder: (context, state) =>

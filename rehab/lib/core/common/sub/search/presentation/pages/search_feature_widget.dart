@@ -175,8 +175,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
-import 'package:rehab/features/sub/search/presentation/cubit/search_cubit.dart';
-import 'package:rehab/features/sub/search/presentation/cubit/search_state.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
 import 'package:sizer/sizer.dart';
 
 // class SearchFeatureWidget extends HookWidget {

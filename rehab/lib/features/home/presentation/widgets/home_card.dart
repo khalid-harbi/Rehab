@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/common/sub/favorites/presentation/widgets/favorite_button.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
@@ -28,22 +29,8 @@ class HomeCard extends StatelessWidget {
                   width: double.infinity,
                   child: Image.network(home.imageUrl, fit: BoxFit.cover),
                 ),
-                
-                Positioned(
-                top: 12,
-                left: 12,
-                child: CircleAvatar(
-                  radius: 18,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.favorite_border,
-                    size: 20,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ),
+    
               ],
-              
             ),
             Padding(
               padding: const EdgeInsets.all(16),

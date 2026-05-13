@@ -10,7 +10,7 @@ import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/profile_feature_screen.dart';
-import 'package:rehab/features/sub/search/presentation/cubit/search_cubit.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/pages/users_feature_screen.dart';
 
