@@ -36,10 +36,11 @@ class LoginFeatureScreen extends HookWidget {
 
               case LoginSuccessState _:
                 if (state.role == UserRole.owner) {
-                context.go(Routes.owner);
+                  context.go(Routes.owner);
                 } else if (state.role == UserRole.user) {
                   context.go(Routes.home);
                 }
+
               case LoginErrorState _:
                 context.showSnackBar(state.message, isError: true);
               default:

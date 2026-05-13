@@ -10,6 +10,7 @@ _ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) =>
     _ProfileModel(
       id: json['id'] as String,
       name: json['name'] as String,
+      imageUrl: json['image_url'] as String?,
       createdAt: DateTime.parse(json['created_at'] as String),
     );
 
@@ -17,5 +18,6 @@ Map<String, dynamic> _$ProfileModelToJson(_ProfileModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'image_url': instance.imageUrl,
       'created_at': instance.createdAt.toIso8601String(),
     };

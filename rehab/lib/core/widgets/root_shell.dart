@@ -31,6 +31,7 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
           create: (context) => GetIt.I<HomeCubit>()..getHomeMethod(),
         ),
         BlocProvider(create: (context) => SearchCubit(GetIt.I.get())),
+        BlocProvider(create: (context) => ProfileCubit(GetIt.I.get())),
       ],
       child: const HomeFeatureScreen(),
     ),

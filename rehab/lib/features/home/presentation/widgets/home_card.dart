@@ -28,22 +28,21 @@ class HomeCard extends StatelessWidget {
                   width: double.infinity,
                   child: Image.network(home.imageUrl, fit: BoxFit.cover),
                 ),
-                
+
                 Positioned(
-                top: 12,
-                left: 12,
-                child: CircleAvatar(
-                  radius: 18,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.favorite_border,
-                    size: 20,
-                    color: Theme.of(context).colorScheme.primary,
+                  top: 12,
+                  left: 12,
+                  child: CircleAvatar(
+                    radius: 18,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.favorite_border,
+                      size: 20,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
-              ),
               ],
-              
             ),
             Padding(
               padding: const EdgeInsets.all(16),
@@ -85,9 +84,9 @@ class HomeCard extends StatelessWidget {
                       const Spacer(),
                       Text(
                         '${home.price}  شهريا/ريال',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: theme.colorScheme.primary,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                     ],

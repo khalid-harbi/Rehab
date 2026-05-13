@@ -9,6 +9,7 @@ abstract class ProfileModel with _$ProfileModel {
   const factory ProfileModel({
     required String id,
     required String name,
+    String? imageUrl,
     required DateTime createdAt,
   }) = _ProfileModel;
 
@@ -18,6 +19,6 @@ abstract class ProfileModel with _$ProfileModel {
 
 extension ProfileModelMapper on ProfileModel {
   ProfileEntity toEntity() {
-    return ProfileEntity(id:id, name: name, createdAt: createdAt);
+    return ProfileEntity(id:id, name: name, imageUrl: imageUrl, createdAt: createdAt);
   }
 }
