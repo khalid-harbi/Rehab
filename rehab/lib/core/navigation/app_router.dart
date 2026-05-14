@@ -25,12 +25,15 @@ import 'package:rehab/features/booking/presentation/pages/booking_feature_screen
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
+import 'package:rehab/features/add_ad/presentation/pages/add_ad_feature_screen.dart';
+import 'package:rehab/features/add_ad/presentation/cubit/add_ad_cubit.dart';
+
 
 
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.splash,
+    initialLocation: Routes.owner,
 
     routes: [
       GoRoute(
@@ -71,23 +74,26 @@ class AppRouter {
           );
         },
       ),
+
       GoRoute(
         path: Routes.homeDetails,
         builder: (context, state) {
           final home = state.extra as HomeEntity;
           return MultiBlocProvider(
-  providers: [
-    BlocProvider(
-      create: (context) => HomeDetailsCubit(GetIt.I.get()),
-    ),
-    BlocProvider(
-      create: (context) => GetIt.I<FavoritesCubit>(),
-    ),
-  ],
-  child: HomeDetailsFeatureScreen(home: home),
+        providers: [
+          BlocProvider(
+            create: (context) => HomeDetailsCubit(GetIt.I.get()),
+          ),
+          BlocProvider(
+            create: (context) => GetIt.I<FavoritesCubit>(),
+          ),
+        ],
+      child: HomeDetailsFeatureScreen(home: home),
 );
       },),
-      
+
+
+
       GoRoute(
         path: Routes.booking,
         builder: (context, state) {
@@ -173,6 +179,14 @@ class AppRouter {
   ),
 
 
+
+  GoRoute(
+    path: Routes.addAd,
+    builder: (context, state) => BlocProvider(
+          create: (context) => AddAdCubit(GetIt.I.get()),
+          child: const AddAdFeatureScreen(),
+        ),
+  ),
 ],
 
     errorBuilder: (context, state) =>
