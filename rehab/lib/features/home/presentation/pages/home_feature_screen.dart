@@ -5,8 +5,8 @@ import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/cubit/home_state.dart';
 import 'package:rehab/features/home/presentation/widgets/home_card.dart';
 import 'package:rehab/features/home/presentation/widgets/sliver_app_bar_widget.dart';
-import 'package:rehab/features/sub/search/presentation/cubit/search_cubit.dart';
-import 'package:rehab/features/sub/search/presentation/cubit/search_state.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
 
 class HomeFeatureScreen extends StatelessWidget {
   const HomeFeatureScreen({super.key});

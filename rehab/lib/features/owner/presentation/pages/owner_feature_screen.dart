@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/features/owner/presentation/widgets/owner_state_card.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
@@ -177,6 +178,19 @@ class OwnerFeatureScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 24),
+
+SizedBox(
+  width: double.infinity,
+  height: 52,
+  child: ElevatedButton.icon(
+    onPressed: () {
+      context.push('/addAd');
+    },
+    icon: const Icon(Icons.add),
+    label: const Text('إضافة إعلان جديد'),
+  ),
+),
             ],
           ),
         ),

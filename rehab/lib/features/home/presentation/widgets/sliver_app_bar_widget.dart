@@ -13,7 +13,7 @@ import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/widgets/filter_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
-import 'package:rehab/features/sub/search/presentation/cubit/search_cubit.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 class SliverAppBarWidget extends HookWidget {

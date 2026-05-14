@@ -15,6 +15,23 @@ import 'package:get_storage/get_storage.dart' as _i792;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
+import '../common/sub/favorites/data/datasources/favorites_remote_data_source.dart'
+    as _i526;
+import '../common/sub/favorites/data/repositories/favorites_repository_data.dart'
+    as _i152;
+import '../common/sub/favorites/domain/repositories/favorites_repository_domain.dart'
+    as _i422;
+import '../common/sub/favorites/domain/use_cases/favorites_use_case.dart'
+    as _i754;
+import '../common/sub/favorites/presentation/cubit/favorites_cubit.dart'
+    as _i183;
+import '../common/sub/search/data/datasources/search_remote_data_source.dart'
+    as _i739;
+import '../common/sub/search/data/repositories/search_repository_data.dart'
+    as _i354;
+import '../common/sub/search/domain/repositories/search_repository_domain.dart'
+    as _i341;
+import '../common/sub/search/domain/use_cases/search_use_case.dart' as _i94;
 import '../network/dio_client.dart' as _i667;
 import '../services/local_keys_service.dart' as _i945;
 import 'third_part.dart' as _i423;
@@ -35,6 +52,32 @@ extension GetItInjectableX on _i174.GetIt {
       () => thirdPartyConfig.flutterSecureStorage,
     );
     gh.lazySingleton<_i667.DioClient>(() => _i667.DioClient());
+    gh.lazySingleton<_i526.BaseFavoritesRemoteDataSource>(
+      () => _i526.FavoritesRemoteDataSource(
+        gh<_i945.LocalKeysService>(),
+        gh<_i454.SupabaseClient>(),
+      ),
+    );
+    gh.lazySingleton<_i739.BaseSearchRemoteDataSource>(
+      () => _i739.SearchRemoteDataSource(gh<_i454.SupabaseClient>()),
+    );
+    gh.lazySingleton<_i422.FavoritesRepositoryDomain>(
+      () => _i152.FavoritesRepositoryData(
+        gh<_i526.BaseFavoritesRemoteDataSource>(),
+      ),
+    );
+    gh.lazySingleton<_i754.FavoritesUseCase>(
+      () => _i754.FavoritesUseCase(gh<_i422.FavoritesRepositoryDomain>()),
+    );
+    gh.lazySingleton<_i341.SearchRepositoryDomain>(
+      () => _i354.SearchRepositoryData(gh<_i739.BaseSearchRemoteDataSource>()),
+    );
+    gh.factory<_i183.FavoritesCubit>(
+      () => _i183.FavoritesCubit(gh<_i754.FavoritesUseCase>()),
+    );
+    gh.lazySingleton<_i94.SearchUseCase>(
+      () => _i94.SearchUseCase(gh<_i341.SearchRepositoryDomain>()),
+    );
     gh.singleton<_i945.LocalKeysService>(() => _i945.LocalKeysService());
     return this;
   }

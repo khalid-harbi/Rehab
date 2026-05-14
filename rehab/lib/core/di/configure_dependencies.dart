@@ -7,11 +7,13 @@ import 'package:rehab/features/home/di/home_di.dart';
 import 'package:rehab/features/home_details/di/home_details_di.dart';
 import 'package:rehab/features/profile/di/profile_di.dart';
 import 'package:rehab/features/users/di/users_di.dart';
-import 'package:rehab/features/sub/search/di/search_di.dart';
+import 'package:rehab/core/common/sub/search/di/search_di.dart';
 import 'package:rehab/features/chat/di/chat_di.dart';
 import 'package:rehab/features/conversation/di/conversation_di.dart';
 import 'package:rehab/features/owner/di/owner_di.dart';
 import 'package:rehab/features/lifestyle/di/lifestyle_di.dart';
+import 'package:rehab/core/common/sub/favorites/di/favorites_di.dart';
+import 'package:rehab/features/add_ad/di/add_ad_di.dart';
 
 @InjectableInit(
   initializerName: 'init',
@@ -33,4 +35,6 @@ Future<void> configureDependencies() async {
   configureConversation(getIt);
   configureOwner(getIt);
   configureLifestyle(getIt);
+    configureFavoritesSub(getIt);
+    configureAddAd(getIt);
 }

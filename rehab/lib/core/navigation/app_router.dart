@@ -3,6 +3,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:rehab/core/common/sub/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/widgets/owner_root_shell.dart';
@@ -24,7 +25,8 @@ import 'package:rehab/features/booking/presentation/pages/booking_feature_screen
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
-
+import 'package:rehab/features/add_ad/presentation/pages/add_ad_feature_screen.dart';
+import 'package:rehab/features/add_ad/presentation/cubit/add_ad_cubit.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -69,12 +71,18 @@ class AppRouter {
           );
         },
       ),
+
       GoRoute(
         path: Routes.homeDetails,
         builder: (context, state) {
           final home = state.extra as HomeEntity;
-          return BlocProvider(
-            create: (context) => HomeDetailsCubit(GetIt.I.get()),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => HomeDetailsCubit(GetIt.I.get()),
+              ),
+              BlocProvider(create: (context) => GetIt.I<FavoritesCubit>()),
+            ],
             child: HomeDetailsFeatureScreen(home: home),
           );
         },
@@ -90,7 +98,10 @@ class AppRouter {
 
       GoRoute(
         path: Routes.home,
-        builder: (context, state) => const RootShell(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => GetIt.I<FavoritesCubit>(),
+          child: const RootShell(),
+        ),
       ),
 
       GoRoute(
@@ -150,17 +161,24 @@ class AppRouter {
           create: (context) => OwnerCubit(GetIt.I.get()),
           child: const OwnerRootShell(),
         ),
-
       ),
-    
-  GoRoute(
-    path: Routes.lifestyle,
-    builder: (context, state) => BlocProvider(
+
+      GoRoute(
+        path: Routes.lifestyle,
+        builder: (context, state) => BlocProvider(
           create: (context) => LifestyleCubit(GetIt.I.get()),
           child: const LifestyleFeatureScreen(),
         ),
-  ),
-],
+      ),
+
+      GoRoute(
+        path: Routes.addAd,
+        builder: (context, state) => BlocProvider(
+          create: (context) => AddAdCubit(GetIt.I.get()),
+          child: const AddAdFeatureScreen(),
+        ),
+      ),
+    ],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),
