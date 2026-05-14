@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 
 class FilterWidget extends StatefulWidget {
@@ -47,7 +48,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             min: 0,
             max: 10000,
             divisions: 20,
-            activeColor: const Color(0xFF6A1B9A),
+            activeColor: AppColors.primary,
             onChanged: (values) {
               setState(() {
                 minPrice = values.start;
@@ -116,7 +117,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             height: 55,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF6A1B9A),
+                backgroundColor: AppColors.primary,
               ),
               onPressed: () {
                 context.read<HomeCubit>().applyFilter(

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UsersModel {
 
- String get id; String get name; DateTime get createdAt; List<UserAnswersModel> get answers; int get matchPercentage;
+ String get id; String get name; DateTime get createdAt; String get imageUrl; List<UserAnswersModel> get answers; int get matchPercentage;
 /// Create a copy of UsersModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UsersModelCopyWith<UsersModel> get copyWith => _$UsersModelCopyWithImpl<UsersMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UsersModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other.answers, answers)&&(identical(other.matchPercentage, matchPercentage) || other.matchPercentage == matchPercentage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UsersModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&const DeepCollectionEquality().equals(other.answers, answers)&&(identical(other.matchPercentage, matchPercentage) || other.matchPercentage == matchPercentage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,createdAt,const DeepCollectionEquality().hash(answers),matchPercentage);
+int get hashCode => Object.hash(runtimeType,id,name,createdAt,imageUrl,const DeepCollectionEquality().hash(answers),matchPercentage);
 
 @override
 String toString() {
-  return 'UsersModel(id: $id, name: $name, createdAt: $createdAt, answers: $answers, matchPercentage: $matchPercentage)';
+  return 'UsersModel(id: $id, name: $name, createdAt: $createdAt, imageUrl: $imageUrl, answers: $answers, matchPercentage: $matchPercentage)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UsersModelCopyWith<$Res>  {
   factory $UsersModelCopyWith(UsersModel value, $Res Function(UsersModel) _then) = _$UsersModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, DateTime createdAt, List<UserAnswersModel> answers, int matchPercentage
+ String id, String name, DateTime createdAt, String imageUrl, List<UserAnswersModel> answers, int matchPercentage
 });
 
 
@@ -65,12 +65,13 @@ class _$UsersModelCopyWithImpl<$Res>
 
 /// Create a copy of UsersModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? createdAt = null,Object? answers = null,Object? matchPercentage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? createdAt = null,Object? imageUrl = null,Object? answers = null,Object? matchPercentage = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime,answers: null == answers ? _self.answers : answers // ignore: cast_nullable_to_non_nullable
+as DateTime,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,answers: null == answers ? _self.answers : answers // ignore: cast_nullable_to_non_nullable
 as List<UserAnswersModel>,matchPercentage: null == matchPercentage ? _self.matchPercentage : matchPercentage // ignore: cast_nullable_to_non_nullable
 as int,
   ));
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  DateTime createdAt,  List<UserAnswersModel> answers,  int matchPercentage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  DateTime createdAt,  String imageUrl,  List<UserAnswersModel> answers,  int matchPercentage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UsersModel() when $default != null:
-return $default(_that.id,_that.name,_that.createdAt,_that.answers,_that.matchPercentage);case _:
+return $default(_that.id,_that.name,_that.createdAt,_that.imageUrl,_that.answers,_that.matchPercentage);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.id,_that.name,_that.createdAt,_that.answers,_that.matchPer
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  DateTime createdAt,  List<UserAnswersModel> answers,  int matchPercentage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  DateTime createdAt,  String imageUrl,  List<UserAnswersModel> answers,  int matchPercentage)  $default,) {final _that = this;
 switch (_that) {
 case _UsersModel():
-return $default(_that.id,_that.name,_that.createdAt,_that.answers,_that.matchPercentage);case _:
+return $default(_that.id,_that.name,_that.createdAt,_that.imageUrl,_that.answers,_that.matchPercentage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +199,10 @@ return $default(_that.id,_that.name,_that.createdAt,_that.answers,_that.matchPer
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  DateTime createdAt,  List<UserAnswersModel> answers,  int matchPercentage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  DateTime createdAt,  String imageUrl,  List<UserAnswersModel> answers,  int matchPercentage)?  $default,) {final _that = this;
 switch (_that) {
 case _UsersModel() when $default != null:
-return $default(_that.id,_that.name,_that.createdAt,_that.answers,_that.matchPercentage);case _:
+return $default(_that.id,_that.name,_that.createdAt,_that.imageUrl,_that.answers,_that.matchPercentage);case _:
   return null;
 
 }
@@ -213,12 +214,13 @@ return $default(_that.id,_that.name,_that.createdAt,_that.answers,_that.matchPer
 
 @JsonSerializable(fieldRename: .snake)
 class _UsersModel implements UsersModel {
-  const _UsersModel({required this.id, required this.name, required this.createdAt, final  List<UserAnswersModel> answers = const [], this.matchPercentage = 0}): _answers = answers;
+  const _UsersModel({required this.id, required this.name, required this.createdAt, this.imageUrl = 'https://ui-avatars.com/api/?name=Placeholder&background=random', final  List<UserAnswersModel> answers = const [], this.matchPercentage = 0}): _answers = answers;
   factory _UsersModel.fromJson(Map<String, dynamic> json) => _$UsersModelFromJson(json);
 
 @override final  String id;
 @override final  String name;
 @override final  DateTime createdAt;
+@override@JsonKey() final  String imageUrl;
  final  List<UserAnswersModel> _answers;
 @override@JsonKey() List<UserAnswersModel> get answers {
   if (_answers is EqualUnmodifiableListView) return _answers;
@@ -241,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UsersModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other._answers, _answers)&&(identical(other.matchPercentage, matchPercentage) || other.matchPercentage == matchPercentage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UsersModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&const DeepCollectionEquality().equals(other._answers, _answers)&&(identical(other.matchPercentage, matchPercentage) || other.matchPercentage == matchPercentage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,createdAt,const DeepCollectionEquality().hash(_answers),matchPercentage);
+int get hashCode => Object.hash(runtimeType,id,name,createdAt,imageUrl,const DeepCollectionEquality().hash(_answers),matchPercentage);
 
 @override
 String toString() {
-  return 'UsersModel(id: $id, name: $name, createdAt: $createdAt, answers: $answers, matchPercentage: $matchPercentage)';
+  return 'UsersModel(id: $id, name: $name, createdAt: $createdAt, imageUrl: $imageUrl, answers: $answers, matchPercentage: $matchPercentage)';
 }
 
 
@@ -261,7 +263,7 @@ abstract mixin class _$UsersModelCopyWith<$Res> implements $UsersModelCopyWith<$
   factory _$UsersModelCopyWith(_UsersModel value, $Res Function(_UsersModel) _then) = __$UsersModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, DateTime createdAt, List<UserAnswersModel> answers, int matchPercentage
+ String id, String name, DateTime createdAt, String imageUrl, List<UserAnswersModel> answers, int matchPercentage
 });
 
 
@@ -278,12 +280,13 @@ class __$UsersModelCopyWithImpl<$Res>
 
 /// Create a copy of UsersModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? createdAt = null,Object? answers = null,Object? matchPercentage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? createdAt = null,Object? imageUrl = null,Object? answers = null,Object? matchPercentage = null,}) {
   return _then(_UsersModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime,answers: null == answers ? _self._answers : answers // ignore: cast_nullable_to_non_nullable
+as DateTime,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as String,answers: null == answers ? _self._answers : answers // ignore: cast_nullable_to_non_nullable
 as List<UserAnswersModel>,matchPercentage: null == matchPercentage ? _self.matchPercentage : matchPercentage // ignore: cast_nullable_to_non_nullable
 as int,
   ));

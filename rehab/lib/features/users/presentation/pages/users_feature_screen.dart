@@ -64,6 +64,7 @@ class UsersFeatureScreen extends HookWidget {
                               id: (user.id),
                               name: (user.name),
                               cratedAt: (user.createdAt),
+                              imageUrl: (user.imageUrl),
                               answers: user.answers,
                               matchPercentage: user.matchPercentage,
                             );

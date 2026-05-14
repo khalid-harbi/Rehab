@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ProfileHeader extends StatelessWidget {
   final int matchPercentage;
-  const ProfileHeader({super.key, required this.matchPercentage});
+  final String imageUrl;
+
+  const ProfileHeader({
+    super.key,
+    required this.matchPercentage,
+    required this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +20,7 @@ class ProfileHeader extends StatelessWidget {
             height: 120,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-              image: DecorationImage(
-                image: NetworkImage('https://picsum.photos/400/200'),
-                fit: BoxFit.cover,
-              ),
+              // image: DecorationImage(fit: BoxFit.cover),
             ),
           ),
           Positioned(
@@ -30,9 +32,9 @@ class ProfileHeader extends StatelessWidget {
                 color: Color(0xFF1A1A1A),
                 shape: BoxShape.circle,
               ),
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 35,
-                backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=a'),
+                backgroundImage: NetworkImage(imageUrl),
               ),
             ),
           ),

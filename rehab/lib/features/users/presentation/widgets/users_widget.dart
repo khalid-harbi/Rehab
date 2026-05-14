@@ -1,12 +1,8 @@
-import 'package:any_image_view/any_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/core/constants/app_colors.dart' show AppColors;
-import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/widgets/profile_header.dart';
-import 'package:sizer/sizer.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/widgets/localization_helper.dart';
@@ -20,6 +16,7 @@ class UsersWidget extends HookWidget {
   final DateTime cratedAt;
   final List<UserAnswerEntity> answers;
   final int matchPercentage;
+  final String imageUrl;
 
   const UsersWidget({
     super.key,
@@ -28,7 +25,9 @@ class UsersWidget extends HookWidget {
     required this.cratedAt,
     required this.answers,
     required this.matchPercentage,
+    required this.imageUrl,
   });
+
   // ===================================================================
   // ===================================================================
   @override
@@ -68,7 +67,7 @@ class UsersWidget extends HookWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ProfileHeader(matchPercentage: matchPercentage),
+            ProfileHeader(imageUrl: imageUrl, matchPercentage: matchPercentage),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -174,145 +173,3 @@ class UsersWidget extends HookWidget {
     );
   }
 }
-
-// class ProfileHeader extends StatelessWidget {
-//   const ProfileHeader({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 160,
-//       child: Stack(
-//         children: [
-//           Container(
-//             height: 120,
-//             decoration: const BoxDecoration(
-//               borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-//               image: DecorationImage(
-//                 image: NetworkImage('https://picsum.photos/400/200'),
-//                 fit: BoxFit.cover,
-//               ),
-//             ),
-//           ),
-//           Positioned(
-//             bottom: 0,
-//             left: 24,
-//             child: BlocBuilder<ProfileCubit, ProfileState>(
-//               builder: (context, state) {
-//                 if (state is ProfileSuccessState) {
-//                   return ClipRRect(
-//                     borderRadius: BorderRadius.circular(50.sp),
-//                     child: AnyImageView(
-//                       imagePath:
-//                          state.profile.imageUrl??
-//                           "https://placeholder.com/user.png",
-//                       width: 40.sp,
-//                       height: 40.sp,
-//                       fit: BoxFit.cover,
-//                       errorWidget: Icon(Icons.person, size: 30.sp),
-//                     ),
-//                   );
-//                 }
-//                 return const SizedBox.shrink();
-//               },
-//             ),
-           
-//           ),
-//           Positioned(
-//             bottom: 20,
-//             right: 20,
-//             child: Container(
-//               padding: const EdgeInsets.all(8),
-//               decoration: BoxDecoration(
-//                 color: Colors.black.withAlpha(102),
-//                 borderRadius: BorderRadius.circular(15),
-//               ),
-//               child: const Row(
-//                 children: [
-//                   Icon(Icons.handshake, color: Colors.red, size: 16),
-//                   SizedBox(width: 5),
-//                   Text(
-//                     'Matches: 75%',
-//                     style: TextStyle(color: Colors.white, fontSize: 12),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-class StatsRow extends StatelessWidget {
-  const StatsRow({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          StatItem(
-            icon: Icons.star,
-            color: Colors.amber,
-            value: '5.0',
-            label: 'Rating',
-          ),
-          StatItem(
-            icon: Icons.flag,
-            color: Colors.blue,
-            value: '\$99',
-            label: 'Hours',
-          ),
-          StatItem(
-            icon: Icons.access_time_filled,
-            color: Colors.purple,
-            value: '12',
-            label: 'Month',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class StatItem extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-  final String value;
-  final String label;
-
-  const StatItem({
-    super.key,
-    required this.icon,
-    required this.color,
-    required this.value,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Icon(icon, color: color, size: 18),
-            const SizedBox(width: 4),
-            Text(
-              value,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 12)),
-      ],
-    );
-  }
-}
-
