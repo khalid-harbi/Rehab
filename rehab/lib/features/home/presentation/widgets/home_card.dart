@@ -51,6 +51,7 @@ class HomeCard extends StatelessWidget {
                         size: 16,
                         color: theme.colorScheme.primary,
                       ),
+                      
 
                       const SizedBox(width: 4),
 
@@ -58,6 +59,24 @@ class HomeCard extends StatelessWidget {
                     ],
                   ),
 
+
+                 const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.apartment_outlined,
+                        size: 16,
+                        color: theme.colorScheme.primary,
+                      ),
+                      
+
+                      const SizedBox(width: 4),
+
+                      Text(home.propertyType, style: theme.textTheme.bodySmall),
+                    ],
+                  ),
+
+                   
                   const SizedBox(height: 10),
                   Row(
                     children: [

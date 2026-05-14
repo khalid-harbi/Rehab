@@ -64,6 +64,21 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                      const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.space_dashboard_outlined,
+                        size: 16,
+                        color: theme.colorScheme.primary,
+                      ),
+                      
+
+                      const SizedBox(width: 4),
+                      Text(home.area.toString()+"M", style: theme.textTheme.bodySmall),  
+                      
+                    ],
+                  ),
 
                   const SizedBox(height: 8),
 

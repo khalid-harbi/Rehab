@@ -16,7 +16,13 @@ abstract class HomeModel with _$HomeModel {
     required int rooms,
     required int bathrooms,
     required String description,
-    @JsonKey(name: 'is_available') required bool isAvailable,
+    @JsonKey(name: 'is_available')
+     required bool isAvailable,
+     @JsonKey(name: 'property_type') 
+     required String propertyType,
+     required double area,
+  
+
   }) = _HomeModel;
 
   factory HomeModel.fromJson(Map<String, Object?> json) =>
@@ -37,6 +43,8 @@ extension HomeModelMapper on HomeModel {
       bathrooms: bathrooms,
       description: description,
       isAvailable: isAvailable,
+      propertyType: propertyType,
+      area: area,
     );
   }
 }
