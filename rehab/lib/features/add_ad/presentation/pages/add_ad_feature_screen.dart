@@ -62,6 +62,12 @@ class AddAdFeatureScreen extends StatelessWidget {
                 hint: 'الرياض، حي الياسمين',
               ),
 
+                const SizedBox(height: 16),
+              const CustomTextField(
+                label: 'نوع السكن',
+                hint: 'شقه خاصه , شقه مشتركة ',
+              ),
+
               const SizedBox(height: 16),
                 const CustomTextField(
                   label: 'الوصف',
