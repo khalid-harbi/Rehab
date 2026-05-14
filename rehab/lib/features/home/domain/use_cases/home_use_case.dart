@@ -13,4 +13,24 @@ class HomeUseCase {
   Future<Result<List<HomeEntity>, Failure>> getHome() async {
     return _repositoryData.getHome();
   }
+
+  Future<Result<List<HomeEntity>, Failure>> filter({
+    double? minPrice,
+    double? maxPrice,
+    String? city,
+    double? minRating,
+    double? maxRating,
+    int? rooms,
+    int? bathrooms,
+  }) async {
+    return _repositoryData.filter(
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      city: city,
+      minRating: minRating,
+      maxRating: maxRating,
+      rooms: rooms,
+      bathrooms: bathrooms,
+    );
+  }
 }

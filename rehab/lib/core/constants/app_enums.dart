@@ -4,7 +4,6 @@ enum SelectedTab { home, chat, users, profile }
 
 enum OwnerSelectedTab { home, ads, chat, profile }
 
-
 enum LoadingState { initial, loading, success, error }
 
 enum NetworkStatus { connected, disconnected, unknown }

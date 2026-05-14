@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:rehab/features/home/data/models/home_model.dart';
-import 'package:rehab/features/users/data/models/users_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseSearchRemoteDataSource {
@@ -18,7 +17,7 @@ class SearchRemoteDataSource implements BaseSearchRemoteDataSource {
     final items = await _supabase
         .from('home')
         .select()
-        .like('title', '$title%');
+        .like('title', '%$title%');
 
     List<HomeModel> homes = List.from(
       items,

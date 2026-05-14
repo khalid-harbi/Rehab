@@ -59,10 +59,14 @@ class UsersFeatureScreen extends HookWidget {
                           itemCount: state.users.length,
 
                           itemBuilder: (context, index) {
+                            final user = state.users[index];
                             return UsersWidget(
-                              id: (state.users[index].id),
-                              name: (state.users[index].name),
-                              cratedAt: (state.users[index].createdAt),
+                              id: (user.id),
+                              name: (user.name),
+                              cratedAt: (user.createdAt),
+                              imageUrl: (user.imageUrl),
+                              answers: user.answers,
+                              matchPercentage: user.matchPercentage,
                             );
                           },
                         ),

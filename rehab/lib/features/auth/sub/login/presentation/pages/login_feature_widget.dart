@@ -22,7 +22,10 @@ class LoginFeatureScreen extends HookWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
     final emailController = useTextEditingController(text: 'ka14x2@gmail.com');
+    // final emailController = useTextEditingController(text: usertest'@gmail.com');
+
     final passwordController = useTextEditingController(text: '12345678');
+
     final globalKey = GlobalKey<FormState>();
 
     return Scaffold(
@@ -36,10 +39,11 @@ class LoginFeatureScreen extends HookWidget {
 
               case LoginSuccessState _:
                 if (state.role == UserRole.owner) {
-                context.go(Routes.owner);
+                  context.go(Routes.owner);
                 } else if (state.role == UserRole.user) {
                   context.go(Routes.home);
                 }
+
               case LoginErrorState _:
                 context.showSnackBar(state.message, isError: true);
               default:

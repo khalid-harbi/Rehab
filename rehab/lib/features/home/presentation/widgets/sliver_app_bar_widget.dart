@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:any_image_view/any_image_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,8 @@ import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
+import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
+import 'package:rehab/features/home/presentation/widgets/filter_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
@@ -113,22 +116,6 @@ class SliverAppBarWidget extends HookWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withAlpha(60),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                height: 9.sh,
-                                width: 9.sh,
-
-                                child: const Icon(
-                                  Icons.person,
-                                  color: Colors.black,
-                                ),
-                              ),
-
-                              Gap(5.sw),
-
                               Expanded(
                                 child: BlocProvider(
                                   create: (context) =>
@@ -142,24 +129,82 @@ class SliverAppBarWidget extends HookWidget {
                                       }
 
                                       if (state is ProfileSuccessState) {
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                        return Row(
                                           children: [
-                                            Text(
-                                              "${"hi".tr()} ${state.profile.name}",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 24,
+                                            Padding(
+                                              padding: const EdgeInsets.all(
+                                                8.0,
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                      10.sp,
+                                                    ),
+                                                child: AnyImageView(
+                                                  imagePath:
+                                                      state.profile.imageUrl ??
+                                                      "https://placeholder.com/user.png",
+                                                  width: 30.sp,
+                                                  height: 30.sp,
+                                                  fit: BoxFit.cover,
+                                                  errorWidget: Icon(
+                                                    Icons.person,
+                                                    size: 30.sp,
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                            Text(
-                                              "howAreYou".tr(),
-                                              style: TextStyle(
+
+                                            Gap(5.sw),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${"hi".tr()} ${state.profile.name}",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 24,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "howAreYou".tr(),
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                final homeCubit = context
+                                                    .read<HomeCubit>();
+                                                showModalBottomSheet(
+                                                  context: context,
+                                                  isScrollControlled: true,
+                                                  shape: const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.vertical(
+                                                          top: Radius.circular(
+                                                            30,
+                                                          ),
+                                                        ),
+                                                  ),
+                                                  builder: (context) {
+                                                    return BlocProvider.value(
+                                                      value: homeCubit,
+                                                      child:
+                                                          const FilterWidget(),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              icon: Icon(
+                                                Icons.tune_rounded,
                                                 color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14,
                                               ),
                                             ),
                                           ],
