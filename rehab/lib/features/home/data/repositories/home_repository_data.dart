@@ -27,35 +27,4 @@ class HomeRepositoryData implements HomeRepositoryDomain {
       return Error(failure);
     }
   }
-
-  @override
-  Future<Result<List<HomeEntity>, Failure>> filter({
-    double? minPrice,
-    double? maxPrice,
-    String? city,
-    double? minRating,
-    double? maxRating,
-    int? rooms,
-    int? bathrooms,
-  }) async {
-    try {
-      final List<HomeModel> models = await remoteDataSource.filter(
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        city: city,
-        minRating: minRating,
-        maxRating: maxRating,
-        rooms: rooms,
-        bathrooms: bathrooms,
-      );
-
-      final List<HomeEntity> entities = models
-          .map((model) => model.toEntity())
-          .toList();
-
-      return Success(entities);
-    } on Failure catch (failure) {
-      return Error(failure);
-    }
-  }
 }

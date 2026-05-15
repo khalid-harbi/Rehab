@@ -1,21 +1,23 @@
 import 'package:equatable/equatable.dart';
 
-abstract class OtpState extends Equatable {
-  const OtpState();
+abstract class LogInWithOtpState extends Equatable {
+  const LogInWithOtpState();
 
   @override
   List<Object?> get props => [];
 }
 
-class OtpLoadingState extends OtpState {}
+class LogInWithOtpInitialState extends LogInWithOtpState {}
 
-class OtpInitialState extends OtpState {}
+class LogInWithOtpLoadingState extends LogInWithOtpState {}
 
-class OtpSuccessState extends OtpState {}
+class LogInWithOtpSuccessState extends LogInWithOtpState {}
 
-class OtpErrorState extends OtpState {
+class LogInWithOtpErrorState extends LogInWithOtpState {
   final String message;
-  const OtpErrorState({required this.message});
+  const LogInWithOtpErrorState({required this.message});
   @override
   List<Object?> get props => [message];
 }
+
+

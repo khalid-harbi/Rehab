@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_state.dart';
@@ -16,8 +17,10 @@ class ChatFeatureScreen extends StatelessWidget {
     final cubit = context.read<ChatCubit>();
     // ===================================================================
     return Scaffold(
-      appBar: AppBar(title: const Text("المحادثات")),
-
+ appBar: AppBar(
+        title: Text("Chats".tr(), style: TextStyle(fontSize: 36)),
+        centerTitle: false,
+      ),
       // ===================================================================
       // ===================================================================
       body: BlocBuilder<ChatCubit, ChatState>(

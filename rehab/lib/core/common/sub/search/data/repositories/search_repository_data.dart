@@ -1,11 +1,4 @@
-import 'package:injectable/injectable.dart';
-import 'package:multiple_result/multiple_result.dart';
-import 'package:rehab/core/errors/network_exceptions.dart';
-import 'package:rehab/core/errors/failure.dart';
-import 'package:rehab/features/home/data/models/home_model.dart';
-import 'package:rehab/features/home/domain/entities/home_entity.dart';
-import 'package:rehab/core/common/sub/search/data/datasources/search_remote_data_source.dart';
-import 'package:rehab/core/common/sub/search/domain/repositories/search_repository_domain.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 @LazySingleton(as: SearchRepositoryDomain)
 class SearchRepositoryData implements SearchRepositoryDomain {
@@ -22,6 +15,37 @@ class SearchRepositoryData implements SearchRepositoryDomain {
       return Success(response.map((e) => e.toEntity()).toList());
     } catch (error) {
       return Error(FailureExceptions.getException(error));
+    }
+  }
+
+  @override
+  Future<Result<List<HomeEntity>, Failure>> filter({
+    double? minPrice,
+    double? maxPrice,
+    String? city,
+    double? minRating,
+    double? maxRating,
+    int? rooms,
+    int? bathrooms,
+  }) async {
+    try {
+      final List<HomeModel> models = await remoteDataSource.filter(
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        city: city,
+        minRating: minRating,
+        maxRating: maxRating,
+        rooms: rooms,
+        bathrooms: bathrooms,
+      );
+
+      final List<HomeEntity> entities = models
+          .map((model) => model.toEntity())
+          .toList();
+
+      return Success(entities);
+    } on Failure catch (failure) {
+      return Error(failure);
     }
   }
 }

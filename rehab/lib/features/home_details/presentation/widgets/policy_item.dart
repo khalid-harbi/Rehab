@@ -4,10 +4,7 @@ class PolicyItem extends StatelessWidget {
   final IconData icon;
   final String title;
 
-  const PolicyItem({
-    required this.icon,
-    required this.title,
-  });
+  const PolicyItem({super.key, required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {

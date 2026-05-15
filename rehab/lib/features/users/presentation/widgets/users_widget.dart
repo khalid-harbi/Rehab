@@ -147,7 +147,7 @@ class UsersWidget extends HookWidget {
             // ===================================================================
             const SizedBox(height: 24),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(24),
               child: ElevatedButton(
                 onPressed: () {
                   cubit.createRoom(id);
@@ -157,7 +157,7 @@ class UsersWidget extends HookWidget {
                   foregroundColor: Colors.black,
                   minimumSize: const Size(double.infinity, 55),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   elevation: 0,
                 ),

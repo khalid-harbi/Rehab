@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:sizer/sizer.dart';
 
-class TextFieldWidget extends StatelessWidget {
+class TextFieldWidget extends HookWidget {
   final String label;
   final TextEditingController controller;
   final String hint;
@@ -22,28 +23,45 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final obscureText = useState(isPassword);
+
     return Column(
-      crossAxisAlignment: .start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 8.sp, left: 4.sp),
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: EdgeInsets.only(bottom: 8.sp, left: 4.sp),
+        //   child: Text(
+        //     label,
+        //     style: const TextStyle(
+        //       fontSize: 14,
+        //       fontWeight: FontWeight.w600,
+        //       color: Colors.black87,
+        //     ),
+        //   ),
+        // ),
         TextFormField(
           controller: controller,
-          obscureText: isPassword,
+          obscureText: obscureText.value,
           validator: validator,
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-            prefixIcon: Icon(icon, color: AppColors.primary,),
+            prefixIcon: Icon(icon, color: AppColors.primary),
+
+            suffixIcon: isPassword
+                ? IconButton(
+                    icon: Icon(
+                      obscureText.value
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      obscureText.value = !obscureText.value;
+                    },
+                  )
+                : null,
+
             filled: true,
             fillColor: const Color(0xFFF5F5F5),
             border: OutlineInputBorder(

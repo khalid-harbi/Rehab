@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 abstract class AppColors {
   AppColors._();
@@ -15,6 +15,8 @@ abstract class AppColors {
   static const Color tertiary = Color(0xFFF5E6CA);
 
   //  Background
+    // static const Color background = Color(0xFFF2EDF3);
+
   static const Color background = Color(0xFFFFF8F6);
   static const Color darkBackground = Colors.black;
 

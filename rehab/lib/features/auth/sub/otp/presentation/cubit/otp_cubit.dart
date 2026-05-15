@@ -2,24 +2,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/features/auth/sub/otp/domain/use_cases/otp_use_case.dart';
 import 'package:rehab/features/auth/sub/otp/presentation/cubit/otp_state.dart';
 
-class OtpCubit extends Cubit<OtpState> {
-  final OtpUseCase _otpUseCase;
-  OtpCubit(this._otpUseCase) : super(OtpInitialState());
+class LogInWithOtpCubit extends Cubit<LogInWithOtpState> {
+  final LogInWithOtpUseCase _logInWithOtpUseCase;
 
-  Future<void> verifyOtpMethod({
-    required String email,
-    required String token,
-  }) async {
-    emit(OtpLoadingState());
-    final result = await _otpUseCase.verifyOtp(email, token);
+  LogInWithOtpCubit(this._logInWithOtpUseCase) : super(LogInWithOtpInitialState());
 
+  Future<void> getLogInWithOtpMethod({required String email}) async {
+    final result = await _logInWithOtpUseCase.getLogInWithOtp(email:email);
     result.when(
       (success) {
-        emit(OtpSuccessState());
+       emit(LogInWithOtpSuccessState());
       },
-      (failure) {
-        emit(OtpErrorState(message: failure.message));
+      (whenError) {
+     emit(LogInWithOtpErrorState(message: whenError.message));
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    //here is when close cubit
+    return super.close();
   }
 }

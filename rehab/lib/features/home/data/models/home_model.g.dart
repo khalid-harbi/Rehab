@@ -11,7 +11,7 @@ _HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => _HomeModel(
   title: json['title'] as String,
   city: json['city'] as String,
   district: json['district'] as String,
-  imageUrl: json['image_url'] as String,
+  imageUrl: json['image_url'] as String? ?? '',
   price: (json['price'] as num).toDouble(),
   rating: (json['rating'] as num).toDouble(),
   rooms: (json['rooms'] as num).toInt(),

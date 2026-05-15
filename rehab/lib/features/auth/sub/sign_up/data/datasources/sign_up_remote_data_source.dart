@@ -23,10 +23,11 @@ class SignUpRemoteDataSource implements BaseSignUpRemoteDataSource {
     final authResponse = await _supabase.auth.signUp(
       password: password,
       email: email,
+      // data: {'name': name},
     );
-
+    print("authResponse: $authResponse");
     final user = authResponse.user;
-
+    print("user: $user");
     if (user == null) {
       throw Exception("User is null (maybe email confirmation required)");
     }

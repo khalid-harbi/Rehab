@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/common/sub/favorites/presentation/widgets/favorite_button.dart';
@@ -8,7 +7,7 @@ import 'package:rehab/features/home_details/presentation/widgets/circle_icone_bu
 class HeaderImage extends StatelessWidget {
   final HomeEntity home;
 
-  const HeaderImage({required this.home});
+  const HeaderImage({super.key, required this.home});
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +41,12 @@ class HeaderImage extends StatelessWidget {
           right: 16,
           child: Row(
             children: [
-              FavoriteButton(
-                homeId: home.id,
-              ),
+              FavoriteButton(homeId: home.id),
               const SizedBox(width: 8),
-              CircleIconButton(
-                icon: Icons.share_outlined,
-                onTap: () {},
-              ),
+              CircleIconButton(icon: Icons.share_outlined, onTap: () {}),
             ],
           ),
         ),
-        
 
         Positioned(
           bottom: 18,

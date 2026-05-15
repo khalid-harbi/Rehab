@@ -1,58 +1,89 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
-import 'package:pinput/pinput.dart';
-import 'package:rehab/core/navigation/routers.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
+import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/features/auth/sub/otp/presentation/cubit/otp_cubit.dart';
 import 'package:rehab/features/auth/sub/otp/presentation/cubit/otp_state.dart';
 
-class OtpFeatureWidget extends StatelessWidget {
-  final String email;
-  const OtpFeatureWidget({super.key, required this.email});
+class LogInWithOtpFeatureScreen extends HookWidget {
+  const LogInWithOtpFeatureScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final defaultPinTheme = PinTheme(
-      width: 56,
-      height: 56,
-      textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8),
-      ),
+    final cubit = context.read<LogInWithOtpCubit>();
+
+    final emailController = useTextEditingController(
+      text: "amasinaif@gmail.com",
     );
-    return BlocProvider(
-      create: (context) => OtpCubit(GetIt.I.get()),
-      child: BlocConsumer<OtpCubit, OtpState>(
-        listener: (context, state) {
-          if (state is OtpSuccessState) {
-            context.go(Routes.home);
-          } else if (state is OtpErrorState) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        },
-        builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("أدخل رمز التحقق المرسل لإيميلك"),
-              const SizedBox(height: 20),
-              Pinput(
-                length: 6,
-                defaultPinTheme: defaultPinTheme,
-                onCompleted: (pin) {
-                  context.read<OtpCubit>().verifyOtpMethod(
-                    email: email,
-                    token: pin,
-                  );
-                },
+    final formKey = GlobalKey<FormState>();
+
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: BlocListener<LogInWithOtpCubit, LogInWithOtpState>(
+              listener: (context, state) {
+                // Always hide loading before handling new state
+                context.hideLoading();
+                switch (state) {
+                  // Loading state
+                  case LogInWithOtpLoadingState _:
+                    context.showLoading();
+
+                  // Success state
+                  // case LogInWithOtpSuccessState _:
+                  // Navigator.push(
+                  //   context,
+                  //   // MaterialPageRoute(
+                  //   //   builder: (context) => OtpVerificationFeatureWidget(
+                  //   //     email: emailController.text,
+                  //   //   ),
+                  //   // ),
+                  // ); // Error state
+                  case LogInWithOtpErrorState _:
+                    context.showSnackBar(state.message, isError: true);
+                }
+              },
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Gap(15),
+
+                    // Email field
+                    TextField(
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        labelText: "البريد الإلكتروني",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+
+                    Gap(20),
+
+                    // Login button
+                    ElevatedButton(
+                      child: const Text("إرسال رمز التحقق"),
+                      onPressed: () {
+                        if (!formKey.currentState!.validate()) {
+                          return;
+                        }
+                        cubit.getLogInWithOtpMethod(
+                          email: emailController.text,
+                        );
+                      },
+                      
+                    ),
+                    Gap(20),
+                  ],
+                ),
               ),
-              if (state is OtpLoadingState) CircularProgressIndicator(),
-            ],
-          );
-        },
+            ),
+          ),
+        ),
       ),
     );
   }

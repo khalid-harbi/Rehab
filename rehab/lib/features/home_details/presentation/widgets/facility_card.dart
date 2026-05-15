@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class FacilityCard extends StatelessWidget {
   final IconData icon;
   final String title;
 
-  const FacilityCard({required this.icon, required this.title});
+  const FacilityCard({super.key, required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {

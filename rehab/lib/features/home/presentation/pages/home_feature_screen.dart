@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rehab/core/widgets/loading_widget.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/cubit/home_state.dart';
 import 'package:rehab/features/home/presentation/widgets/home_card.dart';
@@ -29,54 +28,16 @@ class HomeFeatureScreen extends StatelessWidget {
                   child: CustomScrollView(
                     slivers: [
                       SliverAppBarWidget(),
-                      // BlocBuilder<HomeCubit, HomeState>(
-                      //   builder: (context, state) {
-                      //     return BlocBuilder<SearchCubit, SearchState>(
-                      //       builder: (context, state) {
-                      //         if (state is SearchLoadingState) {
-                      //           return SliverToBoxAdapter(
-                      //             child: const LoadingWidget(),
-                      //           );
-                      //         }
 
-                      //         if (state is SearchSuccessState) {
-                      //           if (state.homes.isEmpty) {
-                      //             return SliverToBoxAdapter(
-                      //               child: const Center(
-                      //                 child: Icon(
-                      //                   Icons.search_off_outlined,
-                      //                   size: 60,
-                      //                   color: Colors.grey,
-                      //                 ),
-                      //               ),
-                      //             );
-                      //           }
-
-                      //           return SliverList.builder(
-                      //             itemCount: state.homes.length,
-                      //             itemBuilder: (context, index) {
-                      //               final home = state.homes[index];
-                      //               return HomeCard(home: home);
-                      //             },
-                      //           );
-                      //         }
-
-                      //         return SliverToBoxAdapter(
-                      //           child: const SizedBox.shrink(),
-                      //         );
-                      //       },
-                      //     );
-                      //   },
-                      // ),
-                      BlocBuilder<HomeCubit, HomeState>(
+                      BlocBuilder<SearchCubit, SearchState>(
                         builder: (context, state) {
-                          if (state is HomeLoadingState) {
+                          if (state is SearchLoadingState) {
                             return SliverToBoxAdapter(
                               child: const LoadingWidget(),
                             );
                           }
 
-                          if (state is HomeSuccessState) {
+                          if (state is SearchSuccessState) {
                             if (state.homes.isEmpty) {
                               return SliverToBoxAdapter(
                                 child: const Center(
