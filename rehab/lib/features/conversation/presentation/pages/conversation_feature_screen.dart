@@ -97,6 +97,18 @@ class ConversationFeatureScreen extends StatelessWidget {
                 filled: true,
                 fillColor: Theme.of(context).colorScheme.surface,
               ),
+              sentMessageBodyTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                height: 1.5,
+              ),
+              receivedMessageBodyTextStyle: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                height: 1.5,
+              ),
             ),
             l10n: const ChatL10nEn(inputPlaceholder: '...Write a message'),
             // Force the general date locale to English
