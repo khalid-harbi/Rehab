@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 abstract class SearchState extends Equatable {
   const SearchState();

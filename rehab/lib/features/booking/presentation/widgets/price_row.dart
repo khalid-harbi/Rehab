@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class PriceRow extends StatelessWidget {
@@ -7,6 +6,7 @@ class PriceRow extends StatelessWidget {
   final bool isTotal;
 
   const PriceRow({
+    super.key,
     required this.title,
     required this.value,
     this.isTotal = false,

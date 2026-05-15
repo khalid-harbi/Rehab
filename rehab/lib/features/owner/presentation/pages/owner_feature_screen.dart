@@ -55,50 +55,47 @@ class OwnerFeatureScreen extends StatelessWidget {
             
                       const SizedBox(height: 6),
             
-                      BlocProvider(
-                        create: (context) => ProfileCubit(GetIt.I.get()),
-                        child: BlocBuilder<ProfileCubit, ProfileState>(
-                          builder: (context, state) {
-                            if (state is ProfileLoadingState) {
-                              return const Center(child: LoadingWidget());
-                            }
-            
-                            if (state is ProfileSuccessState) {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${"hi".tr()} ${state.profile.name}",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24,
-                                    ),
+                      BlocBuilder<ProfileCubit, ProfileState>(
+                        builder: (context, state) {
+                          if (state is ProfileLoadingState) {
+                            return const Center(child: LoadingWidget());
+                          }
+                                  
+                          if (state is ProfileSuccessState) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${"hi".tr()} ${state.profile.name}",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
                                   ),
-                                  Text(
-                                    "howAreYou".tr(),
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
-            
-                            if (state is ProfileErrorState) {
-                              return Center(
-                                child: Text(
-                                  'Error: ${state.message}',
-                                  style: const TextStyle(color: Colors.red),
                                 ),
-                              );
-                            }
-            
-                            return const SizedBox.shrink();
-                          },
-                        ),
+                                Text(
+                                  "howAreYou".tr(),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+                                  
+                          if (state is ProfileErrorState) {
+                            return Center(
+                              child: Text(
+                                'Error: ${state.message}',
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            );
+                          }
+                                  
+                          return const SizedBox.shrink();
+                        },
                       ),
             
                       const SizedBox(height: 20),

@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 class FavoritesEntity extends Equatable {
   final int id;

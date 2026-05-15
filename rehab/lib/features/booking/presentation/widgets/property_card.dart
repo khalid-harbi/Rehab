@@ -5,7 +5,7 @@ import 'package:rehab/features/home/domain/entities/home_entity.dart';
 class PropertyCard extends StatelessWidget {
   final HomeEntity home;
 
-  const PropertyCard({required this.home});
+  const PropertyCard({super.key, required this.home});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,6 @@ class PropertyCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text('مؤثثة', style: TextStyle(color: colors.primary)),
-                
               ],
             ),
           ),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 extension ColorExtensions on Color {
   Color darken([double amount = 0.1]) {

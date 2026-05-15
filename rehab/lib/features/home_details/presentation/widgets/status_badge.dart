@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class StatusBadge extends StatelessWidget {
   final bool isAvailable;
 
-  const StatusBadge({required this.isAvailable});
+  const StatusBadge({super.key, required this.isAvailable});
 
   @override
   Widget build(BuildContext context) {

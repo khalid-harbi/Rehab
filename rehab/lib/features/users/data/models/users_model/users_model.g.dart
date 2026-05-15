@@ -12,7 +12,7 @@ _UsersModel _$UsersModelFromJson(Map<String, dynamic> json) => _UsersModel(
   createdAt: DateTime.parse(json['created_at'] as String),
   imageUrl:
       json['image_url'] as String? ??
-      'https://ui-avatars.com/api/?name=Placeholder&background=random',
+      'https://ui-avatars.com/api/?name=Placeholder&background=random&length=1',
   answers:
       (json['answers'] as List<dynamic>?)
           ?.map((e) => UserAnswersModel.fromJson(e as Map<String, dynamic>))

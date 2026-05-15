@@ -28,12 +28,12 @@ class _OwnerRootShellState extends State<OwnerRootShell> {
     ),
 
     const ChatFeatureScreen(),
-    const ChatFeatureScreen(),
 
-    BlocProvider(
-      create: (context) => ProfileCubit(GetIt.I.get()),
-      child: const ProfileFeatureScreen(),
-    ),
+    // BlocProvider(
+    //   create: (context) => ProfileCubit(GetIt.I.get()),
+      // child: 
+      const ProfileFeatureScreen(),
+    // ),
   ];
 
   @override
@@ -66,11 +66,7 @@ class _OwnerRootShellState extends State<OwnerRootShell> {
               unselectedIcon: Icons.home_outlined,
               selectedColor: AppColors.primary,
             ),
-            CrystalNavigationBarItem(
-              icon: Icons.add,
-              unselectedIcon: Icons.add,
-              selectedColor: Colors.amber,
-            ),
+
             CrystalNavigationBarItem(
               icon: Icons.chat,
               unselectedIcon: Icons.chat_outlined,

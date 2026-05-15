@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 /// Base failure class
 abstract class Failure extends Equatable {
@@ -137,5 +137,3 @@ class UnknownFailure extends Failure {
 class CancelledFailure extends Failure {
   const CancelledFailure([super.message = 'Cancelled']);
 }
-
-

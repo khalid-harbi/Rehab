@@ -78,15 +78,19 @@ class SignUpFeatureScreen extends HookWidget {
                     icon: Icons.email_outlined,
                     validator: Validators.validateEmail,
                   ),
-
+                  // todo:
                   Gap(2.h),
                   TextFieldWidget(
                     label: "كلمة المرور",
                     controller: passwordController,
-                    hint: "••••••••",
+                    hint: "", // no need
                     icon: Icons.lock_outline,
                     isPassword: true,
                     validator: Validators.validatePassword,
+                  ),
+                  Gap(2.h),
+                  LinearProgressIndicator(
+                    value: Validators.passwordStrength(passwordController.text),
                   ),
 
                   Gap(6.h),
@@ -105,7 +109,7 @@ class SignUpFeatureScreen extends HookWidget {
                     onPressed: () {
                       if (globalKey.currentState!.validate()) {
                         cubit.getSignUpMethod(
-                          username: usernameController.text,
+                          name: usernameController.text,
                           email: emailController.text,
                           password: passwordController.text,
                         );

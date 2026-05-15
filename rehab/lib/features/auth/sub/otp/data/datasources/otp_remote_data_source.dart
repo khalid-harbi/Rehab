@@ -1,49 +1,23 @@
 import 'package:injectable/injectable.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-
-abstract class BaseOtpRemoteDataSource {
-  Future<void> sendOtp(String email);
-  Future<AuthResponse> verifyOtp({required String email, required String token});
+abstract class BaseLogInWithOtpRemoteDataSource {
+  Future<void> getLogInWithOtp({required String email});
 }
 
-
-@LazySingleton(as: BaseOtpRemoteDataSource)
-class OtpRemoteDataSource implements BaseOtpRemoteDataSource {
- 
+@LazySingleton(as: BaseLogInWithOtpRemoteDataSource)
+class LogInWithOtpRemoteDataSource implements BaseLogInWithOtpRemoteDataSource {
   final SupabaseClient _supabase;
 
-  
-  
+  LogInWithOtpRemoteDataSource(this._supabase);
 
-   OtpRemoteDataSource(this._supabase);
-
-
-
-   
-@override
-Future<void> sendOtp(String email) async {
-  try {
-    await _supabase.auth.signInWithOtp(
-      email: email,
-      shouldCreateUser: false,
-    );
-  } catch (error) {
-    throw FailureExceptions.getException(error);
+  @override
+  Future<void> getLogInWithOtp({required String email}) async {
+    try {
+      await _supabase.auth.signInWithOtp(email: email, shouldCreateUser: false);
+    } catch (error) {
+      throw FailureExceptions.getException(error);
+    }
   }
-}
-
-@override
-Future<AuthResponse> verifyOtp({required String email, required String token}) async {
-  try {
-    return await _supabase.auth.verifyOTP(
-      email: email,
-      token: token,
-      type: OtpType.magiclink,
-    );
-  } catch (error) {
-    throw FailureExceptions.getException(error);
-  }
-}
 }

@@ -9,7 +9,6 @@ import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
-import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/widgets/filter_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
@@ -21,9 +20,6 @@ class SliverAppBarWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final cubit = context.read<SearchCubit>();
-    // Timer? timer;
-    // final controllerSearch = useTextEditingController();
 
     // controllerSearch.addListener(() async {
     //   if (timer != null) {
@@ -61,184 +57,153 @@ class SliverAppBarWidget extends HookWidget {
       };
     }, []);
     return SliverAppBar(
-      actions: [
-        Align(
-          alignment: .topEnd,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white.withAlpha(60),
-                borderRadius: BorderRadius.circular(12),
+      actions: [],
+      pinned: true,
+      floating: true,
+      expandedHeight: 22.sh,
+      toolbarHeight: 22.sh,
+      shape: RoundedRectangleBorder(
+        borderRadius: .only(
+          bottomRight: .circular(30),
+          bottomLeft: .circular(30),
+        ),
+      ),
+      flexibleSpace: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
+            ),
+          ),
+
+          Positioned(
+            top: 70,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: BlocBuilder<ProfileCubit, ProfileState>(
+                          builder: (context, state) {
+                            if (state is ProfileLoadingState) {
+                              return const Center(child: LoadingWidget());
+                            }
+                        
+                            if (state is ProfileSuccessState) {
+                              return Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                        50.sp,
+                                      ),
+                                      child: AnyImageView(
+                                        imagePath:
+                                            state.profile.imageUrl ??
+                                            "https://placeholder.com/user.png",
+                                        width: 30.sp,
+                                        height: 30.sp,
+                                        fit: BoxFit.cover,
+                                        errorWidget: Icon(
+                                          Icons.person,
+                                          size: 30.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                        
+                                  Gap(5.sw),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${"hi".tr()} ${state.profile.name}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                      Text(
+                                        "howAreYou".tr(),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            }
+                        
+                            if (state is ProfileErrorState) {
+                              return Center(
+                                child: Text(
+                                  'Error: ${state.message}',
+                                  style: const TextStyle(color: Colors.red),
+                                ),
+                              );
+                            }
+                        
+                            return const SizedBox.shrink();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Gap(2.sh),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SearchBar(
+                          controller: controllerSearch,
+                          leading: const Icon(Icons.search),
+                          constraints: const BoxConstraints(
+                            maxHeight: 45,
+                            minHeight: 40,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          final homeCubit = context.read<SearchCubit>();
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(30),
+                              ),
+                            ),
+                            builder: (context) {
+                              return BlocProvider.value(
+                                value: homeCubit,
+                                child: const FilterWidget(),
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.tune_rounded, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
-        ),
-      ],
-      pinned: true,
-      floating: true,
-      expandedHeight: 24.sh,
-      toolbarHeight: 10.sh,
-      shape: RoundedRectangleBorder(
-        borderRadius: .only(
-          bottomRight: .circular(40),
-          bottomLeft: .circular(40),
-        ),
-      ),
-      flexibleSpace: LayoutBuilder(
-        builder: (context, constraints) {
-          final isCollapsed = constraints.biggest.height <= 120;
-
-          return Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(40),
-                  ),
-                ),
-              ),
-
-              if (!isCollapsed)
-                Positioned(
-                  top: 60,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SingleChildScrollView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: BlocProvider(
-                                  create: (context) =>
-                                      ProfileCubit(GetIt.I.get()),
-                                  child: BlocBuilder<ProfileCubit, ProfileState>(
-                                    builder: (context, state) {
-                                      if (state is ProfileLoadingState) {
-                                        return const Center(
-                                          child: LoadingWidget(),
-                                        );
-                                      }
-
-                                      if (state is ProfileSuccessState) {
-                                        return Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(
-                                                8.0,
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                      10.sp,
-                                                    ),
-                                                child: AnyImageView(
-                                                  imagePath:
-                                                      state.profile.imageUrl ??
-                                                      "https://placeholder.com/user.png",
-                                                  width: 30.sp,
-                                                  height: 30.sp,
-                                                  fit: BoxFit.cover,
-                                                  errorWidget: Icon(
-                                                    Icons.person,
-                                                    size: 30.sp,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-
-                                            Gap(5.sw),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "${"hi".tr()} ${state.profile.name}",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 24,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "howAreYou".tr(),
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            IconButton(
-                                              onPressed: () {
-                                                final homeCubit = context
-                                                    .read<HomeCubit>();
-                                                showModalBottomSheet(
-                                                  context: context,
-                                                  isScrollControlled: true,
-                                                  shape: const RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.vertical(
-                                                          top: Radius.circular(
-                                                            30,
-                                                          ),
-                                                        ),
-                                                  ),
-                                                  builder: (context) {
-                                                    return BlocProvider.value(
-                                                      value: homeCubit,
-                                                      child:
-                                                          const FilterWidget(),
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              icon: Icon(
-                                                Icons.tune_rounded,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }
-
-                                      if (state is ProfileErrorState) {
-                                        return Center(
-                                          child: Text(
-                                            'Error: ${state.message}',
-                                            style: const TextStyle(
-                                              color: Colors.red,
-                                            ),
-                                          ),
-                                        );
-                                      }
-
-                                      return const SizedBox.shrink();
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Gap(2.sh),
-                          SearchBar(controller: controllerSearch),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-            ],
-          );
-        },
+        ],
       ),
     );
   }

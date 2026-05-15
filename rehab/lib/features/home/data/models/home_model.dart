@@ -10,13 +10,15 @@ abstract class HomeModel with _$HomeModel {
     required String title,
     required String city,
     required String district,
-    @JsonKey(name: 'image_url') required String imageUrl,
+    @JsonKey(name: 'image_url', defaultValue: '') required String imageUrl,
     required double price,
     required double rating,
     required int rooms,
     required int bathrooms,
     required String description,
     @JsonKey(name: 'is_available') required bool isAvailable,
+    @JsonKey(name: 'property_type') required String propertyType,
+    required double area,
   }) = _HomeModel;
 
   factory HomeModel.fromJson(Map<String, Object?> json) =>

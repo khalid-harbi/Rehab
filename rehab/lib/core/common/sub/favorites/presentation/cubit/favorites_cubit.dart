@@ -1,7 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
-import 'package:rehab/core/common/sub/favorites/domain/use_cases/favorites_use_case.dart';
-import 'package:rehab/core/common/sub/favorites/presentation/cubit/favorites_state.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 @injectable
 class FavoritesCubit extends Cubit<FavoritesState> {
@@ -9,51 +6,31 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   FavoritesCubit(this._favoritesUseCase) : super(FavoritesInitialState());
 
-Future<void> toggleFavorite({
-  required int homeId,
-}) async {
-  final result = await _favoritesUseCase
-      .toggleFavorite(homeId: homeId);
+  Future<void> toggleFavorite({required int homeId}) async {
+    final result = await _favoritesUseCase.toggleFavorite(homeId: homeId);
 
-  result.when(
-    (success) async {
-      await checkFavorite(homeId: homeId);
-    },
-    (whenError) {
-      emit(
-        FavoritesErrorState(
-          message: whenError.message,
-        ),
-      );
-    },
-  );
-}
+    result.when(
+      (success) async {
+        await checkFavorite(homeId: homeId);
+      },
+      (whenError) {
+        emit(FavoritesErrorState(message: whenError.message));
+      },
+    );
+  }
 
-  Future<void> checkFavorite({
-  required int homeId,
-}) async {
-  final result = await _favoritesUseCase
-      .isFavorite(homeId: homeId);
+  Future<void> checkFavorite({required int homeId}) async {
+    final result = await _favoritesUseCase.isFavorite(homeId: homeId);
 
-  result.when(
-    (success) {
-      emit(
-        FavoritesSuccessState(
-          isFavorite: success, homeId: homeId,
-        ),
-      );
-    },
-    (whenError) {
-      emit(
-        FavoritesErrorState(
-          message: whenError.message,
-        ),
-      );
-    },
-  );
-}
-
-
+    result.when(
+      (success) {
+        emit(FavoritesSuccessState(isFavorite: success, homeId: homeId));
+      },
+      (whenError) {
+        emit(FavoritesErrorState(message: whenError.message));
+      },
+    );
+  }
 
   @override
   Future<void> close() {

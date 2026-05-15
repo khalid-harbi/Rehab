@@ -214,7 +214,7 @@ return $default(_that.id,_that.name,_that.createdAt,_that.imageUrl,_that.answers
 
 @JsonSerializable(fieldRename: .snake)
 class _UsersModel implements UsersModel {
-  const _UsersModel({required this.id, required this.name, required this.createdAt, this.imageUrl = 'https://ui-avatars.com/api/?name=Placeholder&background=random', final  List<UserAnswersModel> answers = const [], this.matchPercentage = 0}): _answers = answers;
+  const _UsersModel({required this.id, required this.name, required this.createdAt, this.imageUrl = 'https://ui-avatars.com/api/?name=Placeholder&background=random&length=1', final  List<UserAnswersModel> answers = const [], this.matchPercentage = 0}): _answers = answers;
   factory _UsersModel.fromJson(Map<String, dynamic> json) => _$UsersModelFromJson(json);
 
 @override final  String id;

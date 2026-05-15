@@ -29,12 +29,8 @@ class LoadingWidgetOverlay {
             dismissible: false,
           ),
           Center(
-            child: LoadingAnimationWidget.discreteCircle(
-              // leftDotColor: const Color(0xFF1A1A3F),
-              // rightDotColor: const Color(0xFFEA3799),
-              secondRingColor: AppColors.secondary,
-              thirdRingColor: AppColors.surface,
-              color: AppColors.surface,
+            child: LoadingAnimationWidget.staggeredDotsWave(
+              color: Theme.of(context).colorScheme.primary,
               size: 50,
             ),
           ),
@@ -53,7 +49,6 @@ class LoadingWidgetOverlay {
   }
 }
 
-//--
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key, this.size = 50});
@@ -61,15 +56,10 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: LoadingAnimationWidget.discreteCircle(
-        // leftDotColor: const Color(0xFF1A1A3F),
-        // rightDotColor: const Color(0xFFEA3799),
-        secondRingColor: AppColors.secondary,
-        thirdRingColor: AppColors.surface,
-        color: AppColors.surface,
+      child: LoadingAnimationWidget.staggeredDotsWave(
+        color: Theme.of(context).colorScheme.primary,
         size: size ?? 50,
       ),
     );
   }
 }
-

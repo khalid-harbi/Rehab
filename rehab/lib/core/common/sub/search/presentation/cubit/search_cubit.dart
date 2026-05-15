@@ -1,6 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rehab/core/common/sub/search/domain/use_cases/search_use_case.dart';
-import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 class SearchCubit extends Cubit<SearchState> {
   final SearchUseCase _searchUseCase;
@@ -18,6 +16,36 @@ class SearchCubit extends Cubit<SearchState> {
       },
       (whenError) {
         emit(SearchErrorState(message: whenError.message));
+      },
+    );
+  }
+
+  Future<void> applyFilter({
+    double? minPrice,
+    double? maxPrice,
+    String? city,
+    double? minRating,
+    double? maxRating,
+    int? rooms,
+    int? bathrooms,
+  }) async {
+    emit(SearchLoadingState());
+
+    final result = await _searchUseCase.filter(
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      city: city,
+      minRating: minRating,
+      rooms: rooms,
+      bathrooms: bathrooms,
+    );
+
+    result.when(
+      (success) {
+        emit(SearchSuccessState(homes: success));
+      },
+      (error) {
+        emit(SearchErrorState(message: error.message));
       },
     );
   }

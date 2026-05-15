@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard();
+  const ReviewCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class ReviewCard extends StatelessWidget {
       child: DefaultTextStyle.merge(
         style: const TextStyle(color: Colors.white),
         child: const Text(
-        'المكان جميل وهادئ، مناسب جدًا للسكن وموقعه قريب من الخدمات.',
+          'المكان جميل وهادئ، مناسب جدًا للسكن وموقعه قريب من الخدمات.',
         ),
       ),
     );
