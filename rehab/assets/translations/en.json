@@ -9,7 +9,6 @@
     "darkMode":"Dark Mode",
     "language":"Language",
     "settings":"Settings",
-<<<<<<< HEAD
    "help&support":"Help & Support",
     "logout":"Logout",
     "facilities":"Facilities",
@@ -18,17 +17,13 @@
     "bathrooms": "Bathrooms",
     "wi-fi": "Wi-Fi",
     "parking":"Parking" ,
-    "housing rules and policies":"Housing rules and policies"
-=======
-    "help&support":"Help & Support",
+    "housing rules and policies":"Housing rules and policies",
     "memberSinceToday": "Member since today",
     "memberFor": "Member for",
     "day": "day",
     "month": "month",
     "and": "and",
-    "year": "year",
-    "logout":"Logout"
->>>>>>> 2ff3f549ee17c5974da2478c4f5996517fc0d7b4
+    "year": "year"
 }
 
 
