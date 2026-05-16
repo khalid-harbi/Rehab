@@ -5,20 +5,30 @@ part 'home_model.g.dart';
 
 @freezed
 abstract class HomeModel with _$HomeModel {
+  @JsonSerializable(fieldRename: .snake)
   const factory HomeModel({
     required int id,
-    required String title,
-    required String city,
-    required String district,
-    @JsonKey(name: 'image_url', defaultValue: '') required String imageUrl,
-    required double price,
-    required double rating,
-    required int rooms,
-    required int bathrooms,
-    required String description,
-    @JsonKey(name: 'is_available') required bool isAvailable,
-    @JsonKey(name: 'property_type') required String propertyType,
-    required double area,
+    @Default('') String titleAr,
+    @Default('') String titleEn,
+    @Default('') String cityAr,
+    @Default('') String cityEn,
+    @Default('') String districtAr,
+    @Default('') String districtEn,
+    @Default('') String descriptionAr,
+    @Default('') String descriptionEn,
+    @Default('') String propertyTypeAr,
+    @Default('') String propertyTypeEn,
+    @Default([]) List<String> policyAr,
+    @Default([]) List<String> policyEn,
+    @Default([]) List<String> amenitiesAr,
+    @Default([]) List<String> amenitiesEn,
+    @Default('') String imageUrl,
+    @Default(0.0) double price,
+    @Default(0.0) double rating,
+    @Default(0) int rooms,
+    @Default(0) int bathrooms,
+    @Default(true) bool isAvailable,
+    @Default(0.0) double area,
   }) = _HomeModel;
 
   factory HomeModel.fromJson(Map<String, Object?> json) =>
@@ -29,16 +39,27 @@ extension HomeModelMapper on HomeModel {
   HomeEntity toEntity() {
     return HomeEntity(
       id: id,
-      title: title,
-      city: city,
-      district: district,
+      titleAr: titleAr,
+      titleEn: titleEn,
+      cityAr: cityAr,
+      cityEn: cityEn,
+      districtAr: districtAr,
+      districtEn: districtEn,
+      descriptionAr: descriptionAr,
+      descriptionEn: descriptionEn,
+      propertyTypeAr: propertyTypeAr,
+      propertyTypeEn: propertyTypeEn,
+      policyAr: policyAr,
+      policyEn: policyEn,
+      amenitiesAr: amenitiesAr,
+      amenitiesEn: amenitiesEn,
       imageUrl: imageUrl,
       price: price,
       rating: rating,
       rooms: rooms,
       bathrooms: bathrooms,
-      description: description,
       isAvailable: isAvailable,
+      area: area,
     );
   }
 }

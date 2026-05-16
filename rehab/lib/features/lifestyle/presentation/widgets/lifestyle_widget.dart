@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rehab/core/widgets/localization_helper.dart';
+import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/lifestyle/domain/entities/lifestyle_entity.dart';
 
 typedef OnSelectChoice = void Function(String optionId, String choiceId);

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeModel {
 
- int get id; String get title; String get city; String get district;@JsonKey(name: 'image_url', defaultValue: '') String get imageUrl; double get price; double get rating; int get rooms; int get bathrooms; String get description;@JsonKey(name: 'is_available') bool get isAvailable;@JsonKey(name: 'property_type') String get propertyType; double get area;
+ int get id; String get titleAr; String get titleEn; String get cityAr; String get cityEn; String get districtAr; String get districtEn; String get descriptionAr; String get descriptionEn; String get propertyTypeAr; String get propertyTypeEn; List<String> get policyAr; List<String> get policyEn; List<String> get amenitiesAr; List<String> get amenitiesEn; String get imageUrl; double get price; double get rating; int get rooms; int get bathrooms; bool get isAvailable; double get area;
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $HomeModelCopyWith<HomeModel> get copyWith => _$HomeModelCopyWithImpl<HomeModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.city, city) || other.city == city)&&(identical(other.district, district) || other.district == district)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.rooms, rooms) || other.rooms == rooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.description, description) || other.description == description)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.propertyType, propertyType) || other.propertyType == propertyType)&&(identical(other.area, area) || other.area == area));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeModel&&(identical(other.id, id) || other.id == id)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.titleEn, titleEn) || other.titleEn == titleEn)&&(identical(other.cityAr, cityAr) || other.cityAr == cityAr)&&(identical(other.cityEn, cityEn) || other.cityEn == cityEn)&&(identical(other.districtAr, districtAr) || other.districtAr == districtAr)&&(identical(other.districtEn, districtEn) || other.districtEn == districtEn)&&(identical(other.descriptionAr, descriptionAr) || other.descriptionAr == descriptionAr)&&(identical(other.descriptionEn, descriptionEn) || other.descriptionEn == descriptionEn)&&(identical(other.propertyTypeAr, propertyTypeAr) || other.propertyTypeAr == propertyTypeAr)&&(identical(other.propertyTypeEn, propertyTypeEn) || other.propertyTypeEn == propertyTypeEn)&&const DeepCollectionEquality().equals(other.policyAr, policyAr)&&const DeepCollectionEquality().equals(other.policyEn, policyEn)&&const DeepCollectionEquality().equals(other.amenitiesAr, amenitiesAr)&&const DeepCollectionEquality().equals(other.amenitiesEn, amenitiesEn)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.rooms, rooms) || other.rooms == rooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.area, area) || other.area == area));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,city,district,imageUrl,price,rating,rooms,bathrooms,description,isAvailable,propertyType,area);
+int get hashCode => Object.hashAll([runtimeType,id,titleAr,titleEn,cityAr,cityEn,districtAr,districtEn,descriptionAr,descriptionEn,propertyTypeAr,propertyTypeEn,const DeepCollectionEquality().hash(policyAr),const DeepCollectionEquality().hash(policyEn),const DeepCollectionEquality().hash(amenitiesAr),const DeepCollectionEquality().hash(amenitiesEn),imageUrl,price,rating,rooms,bathrooms,isAvailable,area]);
 
 @override
 String toString() {
-  return 'HomeModel(id: $id, title: $title, city: $city, district: $district, imageUrl: $imageUrl, price: $price, rating: $rating, rooms: $rooms, bathrooms: $bathrooms, description: $description, isAvailable: $isAvailable, propertyType: $propertyType, area: $area)';
+  return 'HomeModel(id: $id, titleAr: $titleAr, titleEn: $titleEn, cityAr: $cityAr, cityEn: $cityEn, districtAr: $districtAr, districtEn: $districtEn, descriptionAr: $descriptionAr, descriptionEn: $descriptionEn, propertyTypeAr: $propertyTypeAr, propertyTypeEn: $propertyTypeEn, policyAr: $policyAr, policyEn: $policyEn, amenitiesAr: $amenitiesAr, amenitiesEn: $amenitiesEn, imageUrl: $imageUrl, price: $price, rating: $rating, rooms: $rooms, bathrooms: $bathrooms, isAvailable: $isAvailable, area: $area)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $HomeModelCopyWith<$Res>  {
   factory $HomeModelCopyWith(HomeModel value, $Res Function(HomeModel) _then) = _$HomeModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String title, String city, String district,@JsonKey(name: 'image_url', defaultValue: '') String imageUrl, double price, double rating, int rooms, int bathrooms, String description,@JsonKey(name: 'is_available') bool isAvailable,@JsonKey(name: 'property_type') String propertyType, double area
+ int id, String titleAr, String titleEn, String cityAr, String cityEn, String districtAr, String districtEn, String descriptionAr, String descriptionEn, String propertyTypeAr, String propertyTypeEn, List<String> policyAr, List<String> policyEn, List<String> amenitiesAr, List<String> amenitiesEn, String imageUrl, double price, double rating, int rooms, int bathrooms, bool isAvailable, double area
 });
 
 
@@ -65,21 +65,30 @@ class _$HomeModelCopyWithImpl<$Res>
 
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? city = null,Object? district = null,Object? imageUrl = null,Object? price = null,Object? rating = null,Object? rooms = null,Object? bathrooms = null,Object? description = null,Object? isAvailable = null,Object? propertyType = null,Object? area = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? titleAr = null,Object? titleEn = null,Object? cityAr = null,Object? cityEn = null,Object? districtAr = null,Object? districtEn = null,Object? descriptionAr = null,Object? descriptionEn = null,Object? propertyTypeAr = null,Object? propertyTypeEn = null,Object? policyAr = null,Object? policyEn = null,Object? amenitiesAr = null,Object? amenitiesEn = null,Object? imageUrl = null,Object? price = null,Object? rating = null,Object? rooms = null,Object? bathrooms = null,Object? isAvailable = null,Object? area = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
-as String,district: null == district ? _self.district : district // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as int,titleAr: null == titleAr ? _self.titleAr : titleAr // ignore: cast_nullable_to_non_nullable
+as String,titleEn: null == titleEn ? _self.titleEn : titleEn // ignore: cast_nullable_to_non_nullable
+as String,cityAr: null == cityAr ? _self.cityAr : cityAr // ignore: cast_nullable_to_non_nullable
+as String,cityEn: null == cityEn ? _self.cityEn : cityEn // ignore: cast_nullable_to_non_nullable
+as String,districtAr: null == districtAr ? _self.districtAr : districtAr // ignore: cast_nullable_to_non_nullable
+as String,districtEn: null == districtEn ? _self.districtEn : districtEn // ignore: cast_nullable_to_non_nullable
+as String,descriptionAr: null == descriptionAr ? _self.descriptionAr : descriptionAr // ignore: cast_nullable_to_non_nullable
+as String,descriptionEn: null == descriptionEn ? _self.descriptionEn : descriptionEn // ignore: cast_nullable_to_non_nullable
+as String,propertyTypeAr: null == propertyTypeAr ? _self.propertyTypeAr : propertyTypeAr // ignore: cast_nullable_to_non_nullable
+as String,propertyTypeEn: null == propertyTypeEn ? _self.propertyTypeEn : propertyTypeEn // ignore: cast_nullable_to_non_nullable
+as String,policyAr: null == policyAr ? _self.policyAr : policyAr // ignore: cast_nullable_to_non_nullable
+as List<String>,policyEn: null == policyEn ? _self.policyEn : policyEn // ignore: cast_nullable_to_non_nullable
+as List<String>,amenitiesAr: null == amenitiesAr ? _self.amenitiesAr : amenitiesAr // ignore: cast_nullable_to_non_nullable
+as List<String>,amenitiesEn: null == amenitiesEn ? _self.amenitiesEn : amenitiesEn // ignore: cast_nullable_to_non_nullable
+as List<String>,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double,rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
 as double,rooms: null == rooms ? _self.rooms : rooms // ignore: cast_nullable_to_non_nullable
 as int,bathrooms: null == bathrooms ? _self.bathrooms : bathrooms // ignore: cast_nullable_to_non_nullable
-as int,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,isAvailable: null == isAvailable ? _self.isAvailable : isAvailable // ignore: cast_nullable_to_non_nullable
-as bool,propertyType: null == propertyType ? _self.propertyType : propertyType // ignore: cast_nullable_to_non_nullable
-as String,area: null == area ? _self.area : area // ignore: cast_nullable_to_non_nullable
+as int,isAvailable: null == isAvailable ? _self.isAvailable : isAvailable // ignore: cast_nullable_to_non_nullable
+as bool,area: null == area ? _self.area : area // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }
@@ -165,10 +174,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url', defaultValue: '')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String titleAr,  String titleEn,  String cityAr,  String cityEn,  String districtAr,  String districtEn,  String descriptionAr,  String descriptionEn,  String propertyTypeAr,  String propertyTypeEn,  List<String> policyAr,  List<String> policyEn,  List<String> amenitiesAr,  List<String> amenitiesEn,  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  bool isAvailable,  double area)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeModel() when $default != null:
-return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.description,_that.isAvailable,_that.propertyType,_that.area);case _:
+return $default(_that.id,_that.titleAr,_that.titleEn,_that.cityAr,_that.cityEn,_that.districtAr,_that.districtEn,_that.descriptionAr,_that.descriptionEn,_that.propertyTypeAr,_that.propertyTypeEn,_that.policyAr,_that.policyEn,_that.amenitiesAr,_that.amenitiesEn,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.isAvailable,_that.area);case _:
   return orElse();
 
 }
@@ -186,10 +195,10 @@ return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url', defaultValue: '')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String titleAr,  String titleEn,  String cityAr,  String cityEn,  String districtAr,  String districtEn,  String descriptionAr,  String descriptionEn,  String propertyTypeAr,  String propertyTypeEn,  List<String> policyAr,  List<String> policyEn,  List<String> amenitiesAr,  List<String> amenitiesEn,  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  bool isAvailable,  double area)  $default,) {final _that = this;
 switch (_that) {
 case _HomeModel():
-return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.description,_that.isAvailable,_that.propertyType,_that.area);case _:
+return $default(_that.id,_that.titleAr,_that.titleEn,_that.cityAr,_that.cityEn,_that.districtAr,_that.districtEn,_that.descriptionAr,_that.descriptionEn,_that.propertyTypeAr,_that.propertyTypeEn,_that.policyAr,_that.policyEn,_that.amenitiesAr,_that.amenitiesEn,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.isAvailable,_that.area);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -206,10 +215,10 @@ return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url', defaultValue: '')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String titleAr,  String titleEn,  String cityAr,  String cityEn,  String districtAr,  String districtEn,  String descriptionAr,  String descriptionEn,  String propertyTypeAr,  String propertyTypeEn,  List<String> policyAr,  List<String> policyEn,  List<String> amenitiesAr,  List<String> amenitiesEn,  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  bool isAvailable,  double area)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeModel() when $default != null:
-return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.description,_that.isAvailable,_that.propertyType,_that.area);case _:
+return $default(_that.id,_that.titleAr,_that.titleEn,_that.cityAr,_that.cityEn,_that.districtAr,_that.districtEn,_that.descriptionAr,_that.descriptionEn,_that.propertyTypeAr,_that.propertyTypeEn,_that.policyAr,_that.policyEn,_that.amenitiesAr,_that.amenitiesEn,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.isAvailable,_that.area);case _:
   return null;
 
 }
@@ -218,25 +227,58 @@ return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_t
 }
 
 /// @nodoc
-@JsonSerializable()
 
+@JsonSerializable(fieldRename: .snake)
 class _HomeModel implements HomeModel {
-  const _HomeModel({required this.id, required this.title, required this.city, required this.district, @JsonKey(name: 'image_url', defaultValue: '') required this.imageUrl, required this.price, required this.rating, required this.rooms, required this.bathrooms, required this.description, @JsonKey(name: 'is_available') required this.isAvailable, @JsonKey(name: 'property_type') required this.propertyType, required this.area});
+  const _HomeModel({required this.id, this.titleAr = '', this.titleEn = '', this.cityAr = '', this.cityEn = '', this.districtAr = '', this.districtEn = '', this.descriptionAr = '', this.descriptionEn = '', this.propertyTypeAr = '', this.propertyTypeEn = '', final  List<String> policyAr = const [], final  List<String> policyEn = const [], final  List<String> amenitiesAr = const [], final  List<String> amenitiesEn = const [], this.imageUrl = '', this.price = 0.0, this.rating = 0.0, this.rooms = 0, this.bathrooms = 0, this.isAvailable = true, this.area = 0.0}): _policyAr = policyAr,_policyEn = policyEn,_amenitiesAr = amenitiesAr,_amenitiesEn = amenitiesEn;
   factory _HomeModel.fromJson(Map<String, dynamic> json) => _$HomeModelFromJson(json);
 
 @override final  int id;
-@override final  String title;
-@override final  String city;
-@override final  String district;
-@override@JsonKey(name: 'image_url', defaultValue: '') final  String imageUrl;
-@override final  double price;
-@override final  double rating;
-@override final  int rooms;
-@override final  int bathrooms;
-@override final  String description;
-@override@JsonKey(name: 'is_available') final  bool isAvailable;
-@override@JsonKey(name: 'property_type') final  String propertyType;
-@override final  double area;
+@override@JsonKey() final  String titleAr;
+@override@JsonKey() final  String titleEn;
+@override@JsonKey() final  String cityAr;
+@override@JsonKey() final  String cityEn;
+@override@JsonKey() final  String districtAr;
+@override@JsonKey() final  String districtEn;
+@override@JsonKey() final  String descriptionAr;
+@override@JsonKey() final  String descriptionEn;
+@override@JsonKey() final  String propertyTypeAr;
+@override@JsonKey() final  String propertyTypeEn;
+ final  List<String> _policyAr;
+@override@JsonKey() List<String> get policyAr {
+  if (_policyAr is EqualUnmodifiableListView) return _policyAr;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_policyAr);
+}
+
+ final  List<String> _policyEn;
+@override@JsonKey() List<String> get policyEn {
+  if (_policyEn is EqualUnmodifiableListView) return _policyEn;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_policyEn);
+}
+
+ final  List<String> _amenitiesAr;
+@override@JsonKey() List<String> get amenitiesAr {
+  if (_amenitiesAr is EqualUnmodifiableListView) return _amenitiesAr;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_amenitiesAr);
+}
+
+ final  List<String> _amenitiesEn;
+@override@JsonKey() List<String> get amenitiesEn {
+  if (_amenitiesEn is EqualUnmodifiableListView) return _amenitiesEn;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_amenitiesEn);
+}
+
+@override@JsonKey() final  String imageUrl;
+@override@JsonKey() final  double price;
+@override@JsonKey() final  double rating;
+@override@JsonKey() final  int rooms;
+@override@JsonKey() final  int bathrooms;
+@override@JsonKey() final  bool isAvailable;
+@override@JsonKey() final  double area;
 
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
@@ -251,16 +293,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.city, city) || other.city == city)&&(identical(other.district, district) || other.district == district)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.rooms, rooms) || other.rooms == rooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.description, description) || other.description == description)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.propertyType, propertyType) || other.propertyType == propertyType)&&(identical(other.area, area) || other.area == area));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeModel&&(identical(other.id, id) || other.id == id)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.titleEn, titleEn) || other.titleEn == titleEn)&&(identical(other.cityAr, cityAr) || other.cityAr == cityAr)&&(identical(other.cityEn, cityEn) || other.cityEn == cityEn)&&(identical(other.districtAr, districtAr) || other.districtAr == districtAr)&&(identical(other.districtEn, districtEn) || other.districtEn == districtEn)&&(identical(other.descriptionAr, descriptionAr) || other.descriptionAr == descriptionAr)&&(identical(other.descriptionEn, descriptionEn) || other.descriptionEn == descriptionEn)&&(identical(other.propertyTypeAr, propertyTypeAr) || other.propertyTypeAr == propertyTypeAr)&&(identical(other.propertyTypeEn, propertyTypeEn) || other.propertyTypeEn == propertyTypeEn)&&const DeepCollectionEquality().equals(other._policyAr, _policyAr)&&const DeepCollectionEquality().equals(other._policyEn, _policyEn)&&const DeepCollectionEquality().equals(other._amenitiesAr, _amenitiesAr)&&const DeepCollectionEquality().equals(other._amenitiesEn, _amenitiesEn)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.price, price) || other.price == price)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.rooms, rooms) || other.rooms == rooms)&&(identical(other.bathrooms, bathrooms) || other.bathrooms == bathrooms)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.area, area) || other.area == area));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,city,district,imageUrl,price,rating,rooms,bathrooms,description,isAvailable,propertyType,area);
+int get hashCode => Object.hashAll([runtimeType,id,titleAr,titleEn,cityAr,cityEn,districtAr,districtEn,descriptionAr,descriptionEn,propertyTypeAr,propertyTypeEn,const DeepCollectionEquality().hash(_policyAr),const DeepCollectionEquality().hash(_policyEn),const DeepCollectionEquality().hash(_amenitiesAr),const DeepCollectionEquality().hash(_amenitiesEn),imageUrl,price,rating,rooms,bathrooms,isAvailable,area]);
 
 @override
 String toString() {
-  return 'HomeModel(id: $id, title: $title, city: $city, district: $district, imageUrl: $imageUrl, price: $price, rating: $rating, rooms: $rooms, bathrooms: $bathrooms, description: $description, isAvailable: $isAvailable, propertyType: $propertyType, area: $area)';
+  return 'HomeModel(id: $id, titleAr: $titleAr, titleEn: $titleEn, cityAr: $cityAr, cityEn: $cityEn, districtAr: $districtAr, districtEn: $districtEn, descriptionAr: $descriptionAr, descriptionEn: $descriptionEn, propertyTypeAr: $propertyTypeAr, propertyTypeEn: $propertyTypeEn, policyAr: $policyAr, policyEn: $policyEn, amenitiesAr: $amenitiesAr, amenitiesEn: $amenitiesEn, imageUrl: $imageUrl, price: $price, rating: $rating, rooms: $rooms, bathrooms: $bathrooms, isAvailable: $isAvailable, area: $area)';
 }
 
 
@@ -271,7 +313,7 @@ abstract mixin class _$HomeModelCopyWith<$Res> implements $HomeModelCopyWith<$Re
   factory _$HomeModelCopyWith(_HomeModel value, $Res Function(_HomeModel) _then) = __$HomeModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String title, String city, String district,@JsonKey(name: 'image_url', defaultValue: '') String imageUrl, double price, double rating, int rooms, int bathrooms, String description,@JsonKey(name: 'is_available') bool isAvailable,@JsonKey(name: 'property_type') String propertyType, double area
+ int id, String titleAr, String titleEn, String cityAr, String cityEn, String districtAr, String districtEn, String descriptionAr, String descriptionEn, String propertyTypeAr, String propertyTypeEn, List<String> policyAr, List<String> policyEn, List<String> amenitiesAr, List<String> amenitiesEn, String imageUrl, double price, double rating, int rooms, int bathrooms, bool isAvailable, double area
 });
 
 
@@ -288,21 +330,30 @@ class __$HomeModelCopyWithImpl<$Res>
 
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? city = null,Object? district = null,Object? imageUrl = null,Object? price = null,Object? rating = null,Object? rooms = null,Object? bathrooms = null,Object? description = null,Object? isAvailable = null,Object? propertyType = null,Object? area = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? titleAr = null,Object? titleEn = null,Object? cityAr = null,Object? cityEn = null,Object? districtAr = null,Object? districtEn = null,Object? descriptionAr = null,Object? descriptionEn = null,Object? propertyTypeAr = null,Object? propertyTypeEn = null,Object? policyAr = null,Object? policyEn = null,Object? amenitiesAr = null,Object? amenitiesEn = null,Object? imageUrl = null,Object? price = null,Object? rating = null,Object? rooms = null,Object? bathrooms = null,Object? isAvailable = null,Object? area = null,}) {
   return _then(_HomeModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
-as String,district: null == district ? _self.district : district // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
+as int,titleAr: null == titleAr ? _self.titleAr : titleAr // ignore: cast_nullable_to_non_nullable
+as String,titleEn: null == titleEn ? _self.titleEn : titleEn // ignore: cast_nullable_to_non_nullable
+as String,cityAr: null == cityAr ? _self.cityAr : cityAr // ignore: cast_nullable_to_non_nullable
+as String,cityEn: null == cityEn ? _self.cityEn : cityEn // ignore: cast_nullable_to_non_nullable
+as String,districtAr: null == districtAr ? _self.districtAr : districtAr // ignore: cast_nullable_to_non_nullable
+as String,districtEn: null == districtEn ? _self.districtEn : districtEn // ignore: cast_nullable_to_non_nullable
+as String,descriptionAr: null == descriptionAr ? _self.descriptionAr : descriptionAr // ignore: cast_nullable_to_non_nullable
+as String,descriptionEn: null == descriptionEn ? _self.descriptionEn : descriptionEn // ignore: cast_nullable_to_non_nullable
+as String,propertyTypeAr: null == propertyTypeAr ? _self.propertyTypeAr : propertyTypeAr // ignore: cast_nullable_to_non_nullable
+as String,propertyTypeEn: null == propertyTypeEn ? _self.propertyTypeEn : propertyTypeEn // ignore: cast_nullable_to_non_nullable
+as String,policyAr: null == policyAr ? _self._policyAr : policyAr // ignore: cast_nullable_to_non_nullable
+as List<String>,policyEn: null == policyEn ? _self._policyEn : policyEn // ignore: cast_nullable_to_non_nullable
+as List<String>,amenitiesAr: null == amenitiesAr ? _self._amenitiesAr : amenitiesAr // ignore: cast_nullable_to_non_nullable
+as List<String>,amenitiesEn: null == amenitiesEn ? _self._amenitiesEn : amenitiesEn // ignore: cast_nullable_to_non_nullable
+as List<String>,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double,rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
 as double,rooms: null == rooms ? _self.rooms : rooms // ignore: cast_nullable_to_non_nullable
 as int,bathrooms: null == bathrooms ? _self.bathrooms : bathrooms // ignore: cast_nullable_to_non_nullable
-as int,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,isAvailable: null == isAvailable ? _self.isAvailable : isAvailable // ignore: cast_nullable_to_non_nullable
-as bool,propertyType: null == propertyType ? _self.propertyType : propertyType // ignore: cast_nullable_to_non_nullable
-as String,area: null == area ? _self.area : area // ignore: cast_nullable_to_non_nullable
+as int,isAvailable: null == isAvailable ? _self.isAvailable : isAvailable // ignore: cast_nullable_to_non_nullable
+as bool,area: null == area ? _self.area : area // ignore: cast_nullable_to_non_nullable
 as double,
   ));
 }

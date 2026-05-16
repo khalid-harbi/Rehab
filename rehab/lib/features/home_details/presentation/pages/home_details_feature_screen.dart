@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/home_details/presentation/widgets/booking_bar.dart';
 import 'package:rehab/features/home_details/presentation/widgets/facility_card.dart';
 import 'package:rehab/features/home_details/presentation/widgets/header_image.dart';
 import 'package:rehab/features/home_details/presentation/widgets/policy_item.dart';
-import 'package:rehab/features/home_details/presentation/widgets/review_card.dart';
 import 'package:rehab/features/home_details/presentation/widgets/section_title.dart';
 import 'package:rehab/features/home_details/presentation/widgets/status_badge.dart';
 
 class HomeDetailsFeatureScreen extends StatelessWidget {
   final HomeEntity home;
 
-  const HomeDetailsFeatureScreen({
-    super.key,
-    required this.home,
-  });
+  const HomeDetailsFeatureScreen({super.key, required this.home});
 
   @override
   Widget build(BuildContext context) {
@@ -37,26 +34,29 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                 children: [
                   StatusBadge(isAvailable: home.isAvailable),
 
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 24),
 
                   Text(
-                    home.title,
+                    titleForLocale(context, home.titleEn, home.titleAr),
                     style: textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: colors.onSurface,
                     ),
                   ),
 
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 24),
 
                   Row(
                     children: [
-                      Icon(Icons.location_on_outlined,
-                          size: 18, color: colors.primary),
+                      Icon(
+                        Icons.location_on_outlined,
+                        size: 18,
+                        color: colors.primary,
+                      ),
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          '${home.city} - ${home.district}',
+                          '${titleForLocale(context, home.cityEn, home.cityAr)} - ${titleForLocale(context, home.districtEn, home.districtAr)}',
                           style: textTheme.bodyMedium?.copyWith(
                             color: colors.onSurface,
                           ),
@@ -69,8 +69,11 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
 
                   Row(
                     children: [
-                      Icon(Icons.star_rounded,
-                          size: 20, color: colors.secondary),
+                      Icon(
+                        Icons.star_rounded,
+                        size: 20,
+                        color: colors.secondary,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         '${home.rating}',
@@ -88,18 +91,23 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                   const SizedBox(height: 8),
 
                   Text(
-                    home.description,
+                    titleForLocale(
+                      context,
+                      home.descriptionEn,
+                      home.descriptionAr,
+                    ),
                     style: textTheme.bodyMedium?.copyWith(
                       height: 1.7,
                       color: colors.onSurface,
                     ),
                   ),
 
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 24),
 
                   SectionTitle(title: 'المرافق المميزة'),
 
                   GridView.count(
+                    padding: EdgeInsets.only(top: 24, bottom: 24),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 2,
@@ -115,13 +123,21 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                         icon: Icons.bathtub_outlined,
                         title: '${home.bathrooms} دورات مياه',
                       ),
-                      const FacilityCard(
+                      FacilityCard(
                         icon: Icons.wifi_outlined,
-                        title: 'واي فاي مجاني',
+                        title: titleForLocale(
+                          context,
+                          home.amenitiesEn[0],
+                          home.amenitiesAr[0],
+                        ),
                       ),
-                      const FacilityCard(
+                      FacilityCard(
                         icon: Icons.local_parking_outlined,
-                        title: 'موقف سيارة',
+                        title: titleForLocale(
+                          context,
+                          home.amenitiesEn[1],
+                          home.amenitiesAr[1],
+                        ),
                       ),
                     ],
                   ),
@@ -132,28 +148,40 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  const PolicyItem(
-                    icon: Icons.lock_outline,
-                    title: 'السكن مخصص للنساء فقط',
+                  PolicyItem(
+                    icon: Icons.info_outline,
+                    title: titleForLocale(
+                      context,
+                      home.policyEn[0],
+                      home.policyAr[0],
+                    ),
                   ),
-                  const PolicyItem(
-                    icon: Icons.schedule_outlined,
-                    title: 'تسجيل الدخول بعد 2 مساءً',
+                  PolicyItem(
+                    icon: Icons.info_outline,
+                    title: titleForLocale(
+                      context,
+                      home.policyEn[1],
+                      home.policyAr[1],
+                    ),
                   ),
-                  const PolicyItem(
-                    icon: Icons.smoke_free_outlined,
-                    title: 'ممنوع التدخين داخل السكن',
+                  PolicyItem(
+                    icon: Icons.info_outline,
+                    title: titleForLocale(
+                      context,
+                      home.policyEn[2],
+                      home.policyAr[2],
+                    ),
                   ),
 
                   const SizedBox(height: 24),
 
-                  SectionTitle(title: 'تجارب الضيوف'),
+                  // SectionTitle(title: 'تجارب الضيوف'),
 
-                  const SizedBox(height: 12),
+                  // const SizedBox(height: 12),
 
-                  const ReviewCard(),
+                  // const ReviewCard(),
 
-                  const SizedBox(height: 90),
+                  // const SizedBox(height: 90),
                 ],
               ),
             ),
@@ -163,8 +191,3 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
