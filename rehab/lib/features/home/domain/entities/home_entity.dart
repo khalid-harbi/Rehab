@@ -14,6 +14,7 @@ class HomeEntity extends Equatable {
   final bool isAvailable;
   final String propertyType;
   final double area;
+  final String policy;
 
   const HomeEntity({
     required this.id,
@@ -29,6 +30,7 @@ class HomeEntity extends Equatable {
     required this.isAvailable,
     required this.propertyType,
     required this.area,
+   required this.policy,
   });
 
   @override
@@ -46,5 +48,6 @@ class HomeEntity extends Equatable {
     isAvailable,
     propertyType,
     area,
+    policy,
   ];
 }

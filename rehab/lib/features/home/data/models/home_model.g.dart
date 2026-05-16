@@ -20,6 +20,7 @@ _HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => _HomeModel(
   isAvailable: json['is_available'] as bool,
   propertyType: json['property_type'] as String,
   area: (json['area'] as num).toDouble(),
+  policy: json['policy'] as String,
 );
 
 Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
@@ -37,4 +38,5 @@ Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
       'is_available': instance.isAvailable,
       'property_type': instance.propertyType,
       'area': instance.area,
+      'policy': instance.policy,
     };

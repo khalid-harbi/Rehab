@@ -87,13 +87,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.BaseForgetPasswordRemoteDataSource>(
       () => _i1033.ForgetPasswordRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
-    gh.lazySingleton<_i1010.BaseGoogleLogInRemoteDataSource>(
-      () => _i1010.GoogleLogInRemoteDataSource(
-        gh<_i13.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
-        gh<_i116.GoogleSignIn>(),
-      ),
-    );
     gh.lazySingleton<_i330.BaseAuthRemoteDataSource>(
       () => _i330.AuthRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
@@ -105,6 +98,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i61.BaseLoginRemoteDataSource>(
       () => _i61.LoginRemoteDataSource(gh<_i454.SupabaseClient>()),
+    );
+    gh.lazySingleton<_i1010.BaseGoogleLogInRemoteDataSource>(
+      () => _i1010.GoogleLogInRemoteDataSource(
+        gh<_i13.LocalKeysService>(),
+        gh<_i454.SupabaseClient>(),
+        gh<_i116.GoogleSignIn>(),
+      ),
     );
     gh.lazySingleton<_i168.BaseSignUpRemoteDataSource>(
       () => _i168.SignUpRemoteDataSource(gh<_i454.SupabaseClient>()),

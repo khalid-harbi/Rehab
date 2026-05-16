@@ -76,7 +76,7 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
 
                       const SizedBox(width: 4),
                       Text(
-                        home.area.toString() + "M",
+                        '${home.area} m²',
                         style: theme.textTheme.bodySmall,
                       ),
                     ],
@@ -149,22 +149,14 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  const PolicyItem(
-                    icon: Icons.lock_outline,
-                    title: 'السكن مخصص للنساء فقط',
+                   PolicyItem(
+                    icon: Icons.policy_outlined,
+                    title:home.policy,
                   ),
-                  const PolicyItem(
-                    icon: Icons.schedule_outlined,
-                    title: 'تسجيل الدخول بعد 2 مساءً',
-                  ),
-                  const PolicyItem(
-                    icon: Icons.smoke_free_outlined,
-                    title: 'ممنوع التدخين داخل السكن',
-                  ),
-
+                
                   const SizedBox(height: 24),
 
-                  SectionTitle(title: 'تجارب الضيوف'),
+                  SectionTitle(title: 'guest experiences'.tr()),
 
                   const SizedBox(height: 12),
 
