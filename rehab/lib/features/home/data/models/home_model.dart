@@ -7,18 +7,18 @@ part 'home_model.g.dart';
 abstract class HomeModel with _$HomeModel {
   const factory HomeModel({
     required int id,
-    required String title,
-    required String city,
-    required String district,
-    @JsonKey(name: 'image_url', defaultValue: '') required String imageUrl,
-    required double price,
-    required double rating,
-    required int rooms,
-    required int bathrooms,
-    required String description,
-    @JsonKey(name: 'is_available') required bool isAvailable,
-    @JsonKey(name: 'property_type') required String propertyType,
-    required double area,
+    @Default('') String title,
+    @Default('') String city,
+    @Default('') String district,
+    @JsonKey(name: 'image_url') @Default('') String imageUrl,
+    @Default(0.0) double price,
+    @Default(0.0) double rating,
+    @Default(0) int rooms,
+    @Default(0) int bathrooms,
+    @Default('') String description,
+    @JsonKey(name: 'is_available') @Default(false) bool isAvailable,
+    @JsonKey(name: 'property_type') @Default('') String propertyType,
+    @Default(0.0) double area,
   }) = _HomeModel;
 
   factory HomeModel.fromJson(Map<String, Object?> json) =>

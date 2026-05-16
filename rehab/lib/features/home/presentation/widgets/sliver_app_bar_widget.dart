@@ -9,7 +9,7 @@ import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
-import 'package:rehab/features/home/presentation/widgets/filter_widget.dart';
+import 'package:rehab/core/common/sub/search/presentation/widgets/filter_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';

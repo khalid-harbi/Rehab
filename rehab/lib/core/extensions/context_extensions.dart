@@ -1,5 +1,7 @@
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/features/auth/sub/otp/presentation/cubit/otp_cubit.dart';
+import 'package:rehab/features/auth/sub/otp/presentation/pages/otp_feature_widget.dart';
 export 'package:easy_localization/easy_localization.dart';
 
 extension ContextExtensions on BuildContext {
@@ -274,4 +276,29 @@ extension ContextExtensions on BuildContext {
       ),
     );
   }
+}
+
+void openOtpBottomSheet(BuildContext context, String email) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+    ),
+    builder: (modalContext) {
+      return BlocProvider(
+        create: (context) => OtpCubit(GetIt.I.get()),
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(modalContext).viewInsets.bottom,
+          ),
+          child: SizedBox(
+            height: 65.h,
+            child: OtpFeatureScreen(email: email),
+          ),
+        ),
+      );
+    },
+  );
 }

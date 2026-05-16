@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeModel {
 
- int get id; String get title; String get city; String get district;@JsonKey(name: 'image_url', defaultValue: '') String get imageUrl; double get price; double get rating; int get rooms; int get bathrooms; String get description;@JsonKey(name: 'is_available') bool get isAvailable;@JsonKey(name: 'property_type') String get propertyType; double get area;
+ int get id; String get title; String get city; String get district;@JsonKey(name: 'image_url') String get imageUrl; double get price; double get rating; int get rooms; int get bathrooms; String get description;@JsonKey(name: 'is_available') bool get isAvailable;@JsonKey(name: 'property_type') String get propertyType; double get area;
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $HomeModelCopyWith<$Res>  {
   factory $HomeModelCopyWith(HomeModel value, $Res Function(HomeModel) _then) = _$HomeModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String title, String city, String district,@JsonKey(name: 'image_url', defaultValue: '') String imageUrl, double price, double rating, int rooms, int bathrooms, String description,@JsonKey(name: 'is_available') bool isAvailable,@JsonKey(name: 'property_type') String propertyType, double area
+ int id, String title, String city, String district,@JsonKey(name: 'image_url') String imageUrl, double price, double rating, int rooms, int bathrooms, String description,@JsonKey(name: 'is_available') bool isAvailable,@JsonKey(name: 'property_type') String propertyType, double area
 });
 
 
@@ -165,7 +165,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url', defaultValue: '')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeModel() when $default != null:
 return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.description,_that.isAvailable,_that.propertyType,_that.area);case _:
@@ -186,7 +186,7 @@ return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url', defaultValue: '')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)  $default,) {final _that = this;
 switch (_that) {
 case _HomeModel():
 return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.description,_that.isAvailable,_that.propertyType,_that.area);case _:
@@ -206,7 +206,7 @@ return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url', defaultValue: '')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  String city,  String district, @JsonKey(name: 'image_url')  String imageUrl,  double price,  double rating,  int rooms,  int bathrooms,  String description, @JsonKey(name: 'is_available')  bool isAvailable, @JsonKey(name: 'property_type')  String propertyType,  double area)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeModel() when $default != null:
 return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_that.price,_that.rating,_that.rooms,_that.bathrooms,_that.description,_that.isAvailable,_that.propertyType,_that.area);case _:
@@ -221,22 +221,22 @@ return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_t
 @JsonSerializable()
 
 class _HomeModel implements HomeModel {
-  const _HomeModel({required this.id, required this.title, required this.city, required this.district, @JsonKey(name: 'image_url', defaultValue: '') required this.imageUrl, required this.price, required this.rating, required this.rooms, required this.bathrooms, required this.description, @JsonKey(name: 'is_available') required this.isAvailable, @JsonKey(name: 'property_type') required this.propertyType, required this.area});
+  const _HomeModel({required this.id, this.title = '', this.city = '', this.district = '', @JsonKey(name: 'image_url') this.imageUrl = '', this.price = 0.0, this.rating = 0.0, this.rooms = 0, this.bathrooms = 0, this.description = '', @JsonKey(name: 'is_available') this.isAvailable = false, @JsonKey(name: 'property_type') this.propertyType = '', this.area = 0.0});
   factory _HomeModel.fromJson(Map<String, dynamic> json) => _$HomeModelFromJson(json);
 
 @override final  int id;
-@override final  String title;
-@override final  String city;
-@override final  String district;
-@override@JsonKey(name: 'image_url', defaultValue: '') final  String imageUrl;
-@override final  double price;
-@override final  double rating;
-@override final  int rooms;
-@override final  int bathrooms;
-@override final  String description;
+@override@JsonKey() final  String title;
+@override@JsonKey() final  String city;
+@override@JsonKey() final  String district;
+@override@JsonKey(name: 'image_url') final  String imageUrl;
+@override@JsonKey() final  double price;
+@override@JsonKey() final  double rating;
+@override@JsonKey() final  int rooms;
+@override@JsonKey() final  int bathrooms;
+@override@JsonKey() final  String description;
 @override@JsonKey(name: 'is_available') final  bool isAvailable;
 @override@JsonKey(name: 'property_type') final  String propertyType;
-@override final  double area;
+@override@JsonKey() final  double area;
 
 /// Create a copy of HomeModel
 /// with the given fields replaced by the non-null parameter values.
@@ -271,7 +271,7 @@ abstract mixin class _$HomeModelCopyWith<$Res> implements $HomeModelCopyWith<$Re
   factory _$HomeModelCopyWith(_HomeModel value, $Res Function(_HomeModel) _then) = __$HomeModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String title, String city, String district,@JsonKey(name: 'image_url', defaultValue: '') String imageUrl, double price, double rating, int rooms, int bathrooms, String description,@JsonKey(name: 'is_available') bool isAvailable,@JsonKey(name: 'property_type') String propertyType, double area
+ int id, String title, String city, String district,@JsonKey(name: 'image_url') String imageUrl, double price, double rating, int rooms, int bathrooms, String description,@JsonKey(name: 'is_available') bool isAvailable,@JsonKey(name: 'property_type') String propertyType, double area
 });
 
 

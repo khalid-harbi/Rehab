@@ -57,7 +57,9 @@ class ForgetPasswordFeatureWidget extends HookWidget {
           
                     const Text(
                       "نسيت كلمة المرور؟",
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        
+                        fontSize: 22, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),

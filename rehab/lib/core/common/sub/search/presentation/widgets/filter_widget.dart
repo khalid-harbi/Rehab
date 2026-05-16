@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:rehab/core/constants/app_colors.dart';
-import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 
 class FilterWidget extends StatefulWidget {
   const FilterWidget({super.key});
