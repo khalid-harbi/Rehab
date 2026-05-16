@@ -31,6 +31,7 @@ import 'package:rehab/features/add_ad/presentation/cubit/add_ad_cubit.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
+
     initialLocation: Routes.splash,
 
     routes: [

@@ -41,6 +41,7 @@ class OtpRemoteDataSource implements BaseOtpRemoteDataSource {
       throw AuthException(e.message, statusCode: e.statusCode);
     } catch (e) {
       throw Exception(e);
+
     }
   }
 }

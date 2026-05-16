@@ -9,12 +9,22 @@
     "darkMode":"Dark Mode",
     "language":"Language",
     "settings":"Settings",
-    "help&support":"Help & Support",
+   "help&support":"Help & Support",
+    "logout":"Logout",
+    "facilities":"Facilities",
+    "aboutProperty": "About Property",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "wi-fi": "Wi-Fi",
+    "parking":"Parking" ,
+    "housing rules and policies":"Housing rules and policies",
     "memberSinceToday": "Member since today",
     "memberFor": "Member for",
     "day": "day",
     "month": "month",
     "and": "and",
     "year": "year",
-    "logout":"Logout"
+    "guest experiences":"Guest experiences"
 }
+
+

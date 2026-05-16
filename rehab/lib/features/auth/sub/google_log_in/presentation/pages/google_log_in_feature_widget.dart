@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:rehab/features/auth/sub/google_log_in/presentation/cubit/google_log_in_cubit.dart';
 import 'package:sizer/sizer.dart';
 
-
 class GoogleLogInFeatureWidget extends StatelessWidget {
   const GoogleLogInFeatureWidget({super.key});
   @override
@@ -15,17 +14,18 @@ class GoogleLogInFeatureWidget extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final cubit = context.read<GoogleLogInCubit>();
-          return Column(children: [
-               FilledButton.icon(
-                    onPressed: () => cubit.getGoogleLogInMethod(),
-                    label: Text('Sign with Google'),
-                    icon: AnyImageView(
-                      imagePath: 'assets/icons/app_logo.jpg',
-                      height: 3.sh,
-                    ),
-                  ),
-              ],
-            );
+          return Column(
+            children: [
+              FilledButton.icon(
+                onPressed: () => cubit.getGoogleLogInMethod(),
+                label: Text('Sign with Google'),
+                icon: AnyImageView(
+                  imagePath: 'assets/icons/app_logo.jpg',
+                  height: 3.sh,
+                ),
+              ),
+            ],
+          );
         },
       ),
     );

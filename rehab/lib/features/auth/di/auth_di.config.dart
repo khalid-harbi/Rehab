@@ -87,12 +87,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1033.BaseForgetPasswordRemoteDataSource>(
       () => _i1033.ForgetPasswordRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
-    gh.lazySingleton<_i168.BaseSignUpRemoteDataSource>(
-      () => _i168.SignUpRemoteDataSource(gh<_i454.SupabaseClient>()),
-    );
-    gh.lazySingleton<_i330.BaseAuthRemoteDataSource>(
-      () => _i330.AuthRemoteDataSource(gh<_i454.SupabaseClient>()),
-    );
+
     gh.lazySingleton<_i416.BaseLogoutRemoteDataSource>(
       () => _i416.LogoutRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
@@ -106,9 +101,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i116.GoogleSignIn>(),
       ),
     );
-    gh.lazySingleton<_i5.BaseOtpRemoteDataSource>(
-      () => _i5.OtpRemoteDataSource(gh<_i454.SupabaseClient>()),
-    );
+
     gh.lazySingleton<_i728.SignUpRepositoryDomain>(
       () => _i750.SignUpRepositoryData(gh<_i168.BaseSignUpRemoteDataSource>()),
     );
@@ -143,6 +136,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i47.AuthRepositoryDomain>(
       () => _i369.AuthRepositoryData(gh<_i330.BaseAuthRemoteDataSource>()),
     );
+
     gh.factory<_i915.LoginCubit>(
       () => _i915.LoginCubit(gh<_i58.LoginUseCase>()),
     );

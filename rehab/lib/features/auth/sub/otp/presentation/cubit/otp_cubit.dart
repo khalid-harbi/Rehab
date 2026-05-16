@@ -15,28 +15,19 @@ class OtpCubit extends Cubit<OtpState> {
 
     final result = await _otpUseCase.verifyOtp(email: email, token: token);
 
-    result.when(
-      (success) {
-        emit(OtpSuccessState());
-      },
-      (failure) {
-        emit(OtpErrorState(message: failure.message));
-      },
-    );
-  }
+    Future<void> resendOtpMethod({required String email}) async {
+      emit(OtpLoadingState());
 
-  Future<void> resendOtpMethod({required String email}) async {
-    emit(OtpLoadingState());
+      final result = await _otpUseCase.resendOtp(email: email);
 
-    final result = await _otpUseCase.resendOtp(email: email);
-
-    result.when(
-      (success) {
-        emit(OtpResendSuccessState());
-      },
-      (failure) {
-        emit(OtpErrorState(message: failure.message));
-      },
-    );
+      result.when(
+        (success) {
+          emit(OtpResendSuccessState());
+        },
+        (failure) {
+          emit(OtpErrorState(message: failure.message));
+        },
+      );
+    }
   }
 }

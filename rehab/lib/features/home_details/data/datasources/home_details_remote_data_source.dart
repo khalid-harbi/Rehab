@@ -22,12 +22,17 @@ class HomeDetailsRemoteDataSource implements BaseHomeDetailsRemoteDataSource {
 
 
 
-    @override
-  Future<HomeDetailsModel> getHomeDetails() async {
-    try {
-      return HomeDetailsModel(id: 1, firstName: "Last Name", lastName: "First Name");
-    } catch (error) {
-     throw FailureExceptions.getException(error);
-    }
+  @override
+Future<HomeDetailsModel> getHomeDetails() async {
+  try {
+    final response = await _supabase
+        .from('home')
+        .select()
+        .single();
+
+    return HomeDetailsModel.fromJson(response);
+  } catch (error) {
+    throw FailureExceptions.getException(error);
   }
+}
 }

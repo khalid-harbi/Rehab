@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/home_details/presentation/widgets/booking_bar.dart';
@@ -11,10 +12,7 @@ import 'package:rehab/features/home_details/presentation/widgets/status_badge.da
 class HomeDetailsFeatureScreen extends StatelessWidget {
   final HomeEntity home;
 
-  const HomeDetailsFeatureScreen({
-    super.key,
-    required this.home,
-  });
+  const HomeDetailsFeatureScreen({super.key, required this.home});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +49,11 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
 
                   Row(
                     children: [
-                      Icon(Icons.location_on_outlined,
-                          size: 18, color: colors.primary),
+                      Icon(
+                        Icons.location_on_outlined,
+                        size: 18,
+                        color: colors.primary,
+                      ),
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
@@ -64,13 +65,30 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-
-                  const SizedBox(height: 8),
-
+                  const SizedBox(height: 6),
                   Row(
                     children: [
-                      Icon(Icons.star_rounded,
-                          size: 20, color: colors.secondary),
+                      Icon(
+                        Icons.space_dashboard_outlined,
+                        size: 16,
+                        color: theme.colorScheme.primary,
+                      ),
+
+                      const SizedBox(width: 4),
+                      Text(
+                        '${home.area} m²',
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star_rounded,
+                        size: 20,
+                        color: colors.secondary,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         '${home.rating}',
@@ -82,8 +100,7 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 24),
-
-                  SectionTitle(title: 'عن هذا العقار'),
+                  SectionTitle(title: 'aboutProperty'.tr()),
 
                   const SizedBox(height: 8),
 
@@ -97,7 +114,7 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
 
                   const SizedBox(height: 10),
 
-                  SectionTitle(title: 'المرافق المميزة'),
+                  SectionTitle(title: "facilities".tr()),
 
                   GridView.count(
                     shrinkWrap: true,
@@ -109,45 +126,37 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                     children: [
                       FacilityCard(
                         icon: Icons.bed_outlined,
-                        title: '${home.rooms} غرف نوم',
+                        title: '${home.rooms}bedrooms'.tr(),
                       ),
                       FacilityCard(
                         icon: Icons.bathtub_outlined,
-                        title: '${home.bathrooms} دورات مياه',
+                        title: '${home.bathrooms} bathrooms'.tr(),
                       ),
-                      const FacilityCard(
+                      FacilityCard(
                         icon: Icons.wifi_outlined,
-                        title: 'واي فاي مجاني',
+                        title: "wi-fi".tr(),
                       ),
-                      const FacilityCard(
+                      FacilityCard(
                         icon: Icons.local_parking_outlined,
-                        title: 'موقف سيارة',
+                        title: 'parking'.tr(),
                       ),
                     ],
                   ),
 
                   const SizedBox(height: 24),
 
-                  SectionTitle(title: 'قواعد وسياسات السكن'),
+                  SectionTitle(title: 'housing rules and policies'.tr()),
 
                   const SizedBox(height: 12),
 
-                  const PolicyItem(
-                    icon: Icons.lock_outline,
-                    title: 'السكن مخصص للنساء فقط',
+                   PolicyItem(
+                    icon: Icons.policy_outlined,
+                    title:home.policy,
                   ),
-                  const PolicyItem(
-                    icon: Icons.schedule_outlined,
-                    title: 'تسجيل الدخول بعد 2 مساءً',
-                  ),
-                  const PolicyItem(
-                    icon: Icons.smoke_free_outlined,
-                    title: 'ممنوع التدخين داخل السكن',
-                  ),
-
+                
                   const SizedBox(height: 24),
 
-                  SectionTitle(title: 'تجارب الضيوف'),
+                  SectionTitle(title: 'guest experiences'.tr()),
 
                   const SizedBox(height: 12),
 
@@ -163,8 +172,3 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

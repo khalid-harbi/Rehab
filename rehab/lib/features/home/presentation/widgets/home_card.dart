@@ -14,7 +14,7 @@ class HomeCard extends StatelessWidget {
       onTap: () {
         context.push(Routes.homeDetails, extra: home);
       },
-      //todo : add shadow "leen" 
+      //todo : add shadow "leen"
       // todo: and change to container instead of card
       // todo: fix ريال/شهريا
       //todo: why the image separated from the card ???
@@ -59,7 +59,6 @@ class HomeCard extends StatelessWidget {
                     ],
                   ),
 
-
                   const SizedBox(height: 6),
                   Row(
                     children: [
@@ -71,7 +70,7 @@ class HomeCard extends StatelessWidget {
 
                       const SizedBox(width: 4),
 
-                      // Text(home.propertyType, style: theme.textTheme.bodySmall),
+                      Text(home.propertyType, style: theme.textTheme.bodySmall),
                     ],
                   ),
 

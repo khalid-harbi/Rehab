@@ -18,5 +18,6 @@ class OtpUseCase {
 
   Future<Result<bool, Failure>> resendOtp({required String email}) {
     return _repositoryData.resendOtp(email: email);
+
   }
 }

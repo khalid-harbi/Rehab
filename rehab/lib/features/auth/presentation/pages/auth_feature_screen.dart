@@ -1,5 +1,3 @@
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:rehab/features/auth/data/models/auth_model.dart';
@@ -62,21 +60,7 @@ class AuthFeatureScreen extends HookWidget {
               ),
             ),
           ),
-          // ClipPath(
-          //   clipper: OvalBottomBorderClipper(),
-          //   child: Container(
-          //     height: 25.h,
-          //     width: double.infinity,
-          //     decoration: const BoxDecoration(color: AppColors.background),
-          //     child: AnyImageView(
-          //       imagePath: "assets/images/logo_removebg.png",
-          //       width: 60.sp,
-          //       height: 60.sp,
-          //       fit: BoxFit.cover,
-          //       errorWidget: Icon(Icons.person, size: 30.sp),
-          //     ),
-          //   ),
-          // ),
+
           Gap(20.sp),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.sp),

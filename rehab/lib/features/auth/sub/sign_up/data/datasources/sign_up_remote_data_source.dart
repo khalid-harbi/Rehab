@@ -114,6 +114,7 @@ class SignUpRemoteDataSource implements BaseSignUpRemoteDataSource {
       return authResponse.user != null;
     } catch (error) {
       throw FailureExceptions.getException(error);
+
     }
   }
 }

@@ -1,16 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 class HomeDetailsEntity extends Equatable {
-  final int id;
-  final String firstName;
-  final String lastName;
+  final String policy ; 
 
   const HomeDetailsEntity({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
+   required this.policy
   });
 
   @override
-  List<Object?> get props => [firstName, lastName, id];
+  List<Object?> get props => [policy];
 }

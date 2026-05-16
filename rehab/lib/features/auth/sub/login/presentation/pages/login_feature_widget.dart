@@ -105,6 +105,7 @@ class LoginFeatureScreen extends HookWidget {
                           "نسيت كلمة المرور ؟",
                           style: TextStyle(
                             color: AppColors.background,
+
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -255,9 +256,9 @@ class SocialAuthButton extends StatelessWidget {
         side: BorderSide(color: Colors.grey.shade300),
       ),
       onPressed: onTap,
-      child: Wrap(
-        spacing: 10,
-        // mainAxisAlignment: MainAxisAlignment.center,
+
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           icon,
           Gap(10),

@@ -7,10 +7,11 @@ part 'home_model.g.dart';
 abstract class HomeModel with _$HomeModel {
   const factory HomeModel({
     required int id,
+
     @Default('') String title,
     @Default('') String city,
     @Default('') String district,
-    @JsonKey(name: 'image_url') @Default('') String imageUrl,
+    @JsonKey(name: 'image_url', defaultValue: '') required String imageUrl,
     @Default(0.0) double price,
     @Default(0.0) double rating,
     @Default(0) int rooms,
@@ -19,6 +20,7 @@ abstract class HomeModel with _$HomeModel {
     @JsonKey(name: 'is_available') @Default(false) bool isAvailable,
     @JsonKey(name: 'property_type') @Default('') String propertyType,
     @Default(0.0) double area,
+    required String policy,
   }) = _HomeModel;
 
   factory HomeModel.fromJson(Map<String, Object?> json) =>
@@ -39,6 +41,9 @@ extension HomeModelMapper on HomeModel {
       bathrooms: bathrooms,
       description: description,
       isAvailable: isAvailable,
+      propertyType: propertyType,
+      area: area,
+      policy: policy,
     );
   }
 }

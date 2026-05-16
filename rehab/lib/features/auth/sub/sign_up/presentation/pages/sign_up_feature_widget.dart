@@ -21,7 +21,6 @@ class SignUpFeatureScreen extends HookWidget {
     final passwordController = useTextEditingController();
     final globalKey = GlobalKey<FormState>();
 
-
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: BlocListener<SignUpCubit, SignUpState>(
@@ -33,7 +32,7 @@ class SignUpFeatureScreen extends HookWidget {
 
             case SignUpSuccessState _:
               openOtpBottomSheet(context, emailController.text);
-              // context.go(Routes.home);
+            // context.go(Routes.home);
 
             case SignUpErrorState _:
               context.showSnackBar(state.message, isError: true);
@@ -50,7 +49,7 @@ class SignUpFeatureScreen extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Gap(4.h),
-                   Text(
+                  Text(
                     "إنشاء حساب",
                     style: TextStyle(
                       fontSize: 32,
@@ -84,6 +83,7 @@ class SignUpFeatureScreen extends HookWidget {
                     label: "كلمة المرور",
                     controller: passwordController,
                     hint: "",
+
                     icon: Icons.lock_outline,
                     isPassword: true,
                     validator: Validators.validatePassword,

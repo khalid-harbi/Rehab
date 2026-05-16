@@ -232,7 +232,7 @@ class OtpFeatureScreen extends HookWidget {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        cubit.resendOtpMethod(email: email);
+                        // cubit.resendOtpMethod(email: email);
                       },
                       child: Text(
                         'Resend Code',
