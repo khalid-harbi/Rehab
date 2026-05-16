@@ -11,6 +11,7 @@ _RoomPreviewModel _$RoomPreviewModelFromJson(Map<String, dynamic> json) =>
       room: Room.fromJson(json['room'] as Map<String, dynamic>),
       displayName: json['displayName'] as String,
       lastMessage: json['lastMessage'] as String?,
+      avatarUrl: json['avatarUrl'] as String?,
     );
 
 Map<String, dynamic> _$RoomPreviewModelToJson(_RoomPreviewModel instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$RoomPreviewModelToJson(_RoomPreviewModel instance) =>
       'room': instance.room,
       'displayName': instance.displayName,
       'lastMessage': instance.lastMessage,
+      'avatarUrl': instance.avatarUrl,
     };

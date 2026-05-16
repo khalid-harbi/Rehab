@@ -17,7 +17,7 @@ class ChatFeatureScreen extends StatelessWidget {
     final cubit = context.read<ChatCubit>();
     // ===================================================================
     return Scaffold(
- appBar: AppBar(
+      appBar: AppBar(
         title: Text("Chats".tr(), style: TextStyle(fontSize: 36)),
         centerTitle: false,
       ),
@@ -66,7 +66,14 @@ class ChatFeatureScreen extends StatelessWidget {
                     ],
                   ),
                   child: ListTile(
-                    leading: CircleAvatar(child: Icon(Icons.person)),
+                    leading: CircleAvatar(
+                      backgroundImage: preview.avatarUrl != null
+                          ? NetworkImage(preview.avatarUrl!)
+                          : null,
+                      child: preview.avatarUrl == null
+                          ? const Icon(Icons.person)
+                          : null,
+                    ),
                     title: Text(preview.displayName),
                     subtitle: Text(
                       preview.lastMessage ?? "لا توجد رسائل بعد",

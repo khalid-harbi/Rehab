@@ -18,6 +18,7 @@ class ChatRemoteDataSource implements BaseChatRemoteDataSource {
   types.Room getRoom(
     Map<String, dynamic> roomMap,
     Map<String, String> usersMap,
+    Map<String, String> imagesMap,
   ) {
     // List<String>.from to create a copy List out of an existing List
     // Extract users Ids from room object
@@ -31,6 +32,7 @@ class ChatRemoteDataSource implements BaseChatRemoteDataSource {
           (id) => types.User(
             id: id,
             firstName: usersMap[id],
+            imageUrl: imagesMap[id],
             metadata: {'name': usersMap[id]},
           ),
         )
@@ -151,11 +153,14 @@ class ChatRemoteDataSource implements BaseChatRemoteDataSource {
     // get users names
     final usersMap = await loadUsersNameMap(_supabase, allUserIds);
 
+    // get users images
+    final imagesMap = await loadUsersImages(allUserIds);
+
     // ------------------------------
 
     final List<types.Room> rooms = roomsMaps
         // get every room created by the package
-        .map((roomMap) => getRoom(roomMap, usersMap))
+        .map((roomMap) => getRoom(roomMap, usersMap, imagesMap))
         // for every single room,
         // When true, room stays in the list. When false, skip
         .where((room) {
@@ -189,6 +194,7 @@ class ChatRemoteDataSource implements BaseChatRemoteDataSource {
             room: room,
             displayName: displayName(room, currentUserId, usersMap),
             lastMessage: lastMessageByRoom[room.id],
+            avatarUrl: getAvatarUrl(room, currentUserId),
           ),
         )
         .toList();
@@ -225,4 +231,35 @@ class ChatRemoteDataSource implements BaseChatRemoteDataSource {
 
   // ===================================================================
   // ===================================================================
+
+  Future<Map<String, String>> loadUsersImages(Set<String> userIds) async {
+    if (userIds.isEmpty) return {};
+
+    final response = await _supabase
+        .from('profiles')
+        .select('id, image_url')
+        .inFilter('id', userIds.toList());
+
+    final Map<String, String> result = {};
+    for (final row in List<Map<String, dynamic>>.from(response)) {
+      final id = row['id']?.toString();
+      final imageUrl = row['image_url']?.toString();
+      if (id != null && imageUrl != null && imageUrl.isNotEmpty) {
+        result[id] = imageUrl;
+      }
+    }
+    return result;
+  }
+}
+
+// ===================================================================
+// ===================================================================
+// NEW: Helper to get the other user's avatar
+String? getAvatarUrl(types.Room room, String currentUserId) {
+  for (final user in room.users) {
+    if (user.id != currentUserId) {
+      return user.imageUrl;
+    }
+  }
+  return null;
 }

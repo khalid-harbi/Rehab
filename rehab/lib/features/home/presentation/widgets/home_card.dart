@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/navigation/routers.dart';
+import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
 class HomeCard extends StatelessWidget {
@@ -39,7 +40,7 @@ class HomeCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    home.title,
+                    titleForLocale(context, home.titleEn, home.titleAr),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -55,7 +56,10 @@ class HomeCard extends StatelessWidget {
 
                       const SizedBox(width: 4),
 
-                      Text(home.city, style: theme.textTheme.bodySmall),
+                      Text(
+                        titleForLocale(context, home.cityEn, home.cityAr),
+                        style: theme.textTheme.bodySmall,
+                      ),
                     ],
                   ),
 
@@ -69,8 +73,14 @@ class HomeCard extends StatelessWidget {
                       ),
 
                       const SizedBox(width: 4),
-
-                      Text(home.propertyType, style: theme.textTheme.bodySmall),
+                      Text(
+                        titleForLocale(
+                          context,
+                          home.propertyTypeEn,
+                          home.propertyTypeAr,
+                        ),
+                        style: theme.textTheme.bodySmall,
+                      ),
                     ],
                   ),
 
@@ -87,7 +97,7 @@ class HomeCard extends StatelessWidget {
                       ),
                       const Spacer(),
                       Text(
-                        '${home.price}  شهريا/ريال',
+                        '${home.price}  ريال/شهريًا',
                         style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: theme.colorScheme.primary,

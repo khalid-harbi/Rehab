@@ -24,8 +24,7 @@ class SearchRemoteDataSource implements BaseSearchRemoteDataSource {
     final items = await _supabase
         .from('home')
         .select()
-        .like('title', '%$title%');
-
+        .or('title_ar.ilike.%$title%,title_en.ilike.%$title%');
     List<HomeModel> homes = List.from(
       items,
     ).map((e) => HomeModel.fromJson(e)).toList();
@@ -45,7 +44,7 @@ class SearchRemoteDataSource implements BaseSearchRemoteDataSource {
     var query = _supabase.from("filter").select();
 
     if (city != null && city.isNotEmpty) {
-      query = query.eq('city', city);
+      query = query.or('city_ar.eq.$city,city_en.eq.$city');
     }
     if (minPrice != null) {
       query = query.gte('price', minPrice);

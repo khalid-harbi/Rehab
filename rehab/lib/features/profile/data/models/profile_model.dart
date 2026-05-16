@@ -9,7 +9,10 @@ abstract class ProfileModel with _$ProfileModel {
   const factory ProfileModel({
     required String id,
     required String name,
-    String? imageUrl,
+    @Default(
+      'https://ui-avatars.com/api/?name=Placeholder&background=random&length=1',
+    )
+    String imageUrl,
     required DateTime createdAt,
   }) = _ProfileModel;
 
@@ -19,6 +22,19 @@ abstract class ProfileModel with _$ProfileModel {
 
 extension ProfileModelMapper on ProfileModel {
   ProfileEntity toEntity() {
-    return ProfileEntity(id:id, name: name, imageUrl: imageUrl, createdAt: createdAt);
+    String finalUrl = imageUrl;
+    if (imageUrl.contains('name=Placeholder')) {
+      // Replace "Placeholder" with the actual user's name
+      // .trim() and .replaceAll to make the name URL-friendly
+      final encodedName = name.trim().replaceAll(' ', '+');
+      finalUrl =
+          'https://ui-avatars.com/api/?name=$encodedName&background=random&length=1';
+    }
+    return ProfileEntity(
+      id: id,
+      name: name,
+      imageUrl: finalUrl,
+      createdAt: createdAt,
+    );
   }
 }
