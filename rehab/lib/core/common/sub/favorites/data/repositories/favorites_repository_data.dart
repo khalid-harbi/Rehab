@@ -7,8 +7,7 @@ class FavoritesRepositoryData implements FavoritesRepositoryDomain {
   FavoritesRepositoryData(this.remoteDataSource);
 
   @override
-  Future<Result<List<FavoritesEntity>, Failure>>
-      getFavorites() async {
+  Future<Result<List<FavoritesEntity>, Failure>> getFavorites() async {
     try {
       final response =
           await remoteDataSource.getFavorites();
@@ -59,4 +58,21 @@ class FavoritesRepositoryData implements FavoritesRepositoryDomain {
       );
     }
   }
+
+@override
+Future<Result<List<HomeEntity>, Failure>> getFavoriteHomes() async {
+  try {
+    final response = await remoteDataSource.getFavoriteHomes();
+
+    return Success(
+      response.map((home) => home.toEntity()).toList(),
+    );
+  } catch (error) {
+    return Error(
+      FailureExceptions.getException(error),
+    );
+  }
+}
+
+
 }

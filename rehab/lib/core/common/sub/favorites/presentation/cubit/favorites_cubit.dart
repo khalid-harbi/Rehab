@@ -32,6 +32,19 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     );
   }
 
+  Future<void> getFavoriteHomesMethod() async {
+    final result = await _favoritesUseCase.getFavoriteHomes();
+
+    result.when(
+      (success) {
+        emit(FavoritesHomesSuccessState(homes: success));
+      },
+      (whenError) {
+        emit(FavoritesErrorState(message: whenError.message));
+      },
+    );
+  }
+
   @override
   Future<void> close() {
     //here is when close cubit

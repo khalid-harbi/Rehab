@@ -78,6 +78,10 @@ class ProfileFeatureScreen extends StatelessWidget {
                     ProfileWidget(
                       icon: Icon(Icons.favorite),
                       title: "favorites",
+                      onTap: () {
+                     context.push(Routes.favorites);
+                      },
+
                     ),
                     ProfileWidget(
                       icon: Icon(Icons.attach_money),

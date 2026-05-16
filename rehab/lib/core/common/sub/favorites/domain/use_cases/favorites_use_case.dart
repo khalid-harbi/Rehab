@@ -17,4 +17,8 @@ class FavoritesUseCase {
   Future<Result<bool, Failure>> isFavorite({required int homeId}) async {
     return _repositoryData.isFavorite(homeId: homeId);
   }
+
+  Future<Result<List<HomeEntity>, Failure>> getFavoriteHomes() async {
+  return _repositoryData.getFavoriteHomes();
+}
 }

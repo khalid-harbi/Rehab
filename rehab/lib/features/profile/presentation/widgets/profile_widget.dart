@@ -6,12 +6,13 @@ class ProfileWidget extends StatelessWidget {
     super.key,
     required this.icon,
     required this.title,
-    this.action, this.onTap,
+    this.action, 
+    this.onTap,
   });
   final Widget icon;
   final String title;
   final Widget? action;
-  final Function()? onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {

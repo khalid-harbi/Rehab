@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:rehab/core/common/sub/favorites/presentation/cubit/favorites_cubit.dart';
+import 'package:rehab/core/common/sub/favorites/presentation/pages/favorites_feature_widget.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/widgets/owner_root_shell.dart';
@@ -180,6 +181,12 @@ class AppRouter {
           child: const AddAdFeatureScreen(),
         ),
       ),
+
+
+          GoRoute(
+          path: Routes.favorites,
+          builder: (context, state) => const FavoritesFeatureWidget(),
+        ),
     ],
 
     errorBuilder: (context, state) =>

@@ -21,6 +21,7 @@ abstract class HomeModel with _$HomeModel {
     @JsonKey(name: 'property_type') required String propertyType,
     required double area,
     required String policy,
+    
 
   }) = _HomeModel;
 
