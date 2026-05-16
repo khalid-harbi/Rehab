@@ -1,12 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:rehab/core/constants/app_colors.dart';
-import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
+import 'package:rehab/core/utils/localization_helper.dart';
+import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
 class FilterWidget extends StatefulWidget {
-  const FilterWidget({super.key});
+  final List<HomeEntity> homes;
+  const FilterWidget({super.key, required this.homes});
 
   @override
   State<FilterWidget> createState() => _FilterWidgetState();
@@ -20,6 +21,13 @@ class _FilterWidgetState extends State<FilterWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // ==========================================================
+    final List<String> dynamicCities = widget.homes
+        .map((home) => titleForLocale(context, home.cityEn, home.cityAr))
+        .toSet() // automatically removes any duplicates
+        .toList();
+    // ==========================================================
+
     return Container(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -66,7 +74,7 @@ class _FilterWidgetState extends State<FilterWidget> {
           ),
           Wrap(
             spacing: 10,
-            children: ["الرياض", "جدة", "الدمام", "مكة"].map((city) {
+            children: dynamicCities.map((city) {
               final isSelected = selectedCity == city;
               return ChoiceChip(
                 label: Text(city),
