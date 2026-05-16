@@ -8,6 +8,7 @@ abstract class FavoritesState extends Equatable {
 }
 
 class FavoritesInitialState extends FavoritesState {}
+
 class FavoritesSuccessState extends FavoritesState {
   final bool isFavorite;
   final int homeId;
@@ -17,6 +18,17 @@ class FavoritesSuccessState extends FavoritesState {
         isFavorite,
         homeId,
       ];
+}
+
+class FavoritesHomesSuccessState extends FavoritesState {
+  final List<HomeEntity> homes;
+
+  const FavoritesHomesSuccessState({
+    required this.homes,
+  });
+
+  @override
+  List<Object?> get props => [homes];
 }
 
 class FavoritesErrorState extends FavoritesState {

@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:rehab/core/common/sub/favorites/presentation/cubit/favorites_cubit.dart';
+import 'package:rehab/core/common/sub/favorites/presentation/pages/favorites_feature_widget.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/widgets/owner_root_shell.dart';
@@ -31,7 +32,6 @@ import 'package:rehab/features/add_ad/presentation/cubit/add_ad_cubit.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-
     initialLocation: Routes.splash,
 
     routes: [
@@ -149,18 +149,10 @@ class AppRouter {
         },
       ),
 
-      // GoRoute(
-      //   path: Routes.owner,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => OwnerCubit(GetIt.I.get()),
-      //     child: const OwnerNavigationScreen(),
-      //   ),
-
-      // ),
       GoRoute(
         path: Routes.owner,
         builder: (context, state) => BlocProvider(
-          create: (context) => OwnerCubit(GetIt.I.get()),
+          create: (context) => ProfileCubit(GetIt.I.get()),
           child: const OwnerRootShell(),
         ),
       ),
@@ -179,6 +171,11 @@ class AppRouter {
           create: (context) => AddAdCubit(GetIt.I.get()),
           child: const AddAdFeatureScreen(),
         ),
+      ),
+
+      GoRoute(
+        path: Routes.favorites,
+        builder: (context, state) => const FavoritesFeatureWidget(),
       ),
     ],
 

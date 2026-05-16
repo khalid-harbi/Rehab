@@ -60,7 +60,7 @@ extension HomeModelMapper on HomeModel {
       bathrooms: bathrooms,
       isAvailable: isAvailable,
       area: area,
-      
+
     );
   }
 }
