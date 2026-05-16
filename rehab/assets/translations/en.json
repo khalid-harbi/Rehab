@@ -10,5 +10,14 @@
    "language":"Language",
     "settings":"Settings",
    "help&support":"Help & Support",
-    "logout":"Logout"
+    "logout":"Logout",
+    "facilities":"Facilities",
+    "aboutProperty": "About Property",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "wi-fi": "Wi-Fi",
+    "parking":"Parking" ,
+    "housing rules and policies":"Housing rules and policies"
 }
+
+

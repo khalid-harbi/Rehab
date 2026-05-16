@@ -10,7 +10,15 @@
    "language":"اللغة",
     "settings":" الإعدادات",
    "help&support":"مساعدة ودعم",
-    "logout":" تسجيل الخروج"
+    "logout":" تسجيل الخروج",
+    "facilities":"المرافق" ,
+    "aboutProperty": "عن هذا العقار",
+"bedrooms": "غرف النوم ",
+"bathrooms": "دورات المياه ",
+"wi-fi": "الواي فاي",
+"parking": "مواقف السيارات ",
+"housing rules and policies":"'قواعد وسياسات السكن"
+
 
 
 

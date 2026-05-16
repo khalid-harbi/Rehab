@@ -6,9 +6,7 @@ part 'home_details_model.g.dart';
 @freezed
 abstract class HomeDetailsModel with _$HomeDetailsModel {
   const factory HomeDetailsModel({
-    required int id,
-    required String firstName,
-    required String lastName,
+    required String policy ,
     
   }) = _HomeDetailsModel;
 
@@ -19,6 +17,6 @@ abstract class HomeDetailsModel with _$HomeDetailsModel {
 
 extension HomeDetailsModelMapper on HomeDetailsModel {
   HomeDetailsEntity toEntity() {
-    return HomeDetailsEntity(id: id, firstName: firstName, lastName: lastName);
+    return HomeDetailsEntity(policy: policy);
   }
   }
