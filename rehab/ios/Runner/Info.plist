@@ -16,6 +16,12 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>rehab</string>
+	<key>NSCameraUsageDescription</key>
+<string>نحتاج الكاميرا لتحديث صورة الملف الشخصي</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>نحتاج مكتبة الصور لتحديث صورة الملف الشخصي</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>نحتاج الميكروفون (في حال تسجيل فيديو مستقبلاً)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleURLTypes</key>

@@ -1,4 +1,4 @@
-import 'package:sizer/sizer.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 extension ResponsiveFontSizer on num {
   double font({double baseWidth = 375, double min = 10, double? max}) {

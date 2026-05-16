@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rehab/core/widgets/loading_widget.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/cubit/home_state.dart';
 import 'package:rehab/features/home/presentation/widgets/home_card.dart';
 import 'package:rehab/features/home/presentation/widgets/sliver_app_bar_widget.dart';
-import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
-import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
 
 class HomeFeatureScreen extends StatelessWidget {
   const HomeFeatureScreen({super.key});
@@ -31,6 +28,7 @@ class HomeFeatureScreen extends StatelessWidget {
                   child: CustomScrollView(
                     slivers: [
                       SliverAppBarWidget(),
+
                       BlocBuilder<SearchCubit, SearchState>(
                         builder: (context, state) {
                           if (state is SearchLoadingState) {
@@ -43,7 +41,11 @@ class HomeFeatureScreen extends StatelessWidget {
                             if (state.homes.isEmpty) {
                               return SliverToBoxAdapter(
                                 child: const Center(
-                                  child: Text("No items found"),
+                                  child: Icon(
+                                    Icons.search_off_outlined,
+                                    size: 60,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               );
                             }

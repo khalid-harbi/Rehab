@@ -37,9 +37,11 @@ class ForgetPasswordFeatureWidget extends HookWidget {
               if (state is ForgetPasswordError) {
                 context.showSnackBar(state.message, isError: true);
               }
+
             },
-            child: Directionality(
-              textDirection: TextDirection.rtl,
+            //! todo: solve this error
+            // child: Directionality(
+              // textDirection: TextDirection.rtl,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 child: Column(
@@ -123,7 +125,7 @@ class ForgetPasswordFeatureWidget extends HookWidget {
                   ],
                 ),
               ),
-            ),
+            // ),
           );
         }
       ),

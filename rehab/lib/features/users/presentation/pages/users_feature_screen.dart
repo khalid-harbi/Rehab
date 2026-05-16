@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
@@ -18,7 +19,10 @@ class UsersFeatureScreen extends HookWidget {
     final cubit = context.read<UsersCubit>();
     // ===================================================================
     return Scaffold(
-      appBar: AppBar(title: const Text('Matching')),
+      appBar: AppBar(
+        title: Text("Matching".tr(), style: TextStyle(fontSize: 36)),
+        centerTitle: false,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: BlocListener<UsersCubit, UsersState>(
@@ -59,10 +63,14 @@ class UsersFeatureScreen extends HookWidget {
                           itemCount: state.users.length,
 
                           itemBuilder: (context, index) {
+                            final user = state.users[index];
                             return UsersWidget(
-                              id: (state.users[index].id),
-                              name: (state.users[index].name),
-                              cratedAt: (state.users[index].createdAt),
+                              id: (user.id),
+                              name: (user.name),
+                              cratedAt: (user.createdAt),
+                              imageUrl: (user.imageUrl),
+                              answers: user.answers,
+                              matchPercentage: user.matchPercentage,
                             );
                           },
                         ),

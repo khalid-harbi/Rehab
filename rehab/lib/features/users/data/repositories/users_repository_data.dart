@@ -4,7 +4,7 @@ import 'package:multiple_result/multiple_result.dart';
 import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:rehab/features/users/data/datasources/users_remote_data_source.dart';
-import 'package:rehab/features/users/data/models/users_model.dart';
+import 'package:rehab/features/users/data/models/users_model/users_model.dart';
 import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:rehab/features/users/domain/repositories/users_repository_domain.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rehab/core/common/sub/favorites/presentation/widgets/favorite_button.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
@@ -15,7 +14,10 @@ class HomeCard extends StatelessWidget {
       onTap: () {
         context.push(Routes.homeDetails, extra: home);
       },
-
+      //todo : add shadow "leen" 
+      // todo: and change to container instead of card
+      // todo: fix ريال/شهريا
+      //todo: why the image separated from the card ???
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         clipBehavior: Clip.antiAlias,
@@ -29,7 +31,6 @@ class HomeCard extends StatelessWidget {
                   width: double.infinity,
                   child: Image.network(home.imageUrl, fit: BoxFit.cover),
                 ),
-    
               ],
             ),
             Padding(
@@ -51,7 +52,6 @@ class HomeCard extends StatelessWidget {
                         size: 16,
                         color: theme.colorScheme.primary,
                       ),
-                      
 
                       const SizedBox(width: 4),
 
@@ -59,8 +59,7 @@ class HomeCard extends StatelessWidget {
                     ],
                   ),
 
-
-                 const SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   Row(
                     children: [
                       Icon(
@@ -68,7 +67,6 @@ class HomeCard extends StatelessWidget {
                         size: 16,
                         color: theme.colorScheme.primary,
                       ),
-                      
 
                       const SizedBox(width: 4),
 
@@ -76,7 +74,6 @@ class HomeCard extends StatelessWidget {
                     ],
                   ),
 
-                   
                   const SizedBox(height: 10),
                   Row(
                     children: [
@@ -91,9 +88,9 @@ class HomeCard extends StatelessWidget {
                       const Spacer(),
                       Text(
                         '${home.price}  شهريا/ريال',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: theme.colorScheme.primary,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                     ],

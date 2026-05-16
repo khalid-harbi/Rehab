@@ -2,7 +2,7 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:injectable/injectable.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:rehab/core/utils/supabase_users_map.dart';
-import 'package:rehab/features/users/data/models/users_model.dart';
+import 'package:rehab/features/users/data/models/users_model/users_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseUsersRemoteDataSource {
@@ -18,14 +18,78 @@ class UsersRemoteDataSource implements BaseUsersRemoteDataSource {
   final SupabaseClient _supabase;
 
   UsersRemoteDataSource(this._supabase);
-
   // ===================================================================
   // ===================================================================
 
   @override
   Future<List<UsersModel>> loadUsers() async {
-    final response = await _supabase.from("profiles").select();
-    final users = response.map((user) => UsersModel.fromJson(user)).toList();
+    final currentUserId = _supabase.auth.currentUser!.id;
+
+    // Fetch only the current user's choices
+    final currentUserAnswersResponse = await _supabase
+        .from('user_lifestyle_answers')
+        .select('choice_id')
+        .eq('user_id', currentUserId);
+
+    // Set of choice_ids for fast comparison
+    final currentUserChoiceIds = currentUserAnswersResponse
+        .map((row) => row['choice_id'].toString())
+        .toSet();
+
+    // ---------------------
+
+    // Fetch all other profiles and their lifestyle answers
+    final response = await _supabase
+        .from("profiles")
+        .select('''
+      *,
+      user_lifestyle_answers (
+        choice_id,
+        lifestyle_choices (
+          value_en,
+          value_ar
+        )
+      )
+    ''')
+        .neq('id', currentUserId); // Filter out the current user
+
+    // ---------------------
+
+    final users = response.map((user) {
+      final rawAnswers = user['user_lifestyle_answers'] as List<dynamic>? ?? [];
+
+      int matchCount = 0;
+
+      final mappedAnswers = rawAnswers.map((answer) {
+        final choiceId = answer['choice_id'].toString();
+
+        // Comparison Logic, if the current user has the exact same choice, increment
+        if (currentUserChoiceIds.contains(choiceId)) {
+          matchCount++;
+        }
+
+        final choice =
+            answer['lifestyle_choices'] as Map<String, dynamic>? ?? {};
+        return {
+          'id': choiceId,
+          'answer_en': choice['value_en']?.toString() ?? '',
+          'answer_ar': choice['value_ar']?.toString() ?? '',
+        };
+      }).toList();
+
+      final userMap = Map<String, dynamic>.from(user);
+      userMap['answers'] = mappedAnswers;
+
+      // Calculate final percentage
+      int finalPercentage = matchCount * 10;
+      if (finalPercentage > 100) finalPercentage = 100;
+
+      // Inject calculated percentage into the JSON map
+      userMap['match_percentage'] = finalPercentage;
+
+      return UsersModel.fromJson(userMap);
+    }).toList();
+
     return users;
   }
 
@@ -74,13 +138,9 @@ class UsersRemoteDataSource implements BaseUsersRemoteDataSource {
       id: roomObject['id'] as String,
       type: types.RoomType.direct,
       users: users,
-      // name: roomObject['name']?.toString(),
-      // imageUrl: roomObject['imageUrl']?.toString(),
       metadata: Map<String, dynamic>.from(
         (roomObject['metadata'] as Map?) ?? {},
       ),
-      // createdAt: _toMillis(roomMap['createdAt']),
-      // updatedAt: _toMillis(roomMap['updatedAt']),
     );
   }
 

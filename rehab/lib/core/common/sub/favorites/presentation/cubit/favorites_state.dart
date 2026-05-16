@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 abstract class FavoritesState extends Equatable {
   const FavoritesState();

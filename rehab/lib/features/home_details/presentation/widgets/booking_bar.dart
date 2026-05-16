@@ -8,7 +8,7 @@ import 'package:rehab/features/home/domain/entities/home_entity.dart';
 class BookingBar extends StatelessWidget {
   final HomeEntity home;
 
-  const BookingBar({required this.home});
+  const BookingBar({super.key, required this.home});
 
   @override
   Widget build(BuildContext context) {

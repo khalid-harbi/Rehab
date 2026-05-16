@@ -1,6 +1,3 @@
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class MonthButton extends StatelessWidget {
@@ -10,6 +7,7 @@ class MonthButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const MonthButton({
+    super.key,
     required this.title,
     required this.value,
     required this.selectedValue,

@@ -12,6 +12,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:get_storage/get_storage.dart' as _i792;
+import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
@@ -19,8 +20,6 @@ import '../common/sub/favorites/data/datasources/favorites_remote_data_source.da
     as _i526;
 import '../common/sub/favorites/data/repositories/favorites_repository_data.dart'
     as _i152;
-import '../common/sub/favorites/domain/repositories/favorites_repository_domain.dart'
-    as _i422;
 import '../common/sub/favorites/domain/use_cases/favorites_use_case.dart'
     as _i754;
 import '../common/sub/favorites/presentation/cubit/favorites_cubit.dart'
@@ -29,9 +28,8 @@ import '../common/sub/search/data/datasources/search_remote_data_source.dart'
     as _i739;
 import '../common/sub/search/data/repositories/search_repository_data.dart'
     as _i354;
-import '../common/sub/search/domain/repositories/search_repository_domain.dart'
-    as _i341;
 import '../common/sub/search/domain/use_cases/search_use_case.dart' as _i94;
+import '../exports/app_exports.dart' as _i388;
 import '../network/dio_client.dart' as _i667;
 import '../services/local_keys_service.dart' as _i945;
 import 'third_part.dart' as _i423;
@@ -51,32 +49,33 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => thirdPartyConfig.flutterSecureStorage,
     );
+    gh.lazySingleton<_i116.GoogleSignIn>(() => thirdPartyConfig.googleSignIn);
     gh.lazySingleton<_i667.DioClient>(() => _i667.DioClient());
     gh.lazySingleton<_i526.BaseFavoritesRemoteDataSource>(
       () => _i526.FavoritesRemoteDataSource(
-        gh<_i945.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
+        gh<_i388.LocalKeysService>(),
+        gh<_i388.SupabaseClient>(),
       ),
     );
     gh.lazySingleton<_i739.BaseSearchRemoteDataSource>(
-      () => _i739.SearchRemoteDataSource(gh<_i454.SupabaseClient>()),
+      () => _i739.SearchRemoteDataSource(gh<_i388.SupabaseClient>()),
     );
-    gh.lazySingleton<_i422.FavoritesRepositoryDomain>(
+    gh.lazySingleton<_i388.FavoritesRepositoryDomain>(
       () => _i152.FavoritesRepositoryData(
-        gh<_i526.BaseFavoritesRemoteDataSource>(),
+        gh<_i388.BaseFavoritesRemoteDataSource>(),
       ),
     );
+    gh.lazySingleton<_i388.SearchRepositoryDomain>(
+      () => _i354.SearchRepositoryData(gh<_i388.BaseSearchRemoteDataSource>()),
+    );
     gh.lazySingleton<_i754.FavoritesUseCase>(
-      () => _i754.FavoritesUseCase(gh<_i422.FavoritesRepositoryDomain>()),
-    );
-    gh.lazySingleton<_i341.SearchRepositoryDomain>(
-      () => _i354.SearchRepositoryData(gh<_i739.BaseSearchRemoteDataSource>()),
-    );
-    gh.factory<_i183.FavoritesCubit>(
-      () => _i183.FavoritesCubit(gh<_i754.FavoritesUseCase>()),
+      () => _i754.FavoritesUseCase(gh<_i388.FavoritesRepositoryDomain>()),
     );
     gh.lazySingleton<_i94.SearchUseCase>(
-      () => _i94.SearchUseCase(gh<_i341.SearchRepositoryDomain>()),
+      () => _i94.SearchUseCase(gh<_i388.SearchRepositoryDomain>()),
+    );
+    gh.factory<_i183.FavoritesCubit>(
+      () => _i183.FavoritesCubit(gh<_i388.FavoritesUseCase>()),
     );
     gh.singleton<_i945.LocalKeysService>(() => _i945.LocalKeysService());
     return this;

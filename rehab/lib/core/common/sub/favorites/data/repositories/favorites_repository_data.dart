@@ -1,11 +1,4 @@
-import 'package:injectable/injectable.dart';
-import 'package:multiple_result/multiple_result.dart';
-import 'package:rehab/core/common/sub/favorites/data/datasources/favorites_remote_data_source.dart';
-import 'package:rehab/core/common/sub/favorites/data/models/favorites_model.dart';
-import 'package:rehab/core/common/sub/favorites/domain/entities/favorites_entity.dart';
-import 'package:rehab/core/common/sub/favorites/domain/repositories/favorites_repository_domain.dart';
-import 'package:rehab/core/errors/failure.dart';
-import 'package:rehab/core/errors/network_exceptions.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 
 @LazySingleton(as: FavoritesRepositoryDomain)
 class FavoritesRepositoryData implements FavoritesRepositoryDomain {

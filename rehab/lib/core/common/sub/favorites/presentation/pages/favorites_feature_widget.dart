@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:rehab/core/common/sub/favorites/presentation/cubit/favorites_cubit.dart';
-
+import 'package:rehab/core/exports/app_exports.dart';
 
 class FavoritesFeatureWidget extends StatelessWidget {
   const FavoritesFeatureWidget({super.key});

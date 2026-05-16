@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
-import 'package:rehab/features/booking/presentation/widgets/mounth_buttom.dart';
+import 'package:rehab/features/booking/presentation/widgets/month_buttom.dart';
 import 'package:rehab/features/booking/presentation/widgets/price_row.dart';
 import 'package:rehab/features/booking/presentation/widgets/property_card.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';

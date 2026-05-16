@@ -1,6 +1,6 @@
 {
    "hi":" اهلا",
-      "howAreYou":" كيف حالك اليوم؟",
+   "howAreYou":" كيف حالك اليوم؟",
    "welcomeBack":"مرحبا بعودتك",
    "profile":"حسابي",
    "favorites":" المفضلة",
@@ -10,6 +10,7 @@
    "language":"اللغة",
     "settings":" الإعدادات",
    "help&support":"مساعدة ودعم",
+<<<<<<< HEAD
     "logout":" تسجيل الخروج",
     "facilities":"المرافق" ,
     "aboutProperty": "عن هذا العقار",
@@ -19,6 +20,15 @@
 "parking": "مواقف السيارات ",
 "housing rules and policies":"'قواعد وسياسات السكن"
 
+=======
+   "memberSinceToday": "'عضو منذ اليوم",
+   "memberFor": "عضو منذ",
+   "day": "يوم",
+   "month": "شهر",
+   "and": "و",
+   "year": "سنة",
+    "logout":" تسجيل الخروج"
+>>>>>>> 2ff3f549ee17c5974da2478c4f5996517fc0d7b4
 
 
 

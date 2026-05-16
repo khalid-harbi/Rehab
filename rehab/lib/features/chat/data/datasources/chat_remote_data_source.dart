@@ -4,23 +4,16 @@ import 'package:rehab/core/utils/supabase_users_map.dart';
 import 'package:rehab/features/chat/data/models/room_preview_model/room_preview_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-
 abstract class BaseChatRemoteDataSource {
-   Future<List<RoomPreviewModel>> getRoomPreviews();
+  Future<List<RoomPreviewModel>> getRoomPreviews();
   Future<void> hideRoomForCurrentUser(String roomId);
 }
 
-
 @LazySingleton(as: BaseChatRemoteDataSource)
 class ChatRemoteDataSource implements BaseChatRemoteDataSource {
- 
   final SupabaseClient _supabase;
-  
-  
 
-   ChatRemoteDataSource(this._supabase);
-
-
+  ChatRemoteDataSource(this._supabase);
 
   types.Room getRoom(
     Map<String, dynamic> roomMap,
@@ -50,11 +43,7 @@ class ChatRemoteDataSource implements BaseChatRemoteDataSource {
       id: roomMap['id'] as String,
       type: types.RoomType.direct,
       users: users,
-      // name: roomMap['name']?.toString(),
-      // imageUrl: roomMap['imageUrl']?.toString(),
       metadata: Map<String, dynamic>.from((roomMap['metadata'] as Map?) ?? {}),
-      // createdAt: _toMillis(roomMap['createdAt']),
-      // updatedAt: _toMillis(roomMap['updatedAt']),
     );
   }
 
@@ -99,6 +88,7 @@ class ChatRemoteDataSource implements BaseChatRemoteDataSource {
 
   // ===================================================================
   // ===================================================================
+
   // TODO: review later
   Future<Map<String, String>> loadLastMessagesByRoom(
     Set<String> roomIds,
