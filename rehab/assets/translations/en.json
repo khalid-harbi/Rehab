@@ -13,18 +13,17 @@
     "logout":"Logout",
     "facilities":"Facilities",
     "aboutProperty": "About Property",
-    "bedrooms": "Bedrooms",
-    "bathrooms": "Bathrooms",
-    "wi-fi": "Wi-Fi",
+    "bedrooms_count": "{} Bedrooms",
+    "bathrooms_count": "{} Bathrooms",
     "parking":"Parking" ,
-    "housing rules and policies":"Housing rules and policies",
+    "housingRulesAndPolicies":"Housing rules and policies",
     "memberSinceToday": "Member since today",
     "memberFor": "Member for",
     "day": "day",
     "month": "month",
     "and": "and",
     "year": "year",
-    "guest experiences":"Guest experiences"
+    "appInfo": "App Info"
 }
 
 

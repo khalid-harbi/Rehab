@@ -128,16 +128,17 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                     children: [
                       FacilityCard(
                         icon: Icons.bed_outlined,
-                        title: '${home.rooms}bedrooms'.tr(),
+                        title: 'bedrooms_count'.tr(
+                          args: [home.rooms.toString()],
+                        ),
                       ),
                       FacilityCard(
                         icon: Icons.bathtub_outlined,
-                        title: '${home.bathrooms} bathrooms'.tr(),
+                        title: 'bathrooms_count'.tr(
+                          args: [home.bathrooms.toString()],
+                        ),
                       ),
-                      FacilityCard(
-                        icon: Icons.wifi_outlined,
-                        title: "wi-fi".tr(),
-                      ),
+
                       FacilityCard(
                         icon: Icons.local_parking_outlined,
                         // title: 'parking'.tr(),
@@ -160,11 +161,10 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
 
                   const SizedBox(height: 24),
 
-                  SectionTitle(title: 'housing rules and policies'.tr()),
+                  SectionTitle(title: 'housingRulesAndPolicies'.tr()),
 
                   const SizedBox(height: 24),
 
-                  SectionTitle(title: 'guest experiences'.tr()),
                   PolicyItem(
                     icon: Icons.info_outline,
                     title: titleForLocale(
