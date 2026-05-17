@@ -40,4 +40,5 @@ abstract class AppColors {
 
   // Error
   static const Color error = Color(0xFFB00020);
+
 }

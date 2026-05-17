@@ -16,7 +16,7 @@ abstract class AppTheme {
       primary: AppColors.primary,
       secondary: AppColors.secondary,
       surface: AppColors.surface,
-      error: AppColors.error,
+      error: AppColors.secondary, //! todo: change it
     ),
 
     scaffoldBackgroundColor: AppColors.background,
