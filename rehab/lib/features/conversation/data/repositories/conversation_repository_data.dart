@@ -5,6 +5,8 @@ import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/features/conversation/data/datasources/conversation_remote_data_source.dart';
 import 'package:rehab/features/conversation/domain/repositories/conversation_repository_domain.dart';
+import 'package:rehab/features/users/data/models/users_model/users_model.dart';
+import 'package:rehab/features/users/domain/entities/users_entity.dart';
 
 @LazySingleton(as: ConversationRepositoryDomain)
 class ConversationRepositoryData implements ConversationRepositoryDomain {
@@ -48,4 +50,15 @@ class ConversationRepositoryData implements ConversationRepositoryDomain {
 
   // ===================================================================
   // ===================================================================
+
+  @override
+  Future<Result<UsersEntity, Failure>> getUserById(String userId) async {
+    try {
+      final userModel = await remoteDataSource.getUserById(userId);
+      final userEntity = userModel.toEntity();
+      return Success(userEntity);
+    } catch (e) {
+      return Error(FailureExceptions.getException(e));
+    }
+  }
 }

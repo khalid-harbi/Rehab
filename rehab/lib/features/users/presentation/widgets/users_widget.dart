@@ -1,32 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/core/constants/app_colors.dart' show AppColors;
+import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/widgets/profile_header.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/utils/localization_helper.dart';
-import 'package:rehab/features/users/domain/entities/user_answer_entity.dart';
 import 'package:rehab/features/users/presentation/widgets/build_chip.dart';
 import 'package:rehab/features/users/presentation/widgets/member_since.dart';
 
 class UsersWidget extends HookWidget {
-  final String id;
-  final String name;
-  final DateTime cratedAt;
-  final List<UserAnswerEntity> answers;
-  final int matchPercentage;
-  final String imageUrl;
+  final UsersEntity user;
 
-  const UsersWidget({
-    super.key,
-    required this.id,
-    required this.name,
-    required this.cratedAt,
-    required this.answers,
-    required this.matchPercentage,
-    required this.imageUrl,
-  });
+  const UsersWidget({super.key, required this.user});
 
   // ===================================================================
   // ===================================================================
@@ -42,9 +29,11 @@ class UsersWidget extends HookWidget {
     // How many answers to show?
     final limit = 4;
     // Ellipsis are '...' and will only be displayed when card is not expanded & there are more answers to show
-    final showEllipsis = !isExpanded.value && answers.length > limit;
+    final showEllipsis = !isExpanded.value && user.answers.length > limit;
     // .take takes the specified number from the list
-    final visibleAnswers = isExpanded.value ? answers : answers.take(limit);
+    final visibleAnswers = isExpanded.value
+        ? user.answers
+        : user.answers.take(limit);
 
     // ===================================================================
     // ===================================================================
@@ -67,7 +56,10 @@ class UsersWidget extends HookWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ProfileHeader(imageUrl: imageUrl, matchPercentage: matchPercentage),
+            ProfileHeader(
+              imageUrl: user.imageUrl,
+              matchPercentage: user.matchPercentage,
+            ),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -77,7 +69,7 @@ class UsersWidget extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      user.name,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -85,7 +77,7 @@ class UsersWidget extends HookWidget {
                       ),
                     ),
                     Text(
-                      getMemberSinceText(context, cratedAt),
+                      getMemberSinceText(context, user.createdAt),
                       style: const TextStyle(color: Colors.grey, fontSize: 14),
                     ),
                   ],
@@ -131,7 +123,7 @@ class UsersWidget extends HookWidget {
                       if (showEllipsis)
                         GestureDetector(
                           onTap: () {
-                            if (answers.length > limit) {
+                            if (user.answers.length > limit) {
                               isExpanded.value = !isExpanded.value;
                             }
                           },
@@ -150,7 +142,7 @@ class UsersWidget extends HookWidget {
               padding: const EdgeInsets.all(24),
               child: ElevatedButton(
                 onPressed: () {
-                  cubit.createRoom(id);
+                  cubit.createRoom(user);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.background,

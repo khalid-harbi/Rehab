@@ -3,11 +3,12 @@ import 'package:injectable/injectable.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:rehab/core/utils/supabase_users_map.dart';
 import 'package:rehab/features/users/data/models/users_model/users_model.dart';
+import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseUsersRemoteDataSource {
   Future<List<UsersModel>> loadUsers();
-  Future<types.Room> createChatRoom(String otherUserId);
+  Future<types.Room> createChatRoom(UsersEntity otherUser);
 }
 
 // ===================================================================
@@ -148,11 +149,11 @@ class UsersRemoteDataSource implements BaseUsersRemoteDataSource {
   // ===================================================================
 
   @override
-  Future<types.Room> createChatRoom(String otherUserId) async {
+  Future<types.Room> createChatRoom(UsersEntity otherUser) async {
     try {
       // ---------------------
       final currentUserId = _supabase.auth.currentUser!.id;
-      final List<String> participants = [currentUserId, otherUserId];
+      final List<String> participants = [currentUserId, otherUser.id];
       // ---------------------
 
       // Take raw database response
@@ -173,7 +174,7 @@ class UsersRemoteDataSource implements BaseUsersRemoteDataSource {
         // if (true), the existing room object will be returned to existingDirectRoom
         return userIds.length == 2 &&
             userIds.contains(currentUserId) &&
-            userIds.contains(otherUserId);
+            userIds.contains(otherUser.id);
         // If no such room is found, return an empty map
       }, orElse: () => <String, dynamic>{});
 

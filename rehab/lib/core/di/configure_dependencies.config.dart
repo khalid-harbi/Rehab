@@ -52,17 +52,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i116.GoogleSignIn>(() => thirdPartyConfig.googleSignIn);
     gh.lazySingleton<_i667.DioClient>(() => _i667.DioClient());
-    gh.lazySingleton<_i526.BaseFavoritesRemoteDataSource>(
-      () => _i526.FavoritesRemoteDataSource(
-        gh<_i388.LocalKeysService>(),
-        gh<_i388.SupabaseClient>(),
-      ),
-    );
     gh.lazySingleton<_i669.BaseLocationService>(
       () => _i669.LocationServiceImpl(),
     );
     gh.lazySingleton<_i739.BaseSearchRemoteDataSource>(
       () => _i739.SearchRemoteDataSource(gh<_i388.SupabaseClient>()),
+    );
+    gh.lazySingleton<_i526.BaseFavoritesRemoteDataSource>(
+      () => _i526.FavoritesRemoteDataSource(gh<_i388.SupabaseClient>()),
     );
     gh.lazySingleton<_i388.FavoritesRepositoryDomain>(
       () => _i152.FavoritesRepositoryData(

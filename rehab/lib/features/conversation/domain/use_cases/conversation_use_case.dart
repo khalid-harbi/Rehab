@@ -3,6 +3,7 @@ import 'package:multiple_result/multiple_result.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/features/conversation/domain/repositories/conversation_repository_domain.dart';
+import 'package:rehab/features/users/domain/entities/users_entity.dart';
 
 @lazySingleton
 class ConversationUseCase {
@@ -26,5 +27,11 @@ class ConversationUseCase {
 
   Future<Result<types.Room, Failure>> createRoom(String otherUserId) async {
     return await _repositoryData.createRoom(otherUserId);
+  }
+  // ===================================================================
+  // ===================================================================
+
+  Future<Result<UsersEntity, Failure>> getUserById(String userId) async {
+    return await _repositoryData.getUserById(userId);
   }
 }

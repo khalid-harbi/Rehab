@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:rehab/features/conversation/domain/use_cases/conversation_use_case.dart';
 import 'package:rehab/features/conversation/presentation/cubit/conversation_state.dart';
+import 'package:rehab/features/users/domain/entities/users_entity.dart';
 
 class ConversationCubit extends Cubit<ConversationState> {
   final ConversationUseCase _conversationUseCase;
@@ -60,6 +61,28 @@ class ConversationCubit extends Cubit<ConversationState> {
           },
         );
   }
+
+  // ===================================================================
+  // ===================================================================
+
+  Future<UsersEntity?> getUserById(String userId) async {
+    final result = await _conversationUseCase.getUserById(userId);
+
+    return result.when(
+      (userEntity) {
+        // We don't emit a success state here so we don't clear out
+        // the ConversationMessagesLoadedState on the current chat screen UI
+        return userEntity;
+      },
+      (failure) {
+        emit(ConversationErrorState(message: failure.message));
+        return null;
+      },
+    );
+  }
+
+  // ===================================================================
+  // ===================================================================
 
   @override
   Future<void> close() {

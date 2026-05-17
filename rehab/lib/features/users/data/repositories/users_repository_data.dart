@@ -31,7 +31,7 @@ class UsersRepositoryData implements UsersRepositoryDomain {
   // ===================================================================
 
   @override
-  Future<Result<types.Room, Failure>> createChatRoom(String otherUserId) async {
+  Future<Result<types.Room, Failure>> createChatRoom(UsersEntity otherUserId) async {
     try {
       final response = await remoteDataSource.createChatRoom(otherUserId);
       // -------------------

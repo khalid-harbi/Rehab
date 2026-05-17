@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:rehab/core/exports/app_exports.dart';
 
 abstract class BaseFavoritesRemoteDataSource {
@@ -14,9 +12,8 @@ abstract class BaseFavoritesRemoteDataSource {
 @LazySingleton(as: BaseFavoritesRemoteDataSource)
 class FavoritesRemoteDataSource implements BaseFavoritesRemoteDataSource {
   final SupabaseClient _supabase;
-  final LocalKeysService _localKeysService;
 
-  FavoritesRemoteDataSource(this._localKeysService, this._supabase);
+  FavoritesRemoteDataSource(this._supabase);
 
   @override
   Future<List<HomeModel>> getFavoriteHomes() async {

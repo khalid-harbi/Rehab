@@ -3,12 +3,14 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_supabase_chat_core/flutter_supabase_chat_core.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rehab/core/utils/supabase_timestamp.dart';
+import 'package:rehab/features/users/data/models/users_model/users_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseConversationRemoteDataSource {
   Stream<List<types.Message>> getMessages(types.Room room);
   Future<void> sendMessage(String text, String roomId);
   Future<types.Room> createRoom(String otherUserId);
+  Future<UsersModel> getUserById(String userId);
 }
 
 @LazySingleton(as: BaseConversationRemoteDataSource)
@@ -111,6 +113,19 @@ class ConversationRemoteDataSource implements BaseConversationRemoteDataSource {
   Future<types.Room> createRoom(String otherUserId) async {
     final otherUser = types.User(id: otherUserId);
     return await _chatCore.createRoom(otherUser);
+  }
+
+  // ===================================================================
+  // ===================================================================
+  @override
+  Future<UsersModel> getUserById(String userId) async {
+    final response = await _supabase
+        .from('profiles')
+        .select()
+        .eq('id', userId)
+        .single();
+
+    return UsersModel.fromJson(response);
   }
 
   // ===================================================================

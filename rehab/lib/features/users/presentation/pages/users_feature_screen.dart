@@ -33,7 +33,10 @@ class UsersFeatureScreen extends HookWidget {
           // ===================================================================
           listener: (context, state) async {
             if (state is UsersRoomCreatedState) {
-              await context.push(Routes.conversation, extra: state.room);
+              await context.push(
+                Routes.conversation,
+                extra: state.room,
+              );
 
               // Refresh users when coming back
               if (context.mounted) {
@@ -66,14 +69,7 @@ class UsersFeatureScreen extends HookWidget {
 
                           itemBuilder: (context, index) {
                             final user = displayUsers[index];
-                            return UsersWidget(
-                              id: user.id,
-                              name: user.name,
-                              cratedAt: user.createdAt,
-                              imageUrl: user.imageUrl,
-                              answers: user.answers,
-                              matchPercentage: user.matchPercentage,
-                            );
+                            return UsersWidget(user: user);
                           },
                         ),
                       ),
