@@ -35,6 +35,6 @@ Future<void> configureDependencies() async {
   configureConversation(getIt);
   configureOwner(getIt);
   configureLifestyle(getIt);
-    configureFavoritesSub(getIt);
-    configureAddAd(getIt);
+  configureFavoritesSub(getIt);
+  configureAddAd(getIt);
 }

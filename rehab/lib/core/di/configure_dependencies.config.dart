@@ -32,6 +32,7 @@ import '../common/sub/search/domain/use_cases/search_use_case.dart' as _i94;
 import '../exports/app_exports.dart' as _i388;
 import '../network/dio_client.dart' as _i667;
 import '../services/local_keys_service.dart' as _i945;
+import '../services/location_service.dart' as _i669;
 import 'third_part.dart' as _i423;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -56,6 +57,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i388.LocalKeysService>(),
         gh<_i388.SupabaseClient>(),
       ),
+    );
+    gh.lazySingleton<_i669.BaseLocationService>(
+      () => _i669.LocationServiceImpl(),
     );
     gh.lazySingleton<_i739.BaseSearchRemoteDataSource>(
       () => _i739.SearchRemoteDataSource(gh<_i388.SupabaseClient>()),

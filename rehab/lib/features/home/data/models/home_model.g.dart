@@ -41,6 +41,9 @@ _HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => _HomeModel(
   bathrooms: (json['bathrooms'] as num?)?.toInt() ?? 0,
   isAvailable: json['is_available'] as bool? ?? true,
   area: (json['area'] as num?)?.toDouble() ?? 0.0,
+  lat: (json['lat'] as num?)?.toDouble() ?? 0.0,
+  lng: (json['lng'] as num?)?.toDouble() ?? 0.0,
+  distance: (json['distance'] as num?)?.toDouble() ?? 0.0,
 );
 
 Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
@@ -67,4 +70,7 @@ Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
       'bathrooms': instance.bathrooms,
       'is_available': instance.isAvailable,
       'area': instance.area,
+      'lat': instance.lat,
+      'lng': instance.lng,
+      'distance': instance.distance,
     };

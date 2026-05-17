@@ -29,6 +29,9 @@ abstract class HomeModel with _$HomeModel {
     @Default(0) int bathrooms,
     @Default(true) bool isAvailable,
     @Default(0.0) double area,
+    @Default(0.0) double lat,
+    @Default(0.0) double lng,
+    @Default(0.0) double distance,
   }) = _HomeModel;
 
   factory HomeModel.fromJson(Map<String, Object?> json) =>
@@ -60,7 +63,9 @@ extension HomeModelMapper on HomeModel {
       bathrooms: bathrooms,
       isAvailable: isAvailable,
       area: area,
-
+      lat: lat,
+      lng: lng,
+      distance: distance,
     );
   }
 }

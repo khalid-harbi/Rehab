@@ -31,4 +31,11 @@ class SearchUseCase {
       bathrooms: bathrooms,
     );
   }
+
+  Future<Result<List<HomeEntity>, Failure>> getNearbyHomes(
+    double lat,
+    double lng,
+  ) async {
+    return _repositoryData.getNearbyHomes(lat, lng);
+  }
 }

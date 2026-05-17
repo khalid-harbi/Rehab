@@ -11,4 +11,8 @@ abstract class SearchRepositoryDomain {
     int? rooms,
     int? bathrooms,
   });  
+   Future<Result<List<HomeEntity>, Failure>> getNearbyHomes(
+    double lat,
+    double lng,
+  );
 }
