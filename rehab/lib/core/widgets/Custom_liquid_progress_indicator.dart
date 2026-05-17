@@ -22,14 +22,14 @@ class _CustomLiquidProgressIndicatorState
     final double percentValue = widget.matchPercentage / 100.0;
 
     return SizedBox(
-      height: 120,
-      width: 120,
+      height: 160,
+      width: 160,
       child: LiquidCustomProgressIndicator(
         value: percentValue,
         valueColor: const AlwaysStoppedAnimation(Colors.red),
         backgroundColor: Colors.red.withAlpha(50),
         direction: Axis.vertical,
-        shapePath: HeartClipper().getClip(const Size(120, 120)),
+        shapePath: HeartClipper().getClip(const Size(160, 160)),
         center: Text(
           '${widget.matchPercentage}%',
           style: const TextStyle(

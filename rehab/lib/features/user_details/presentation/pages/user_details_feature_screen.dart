@@ -34,30 +34,36 @@ class UserDetailsFeatureScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // ===================================================================
-            // Large Profile Image
-            // ===================================================================
-            Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withAlpha(50),
-              ),
-              child: CircleAvatar(
-                radius: 75,
-                backgroundImage: NetworkImage(user.imageUrl),
-                backgroundColor: Colors.grey.shade800,
-              ),
+            Row(
+              mainAxisAlignment: .center,
+              children: [
+                Transform.translate(
+                  offset: const Offset(0, -15),
+                  child: CustomLiquidProgressIndicator(
+                    matchPercentage: user.matchPercentage,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withAlpha(50),
+                  ),
+                  child: CircleAvatar(
+                    radius: 65,
+                    backgroundImage: NetworkImage(user.imageUrl),
+                    backgroundColor: Colors.grey.shade800,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 32),
+            // ===================================================================
+            // Large Match Percentage Heart (Moved to Top)
+            // ===================================================================
 
             // ===================================================================
-            // Centered Match Percentage
+            // Smaller Profile Image (Moved Below)
             // ===================================================================
-            CustomLiquidProgressIndicator(
-              matchPercentage: user.matchPercentage,
-            ),
-            const SizedBox(height: 24),
 
             // ===================================================================
             // Member since

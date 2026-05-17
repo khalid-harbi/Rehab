@@ -58,7 +58,6 @@ class ConversationFeatureScreen extends StatelessWidget {
               child: IconButton(
                 onPressed: () async {
                   final fetchedUser = await cubit.getUserById(otherUser.id);
-                  print(fetchedUser);
                   context.push(Routes.userDetails, extra: fetchedUser);
                 },
                 icon: Icon(Icons.more_horiz_rounded),
