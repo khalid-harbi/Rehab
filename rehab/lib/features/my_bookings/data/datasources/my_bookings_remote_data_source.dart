@@ -33,9 +33,9 @@ class MyBookingsRemoteDataSource implements BaseMyBookingsRemoteDataSource {
       final response = await _supabase
           .from('bookings')
           .select('''
-            *,
-            home(*)
-          ''')
+          *,
+          home:home_id(*)
+            ''')
           .eq('seeker_id', userId)
           .order('created_at', ascending: false);
 
