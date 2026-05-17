@@ -48,12 +48,27 @@ class ProfileHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.favorite, color: Colors.red, size: 24),
-                  SizedBox(width: 5),
                   Text(
                     '$matchPercentage%',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      height: 1,
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  Transform.translate(
+                    offset: const Offset(
+                      0,
+                      -3,
+                    ), // Adjust the negative number to move the heart UP
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.redAccent,
+                      size: 24,
+                    ),
                   ),
                 ],
               ),

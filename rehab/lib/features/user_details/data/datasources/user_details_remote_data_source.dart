@@ -14,11 +14,10 @@ abstract class BaseUserDetailsRemoteDataSource {
 class UserDetailsRemoteDataSource implements BaseUserDetailsRemoteDataSource {
  
   final SupabaseClient _supabase;
-  final LocalKeysService _localKeysService;
   
   
 
-   UserDetailsRemoteDataSource(this._localKeysService, this._supabase);
+   UserDetailsRemoteDataSource(this._supabase);
 
 
 

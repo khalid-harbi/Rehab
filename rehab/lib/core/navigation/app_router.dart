@@ -22,6 +22,7 @@ import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/app_info_screen.dart';
 import 'package:rehab/features/users/domain/entities/users_entity.dart';
+import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'routers.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
@@ -190,8 +191,14 @@ class AppRouter {
         path: Routes.userDetails,
         builder: (context, state) {
           final user = state.extra as UsersEntity?;
-          return BlocProvider(
-            create: (context) => UserDetailsCubit(GetIt.I.get()),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => UserDetailsCubit(GetIt.I.get()),
+              ),
+              // Add the UsersCubit provider here!
+              BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
+            ],
             child: UserDetailsFeatureScreen(fetchedUser: user),
           );
         },
