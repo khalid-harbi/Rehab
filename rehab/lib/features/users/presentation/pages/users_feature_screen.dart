@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/core/extensions/user_list_extension.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
@@ -56,19 +57,20 @@ class UsersFeatureScreen extends HookWidget {
                   return const LoadingWidget();
 
                 case UsersSuccessState _:
+                  final displayUsers = state.users.filteredAndSortedMatches;
                   return Column(
                     children: [
                       Expanded(
                         child: ListView.builder(
-                          itemCount: state.users.length,
+                          itemCount: displayUsers.length,
 
                           itemBuilder: (context, index) {
-                            final user = state.users[index];
+                            final user = displayUsers[index];
                             return UsersWidget(
-                              id: (user.id),
-                              name: (user.name),
-                              cratedAt: (user.createdAt),
-                              imageUrl: (user.imageUrl),
+                              id: user.id,
+                              name: user.name,
+                              cratedAt: user.createdAt,
+                              imageUrl: user.imageUrl,
                               answers: user.answers,
                               matchPercentage: user.matchPercentage,
                             );

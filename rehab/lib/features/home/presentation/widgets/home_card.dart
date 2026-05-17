@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/constants/app_colors.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/navigation/routers.dart';
+import 'package:rehab/core/services/map_service.dart';
+import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 
 class HomeCard extends StatelessWidget {
   final HomeEntity home;
@@ -31,6 +36,30 @@ class HomeCard extends StatelessWidget {
                   width: double.infinity,
                   child: Image.network(home.imageUrl, fit: BoxFit.cover),
                 ),
+                //todo: change it posion based on language
+                if (home.distance != null && home.distance! > 0.1)
+                  Positioned(
+                    top: 15,
+                    left: 15,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.secondary.withAlpha(99),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        'يبعد ${home.distance!.toStringAsFixed(1)} كم',
+                        style: const TextStyle(
+                          color: AppColors.background,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
             Padding(
@@ -39,7 +68,7 @@ class HomeCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    home.title,
+                    titleForLocale(context, home.titleEn, home.titleAr),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -55,7 +84,10 @@ class HomeCard extends StatelessWidget {
 
                       const SizedBox(width: 4),
 
-                      Text(home.city, style: theme.textTheme.bodySmall),
+                      Text(
+                        titleForLocale(context, home.cityEn, home.cityAr),
+                        style: theme.textTheme.bodySmall,
+                      ),
                     ],
                   ),
 
@@ -69,8 +101,14 @@ class HomeCard extends StatelessWidget {
                       ),
 
                       const SizedBox(width: 4),
-
-                      Text(home.propertyType, style: theme.textTheme.bodySmall),
+                      Text(
+                        titleForLocale(
+                          context,
+                          home.propertyTypeEn,
+                          home.propertyTypeAr,
+                        ),
+                        style: theme.textTheme.bodySmall,
+                      ),
                     ],
                   ),
 
@@ -87,13 +125,40 @@ class HomeCard extends StatelessWidget {
                       ),
                       const Spacer(),
                       Text(
-                        '${home.price}  شهريا/ريال',
+                        '${home.price}  ريال/شهريًا',
                         style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: theme.colorScheme.primary,
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        context.read<HomeCubit>().openMapLocation(
+                          home.lat,
+                          home.lng,
+                        );
+                      },
+                      icon: const Icon(Icons.map_outlined, size: 18),
+                      label: const Text(
+                        'فتح في الخريطة',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                    ),
                   ),
                 ],
               ),

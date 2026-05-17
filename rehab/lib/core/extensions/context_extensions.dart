@@ -80,40 +80,59 @@ extension ContextExtensions on BuildContext {
     );
   }
 
-  void showPaymentBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  void showPaymentBottomSheet({
+  required double amount,
+  required String description,
+  required VoidCallback onPaid,
+}) {
+  showModalBottomSheet(
+    context: this,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (bottomSheetContext) => Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(bottomSheetContext).viewInsets.bottom,
+        top: 20,
+        left: 16,
+        right: 16,
       ),
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          top: 20,
-          left: 16,
-          right: 16,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                "الدفع الآمن",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              "الدفع الآمن",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 20),
+
+            CreditCard(
+              config: Payment().initial(
+                amount: amount,
+                description: description,
               ),
-              const SizedBox(height: 20),
-              CreditCard(
-                config: Payment().initial(amount: 21.0),
-                onPaymentResult: Payment().onPaymentResult,
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
+              onPaymentResult: (result) async {
+                final isPaid = await Payment().onPaymentResult(result);
+
+                if (isPaid) {
+                  Navigator.pop(bottomSheetContext);
+                  onPaid();
+                } else {
+                  showSnackBar('فشلت عملية الدفع', isError: true);
+                }
+              },
+            ),
+
+            const SizedBox(height: 20),
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   void showEditProfileDialog(BuildContext context, String currentName) {
     final nameController = TextEditingController(text: currentName);

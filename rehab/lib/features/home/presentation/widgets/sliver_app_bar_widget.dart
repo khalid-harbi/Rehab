@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:rehab/core/common/sub/search/presentation/widgets/filter_widget.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
-import 'package:rehab/core/common/sub/search/presentation/widgets/filter_widget.dart';
+import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
+import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
@@ -141,6 +143,14 @@ class SliverAppBarWidget extends HookWidget {
                                       ),
                                     ],
                                   ),
+                                  IconButton(
+                                    icon: Icon(Icons.near_me),
+                                    onPressed: () {
+                                      context
+                                          .read<SearchCubit>()
+                                          .getNearbyHomesMethod();
+                                    },
+                                  ),
                                 ],
                               );
                             }
@@ -175,7 +185,15 @@ class SliverAppBarWidget extends HookWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          final homeCubit = context.read<SearchCubit>();
+                          // ======================================================
+                          final searchCubit = context.read<SearchCubit>();
+                          List<HomeEntity> currentHomes = [];
+                          if (searchCubit.state is SearchSuccessState) {
+                            currentHomes =
+                                (searchCubit.state as SearchSuccessState).homes;
+                          }
+                          // ======================================================
+
                           showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
@@ -186,8 +204,8 @@ class SliverAppBarWidget extends HookWidget {
                             ),
                             builder: (context) {
                               return BlocProvider.value(
-                                value: homeCubit,
-                                child: const FilterWidget(),
+                                value: searchCubit,
+                                child: FilterWidget(homes: currentHomes),
                               );
                             },
                           );

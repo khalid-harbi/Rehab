@@ -14,6 +14,7 @@ import 'package:rehab/features/auth/presentation/cubit/auth_state.dart';
 import 'package:rehab/features/auth/presentation/pages/auth_feature_screen.dart';
 import 'package:rehab/features/auth/sub/login/presentation/cubit/login_cubit.dart';
 import 'package:rehab/features/auth/sub/sign_up/presentation/cubit/sign_up_cubit.dart';
+import 'package:rehab/features/booking/presentation/cubit/booking_cubit.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
@@ -24,15 +25,17 @@ import 'routers.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
-import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
 import 'package:rehab/features/add_ad/presentation/pages/add_ad_feature_screen.dart';
 import 'package:rehab/features/add_ad/presentation/cubit/add_ad_cubit.dart';
+import 'package:rehab/features/my_bookings/presentation/pages/my_bookings_feature_screen.dart';
+import 'package:rehab/features/my_bookings/presentation/cubit/my_bookings_cubit.dart';
+
+
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-
     initialLocation: Routes.splash,
 
     routes: [
@@ -91,13 +94,6 @@ class AppRouter {
         },
       ),
 
-      GoRoute(
-        path: Routes.booking,
-        builder: (context, state) {
-          final home = state.extra as HomeEntity;
-          return BookingFeatureScreen(home: home);
-        },
-      ),
 
       GoRoute(
         path: Routes.home,
@@ -142,26 +138,23 @@ class AppRouter {
         },
       ),
 
-      GoRoute(
-        path: Routes.booking,
-        builder: (context, state) {
-          final home = state.extra as HomeEntity;
-          return BookingFeatureScreen(home: home);
-        },
-      ),
+     GoRoute(
+  path: Routes.booking,
+  builder: (context, state) {
+    final home = state.extra as HomeEntity;
 
-      // GoRoute(
-      //   path: Routes.owner,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => OwnerCubit(GetIt.I.get()),
-      //     child: const OwnerNavigationScreen(),
-      //   ),
+    return BlocProvider(
+      create: (context) => BookingCubit(GetIt.I.get()),
+      child: BookingFeatureScreen(home: home),
+    );
+  },
+),
+      
 
-      // ),
       GoRoute(
         path: Routes.owner,
         builder: (context, state) => BlocProvider(
-          create: (context) => OwnerCubit(GetIt.I.get()),
+          create: (context) => ProfileCubit(GetIt.I.get()),
           child: const OwnerRootShell(),
         ),
       ),
@@ -182,12 +175,23 @@ class AppRouter {
         ),
       ),
 
+      GoRoute(
+        path: Routes.favorites,
+        builder: (context, state) => const FavoritesFeatureWidget(),
+      ),
+    
 
-          GoRoute(
-          path: Routes.favorites,
-          builder: (context, state) => const FavoritesFeatureWidget(),
-        ),
-    ],
+GoRoute(
+  path: Routes.myBookings,
+  builder: (context, state) {
+    return BlocProvider(
+      create: (context) =>
+          GetIt.I<MyBookingsCubit>()..getMyBookingsMethod(),
+      child: const MyBookingsFeatureScreen(),
+    );
+  },
+),
+],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),

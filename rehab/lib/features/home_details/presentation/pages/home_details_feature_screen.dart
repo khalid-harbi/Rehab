@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/home_details/presentation/widgets/booking_bar.dart';
 import 'package:rehab/features/home_details/presentation/widgets/facility_card.dart';
 import 'package:rehab/features/home_details/presentation/widgets/header_image.dart';
 import 'package:rehab/features/home_details/presentation/widgets/policy_item.dart';
-import 'package:rehab/features/home_details/presentation/widgets/review_card.dart';
 import 'package:rehab/features/home_details/presentation/widgets/section_title.dart';
 import 'package:rehab/features/home_details/presentation/widgets/status_badge.dart';
 
@@ -35,17 +35,17 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                 children: [
                   StatusBadge(isAvailable: home.isAvailable),
 
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 24),
 
                   Text(
-                    home.title,
+                    titleForLocale(context, home.titleEn, home.titleAr),
                     style: textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: colors.onSurface,
                     ),
                   ),
 
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 24),
 
                   Row(
                     children: [
@@ -57,7 +57,7 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          '${home.city} - ${home.district}',
+                          '${titleForLocale(context, home.cityEn, home.cityAr)} - ${titleForLocale(context, home.districtEn, home.districtAr)}',
                           style: textTheme.bodyMedium?.copyWith(
                             color: colors.onSurface,
                           ),
@@ -75,10 +75,7 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                       ),
 
                       const SizedBox(width: 4),
-                      Text(
-                        '${home.area} m²',
-                        style: theme.textTheme.bodySmall,
-                      ),
+                      Text('${home.area} m²', style: theme.textTheme.bodySmall),
                     ],
                   ),
                   const SizedBox(height: 8),
@@ -105,18 +102,23 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                   const SizedBox(height: 8),
 
                   Text(
-                    home.description,
+                    titleForLocale(
+                      context,
+                      home.descriptionEn,
+                      home.descriptionAr,
+                    ),
                     style: textTheme.bodyMedium?.copyWith(
                       height: 1.7,
                       color: colors.onSurface,
                     ),
                   ),
 
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 24),
 
                   SectionTitle(title: "facilities".tr()),
 
                   GridView.count(
+                    padding: EdgeInsets.only(top: 24, bottom: 24),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 2,
@@ -138,7 +140,20 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                       ),
                       FacilityCard(
                         icon: Icons.local_parking_outlined,
-                        title: 'parking'.tr(),
+                        // title: 'parking'.tr(),
+                        title: titleForLocale(
+                          context,
+                          home.amenitiesEn[0],
+                          home.amenitiesAr[0],
+                        ),
+                      ),
+                      FacilityCard(
+                        icon: Icons.local_parking_outlined,
+                        title: titleForLocale(
+                          context,
+                          home.amenitiesEn[1],
+                          home.amenitiesAr[1],
+                        ),
                       ),
                     ],
                   ),
@@ -147,22 +162,43 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
 
                   SectionTitle(title: 'housing rules and policies'.tr()),
 
-                  const SizedBox(height: 12),
-
-                   PolicyItem(
-                    icon: Icons.policy_outlined,
-                    title:home.policy,
-                  ),
-                
                   const SizedBox(height: 24),
 
                   SectionTitle(title: 'guest experiences'.tr()),
+                  PolicyItem(
+                    icon: Icons.info_outline,
+                    title: titleForLocale(
+                      context,
+                      home.policyEn[0],
+                      home.policyAr[0],
+                    ),
+                  ),
+                  PolicyItem(
+                    icon: Icons.info_outline,
+                    title: titleForLocale(
+                      context,
+                      home.policyEn[1],
+                      home.policyAr[1],
+                    ),
+                  ),
+                  PolicyItem(
+                    icon: Icons.info_outline,
+                    title: titleForLocale(
+                      context,
+                      home.policyEn[2],
+                      home.policyAr[2],
+                    ),
+                  ),
 
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 24),
 
-                  const ReviewCard(),
+                  // SectionTitle(title: 'تجارب الضيوف'),
 
-                  const SizedBox(height: 90),
+                  // const SizedBox(height: 12),
+
+                  // const ReviewCard(),
+
+                  // const SizedBox(height: 90),
                 ],
               ),
             ),

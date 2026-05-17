@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RoomPreviewModel {
 
- types.Room get room; String get displayName; String? get lastMessage;
+ types.Room get room; String get displayName; String? get lastMessage; String? get avatarUrl;
 /// Create a copy of RoomPreviewModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $RoomPreviewModelCopyWith<RoomPreviewModel> get copyWith => _$RoomPreviewModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RoomPreviewModel&&(identical(other.room, room) || other.room == room)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RoomPreviewModel&&(identical(other.room, room) || other.room == room)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,room,displayName,lastMessage);
+int get hashCode => Object.hash(runtimeType,room,displayName,lastMessage,avatarUrl);
 
 @override
 String toString() {
-  return 'RoomPreviewModel(room: $room, displayName: $displayName, lastMessage: $lastMessage)';
+  return 'RoomPreviewModel(room: $room, displayName: $displayName, lastMessage: $lastMessage, avatarUrl: $avatarUrl)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $RoomPreviewModelCopyWith<$Res>  {
   factory $RoomPreviewModelCopyWith(RoomPreviewModel value, $Res Function(RoomPreviewModel) _then) = _$RoomPreviewModelCopyWithImpl;
 @useResult
 $Res call({
- types.Room room, String displayName, String? lastMessage
+ types.Room room, String displayName, String? lastMessage, String? avatarUrl
 });
 
 
@@ -65,11 +65,12 @@ class _$RoomPreviewModelCopyWithImpl<$Res>
 
 /// Create a copy of RoomPreviewModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? room = null,Object? displayName = null,Object? lastMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? room = null,Object? displayName = null,Object? lastMessage = freezed,Object? avatarUrl = freezed,}) {
   return _then(_self.copyWith(
 room: null == room ? _self.room : room // ignore: cast_nullable_to_non_nullable
 as types.Room,displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
 as String,lastMessage: freezed == lastMessage ? _self.lastMessage : lastMessage // ignore: cast_nullable_to_non_nullable
+as String?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( types.Room room,  String displayName,  String? lastMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( types.Room room,  String displayName,  String? lastMessage,  String? avatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RoomPreviewModel() when $default != null:
-return $default(_that.room,_that.displayName,_that.lastMessage);case _:
+return $default(_that.room,_that.displayName,_that.lastMessage,_that.avatarUrl);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.room,_that.displayName,_that.lastMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( types.Room room,  String displayName,  String? lastMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( types.Room room,  String displayName,  String? lastMessage,  String? avatarUrl)  $default,) {final _that = this;
 switch (_that) {
 case _RoomPreviewModel():
-return $default(_that.room,_that.displayName,_that.lastMessage);case _:
+return $default(_that.room,_that.displayName,_that.lastMessage,_that.avatarUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +197,10 @@ return $default(_that.room,_that.displayName,_that.lastMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( types.Room room,  String displayName,  String? lastMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( types.Room room,  String displayName,  String? lastMessage,  String? avatarUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _RoomPreviewModel() when $default != null:
-return $default(_that.room,_that.displayName,_that.lastMessage);case _:
+return $default(_that.room,_that.displayName,_that.lastMessage,_that.avatarUrl);case _:
   return null;
 
 }
@@ -211,12 +212,13 @@ return $default(_that.room,_that.displayName,_that.lastMessage);case _:
 @JsonSerializable()
 
 class _RoomPreviewModel implements RoomPreviewModel {
-  const _RoomPreviewModel({required this.room, required this.displayName, required this.lastMessage});
+  const _RoomPreviewModel({required this.room, required this.displayName, required this.lastMessage, required this.avatarUrl});
   factory _RoomPreviewModel.fromJson(Map<String, dynamic> json) => _$RoomPreviewModelFromJson(json);
 
 @override final  types.Room room;
 @override final  String displayName;
 @override final  String? lastMessage;
+@override final  String? avatarUrl;
 
 /// Create a copy of RoomPreviewModel
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RoomPreviewModel&&(identical(other.room, room) || other.room == room)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RoomPreviewModel&&(identical(other.room, room) || other.room == room)&&(identical(other.displayName, displayName) || other.displayName == displayName)&&(identical(other.lastMessage, lastMessage) || other.lastMessage == lastMessage)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,room,displayName,lastMessage);
+int get hashCode => Object.hash(runtimeType,room,displayName,lastMessage,avatarUrl);
 
 @override
 String toString() {
-  return 'RoomPreviewModel(room: $room, displayName: $displayName, lastMessage: $lastMessage)';
+  return 'RoomPreviewModel(room: $room, displayName: $displayName, lastMessage: $lastMessage, avatarUrl: $avatarUrl)';
 }
 
 
@@ -251,7 +253,7 @@ abstract mixin class _$RoomPreviewModelCopyWith<$Res> implements $RoomPreviewMod
   factory _$RoomPreviewModelCopyWith(_RoomPreviewModel value, $Res Function(_RoomPreviewModel) _then) = __$RoomPreviewModelCopyWithImpl;
 @override @useResult
 $Res call({
- types.Room room, String displayName, String? lastMessage
+ types.Room room, String displayName, String? lastMessage, String? avatarUrl
 });
 
 
@@ -268,11 +270,12 @@ class __$RoomPreviewModelCopyWithImpl<$Res>
 
 /// Create a copy of RoomPreviewModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? room = null,Object? displayName = null,Object? lastMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? room = null,Object? displayName = null,Object? lastMessage = freezed,Object? avatarUrl = freezed,}) {
   return _then(_RoomPreviewModel(
 room: null == room ? _self.room : room // ignore: cast_nullable_to_non_nullable
 as types.Room,displayName: null == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
 as String,lastMessage: freezed == lastMessage ? _self.lastMessage : lastMessage // ignore: cast_nullable_to_non_nullable
+as String?,avatarUrl: freezed == avatarUrl ? _self.avatarUrl : avatarUrl // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BookingModel {
 
- int get id; String get firstName; String get lastName;
+ String get id;@JsonKey(name: 'seeker_id') String get seekerId;@JsonKey(name: 'owner_id') String get ownerId;@JsonKey(name: 'home_id') int get homeId; double get amount;@JsonKey(name: 'duration_months') int get durationMonths;@JsonKey(name: 'payment_id') String get paymentId; String get status;
 /// Create a copy of BookingModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $BookingModelCopyWith<BookingModel> get copyWith => _$BookingModelCopyWithImpl<B
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BookingModel&&(identical(other.id, id) || other.id == id)&&(identical(other.seekerId, seekerId) || other.seekerId == seekerId)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.homeId, homeId) || other.homeId == homeId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.durationMonths, durationMonths) || other.durationMonths == durationMonths)&&(identical(other.paymentId, paymentId) || other.paymentId == paymentId)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
+int get hashCode => Object.hash(runtimeType,id,seekerId,ownerId,homeId,amount,durationMonths,paymentId,status);
 
 @override
 String toString() {
-  return 'BookingModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'BookingModel(id: $id, seekerId: $seekerId, ownerId: $ownerId, homeId: $homeId, amount: $amount, durationMonths: $durationMonths, paymentId: $paymentId, status: $status)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $BookingModelCopyWith<$Res>  {
   factory $BookingModelCopyWith(BookingModel value, $Res Function(BookingModel) _then) = _$BookingModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String firstName, String lastName
+ String id,@JsonKey(name: 'seeker_id') String seekerId,@JsonKey(name: 'owner_id') String ownerId,@JsonKey(name: 'home_id') int homeId, double amount,@JsonKey(name: 'duration_months') int durationMonths,@JsonKey(name: 'payment_id') String paymentId, String status
 });
 
 
@@ -65,11 +65,16 @@ class _$BookingModelCopyWithImpl<$Res>
 
 /// Create a copy of BookingModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? seekerId = null,Object? ownerId = null,Object? homeId = null,Object? amount = null,Object? durationMonths = null,Object? paymentId = null,Object? status = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String,seekerId: null == seekerId ? _self.seekerId : seekerId // ignore: cast_nullable_to_non_nullable
+as String,ownerId: null == ownerId ? _self.ownerId : ownerId // ignore: cast_nullable_to_non_nullable
+as String,homeId: null == homeId ? _self.homeId : homeId // ignore: cast_nullable_to_non_nullable
+as int,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double,durationMonths: null == durationMonths ? _self.durationMonths : durationMonths // ignore: cast_nullable_to_non_nullable
+as int,paymentId: null == paymentId ? _self.paymentId : paymentId // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -155,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'seeker_id')  String seekerId, @JsonKey(name: 'owner_id')  String ownerId, @JsonKey(name: 'home_id')  int homeId,  double amount, @JsonKey(name: 'duration_months')  int durationMonths, @JsonKey(name: 'payment_id')  String paymentId,  String status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BookingModel() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.seekerId,_that.ownerId,_that.homeId,_that.amount,_that.durationMonths,_that.paymentId,_that.status);case _:
   return orElse();
 
 }
@@ -176,10 +181,10 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'seeker_id')  String seekerId, @JsonKey(name: 'owner_id')  String ownerId, @JsonKey(name: 'home_id')  int homeId,  double amount, @JsonKey(name: 'duration_months')  int durationMonths, @JsonKey(name: 'payment_id')  String paymentId,  String status)  $default,) {final _that = this;
 switch (_that) {
 case _BookingModel():
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.seekerId,_that.ownerId,_that.homeId,_that.amount,_that.durationMonths,_that.paymentId,_that.status);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +201,10 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String firstName,  String lastName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'seeker_id')  String seekerId, @JsonKey(name: 'owner_id')  String ownerId, @JsonKey(name: 'home_id')  int homeId,  double amount, @JsonKey(name: 'duration_months')  int durationMonths, @JsonKey(name: 'payment_id')  String paymentId,  String status)?  $default,) {final _that = this;
 switch (_that) {
 case _BookingModel() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.seekerId,_that.ownerId,_that.homeId,_that.amount,_that.durationMonths,_that.paymentId,_that.status);case _:
   return null;
 
 }
@@ -211,12 +216,17 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 @JsonSerializable()
 
 class _BookingModel implements BookingModel {
-  const _BookingModel({required this.id, required this.firstName, required this.lastName});
+  const _BookingModel({required this.id, @JsonKey(name: 'seeker_id') required this.seekerId, @JsonKey(name: 'owner_id') required this.ownerId, @JsonKey(name: 'home_id') required this.homeId, required this.amount, @JsonKey(name: 'duration_months') required this.durationMonths, @JsonKey(name: 'payment_id') required this.paymentId, required this.status});
   factory _BookingModel.fromJson(Map<String, dynamic> json) => _$BookingModelFromJson(json);
 
-@override final  int id;
-@override final  String firstName;
-@override final  String lastName;
+@override final  String id;
+@override@JsonKey(name: 'seeker_id') final  String seekerId;
+@override@JsonKey(name: 'owner_id') final  String ownerId;
+@override@JsonKey(name: 'home_id') final  int homeId;
+@override final  double amount;
+@override@JsonKey(name: 'duration_months') final  int durationMonths;
+@override@JsonKey(name: 'payment_id') final  String paymentId;
+@override final  String status;
 
 /// Create a copy of BookingModel
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +241,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BookingModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BookingModel&&(identical(other.id, id) || other.id == id)&&(identical(other.seekerId, seekerId) || other.seekerId == seekerId)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.homeId, homeId) || other.homeId == homeId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.durationMonths, durationMonths) || other.durationMonths == durationMonths)&&(identical(other.paymentId, paymentId) || other.paymentId == paymentId)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
+int get hashCode => Object.hash(runtimeType,id,seekerId,ownerId,homeId,amount,durationMonths,paymentId,status);
 
 @override
 String toString() {
-  return 'BookingModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'BookingModel(id: $id, seekerId: $seekerId, ownerId: $ownerId, homeId: $homeId, amount: $amount, durationMonths: $durationMonths, paymentId: $paymentId, status: $status)';
 }
 
 
@@ -251,7 +261,7 @@ abstract mixin class _$BookingModelCopyWith<$Res> implements $BookingModelCopyWi
   factory _$BookingModelCopyWith(_BookingModel value, $Res Function(_BookingModel) _then) = __$BookingModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String firstName, String lastName
+ String id,@JsonKey(name: 'seeker_id') String seekerId,@JsonKey(name: 'owner_id') String ownerId,@JsonKey(name: 'home_id') int homeId, double amount,@JsonKey(name: 'duration_months') int durationMonths,@JsonKey(name: 'payment_id') String paymentId, String status
 });
 
 
@@ -268,11 +278,16 @@ class __$BookingModelCopyWithImpl<$Res>
 
 /// Create a copy of BookingModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? seekerId = null,Object? ownerId = null,Object? homeId = null,Object? amount = null,Object? durationMonths = null,Object? paymentId = null,Object? status = null,}) {
   return _then(_BookingModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
-as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
+as String,seekerId: null == seekerId ? _self.seekerId : seekerId // ignore: cast_nullable_to_non_nullable
+as String,ownerId: null == ownerId ? _self.ownerId : ownerId // ignore: cast_nullable_to_non_nullable
+as String,homeId: null == homeId ? _self.homeId : homeId // ignore: cast_nullable_to_non_nullable
+as int,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double,durationMonths: null == durationMonths ? _self.durationMonths : durationMonths // ignore: cast_nullable_to_non_nullable
+as int,paymentId: null == paymentId ? _self.paymentId : paymentId // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

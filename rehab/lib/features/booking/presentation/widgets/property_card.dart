@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rehab/core/constants/app_colors.dart';
+import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
 class PropertyCard extends StatelessWidget {
@@ -37,14 +38,14 @@ class PropertyCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  home.title,
+                  titleForLocale(context, home.titleEn, home.titleAr),
                   style: textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '${home.city} - ${home.district}',
+                  '${titleForLocale(context, home.cityEn, home.cityAr)} - ${titleForLocale(context, home.districtEn, home.districtAr)}',
                   style: textTheme.bodySmall,
                 ),
                 const SizedBox(height: 8),

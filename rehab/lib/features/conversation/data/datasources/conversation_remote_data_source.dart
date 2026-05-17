@@ -46,8 +46,25 @@ class ConversationRemoteDataSource implements BaseConversationRemoteDataSource {
               // Translate 'content' column to 'text' key the Package expects
               map['text'] = map['content'];
 
-              // The Package requires a nested 'author' map, not just an ID string
-              map['author'] = {'id': map['authorId']};
+              // ------------------------------------------
+
+              // Match authorId to the room users
+              final authorId = map['authorId']?.toString() ?? '';
+
+              // Find the user in the room's users list to get their image
+              final authorUser = room.users.firstWhere(
+                (user) => user.id == authorId,
+                orElse: () => types.User(id: authorId), // fallback if not found
+              );
+
+              // ------------------------------------------
+
+              // The Package requires a nested 'author' map
+              map['author'] = {
+                'id': authorUser.id,
+                'firstName': authorUser.firstName,
+                'imageUrl': authorUser.imageUrl,
+              };
 
               // Ensure the type matches what the package expects
               map['type'] = map['type'] ?? 'text';
@@ -99,4 +116,3 @@ class ConversationRemoteDataSource implements BaseConversationRemoteDataSource {
   // ===================================================================
   // ===================================================================
 }
-

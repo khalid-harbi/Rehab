@@ -12,6 +12,7 @@ abstract class RoomPreviewModel with _$RoomPreviewModel {
     required types.Room room,
     required String displayName,
     required String? lastMessage,
+    required String? avatarUrl,
   }) = _RoomPreviewModel;
 
   factory RoomPreviewModel.fromJson(Map<String, Object?> json) =>
@@ -24,6 +25,7 @@ extension RoomPreviewModelMapper on RoomPreviewModel {
       room: room,
       displayName: displayName,
       lastMessage: lastMessage,
+      avatarUrl: avatarUrl,
     );
   }
 }

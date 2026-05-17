@@ -5,11 +5,13 @@ class RoomPreviewEntity extends Equatable {
   final types.Room room;
   final String displayName;
   final String? lastMessage;
+  final String? avatarUrl;
 
   const RoomPreviewEntity({
     required this.room,
     required this.displayName,
     required this.lastMessage,
+    this.avatarUrl,
   });
 
   @override

@@ -23,7 +23,7 @@ class HomeSuccessState extends HomeState {
 class HomeErrorState extends HomeState {
   final String message;
 
-  const HomeErrorState(this.message);
+  const HomeErrorState({required this.message});
 
   @override
   List<Object?> get props => [message];

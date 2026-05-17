@@ -2,52 +2,85 @@ import 'package:equatable/equatable.dart';
 
 class HomeEntity extends Equatable {
   final int id;
-  final String title;
-  final String city;
-  final String district;
+  final String titleAr;
+  final String titleEn;
+  final String cityAr;
+  final String cityEn;
+  final String districtAr;
+  final String districtEn;
+  final String descriptionAr;
+  final String descriptionEn;
+  final String propertyTypeAr;
+  final String propertyTypeEn;
+  final List<String> policyAr;
+  final List<String> policyEn;
+  final List<String> amenitiesAr;
+  final List<String> amenitiesEn;
   final String imageUrl;
   final double price;
   final double rating;
   final int rooms;
   final int bathrooms;
-  final String description;
   final bool isAvailable;
-  final String propertyType;
   final double area;
-  final String policy;
+  final double lat;
+  final double lng;
+  final double? distance;
 
   const HomeEntity({
     required this.id,
-    required this.title,
-    required this.city,
-    required this.district,
+    required this.titleAr,
+    required this.titleEn,
+    required this.cityAr,
+    required this.cityEn,
+    required this.districtAr,
+    required this.districtEn,
+    required this.descriptionAr,
+    required this.descriptionEn,
+    required this.propertyTypeAr,
+    required this.propertyTypeEn,
+    required this.policyAr,
+    required this.policyEn,
+    required this.amenitiesAr,
+    required this.amenitiesEn,
     required this.imageUrl,
     required this.price,
     required this.rating,
     required this.rooms,
     required this.bathrooms,
-    required this.description,
     required this.isAvailable,
-    required this.propertyType,
     required this.area,
-   required this.policy,
+    required this.lat,
+    required this.lng,
+    this.distance,
   });
 
   @override
   List<Object?> get props => [
     id,
-    title,
-    city,
-    district,
+    titleAr,
+    titleEn,
+    cityAr,
+    cityEn,
+    districtAr,
+    districtEn,
+    descriptionAr,
+    descriptionEn,
+    propertyTypeAr,
+    propertyTypeEn,
+    policyAr,
+    policyEn,
+    amenitiesAr,
+    amenitiesEn,
     imageUrl,
     price,
     rating,
     rooms,
     bathrooms,
-    description,
     isAvailable,
-    propertyType,
     area,
-    policy,
+    lat,
+    lng,
+    distance,
   ];
 }

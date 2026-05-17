@@ -2,8 +2,10 @@ import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:rehab/core/common/sub/search/domain/use_cases/search_use_case.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/constants/app_enums.dart';
+import 'package:rehab/core/services/location_service.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
@@ -30,7 +32,12 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
         BlocProvider(
           create: (context) => GetIt.I<HomeCubit>()..getHomeMethod(),
         ),
-        BlocProvider(create: (context) => SearchCubit(GetIt.I.get())),
+        BlocProvider(
+          create: (context) => SearchCubit(
+            GetIt.I.get<SearchUseCase>(),
+            GetIt.I.get<BaseLocationService>(),
+          ),
+        ),
         // BlocProvider(create: (context) => ProfileCubit(GetIt.I.get())),
       ],
       child: const HomeFeatureScreen(),
@@ -46,9 +53,9 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
     ),
 
     // BlocProvider(
-      // create: (context) => ProfileCubit(GetIt.I.get()),
-      // child: 
-      const ProfileFeatureScreen(),
+    // create: (context) => ProfileCubit(GetIt.I.get()),
+    // child:
+    const ProfileFeatureScreen(),
     // ),
   ];
 

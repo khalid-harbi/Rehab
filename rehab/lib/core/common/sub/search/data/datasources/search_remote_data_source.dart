@@ -11,6 +11,7 @@ abstract class BaseSearchRemoteDataSource {
     int? rooms,
     int? bathrooms,
   });
+  Future<List<HomeModel>> getNearbyHomes(double lat, double lng);
 }
 
 @LazySingleton(as: BaseSearchRemoteDataSource)
@@ -24,8 +25,7 @@ class SearchRemoteDataSource implements BaseSearchRemoteDataSource {
     final items = await _supabase
         .from('home')
         .select()
-        .like('title', '%$title%');
-
+        .or('title_ar.ilike.%$title%,title_en.ilike.%$title%');
     List<HomeModel> homes = List.from(
       items,
     ).map((e) => HomeModel.fromJson(e)).toList();
@@ -45,7 +45,7 @@ class SearchRemoteDataSource implements BaseSearchRemoteDataSource {
     var query = _supabase.from("filter").select();
 
     if (city != null && city.isNotEmpty) {
-      query = query.eq('city', city);
+      query = query.or('city_ar.eq.$city,city_en.eq.$city');
     }
     if (minPrice != null) {
       query = query.gte('price', minPrice);
@@ -68,5 +68,16 @@ class SearchRemoteDataSource implements BaseSearchRemoteDataSource {
     final response = await query.order('price', ascending: true);
 
     return response.map<HomeModel>((json) => HomeModel.fromJson(json)).toList();
+  }
+  @override
+  Future<List<HomeModel>> getNearbyHomes(double lat, double lng) async {
+    final response = await _supabase.rpc(
+      'get_nearby_homes',
+      params: {'user_lat': lat, 'user_lang': lng, 'dist_threshold': 50.0},
+    );
+
+    return (response as List)
+        .map<HomeModel>((json) => HomeModel.fromJson(json))
+        .toList();
   }
 }

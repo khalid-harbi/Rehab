@@ -5,7 +5,7 @@ import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/widgets/profile_header.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rehab/core/constants/app_colors.dart';
-import 'package:rehab/core/widgets/localization_helper.dart';
+import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/users/domain/entities/user_answer_entity.dart';
 import 'package:rehab/features/users/presentation/widgets/build_chip.dart';
 import 'package:rehab/features/users/presentation/widgets/member_since.dart';
