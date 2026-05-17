@@ -5,17 +5,35 @@ import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:rehab/features/auth/sub/otp/data/datasources/otp_remote_data_source.dart';
 import 'package:rehab/features/auth/sub/otp/domain/repositories/otp_repository_domain.dart';
 
-@LazySingleton(as: LogInWithOtpRepositoryDomain)
-class LogInWithOtpRepositoryData implements LogInWithOtpRepositoryDomain {
-  final BaseLogInWithOtpRemoteDataSource remoteDataSource;
+@LazySingleton(as: OtpRepositoryDomain)
+class OtpRepositoryData implements OtpRepositoryDomain {
+  final BaseOtpRemoteDataSource _remoteDataSource;
 
-  LogInWithOtpRepositoryData(this.remoteDataSource);
+  OtpRepositoryData(this._remoteDataSource);
 
   @override
-  Future<Result<void, Failure>> getLogInWithOtp({required String email}) async {
+  Future<Result<bool, Failure>> verifyOtp({
+    required String email,
+    required String token,
+  }) async {
     try {
-      await remoteDataSource.getLogInWithOtp(email: email);
-      return Success(null);
+      final result = await _remoteDataSource.verifyOtp(
+        email: email,
+        token: token,
+      );
+
+      return Success(result);
+    } catch (error) {
+      return Error(FailureExceptions.getException(error));
+    }
+  }
+
+  @override
+  Future<Result<bool, Failure>> resendOtp({required String email}) async {
+    try {
+      final result = await _remoteDataSource.resendOtp(email: email);
+
+      return Success(result);
     } catch (error) {
       return Error(FailureExceptions.getException(error));
     }

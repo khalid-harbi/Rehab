@@ -222,22 +222,22 @@ return $default(_that.id,_that.title,_that.city,_that.district,_that.imageUrl,_t
 @JsonSerializable()
 
 class _HomeModel implements HomeModel {
-  const _HomeModel({required this.id, required this.title, required this.city, required this.district, @JsonKey(name: 'image_url', defaultValue: '') required this.imageUrl, required this.price, required this.rating, required this.rooms, required this.bathrooms, required this.description, @JsonKey(name: 'is_available') required this.isAvailable, @JsonKey(name: 'property_type') required this.propertyType, required this.area, required this.policy});
+  const _HomeModel({required this.id, this.title = '', this.city = '', this.district = '', @JsonKey(name: 'image_url', defaultValue: '') required this.imageUrl, this.price = 0.0, this.rating = 0.0, this.rooms = 0, this.bathrooms = 0, this.description = '', @JsonKey(name: 'is_available') this.isAvailable = false, @JsonKey(name: 'property_type') this.propertyType = '', this.area = 0.0, required this.policy});
   factory _HomeModel.fromJson(Map<String, dynamic> json) => _$HomeModelFromJson(json);
 
 @override final  int id;
-@override final  String title;
-@override final  String city;
-@override final  String district;
+@override@JsonKey() final  String title;
+@override@JsonKey() final  String city;
+@override@JsonKey() final  String district;
 @override@JsonKey(name: 'image_url', defaultValue: '') final  String imageUrl;
-@override final  double price;
-@override final  double rating;
-@override final  int rooms;
-@override final  int bathrooms;
-@override final  String description;
+@override@JsonKey() final  double price;
+@override@JsonKey() final  double rating;
+@override@JsonKey() final  int rooms;
+@override@JsonKey() final  int bathrooms;
+@override@JsonKey() final  String description;
 @override@JsonKey(name: 'is_available') final  bool isAvailable;
 @override@JsonKey(name: 'property_type') final  String propertyType;
-@override final  double area;
+@override@JsonKey() final  double area;
 @override final  String policy;
 
 /// Create a copy of HomeModel

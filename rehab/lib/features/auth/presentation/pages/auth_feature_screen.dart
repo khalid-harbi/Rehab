@@ -1,4 +1,3 @@
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:rehab/features/auth/data/models/auth_model.dart';
@@ -41,30 +40,34 @@ class AuthFeatureScreen extends HookWidget {
     }
 
     return Scaffold(
+      backgroundColor: AppColors.primary,
       body: Column(
         children: [
-          ClipPath(
-            clipper: ArcClipper(),
-            child: Container(
-              height: 30.h,
-              width: double.infinity,
-              decoration: const BoxDecoration(color: Colors.white),
+          Container(
+            height: 23.h,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: SafeArea(
               child: AnyImageView(
-                imagePath: "assets/icons/app_logo.jpg",
-                width: 40.sp,
-                height: 40.sp,
+                imagePath: "assets/images/logo_removebg.png",
+                width: 60.sp,
+                height: 60.sp,
                 fit: BoxFit.cover,
                 errorWidget: Icon(Icons.person, size: 30.sp),
               ),
             ),
           ),
 
+          Gap(20.sp),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.sp),
             child: Container(
-              height: 55,
+              height: 50,
               decoration: BoxDecoration(
-                color: Colors.grey.shade100,
+                color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(15),
               ),
               child: TabBar(
@@ -72,7 +75,7 @@ class AuthFeatureScreen extends HookWidget {
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: AppColors.primary,
+                  color: Colors.white,
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.primary.withAlpha(50),
@@ -81,8 +84,10 @@ class AuthFeatureScreen extends HookWidget {
                     ),
                   ],
                 ),
-                labelColor: Colors.white,
-                unselectedLabelColor: Colors.grey,
+                dividerColor: Colors.transparent,
+                labelColor: Colors.black87,
+                unselectedLabelColor: Colors.black54,
+
                 labelStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,

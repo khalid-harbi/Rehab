@@ -1,15 +1,13 @@
 import 'dart:async';
-
 import 'package:any_image_view/any_image_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:get_it/get_it.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
-import 'package:rehab/features/home/presentation/widgets/filter_widget.dart';
+import 'package:rehab/core/common/sub/search/presentation/widgets/filter_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
@@ -20,7 +18,6 @@ class SliverAppBarWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // controllerSearch.addListener(() async {
     //   if (timer != null) {
     //     timer!.cancel();
@@ -96,7 +93,7 @@ class SliverAppBarWidget extends HookWidget {
                             if (state is ProfileLoadingState) {
                               return const Center(child: LoadingWidget());
                             }
-                        
+
                             if (state is ProfileSuccessState) {
                               return Row(
                                 children: [
@@ -120,7 +117,7 @@ class SliverAppBarWidget extends HookWidget {
                                       ),
                                     ),
                                   ),
-                        
+
                                   Gap(5.sw),
                                   Column(
                                     crossAxisAlignment:
@@ -147,7 +144,7 @@ class SliverAppBarWidget extends HookWidget {
                                 ],
                               );
                             }
-                        
+
                             if (state is ProfileErrorState) {
                               return Center(
                                 child: Text(
@@ -156,7 +153,7 @@ class SliverAppBarWidget extends HookWidget {
                                 ),
                               );
                             }
-                        
+
                             return const SizedBox.shrink();
                           },
                         ),

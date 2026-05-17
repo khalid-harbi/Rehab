@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:rehab/core/constants/app_colors.dart';
-import 'package:sizer/sizer.dart';
 
 class TextFieldWidget extends HookWidget {
   final String label;
@@ -39,6 +38,7 @@ class TextFieldWidget extends HookWidget {
         //     ),
         //   ),
         // ),
+        // todo: add keyboard type
         TextFormField(
           controller: controller,
           obscureText: obscureText.value,
@@ -62,8 +62,8 @@ class TextFieldWidget extends HookWidget {
                   )
                 : null,
 
-            filled: true,
-            fillColor: const Color(0xFFF5F5F5),
+            // filled: true,
+            fillColor: Colors.grey.shade300,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
               borderSide: BorderSide.none,

@@ -14,7 +14,7 @@ class HomeCard extends StatelessWidget {
       onTap: () {
         context.push(Routes.homeDetails, extra: home);
       },
-      //todo : add shadow "leen" 
+      //todo : add shadow "leen"
       // todo: and change to container instead of card
       // todo: fix ريال/شهريا
       //todo: why the image separated from the card ???

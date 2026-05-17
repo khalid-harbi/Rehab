@@ -4,12 +4,20 @@ import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/features/auth/sub/otp/domain/repositories/otp_repository_domain.dart';
 
 @lazySingleton
-class LogInWithOtpUseCase {
-  final LogInWithOtpRepositoryDomain _repositoryData;
+class OtpUseCase {
+  final OtpRepositoryDomain _repositoryData;
 
-  LogInWithOtpUseCase(this._repositoryData);
+  OtpUseCase(this._repositoryData);
 
-  Future<Result<void, Failure>> getLogInWithOtp({required String email}) async {
-    return _repositoryData.getLogInWithOtp(email: email);
+  Future<Result<bool, Failure>> verifyOtp({
+    required String email,
+    required String token,
+  }) {
+    return _repositoryData.verifyOtp(email: email, token: token);
+  }
+
+  Future<Result<bool, Failure>> resendOtp({required String email}) {
+    return _repositoryData.resendOtp(email: email);
+
   }
 }

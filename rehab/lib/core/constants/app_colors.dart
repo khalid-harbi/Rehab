@@ -5,7 +5,9 @@ abstract class AppColors {
 
   //  Primary
   // static const Color primary = Color(0xFFD88C9A); //leen
-  static const Color primary = Color(0xFF5E3056);
+  // static const Color primary = Color(0xFF5E3056);
+    static const Color primary = Color(0xFF5C1B42);
+
 
   // Secondary
   // static const Color secondary = Color(0xFFF2C6C2); //leen
