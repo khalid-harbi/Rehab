@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rehab/core/services/location_service.dart';
-import 'package:rehab/core/services/map_service.dart';
 import 'package:rehab/features/home/domain/use_cases/home_use_case.dart';
 import 'package:rehab/features/home/presentation/cubit/home_state.dart';
 
@@ -26,15 +25,8 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  // Future<void> openMapLocation(double lat, double lng) async {
-  //   try {
-  //     await _mapService.openMap(lat, lng);
-  //   } catch (e) {
-  //     emit(HomeErrorState(message: "تعذر فتح الخريطة"));
-  //   }
   Future<void> openMapLocation(double lat, double lng) async {
     try {
-      // التعديل هنا: استخدام الاسم الجديد
       await _locationService.openMap(lat, lng);
     } catch (e) {
       emit(HomeErrorState(message: "تعذر فتح الخريطة"));

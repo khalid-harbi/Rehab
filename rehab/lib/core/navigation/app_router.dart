@@ -20,11 +20,11 @@ import 'package:rehab/features/conversation/presentation/cubit/conversation_cubi
 import 'package:rehab/features/conversation/presentation/pages/conversation_feature_screen.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:rehab/features/profile/presentation/pages/app_info_screen.dart';
 import 'routers.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
-import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
 import 'package:rehab/features/add_ad/presentation/pages/add_ad_feature_screen.dart';
@@ -176,6 +176,10 @@ class AppRouter {
       GoRoute(
         path: Routes.favorites,
         builder: (context, state) => const FavoritesFeatureWidget(),
+      ),
+      GoRoute(
+        path: Routes.appInfo,
+        builder: (context, state) => const AppInfoScreen(),
       ),
     ],
 

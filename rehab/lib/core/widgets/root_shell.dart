@@ -10,7 +10,6 @@ import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/pages/home_feature_screen.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/profile_feature_screen.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
@@ -38,25 +37,17 @@ class _TaskCreatorFeatureScreenState extends State<RootShell> {
             GetIt.I.get<BaseLocationService>(),
           ),
         ),
-        // BlocProvider(create: (context) => ProfileCubit(GetIt.I.get())),
       ],
       child: const HomeFeatureScreen(),
     ),
 
     const ChatFeatureScreen(),
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
-        // BlocProvider(create: (context) => ProfileCubit(GetIt.I.get())),
-      ],
+    BlocProvider(
+      create: (context) => UsersCubit(GetIt.I.get()),
       child: const UsersFeatureScreen(),
     ),
 
-    // BlocProvider(
-    // create: (context) => ProfileCubit(GetIt.I.get()),
-    // child:
     const ProfileFeatureScreen(),
-    // ),
   ];
 
   @override

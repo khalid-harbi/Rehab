@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:any_image_view/any_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,12 +75,11 @@ class ProfileFeatureScreen extends StatelessWidget {
                     ),
 
                     ProfileWidget(
-                      icon: Icon(Icons.favorite),
+                      icon: Icon(Icons.favorite_border),
                       title: "favorites",
                       onTap: () {
-                     context.push(Routes.favorites);
+                        context.push(Routes.favorites);
                       },
-
                     ),
                     ProfileWidget(
                       icon: Icon(Icons.attach_money),
@@ -103,7 +101,7 @@ class ProfileFeatureScreen extends StatelessWidget {
                     ),
 
                     ProfileWidget(
-                      icon: Icon(Icons.settings),
+                      icon: Icon(Icons.settings_outlined),
                       title: "settings",
                     ),
                     Gap(2.sh),
@@ -111,7 +109,11 @@ class ProfileFeatureScreen extends StatelessWidget {
                       icon: Icon(Icons.support_agent_outlined),
                       title: "help&support",
                     ),
-
+                    ProfileWidget(
+                      icon: Icon(Icons.info_outline),
+                      title: "App Info",
+                      onTap: () => context.push(Routes.appInfo),
+                    ),
                     LogoutFeatureWidget(),
                   ],
                 ),

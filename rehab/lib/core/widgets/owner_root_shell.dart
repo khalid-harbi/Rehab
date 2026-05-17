@@ -8,7 +8,6 @@ import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/owner/presentation/pages/owner_feature_screen.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/profile_feature_screen.dart';
 
 class OwnerRootShell extends StatefulWidget {
@@ -29,11 +28,7 @@ class _OwnerRootShellState extends State<OwnerRootShell> {
 
     const ChatFeatureScreen(),
 
-    // BlocProvider(
-    //   create: (context) => ProfileCubit(GetIt.I.get()),
-      // child: 
-      const ProfileFeatureScreen(),
-    // ),
+    const ProfileFeatureScreen(),
   ];
 
   @override

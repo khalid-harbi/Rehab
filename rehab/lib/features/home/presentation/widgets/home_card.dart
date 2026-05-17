@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/navigation/routers.dart';
-import 'package:rehab/core/services/map_service.dart';
 import 'package:rehab/core/utils/localization_helper.dart';
-import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 
 class HomeCard extends StatelessWidget {

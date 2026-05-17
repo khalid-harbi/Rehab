@@ -15,4 +15,5 @@ class Routes {
   static const String lifestyle = '/lifestyle';
   static const String favorites = '/favorites';
   static const String addAd = '/addAd';
+  static const String appInfo = '/app_info_screen';
 }
