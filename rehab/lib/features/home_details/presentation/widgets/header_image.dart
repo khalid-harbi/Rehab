@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/common/sub/favorites/presentation/widgets/favorite_button.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'package:rehab/features/home/presentation/widgets/home_image_carousel.dart';
 import 'package:rehab/features/home_details/presentation/widgets/circle_icone_buttom.dart';
 
 class HeaderImage extends StatelessWidget {
@@ -12,20 +13,17 @@ class HeaderImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-
-    return Stack(
-      children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.vertical(
-            bottom: Radius.circular(28),
-          ),
-          child: Image.network(
-            home.imageUrl,
-            height: 310,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
-        ),
+   return Stack(
+  children: [
+    HomeImageCarousel(
+      images: home.imageUrls.isNotEmpty
+          ? home.imageUrls
+          : [home.imageUrl],
+      height: 310,
+      borderRadius: const BorderRadius.vertical(
+        bottom: Radius.circular(28),
+      ),
+    ),
 
         Positioned(
           top: 45,
