@@ -21,7 +21,7 @@ class UsersFeatureScreen extends HookWidget {
     // ===================================================================
     return Scaffold(
       appBar: AppBar(
-        title: Text("Matching".tr(), style: TextStyle(fontSize: 36)),
+        title: Text("matching".tr(), style: TextStyle(fontSize: 36)),
         centerTitle: false,
       ),
       body: Padding(
@@ -33,10 +33,7 @@ class UsersFeatureScreen extends HookWidget {
           // ===================================================================
           listener: (context, state) async {
             if (state is UsersRoomCreatedState) {
-              await context.push(
-                Routes.conversation,
-                extra: state.room,
-              );
+              await context.push(Routes.conversation, extra: state.room);
 
               // Refresh users when coming back
               if (context.mounted) {
@@ -61,6 +58,19 @@ class UsersFeatureScreen extends HookWidget {
 
                 case UsersSuccessState _:
                   final displayUsers = state.users.filteredAndSortedMatches;
+
+                  // ==========================================
+                  // Check if the list is empty here
+                  // ==========================================
+                  if (displayUsers.isEmpty) {
+                    return Center(
+                      child: Icon(
+                        Icons.person_off_outlined,
+                        size: 200,
+                        color: Colors.grey.withAlpha(50),
+                      ),
+                    );
+                  }
                   return Column(
                     children: [
                       Expanded(

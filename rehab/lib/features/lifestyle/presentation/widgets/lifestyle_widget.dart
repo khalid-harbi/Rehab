@@ -75,35 +75,39 @@ class LifestyleOptionsBody extends StatelessWidget {
                         );
                         final selected = selectedId == choice.id;
 
-                        final chip = ChoiceChip(
-                          label: Container(
-                            width: double.infinity, // take available space
-                            alignment: Alignment.center,
-                            child: Text(
-                              label,
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                        final chip = Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: ChoiceChip(
+                            label: Container(
+                              width: double.infinity, // take available space
+                              alignment: Alignment.center,
+                              child: Text(
+                                label,
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                // style: TextStyle(fontSize: 14),
+                              ),
                             ),
-                          ),
-                          selected: selected,
-                          showCheckmark: false,
-                          onSelected: (_) =>
-                              onSelectChoice(option.id, choice.id),
-                          selectedColor: theme.colorScheme.primaryContainer,
-                          backgroundColor:
-                              theme.colorScheme.surfaceContainerHighest,
-                          side: BorderSide.none,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          labelStyle: TextStyle(
-                            color: selected
-                                ? theme.colorScheme.onPrimaryContainer
-                                : theme.colorScheme.onSurfaceVariant,
-                            fontWeight: selected
-                                ? FontWeight.bold
-                                : FontWeight.normal,
+                            selected: selected,
+                            showCheckmark: false,
+                            onSelected: (_) =>
+                                onSelectChoice(option.id, choice.id),
+                            selectedColor: theme.colorScheme.primaryContainer,
+                            backgroundColor:
+                                theme.colorScheme.surfaceContainerHighest,
+                            side: BorderSide.none,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            labelStyle: TextStyle(
+                              color: selected
+                                  ? theme.colorScheme.onPrimaryContainer
+                                  : theme.colorScheme.onSurfaceVariant,
+                              fontWeight: selected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
                           ),
                         );
 
