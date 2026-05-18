@@ -9,6 +9,7 @@ abstract class OwnerModel with _$OwnerModel {
     required int id,
     required String firstName,
     required String lastName,
+    required double totalRevenue,
     
   }) = _OwnerModel;
 
@@ -19,6 +20,6 @@ abstract class OwnerModel with _$OwnerModel {
 
 extension OwnerModelMapper on OwnerModel {
   OwnerEntity toEntity() {
-    return OwnerEntity(id: id, firstName: firstName, lastName: lastName);
+    return OwnerEntity(id: id, firstName: firstName, lastName: lastName,totalRevenue: totalRevenue,);
   }
   }
