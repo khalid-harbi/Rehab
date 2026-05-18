@@ -17,6 +17,7 @@ class HomeEntity extends Equatable {
   final List<String> amenitiesAr;
   final List<String> amenitiesEn;
   final String imageUrl;
+  final List<String> imageUrls;
   final double price;
   final double rating;
   final int rooms;
@@ -44,6 +45,7 @@ class HomeEntity extends Equatable {
     required this.amenitiesAr,
     required this.amenitiesEn,
     required this.imageUrl,
+    required this.imageUrls,
     required this.price,
     required this.rating,
     required this.rooms,
@@ -73,6 +75,7 @@ class HomeEntity extends Equatable {
     amenitiesAr,
     amenitiesEn,
     imageUrl,
+    imageUrls,
     price,
     rating,
     rooms,

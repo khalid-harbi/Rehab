@@ -4,12 +4,16 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final String hint;
   final int maxLines;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
 
   const CustomTextField({
     super.key,
     required this.label,
     required this.hint,
     this.maxLines = 1,
+    this.controller,
+    this.keyboardType,
   });
 
   @override
@@ -23,10 +27,10 @@ class CustomTextField extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
         ),
-
         const SizedBox(height: 8),
-
         TextField(
+          controller: controller,
+          keyboardType: keyboardType,
           maxLines: maxLines,
           textAlign: TextAlign.right,
           decoration: InputDecoration(

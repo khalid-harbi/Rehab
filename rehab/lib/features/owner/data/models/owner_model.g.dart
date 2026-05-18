@@ -10,6 +10,7 @@ _OwnerModel _$OwnerModelFromJson(Map<String, dynamic> json) => _OwnerModel(
   id: (json['id'] as num).toInt(),
   firstName: json['firstName'] as String,
   lastName: json['lastName'] as String,
+  totalRevenue: (json['totalRevenue'] as num).toDouble(),
 );
 
 Map<String, dynamic> _$OwnerModelToJson(_OwnerModel instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$OwnerModelToJson(_OwnerModel instance) =>
       'id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
+      'totalRevenue': instance.totalRevenue,
     };

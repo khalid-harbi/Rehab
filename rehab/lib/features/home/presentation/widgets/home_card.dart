@@ -3,6 +3,7 @@ import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
+import 'package:rehab/features/home/presentation/widgets/home_image_carousel.dart';
 
 class HomeCard extends StatelessWidget {
   final HomeEntity home;
@@ -28,9 +29,15 @@ class HomeCard extends StatelessWidget {
             Stack(
               children: [
                 SizedBox(
-                  height: 200,
+                  height: 250,
                   width: double.infinity,
-                  child: Image.network(home.imageUrl, fit: BoxFit.cover),
+                  child:HomeImageCarousel(
+  images: home.imageUrls.isNotEmpty
+      ? home.imageUrls
+      : [home.imageUrl],
+  height: 200,
+  borderRadius: BorderRadius.zero,
+),
                 ),
                 //todo: change it posion based on language
                 if (home.distance != null && home.distance! > 0.1)

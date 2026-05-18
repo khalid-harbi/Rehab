@@ -35,6 +35,11 @@ _HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => _HomeModel(
           .toList() ??
       const [],
   imageUrl: json['image_url'] as String? ?? '',
+  imageUrls:
+      (json['image_urls'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
   price: (json['price'] as num?)?.toDouble() ?? 0.0,
   rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
   rooms: (json['rooms'] as num?)?.toInt() ?? 0,
@@ -64,6 +69,7 @@ Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
       'amenities_ar': instance.amenitiesAr,
       'amenities_en': instance.amenitiesEn,
       'image_url': instance.imageUrl,
+      'image_urls': instance.imageUrls,
       'price': instance.price,
       'rating': instance.rating,
       'rooms': instance.rooms,

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OwnerModel {
 
- int get id; String get firstName; String get lastName;
+ int get id; String get firstName; String get lastName; double get totalRevenue;
 /// Create a copy of OwnerModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $OwnerModelCopyWith<OwnerModel> get copyWith => _$OwnerModelCopyWithImpl<OwnerMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OwnerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OwnerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.totalRevenue, totalRevenue) || other.totalRevenue == totalRevenue));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
+int get hashCode => Object.hash(runtimeType,id,firstName,lastName,totalRevenue);
 
 @override
 String toString() {
-  return 'OwnerModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'OwnerModel(id: $id, firstName: $firstName, lastName: $lastName, totalRevenue: $totalRevenue)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $OwnerModelCopyWith<$Res>  {
   factory $OwnerModelCopyWith(OwnerModel value, $Res Function(OwnerModel) _then) = _$OwnerModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String firstName, String lastName
+ int id, String firstName, String lastName, double totalRevenue
 });
 
 
@@ -65,12 +65,13 @@ class _$OwnerModelCopyWithImpl<$Res>
 
 /// Create a copy of OwnerModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? totalRevenue = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,
+as String,totalRevenue: null == totalRevenue ? _self.totalRevenue : totalRevenue // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 
@@ -155,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName,  double totalRevenue)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OwnerModel() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.totalRevenue);case _:
   return orElse();
 
 }
@@ -176,10 +177,10 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String firstName,  String lastName,  double totalRevenue)  $default,) {final _that = this;
 switch (_that) {
 case _OwnerModel():
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.totalRevenue);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +197,10 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String firstName,  String lastName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String firstName,  String lastName,  double totalRevenue)?  $default,) {final _that = this;
 switch (_that) {
 case _OwnerModel() when $default != null:
-return $default(_that.id,_that.firstName,_that.lastName);case _:
+return $default(_that.id,_that.firstName,_that.lastName,_that.totalRevenue);case _:
   return null;
 
 }
@@ -211,12 +212,13 @@ return $default(_that.id,_that.firstName,_that.lastName);case _:
 @JsonSerializable()
 
 class _OwnerModel implements OwnerModel {
-  const _OwnerModel({required this.id, required this.firstName, required this.lastName});
+  const _OwnerModel({required this.id, required this.firstName, required this.lastName, required this.totalRevenue});
   factory _OwnerModel.fromJson(Map<String, dynamic> json) => _$OwnerModelFromJson(json);
 
 @override final  int id;
 @override final  String firstName;
 @override final  String lastName;
+@override final  double totalRevenue;
 
 /// Create a copy of OwnerModel
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OwnerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OwnerModel&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.totalRevenue, totalRevenue) || other.totalRevenue == totalRevenue));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,firstName,lastName);
+int get hashCode => Object.hash(runtimeType,id,firstName,lastName,totalRevenue);
 
 @override
 String toString() {
-  return 'OwnerModel(id: $id, firstName: $firstName, lastName: $lastName)';
+  return 'OwnerModel(id: $id, firstName: $firstName, lastName: $lastName, totalRevenue: $totalRevenue)';
 }
 
 
@@ -251,7 +253,7 @@ abstract mixin class _$OwnerModelCopyWith<$Res> implements $OwnerModelCopyWith<$
   factory _$OwnerModelCopyWith(_OwnerModel value, $Res Function(_OwnerModel) _then) = __$OwnerModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String firstName, String lastName
+ int id, String firstName, String lastName, double totalRevenue
 });
 
 
@@ -268,12 +270,13 @@ class __$OwnerModelCopyWithImpl<$Res>
 
 /// Create a copy of OwnerModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? lastName = null,Object? totalRevenue = null,}) {
   return _then(_OwnerModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
-as String,
+as String,totalRevenue: null == totalRevenue ? _self.totalRevenue : totalRevenue // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 

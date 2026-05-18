@@ -11,7 +11,7 @@ class OwnerCubit extends Cubit<OwnerState> {
     final result = await _ownerUseCase.getOwner();
     result.when(
       (success) {
-        //here is when success result
+       emit(OwnerSuccessState(owner: success));
       },
       (whenError) {
        //here is when error result
