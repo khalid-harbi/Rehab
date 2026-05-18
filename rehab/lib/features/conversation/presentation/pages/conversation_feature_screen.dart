@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart' hide ChatState;
+import 'package:go_router/go_router.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/utils/display_user_name.dart';
 import 'package:rehab/core/extensions/room_extensions.dart';
 import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
@@ -26,6 +28,7 @@ class ConversationFeatureScreen extends StatelessWidget {
     final userId = Supabase.instance.client.auth.currentUser!.id;
     final roomName = displayName(room, userId);
     final otherUser = room.getOtherUser(userId);
+
     // ===================================================================
 
     return Scaffold(
@@ -48,6 +51,16 @@ class ConversationFeatureScreen extends StatelessWidget {
                 roomName,
                 style: const TextStyle(fontSize: 18),
                 overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: IconButton(
+                onPressed: () async {
+                  final fetchedUser = await cubit.getUserById(otherUser.id);
+                  context.push(Routes.userDetails, extra: fetchedUser);
+                },
+                icon: Icon(Icons.more_horiz_rounded),
               ),
             ),
           ],

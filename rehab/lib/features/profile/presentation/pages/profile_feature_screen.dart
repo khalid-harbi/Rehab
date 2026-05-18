@@ -117,7 +117,7 @@ class ProfileFeatureScreen extends StatelessWidget {
                     ),
                     ProfileWidget(
                       icon: Icon(Icons.info_outline),
-                      title: "App Info",
+                      title: "appInfo".tr(),
                       onTap: () => context.push(Routes.appInfo),
                     ),
                     LogoutFeatureWidget(),

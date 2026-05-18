@@ -3,12 +3,14 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_supabase_chat_core/flutter_supabase_chat_core.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rehab/core/utils/supabase_timestamp.dart';
+import 'package:rehab/features/users/data/models/users_model/users_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseConversationRemoteDataSource {
   Stream<List<types.Message>> getMessages(types.Room room);
   Future<void> sendMessage(String text, String roomId);
   Future<types.Room> createRoom(String otherUserId);
+  Future<UsersModel> getUserById(String userId);
 }
 
 @LazySingleton(as: BaseConversationRemoteDataSource)
@@ -111,6 +113,73 @@ class ConversationRemoteDataSource implements BaseConversationRemoteDataSource {
   Future<types.Room> createRoom(String otherUserId) async {
     final otherUser = types.User(id: otherUserId);
     return await _chatCore.createRoom(otherUser);
+  }
+
+  // ===================================================================
+  // ===================================================================
+
+  @override
+  Future<UsersModel> getUserById(String userId) async {
+    final currentUserId = _supabase.auth.currentUser!.id;
+
+    // Fetch current user's choices
+    final currentUserAnswersResponse = await _supabase
+        .from('user_lifestyle_answers')
+        .select('choice_id')
+        .eq('user_id', currentUserId);
+
+    final currentUserChoiceIds = currentUserAnswersResponse
+        .map((row) => row['choice_id'].toString())
+        .toSet();
+
+    // Fetch the target user profile AND their nested lifestyle answers
+    final response = await _supabase
+        .from("profiles")
+        .select('''
+          *,
+          user_lifestyle_answers (
+            choice_id,
+            lifestyle_choices (
+              value_en,
+              value_ar
+            )
+          )
+        ''')
+        .eq('id', userId)
+        .single(); // make sure we only get one record back
+
+    // Process the raw answers to map them and calculate the match count
+    final rawAnswers =
+        response['user_lifestyle_answers'] as List<dynamic>? ?? [];
+    int matchCount = 0;
+
+    final mappedAnswers = rawAnswers.map((answer) {
+      final choiceId = answer['choice_id'].toString();
+
+      // Check if the current user has the exact same choice
+      if (currentUserChoiceIds.contains(choiceId)) {
+        matchCount++;
+      }
+
+      final choice = answer['lifestyle_choices'] as Map<String, dynamic>? ?? {};
+
+      return {
+        'id': choiceId,
+        'answer_en': choice['value_en']?.toString() ?? '',
+        'answer_ar': choice['value_ar']?.toString() ?? '',
+      };
+    }).toList();
+
+    // Inject the answers and calculated match percentage into the JSON map
+    final userMap = Map<String, dynamic>.from(response);
+    userMap['answers'] = mappedAnswers;
+
+    int finalPercentage = matchCount * 10;
+    if (finalPercentage > 100) finalPercentage = 100;
+    userMap['match_percentage'] = finalPercentage;
+
+    // Convert the map back into the model
+    return UsersModel.fromJson(userMap);
   }
 
   // ===================================================================

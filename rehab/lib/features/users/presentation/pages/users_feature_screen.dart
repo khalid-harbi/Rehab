@@ -21,7 +21,7 @@ class UsersFeatureScreen extends HookWidget {
     // ===================================================================
     return Scaffold(
       appBar: AppBar(
-        title: Text("Matching".tr(), style: TextStyle(fontSize: 36)),
+        title: Text("matching".tr(), style: TextStyle(fontSize: 36)),
         centerTitle: false,
       ),
       body: Padding(
@@ -58,6 +58,19 @@ class UsersFeatureScreen extends HookWidget {
 
                 case UsersSuccessState _:
                   final displayUsers = state.users.filteredAndSortedMatches;
+
+                  // ==========================================
+                  // Check if the list is empty here
+                  // ==========================================
+                  if (displayUsers.isEmpty) {
+                    return Center(
+                      child: Icon(
+                        Icons.person_off_outlined,
+                        size: 200,
+                        color: Colors.grey.withAlpha(50),
+                      ),
+                    );
+                  }
                   return Column(
                     children: [
                       Expanded(
@@ -66,14 +79,7 @@ class UsersFeatureScreen extends HookWidget {
 
                           itemBuilder: (context, index) {
                             final user = displayUsers[index];
-                            return UsersWidget(
-                              id: user.id,
-                              name: user.name,
-                              cratedAt: user.createdAt,
-                              imageUrl: user.imageUrl,
-                              answers: user.answers,
-                              matchPercentage: user.matchPercentage,
-                            );
+                            return UsersWidget(user: user);
                           },
                         ),
                       ),

@@ -1,32 +1,29 @@
 {
-   "hi":" اهلا",
+   "hi":"مرحبًا",
    "howAreYou":" كيف حالك اليوم؟",
    "welcomeBack":"مرحبا بعودتك",
    "profile":"حسابي",
    "favorites":" المفضلة",
    "bookings":"حجوزاتي",
    "lifestyle":"نمط الحياة",
-    "darkMode":" الوضع الداكن",
+   "darkMode":" الوضع الداكن",
    "language":"اللغة",
-    "settings":" الإعدادات",
+   "settings":" الإعدادات",
    "help&support":"مساعدة ودعم",
-    "logout":" تسجيل الخروج",
-    "facilities":"المرافق" ,
-    "aboutProperty": "عن هذا العقار",
-"bedrooms": "غرف النوم ",
-"bathrooms": "دورات المياه ",
-"wi-fi": "الواي فاي",
-"parking": "مواقف السيارات ",
-"housing rules and policies":"قواعد وسياسات السكن",
-"guest experiences":"تجارب الضيوف",
-   "memberSinceToday": "'عضو منذ اليوم",
+   "logout":" تسجيل الخروج",
+   "facilities":"المرافق" ,
+   "aboutProperty": "عن هذا العقار",
+   "bedrooms_count": "{} غرف نوم",
+   "bathrooms_count": "{} دورات مياه",
+   "parking": "مواقف السيارات ",
+   "housingRulesAndPolicies":"قواعد وسياسات السكن",
+   "memberSinceToday": "عضو منذ اليوم",
    "memberFor": "عضو منذ",
    "day": "يوم",
    "month": "شهر",
    "and": "و",
-   "year": "سنة"
-
-
-
+   "year": "سنة",
+   "appInfo": "عن التطبيق",
+   "matching": "التطابق"
 }
 

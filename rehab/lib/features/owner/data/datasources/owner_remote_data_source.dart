@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:rehab/core/services/local_keys_service.dart';
 import 'package:rehab/features/owner/data/models/owner_model.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
 
@@ -14,11 +13,10 @@ abstract class BaseOwnerRemoteDataSource {
 class OwnerRemoteDataSource implements BaseOwnerRemoteDataSource {
  
   final SupabaseClient _supabase;
-  final LocalKeysService _localKeysService;
   
   
 
-   OwnerRemoteDataSource(this._localKeysService, this._supabase);
+   OwnerRemoteDataSource(this._supabase);
 
 
 
