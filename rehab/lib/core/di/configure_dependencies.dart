@@ -14,6 +14,8 @@ import 'package:rehab/features/owner/di/owner_di.dart';
 import 'package:rehab/features/lifestyle/di/lifestyle_di.dart';
 import 'package:rehab/core/common/sub/favorites/di/favorites_di.dart';
 import 'package:rehab/features/add_ad/di/add_ad_di.dart';
+import 'package:rehab/features/my_bookings/di/my_bookings_di.dart';
+
 
 @InjectableInit(
   initializerName: 'init',
@@ -37,4 +39,6 @@ Future<void> configureDependencies() async {
   configureLifestyle(getIt);
   configureFavoritesSub(getIt);
   configureAddAd(getIt);
+
+    configureMyBookings(getIt);
 }

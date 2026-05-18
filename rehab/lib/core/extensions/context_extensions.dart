@@ -80,16 +80,20 @@ extension ContextExtensions on BuildContext {
     );
   }
 
-  void showPaymentBottomSheet(BuildContext context) {
+  void showPaymentBottomSheet({
+    required double amount,
+    required String description,
+    required VoidCallback onPaid,
+  }) {
     showModalBottomSheet(
-      context: context,
+      context: this,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => Padding(
+      builder: (bottomSheetContext) => Padding(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
+          bottom: MediaQuery.of(bottomSheetContext).viewInsets.bottom,
           top: 20,
           left: 16,
           right: 16,
@@ -102,11 +106,26 @@ extension ContextExtensions on BuildContext {
                 "الدفع الآمن",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
+
               const SizedBox(height: 20),
+
               CreditCard(
-                config: Payment().initial(amount: 21.0),
-                onPaymentResult: Payment().onPaymentResult,
+                config: Payment().initial(
+                  amount: amount,
+                  description: description,
+                ),
+                onPaymentResult: (result) async {
+                  final isPaid = await Payment().onPaymentResult(result);
+
+                  if (isPaid) {
+                    Navigator.pop(bottomSheetContext);
+                    onPaid();
+                  } else {
+                    showSnackBar('فشلت عملية الدفع', isError: true);
+                  }
+                },
               ),
+
               const SizedBox(height: 20),
             ],
           ),
@@ -151,23 +170,51 @@ extension ContextExtensions on BuildContext {
                               child: Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  ClipRRect(
+                                  // ClipRRect(
+                                  //   borderRadius: BorderRadius.circular(50.sp),
+                                  //   child: pickedImageFile != null
+                                  //       ? Image.file(
+                                  //           pickedImageFile!,
+                                  //           width: 60.sp,
+                                  //           height: 60.sp,
+                                  //           fit: BoxFit.cover,
+                                  //         )
+                                  //       : AnyImageView(
+                                  //           imagePath:
+                                  //               state.profile.imageUrl ??
+                                  //               "https://placeholder.com/user.png",
+                                  //           width: 60.sp,
+                                  //           height: 60.sp,
+                                  //           fit: BoxFit.cover,
+                                  //         ),
+                                  // ),
+                                  InkWell(
                                     borderRadius: BorderRadius.circular(50.sp),
-                                    child: pickedImageFile != null
-                                        ? Image.file(
-                                            pickedImageFile!,
-                                            width: 60.sp,
-                                            height: 60.sp,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : AnyImageView(
-                                            imagePath:
-                                                state.profile.imageUrl ??
-                                                "https://placeholder.com/user.png",
-                                            width: 60.sp,
-                                            height: 60.sp,
-                                            fit: BoxFit.cover,
-                                          ),
+                                    onTap: () => showImageOptionsForDialog(
+                                      context,
+                                      setDialogState,
+                                      (file) => pickedImageFile = file,
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                        50.sp,
+                                      ),
+                                      child: pickedImageFile != null
+                                          ? Image.file(
+                                              pickedImageFile!,
+                                              width: 60.sp,
+                                              height: 60.sp,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : AnyImageView(
+                                              imagePath:
+                                                  state.profile.imageUrl ??
+                                                  "https://placeholder.com/user.png",
+                                              width: 60.sp,
+                                              height: 60.sp,
+                                              fit: BoxFit.cover,
+                                            ),
+                                    ),
                                   ),
                                   CircleAvatar(
                                     radius: 15,
@@ -297,6 +344,58 @@ void openOtpBottomSheet(BuildContext context, String email) {
             height: 65.h,
             child: OtpFeatureScreen(email: email),
           ),
+        ),
+      );
+    },
+  );
+}
+
+Future<void> showImageOptions(BuildContext context) async {
+  final picker = ImagePicker();
+
+  showModalBottomSheet(
+    context: context,
+    builder: (_) {
+      return SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo),
+              title: const Text("Gallery"),
+              onTap: () async {
+                Navigator.pop(context);
+
+                final image = await picker.pickImage(
+                  source: ImageSource.gallery,
+                  imageQuality: 70,
+                );
+
+                if (image != null && context.mounted) {
+                  context.read<ProfileCubit>().updateProfileImage(
+                    File(image.path),
+                  );
+                }
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text("Camera"),
+              onTap: () async {
+                Navigator.pop(context);
+
+                final image = await picker.pickImage(
+                  source: ImageSource.camera,
+                  imageQuality: 70,
+                );
+
+                if (image != null && context.mounted) {
+                  context.read<ProfileCubit>().updateProfileImage(
+                    File(image.path),
+                  );
+                }
+              },
+            ),
+          ],
         ),
       );
     },

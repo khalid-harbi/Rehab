@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rehab/core/constants/app_colors.dart' show AppColors;
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/widgets/profile_header.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/users/domain/entities/user_answer_entity.dart';
 import 'package:rehab/features/users/presentation/widgets/build_chip.dart';
@@ -67,7 +63,45 @@ class UsersWidget extends HookWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ProfileHeader(imageUrl: imageUrl, matchPercentage: matchPercentage),
+            Stack(
+              children: [
+                Container(
+                  height: 15.sh,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(40),
+                    ),
+                  ),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      AnyImageView(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(40),
+                        ),
+                        width: 100.sw,
+                        imagePath: imageUrl,
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withAlpha(75),
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(40),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                ProfileHeader(
+                  imageUrl: imageUrl,
+                  matchPercentage: matchPercentage,
+                ),
+              ],
+            ),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),

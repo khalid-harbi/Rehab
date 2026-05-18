@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/common/sub/favorites/presentation/widgets/favorite_button.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home_details/presentation/widgets/circle_icone_buttom.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HeaderImage extends StatelessWidget {
   final HomeEntity home;
@@ -36,6 +38,17 @@ class HeaderImage extends StatelessWidget {
           ),
         ),
 
+        // Positioned(
+        //   top: 45,
+        //   right: 16,
+        //   child: Row(
+        //     children: [
+        //       FavoriteButton(homeId: home.id),
+        //       const SizedBox(width: 8),
+        //       CircleIconButton(icon: Icons.share_outlined, onTap: () {}),
+        //     ],
+        //   ),
+        // ),
         Positioned(
           top: 45,
           right: 16,
@@ -43,7 +56,12 @@ class HeaderImage extends StatelessWidget {
             children: [
               FavoriteButton(homeId: home.id),
               const SizedBox(width: 8),
-              CircleIconButton(icon: Icons.share_outlined, onTap: () {}),
+              CircleIconButton(
+                icon: Icons.share_outlined,
+                onTap: () {
+                  // Share.share(HomeDetailsFeatureScreen());
+                },
+              ),
             ],
           ),
         ),

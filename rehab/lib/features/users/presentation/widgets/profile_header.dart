@@ -20,7 +20,6 @@ class ProfileHeader extends StatelessWidget {
             height: 120,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-              // image: DecorationImage(fit: BoxFit.cover),
             ),
           ),
           Positioned(

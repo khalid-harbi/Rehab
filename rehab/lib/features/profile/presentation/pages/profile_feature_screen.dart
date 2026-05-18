@@ -45,14 +45,17 @@ class ProfileFeatureScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50.sp),
-                        child: AnyImageView(
-                          imagePath:
-                              state.profile.imageUrl ??
-                              "https://placeholder.com/user.png",
-                          width: 60.sp,
-                          height: 60.sp,
-                          fit: BoxFit.cover,
-                          errorWidget: Icon(Icons.person, size: 30.sp),
+                        child: InkWell(
+                          onTap: () => showImageOptions(context),
+                          child: AnyImageView(
+                            imagePath:
+                                state.profile.imageUrl ??
+                                "https://placeholder.com/user.png",
+                            width: 60.sp,
+                            height: 60.sp,
+                            fit: BoxFit.cover,
+                            errorWidget: Icon(Icons.person, size: 30.sp),
+                          ),
                         ),
                       ),
                     ),
@@ -84,6 +87,9 @@ class ProfileFeatureScreen extends StatelessWidget {
                     ProfileWidget(
                       icon: Icon(Icons.attach_money),
                       title: "bookings",
+                      onTap: () {
+                        context.push(Routes.myBookings);
+                      },
                     ),
                     ProfileWidget(
                       icon: Icon(Icons.interests_outlined),

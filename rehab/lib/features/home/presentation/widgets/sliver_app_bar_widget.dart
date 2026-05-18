@@ -212,6 +212,35 @@ class SliverAppBarWidget extends HookWidget {
                         },
                         icon: Icon(Icons.tune_rounded, color: Colors.white),
                       ),
+                       IconButton(
+                        onPressed: () {
+                          // ======================================================
+                          final searchCubit = context.read<SearchCubit>();
+                          List<HomeEntity> currentHomes = [];
+                          if (searchCubit.state is SearchSuccessState) {
+                            currentHomes =
+                                (searchCubit.state as SearchSuccessState).homes;
+                          }
+                          // ======================================================
+
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(30),
+                              ),
+                            ),
+                            builder: (context) {
+                              return BlocProvider.value(
+                                value: searchCubit,
+                                child: FilterWidget(homes: currentHomes),
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.tune_rounded, color: Colors.white),
+                      ),
                     ],
                   ),
                 ],

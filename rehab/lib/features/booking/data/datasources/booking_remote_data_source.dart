@@ -7,6 +7,12 @@ import 'package:rehab/core/errors/network_exceptions.dart';
 
 abstract class BaseBookingRemoteDataSource {
   Future<BookingModel> getBooking();
+   Future<BookingModel> createBooking({
+    required int homeId,
+    required double amount,
+    required int durationMonths,
+    required String paymentId,
+  });
 }
 
 
@@ -23,11 +29,60 @@ class BookingRemoteDataSource implements BaseBookingRemoteDataSource {
 
 
     @override
-  Future<BookingModel> getBooking() async {
+ Future<BookingModel> getBooking() async {
     try {
-      return BookingModel(id: 1, firstName: "Last Name", lastName: "First Name");
+      final userId = _supabase.auth.currentUser?.id;
+
+      if (userId == null) {
+        throw Exception('User is not logged in');
+      }
+
+      final response = await _supabase
+          .from('bookings')
+          .select()
+          .eq('user_id', userId)
+          .order('created_at', ascending: false)
+          .limit(1)
+          .single();
+
+      return BookingModel.fromJson(response);
     } catch (error) {
-     throw FailureExceptions.getException(error);
+      throw FailureExceptions.getException(error);
+    }
+  }
+
+   @override
+  Future<BookingModel> createBooking({
+    required int homeId,
+    required double amount,
+    required int durationMonths,
+    required String paymentId,
+  }) async {
+    try {
+      final userId = _supabase.auth.currentUser?.id;
+
+      if (userId == null) {
+        throw Exception('User is not logged in');
+      }
+
+    final response = await _supabase
+    .from('bookings')
+    .insert({
+      'seeker_id': userId,
+      'owner_id': userId,
+      'home_id': homeId,
+      'amount': amount,
+      'duration_months': durationMonths,
+      'payment_id': paymentId,
+      'status': 'paid',
+    })
+    .select()
+    .single();
+
+      return BookingModel.fromJson(response);
+    } catch (error) {
+      throw FailureExceptions.getException(error);
     }
   }
 }
+

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/constants/app_colors.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/features/booking/presentation/cubit/booking_cubit.dart';
 import 'package:rehab/features/booking/presentation/widgets/month_buttom.dart';
 import 'package:rehab/features/booking/presentation/widgets/price_row.dart';
 import 'package:rehab/features/booking/presentation/widgets/property_card.dart';
@@ -11,10 +13,7 @@ import 'package:rehab/features/home/domain/entities/home_entity.dart';
 class BookingFeatureScreen extends HookWidget {
   final HomeEntity home;
 
-  const BookingFeatureScreen({
-    super.key,
-    required this.home,
-  });
+  const BookingFeatureScreen({super.key, required this.home});
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +65,7 @@ class BookingFeatureScreen extends HookWidget {
 
                     const Text(
                       'الخطوة 1 من 3',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ],
                 ),
@@ -86,10 +83,7 @@ class BookingFeatureScreen extends HookWidget {
 
                   const SizedBox(height: 24),
 
-                  Text(
-                    'تاريخ الانتقال',
-                    style: theme.textTheme.titleMedium,
-                  ),
+                  Text('تاريخ الانتقال', style: theme.textTheme.titleMedium),
 
                   const SizedBox(height: 8),
 
@@ -98,21 +92,14 @@ class BookingFeatureScreen extends HookWidget {
                     readOnly: true,
                     decoration: const InputDecoration(
                       hintText: 'اليوم / الشهر / السنة',
-                      suffixIcon: Icon(
-                        Icons.calendar_month_outlined,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.calendar_today_outlined,
-                      ),
+                      suffixIcon: Icon(Icons.calendar_month_outlined),
+                      prefixIcon: Icon(Icons.calendar_today_outlined),
                     ),
                   ),
 
                   const SizedBox(height: 20),
 
-                  Text(
-                    'مدة الإقامة',
-                    style: theme.textTheme.titleMedium,
-                  ),
+                  Text('مدة الإقامة', style: theme.textTheme.titleMedium),
 
                   const SizedBox(height: 12),
 
@@ -163,30 +150,24 @@ class BookingFeatureScreen extends HookWidget {
                       children: [
                         PriceRow(
                           title: 'الإيجار الشهري',
-                          value:
-                              '${monthlyPrice.toStringAsFixed(0)} ريال',
+                          value: '${monthlyPrice.toStringAsFixed(0)} ريال',
                         ),
 
                         PriceRow(
                           title: 'مدة الإقامة',
-                          value:
-                              '${selectedMonths.value} شهور',
+                          value: '${selectedMonths.value} شهور',
                         ),
 
                         PriceRow(
                           title: 'التأمين',
-                          value:
-                              '${monthlyPrice.toStringAsFixed(0)} ريال',
+                          value: '${monthlyPrice.toStringAsFixed(0)} ريال',
                         ),
 
-                        const Divider(
-                          height: 28,
-                        ),
+                        const Divider(height: 28),
 
                         PriceRow(
                           title: 'الإجمالي',
-                          value:
-                              '${total.toStringAsFixed(0)} ريال',
+                          value: '${total.toStringAsFixed(0)} ريال',
                           isTotal: true,
                         ),
                       ],
@@ -209,15 +190,38 @@ class BookingFeatureScreen extends HookWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                onPressed: () =>
-                    context.showPaymentBottomSheet(context),
-                child: const Text(
-                  'ادفع',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                onPressed: () {
+  context.showPaymentBottomSheet(
+    amount: total,
+    description: 'Booking for ${home.titleAr}',
+    onPaid: () async {
+      debugPrint(' ON PAID STARTED');
+
+      try {
+        await context.read<BookingCubit>().createBookingMethod(
+          homeId: home.id,
+          amount: total,
+          durationMonths: selectedMonths.value,
+          paymentId: 'moyasar_test_payment',
+        );
+
+        debugPrint(' BOOKING SAVED');
+
+        if (context.mounted) {
+          context.showSnackBar('تم الدفع وإتمام الحجز بنجاح');
+          context.pop();
+        }
+      } catch (error) {
+        debugPrint(' BOOKING ERROR: $error');
+
+        if (context.mounted) {
+          context.showSnackBar('فشل حفظ الحجز', isError: true);
+        }
+      }
+    },
+  );
+},
+               child: Text("اتمام الحجز "),
               ),
             ),
           ),

@@ -7,21 +7,33 @@ class BookingCubit extends Cubit<BookingState> {
 
   BookingCubit(this._bookingUseCase) : super(BookingInitialState());
 
-  Future<void> getBookingMethod() async {
-    final result = await _bookingUseCase.getBooking();
+  Future<void> createBookingMethod({
+    required int homeId,
+    required double amount,
+    required int durationMonths,
+    required String paymentId,
+  }) async {
+    emit(BookingLoadingState());
+
+    final result = await _bookingUseCase.createBooking(
+      homeId: homeId,
+      amount: amount,
+      durationMonths: durationMonths,
+      paymentId: paymentId,
+    );
+
     result.when(
       (success) {
-        //here is when success result
+        emit(BookingSuccessState());
       },
       (whenError) {
-       //here is when error result
+        emit(BookingErrorState(message: whenError.message));
       },
     );
   }
 
   @override
   Future<void> close() {
-    //here is when close cubit
     return super.close();
   }
 }
