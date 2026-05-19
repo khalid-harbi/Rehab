@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rehab/features/profile/domain/use_cases/profile_use_case.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
+import 'package:rehab/features/profile/presentation/cubit/profile/profile_state.dart';
 
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {

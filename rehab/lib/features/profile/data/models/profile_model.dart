@@ -13,6 +13,7 @@ abstract class ProfileModel with _$ProfileModel {
       'https://ui-avatars.com/api/?name=Placeholder&background=random&length=1',
     )
     String imageUrl,
+    @Default('user') String role,
     required DateTime createdAt,
   }) = _ProfileModel;
 
@@ -34,6 +35,7 @@ extension ProfileModelMapper on ProfileModel {
       id: id,
       name: name,
       imageUrl: finalUrl,
+      role: role,
       createdAt: createdAt,
     );
   }

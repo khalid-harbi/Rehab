@@ -36,8 +36,8 @@ export 'package:rehab/core/constants/app_colors.dart';
 export 'package:rehab/features/auth/sub/logout/presentation/cubit/logout_cubit.dart';
 export 'package:moyasar/moyasar.dart';
 export 'package:rehab/core/services/payment.dart';
-export 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
-export 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
+export 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
+export 'package:rehab/features/profile/presentation/cubit/profile/profile_state.dart';
 
 export 'package:sizer/sizer.dart';
 export 'package:rehab/core/constants/app_enums.dart';

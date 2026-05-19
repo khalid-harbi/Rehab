@@ -1,22 +1,18 @@
-import 'dart:io';
-import 'package:any_image_view/any_image_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/core/extensions/user_role_extension.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/features/auth/sub/logout/presentation/pages/logout_feature_widget.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
+import 'package:rehab/features/profile/presentation/cubit/theme/Theme_switcher_cubit.dart';
 import 'package:rehab/features/profile/presentation/widgets/profile_widget.dart';
-import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ProfileFeatureScreen extends StatelessWidget {
+class ProfileFeatureScreen extends HookWidget {
   const ProfileFeatureScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final isArabic = useState(context.locale.languageCode == 'ar');
     return Scaffold(
       appBar: AppBar(
         title: Padding(
@@ -80,34 +76,39 @@ class ProfileFeatureScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
-                    ProfileWidget(
-                      icon: Icon(Icons.favorite_border),
-                      title: "favorites",
-                      onTap: () {
-                        context.push(Routes.favorites);
-                      },
-                    ),
-                    ProfileWidget(
-                      icon: Icon(Icons.attach_money),
-                      title: "bookings",
-                      onTap: () {
-                        context.push(Routes.myBookings);
-                      },
-                    ),
-                    ProfileWidget(
-                      icon: Icon(Icons.interests_outlined),
-                      title: "lifestyle",
-                      onTap: () => context.push(Routes.lifestyle),
-                    ),
-
+                    if (state.profile.role.toUserRole() != UserRole.owner)
+                      ProfileWidget(
+                        icon: Icon(Icons.favorite_border),
+                        title: "favorites",
+                        onTap: () {
+                          context.push(Routes.favorites);
+                        },
+                      ),
+                    if (state.profile.role.toUserRole() != UserRole.owner)
+                      ProfileWidget(
+                        icon: Icon(Icons.attach_money),
+                        title: "bookings",
+                        onTap: () {
+                          context.push(Routes.myBookings);
+                        },
+                      ),
+                    if (state.profile.role.toUserRole() != UserRole.owner)
+                      ProfileWidget(
+                        icon: const Icon(Icons.interests_outlined),
+                        title: "lifestyle",
+                        onTap: () => context.push(Routes.lifestyle),
+                      ),
                     ProfileWidget(
                       icon: Icon(Icons.dark_mode_outlined),
                       title: "darkMode",
-                      action: Switch(
-                        value: false,
-                        onChanged: (value) {
-                          value = !value;
+                      action: BlocBuilder<ThemeSwitcherCubit, bool>(
+                        builder: (context, state) {
+                          return Switch(
+                            value: !state,
+                            onChanged: (value) {
+                              context.read<ThemeSwitcherCubit>().toggle();
+                            },
+                          );
                         },
                       ),
                     ),
@@ -115,21 +116,119 @@ class ProfileFeatureScreen extends StatelessWidget {
                       icon: Icon(Icons.language),
                       title: "language",
                       action: Switch(
-                        value: true,
-                        onChanged: (value) {
-                          value = !value;
+                        value: isArabic.value,
+                        activeThumbColor: AppColors.primary,
+                        activeTrackColor: AppColors.primary.withValues(
+                          alpha: 0.3,
+                        ),
+                        onChanged: (value) async {
+                          isArabic.value = value;
+                          if (value) {
+                            await context.setLocale(Locale('ar'));
+                          } else {
+                            await context.setLocale(Locale('en'));
+                          }
                         },
                       ),
                     ),
 
-                    // ProfileWidget(
-                    //   icon: Icon(Icons.settings_outlined),
-                    //   title: "settings",
-                    // ),
                     Gap(2.sh),
                     ProfileWidget(
-                      icon: Icon(Icons.support_agent_outlined),
+                      icon: const Icon(Icons.support_agent_outlined),
                       title: "help&support",
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              title: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.support_agent_outlined,
+                                    color: Colors.blue,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text("help&support".tr()),
+                                ],
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "تواصل معنا عبر البريد الإلكتروني لفريق الدعم:",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey.shade600,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+
+                                  InkWell(
+                                    onTap: () async {
+                                      Navigator.pop(context);
+                                      await launchSupportEmail(
+                                        'rehabtuwaiq@gmail.com',
+                                      );
+                                    },
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue.shade50.withAlpha(
+                                          50,
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: Colors.blue.shade200,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.email_outlined,
+                                            color: Colors.blue,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          const Expanded(
+                                            child: Text(
+                                              'rehabtuwaiq@gmail.com',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                                color: Colors.blue,
+                                              ),
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.open_in_new,
+                                            size: 16,
+                                            color: Colors.blue.shade300,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text(
+                                    'إغلاق',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
                     ),
                     ProfileWidget(
                       icon: Icon(Icons.info_outline),
@@ -186,5 +285,17 @@ Future<void> pickImageLocal(
     setDialogState(() {
       onFilePicked(File(image.path));
     });
+  }
+}
+
+Future<void> launchSupportEmail(String emailPath) async {
+  final Uri launchUri = Uri.parse(
+    'mailto:$emailPath?subject=${Uri.encodeComponent('الدعم الفني - تطبيق رحاب')}',
+  );
+
+  try {
+    await launchUrl(launchUri, mode: LaunchMode.externalApplication);
+  } catch (e) {
+    debugPrint('حدث خطأ أثناء محاولة فتح تطبيق البريد: $e');
   }
 }

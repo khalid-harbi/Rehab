@@ -7,12 +7,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:rehab/core/common/sub/search/presentation/widgets/filter_widget.dart';
 import 'package:rehab/core/constants/app_colors.dart';
-import 'package:rehab/core/extensions/orientation_extension.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_state.dart';
+import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
+import 'package:rehab/features/profile/presentation/cubit/profile/profile_state.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:sizer/sizer.dart';
 
@@ -36,6 +35,7 @@ class SliverAppBarWidget extends HookWidget {
     // });
     final cubit = context.read<SearchCubit>();
     final controllerSearch = useTextEditingController();
+ 
 
     Timer? timer;
 
@@ -61,12 +61,8 @@ class SliverAppBarWidget extends HookWidget {
       actions: [],
       pinned: true,
       floating: true,
-      expandedHeight: context.orientation == Orientation.portrait
-          ? 22.sh
-          : 30.sh,
-      toolbarHeight: context.orientation == Orientation.portrait
-          ? 22.sh
-          : 30.sw,
+      expandedHeight: 22.sh,
+      toolbarHeight: 22.sh,
       shape: RoundedRectangleBorder(
         borderRadius: .only(
           bottomRight: .circular(30),
@@ -149,6 +145,7 @@ class SliverAppBarWidget extends HookWidget {
                                       ),
                                     ],
                                   ),
+                                  
                                 ],
                               );
                             }

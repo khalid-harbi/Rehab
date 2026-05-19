@@ -14,6 +14,7 @@ _ProfileModel _$ProfileModelFromJson(
   imageUrl:
       json['image_url'] as String? ??
       'https://ui-avatars.com/api/?name=Placeholder&background=random&length=1',
+  role: json['role'] as String? ?? 'user',
   createdAt: DateTime.parse(json['created_at'] as String),
 );
 
@@ -22,5 +23,6 @@ Map<String, dynamic> _$ProfileModelToJson(_ProfileModel instance) =>
       'id': instance.id,
       'name': instance.name,
       'image_url': instance.imageUrl,
+      'role': instance.role,
       'created_at': instance.createdAt.toIso8601String(),
     };

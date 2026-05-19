@@ -19,7 +19,7 @@ import 'package:rehab/features/profile/domain/repositories/profile_repository_do
     as _i855;
 import 'package:rehab/features/profile/domain/use_cases/profile_use_case.dart'
     as _i659;
-import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart'
+import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart'
     as _i834;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 

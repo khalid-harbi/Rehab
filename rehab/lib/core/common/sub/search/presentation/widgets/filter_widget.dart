@@ -236,20 +236,6 @@ class _FilterWidgetState extends State<FilterWidget> {
   String? selectedCity;
   String? selectedSort = 'price_asc';
 
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   if (widget.homes.isNotEmpty) {
-  //     final maxDbPrice = widget.homes
-  //         .map((home) => home.price.toDouble())
-  //         .reduce((value, element) => value > element ? value : element);
-  //     setState(() {
-  //       highestPriceInDb = maxDbPrice > 0 ? maxDbPrice : 10000;
-  //       maxPrice = highestPriceInDb;
-  //     });
-  //   }
-  // }
   @override
   void initState() {
     super.initState();
@@ -258,30 +244,15 @@ class _FilterWidgetState extends State<FilterWidget> {
       final maxDbPrice = widget.homes
           .map((home) => home.price.toDouble())
           .reduce((value, element) => value > element ? value : element);
-
       setState(() {
-        // إذا كان أعلى سعر في الداتا بيس هو 0 (حالة حماية)، نضع قيمة افتراضية 10000
         highestPriceInDb = maxDbPrice > 0 ? maxDbPrice : 10000;
-        maxPrice = highestPriceInDb; // السهم الأيمن يبدأ من الحد الأقصى الحقيقي
-        minPrice = 0;
+        maxPrice = highestPriceInDb;
       });
-    } else {
-      // في حال كانت القائمة فارغة مؤقتاً
-      highestPriceInDb = 10000;
-      maxPrice = 10000;
-      minPrice = 0;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    double safeMinPrice = minPrice.clamp(0.0, highestPriceInDb);
-    double safeMaxPrice = maxPrice.clamp(safeMinPrice, highestPriceInDb);
-
-    if (highestPriceInDb == 0 || safeMinPrice == safeMaxPrice) {
-      highestPriceInDb = 10000;
-      safeMaxPrice = 10000;
-    }
     final List<String> dynamicCities = widget.homes
         .map((home) => titleForLocale(context, home.cityEn, home.cityAr))
         .toSet()
@@ -430,9 +401,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                         color: AppColors.primary,
                       ),
                       const SizedBox(width: 8),
-
                       Text(
-                        "نطاق السعر: ${safeMinPrice.toInt()} - ${safeMaxPrice.toInt()} ريال",
+                        "نطاق السعر",
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
                       ),
                     ],
                   ),
@@ -464,16 +439,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                 ),
               ),
               child: RangeSlider(
-                // 🔥 التحديث هنا: مرري المتغيرات الآمنة
-                values: RangeValues(safeMinPrice, safeMaxPrice),
+                values: RangeValues(minPrice, maxPrice),
                 min: 0,
                 max: highestPriceInDb,
                 divisions: (highestPriceInDb / 500).toInt() > 0
                     ? (highestPriceInDb / 500).toInt()
                     : 1,
                 labels: RangeLabels(
-                  '${safeMinPrice.toInt()}',
-                  '${safeMaxPrice.toInt()}',
+                  '${minPrice.toInt()}',
+                  '${maxPrice.toInt()}',
                 ),
                 onChanged: (values) {
                   setState(() {

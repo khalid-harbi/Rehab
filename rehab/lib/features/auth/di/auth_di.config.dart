@@ -10,9 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
-import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:rehab/core/services/local_keys_service.dart' as _i13;
 import 'package:rehab/features/auth/data/datasources/auth_remote_data_source.dart'
     as _i330;
 import 'package:rehab/features/auth/data/repositories/auth_repository_data.dart'
@@ -31,14 +29,6 @@ import 'package:rehab/features/auth/sub/forget_password/domain/repositories/forg
     as _i856;
 import 'package:rehab/features/auth/sub/forget_password/domain/use_cases/forget_password_use_case.dart'
     as _i803;
-import 'package:rehab/features/auth/sub/google_log_in/data/datasources/google_log_in_remote_data_source.dart'
-    as _i1010;
-import 'package:rehab/features/auth/sub/google_log_in/data/repositories/google_log_in_repository_data.dart'
-    as _i631;
-import 'package:rehab/features/auth/sub/google_log_in/domain/repositories/google_log_in_repository_domain.dart'
-    as _i576;
-import 'package:rehab/features/auth/sub/google_log_in/domain/use_cases/google_log_in_use_case.dart'
-    as _i916;
 import 'package:rehab/features/auth/sub/login/data/datasources/login_remote_data_source.dart'
     as _i61;
 import 'package:rehab/features/auth/sub/login/data/repositories/login_repository_data.dart'
@@ -99,13 +89,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i61.BaseLoginRemoteDataSource>(
       () => _i61.LoginRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
-    gh.lazySingleton<_i1010.BaseGoogleLogInRemoteDataSource>(
-      () => _i1010.GoogleLogInRemoteDataSource(
-        gh<_i13.LocalKeysService>(),
-        gh<_i454.SupabaseClient>(),
-        gh<_i116.GoogleSignIn>(),
-      ),
-    );
     gh.lazySingleton<_i5.BaseOtpRemoteDataSource>(
       () => _i5.OtpRemoteDataSource(gh<_i454.SupabaseClient>()),
     );
@@ -126,11 +109,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i372.LoginRepositoryDomain>(
       () => _i367.LoginRepositoryData(gh<_i61.BaseLoginRemoteDataSource>()),
     );
-    gh.lazySingleton<_i576.GoogleLogInRepositoryDomain>(
-      () => _i631.GoogleLogInRepositoryData(
-        gh<_i1010.BaseGoogleLogInRemoteDataSource>(),
-      ),
-    );
     gh.lazySingleton<_i878.OtpUseCase>(
       () => _i878.OtpUseCase(gh<_i780.OtpRepositoryDomain>()),
     );
@@ -150,9 +128,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i803.ForgetPasswordUseCase(
         gh<_i856.ForgetPasswordRepositoryDomain>(),
       ),
-    );
-    gh.lazySingleton<_i916.GoogleLogInUseCase>(
-      () => _i916.GoogleLogInUseCase(gh<_i576.GoogleLogInRepositoryDomain>()),
     );
     gh.lazySingleton<_i565.AuthUseCase>(
       () => _i565.AuthUseCase(gh<_i47.AuthRepositoryDomain>()),

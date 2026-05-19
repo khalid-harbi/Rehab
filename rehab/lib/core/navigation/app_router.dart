@@ -20,7 +20,7 @@ import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart'
 import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
 import 'package:rehab/features/conversation/presentation/pages/conversation_feature_screen.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/app_info_screen.dart';
 import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
