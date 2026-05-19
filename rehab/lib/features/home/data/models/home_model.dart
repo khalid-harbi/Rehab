@@ -8,6 +8,7 @@ abstract class HomeModel with _$HomeModel {
   @JsonSerializable(fieldRename: .snake)
   const factory HomeModel({
     required int id,
+    required String ownerId,
     @Default('') String titleAr,
     @Default('') String titleEn,
     @Default('') String cityAr,
@@ -43,6 +44,7 @@ extension HomeModelMapper on HomeModel {
   HomeEntity toEntity() {
     return HomeEntity(
       id: id,
+      ownerId: ownerId,
       titleAr: titleAr,
       titleEn: titleEn,
       cityAr: cityAr,

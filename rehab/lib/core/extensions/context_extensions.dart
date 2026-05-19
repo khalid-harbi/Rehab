@@ -107,7 +107,7 @@ extension ContextExtensions on BuildContext {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
-              const SizedBox(height: 20),
+              Gap(20),
 
               CreditCard(
                 config: Payment().initial(
@@ -126,7 +126,7 @@ extension ContextExtensions on BuildContext {
                 },
               ),
 
-              const SizedBox(height: 20),
+              Gap(20),
             ],
           ),
         ),
@@ -162,7 +162,7 @@ extension ContextExtensions on BuildContext {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      Gap(20),
                       BlocBuilder<ProfileCubit, ProfileState>(
                         builder: (context, state) {
                           if (state is ProfileSuccessState) {
@@ -221,13 +221,13 @@ extension ContextExtensions on BuildContext {
                           return const SizedBox.shrink();
                         },
                       ),
-                      const Gap(24),
+                      Gap(24),
                       buildTextField(
                         controller: nameController,
                         label: "name".tr(),
                         icon: Icons.person_outline,
                       ),
-                      const SizedBox(height: 24),
+                      Gap(24),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -235,7 +235,7 @@ extension ContextExtensions on BuildContext {
                             onPressed: () => Navigator.pop(dialogContext),
                             child: Text("cancel".tr()),
                           ),
-                          const SizedBox(width: 8),
+                          Gap(8),
                           ElevatedButton(
                             onPressed: () {
                               if (pickedImageFile != null) {

@@ -1,7 +1,5 @@
 import 'package:rehab/core/exports/app_exports.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rehab/core/constants/app_colors.dart' show AppColors;
+import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/widgets/profile_header.dart';
@@ -177,7 +175,7 @@ class UsersWidget extends HookWidget {
               padding: const EdgeInsets.all(24),
               child: ElevatedButton(
                 onPressed: () {
-                  cubit.createRoom(user);
+                  cubit.createRoom(user.id);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.background,
@@ -188,8 +186,8 @@ class UsersWidget extends HookWidget {
                   ),
                   elevation: 0,
                 ),
-                child: const Text(
-                  'Get In Touch',
+                child: Text(
+                  "getInTouch".tr(),
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),

@@ -5,5 +5,5 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 abstract class UsersRepositoryDomain {
   Future<Result<List<UsersEntity>, Failure>> loadUsers();
-  Future<Result<types.Room, Failure>> createChatRoom(UsersEntity otherUserId);
+  Future<Result<types.Room, Failure>> createChatRoom(String otherUserId);
 }

@@ -31,7 +31,7 @@ class BookingRemoteDataSource implements BaseBookingRemoteDataSource {
       final response = await _supabase
           .from('bookings')
           .select()
-          .eq('user_id', userId)
+          .eq('seeker_id', userId)
           .order('created_at', ascending: false)
           .limit(1)
           .single();
