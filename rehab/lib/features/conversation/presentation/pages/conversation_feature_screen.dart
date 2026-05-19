@@ -3,12 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart' hide ChatState;
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/constants/app_enums.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/core/extensions/user_role_extension.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/utils/display_user_name.dart';
 import 'package:rehab/core/extensions/room_extensions.dart';
 import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
 import 'package:rehab/features/conversation/presentation/cubit/conversation_state.dart';
+import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
+import 'package:rehab/features/profile/presentation/cubit/profile/profile_state.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ConversationFeatureScreen extends StatelessWidget {
@@ -53,15 +57,29 @@ class ConversationFeatureScreen extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: IconButton(
-                onPressed: () async {
-                  final fetchedUser = await cubit.getUserById(otherUser.id);
-                  context.push(Routes.userDetails, extra: fetchedUser);
-                },
-                icon: Icon(Icons.more_horiz_rounded),
-              ),
+            BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, profileState) {
+                if (profileState is ProfileSuccessState &&
+                    profileState.profile.role.toUserRole() != UserRole.owner) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: IconButton(
+                      onPressed: () async {
+                        final fetchedUser = await cubit.getUserById(
+                          otherUser.id,
+                        );
+                        if (context.mounted) {
+                          context.push(Routes.userDetails, extra: fetchedUser);
+                        }
+                      },
+                      icon: const Icon(Icons.more_horiz_rounded),
+                    ),
+                  );
+                }
+
+                // 🔴 إذا كان المستخدم owner أو البروفايل لسه يحمل، لا تعرضي شيئاً
+                return const SizedBox.shrink();
+              },
             ),
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:rehab/core/extensions/user_role_extension.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/features/auth/sub/logout/presentation/pages/logout_feature_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/theme/Theme_switcher_cubit.dart';
+import 'package:rehab/features/profile/presentation/widgets/language_switch_widhet.dart';
 import 'package:rehab/features/profile/presentation/widgets/profile_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -112,24 +113,11 @@ class ProfileFeatureScreen extends HookWidget {
                         },
                       ),
                     ),
+
                     ProfileWidget(
-                      icon: Icon(Icons.language),
+                      icon: Icon(Icons.language_rounded),
                       title: "language",
-                      action: Switch(
-                        value: isArabic.value,
-                        activeThumbColor: AppColors.primary,
-                        activeTrackColor: AppColors.primary.withValues(
-                          alpha: 0.3,
-                        ),
-                        onChanged: (value) async {
-                          isArabic.value = value;
-                          if (value) {
-                            await context.setLocale(Locale('ar'));
-                          } else {
-                            await context.setLocale(Locale('en'));
-                          }
-                        },
-                      ),
+                      action: LanguageSwitchWidget(),
                     ),
 
                     Gap(2.sh),
@@ -137,97 +125,7 @@ class ProfileFeatureScreen extends HookWidget {
                       icon: const Icon(Icons.support_agent_outlined),
                       title: "help&support",
                       onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              title: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.support_agent_outlined,
-                                    color: Colors.blue,
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Text("help&support".tr()),
-                                ],
-                              ),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "تواصل معنا عبر البريد الإلكتروني لفريق الدعم:",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey.shade600,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-
-                                  InkWell(
-                                    onTap: () async {
-                                      Navigator.pop(context);
-                                      await launchSupportEmail(
-                                        'rehabtuwaiq@gmail.com',
-                                      );
-                                    },
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(12),
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue.shade50.withAlpha(
-                                          50,
-                                        ),
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: Colors.blue.shade200,
-                                        ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.email_outlined,
-                                            color: Colors.blue,
-                                          ),
-                                          const SizedBox(width: 10),
-                                          const Expanded(
-                                            child: Text(
-                                              'rehabtuwaiq@gmail.com',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15,
-                                                color: Colors.blue,
-                                              ),
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.open_in_new,
-                                            size: 16,
-                                            color: Colors.blue.shade300,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text(
-                                    'إغلاق',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        showHelpAndSupportDialog(context);
                       },
                     ),
                     ProfileWidget(

@@ -1,9 +1,5 @@
-import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:rehab/core/constants/app_colors.dart';
-import 'package:rehab/core/constants/app_enums.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
@@ -18,7 +14,7 @@ class OwnerRootShell extends StatefulWidget {
 }
 
 class _OwnerRootShellState extends State<OwnerRootShell> {
-  OwnerSelectedTab _selectedTab = OwnerSelectedTab.home;
+  int _selectedIndex = 0;
 
   final List<Widget> _pages = [
     BlocProvider(
@@ -36,43 +32,45 @@ class _OwnerRootShellState extends State<OwnerRootShell> {
     return BlocProvider(
       create: (context) => ChatCubit(GetIt.I.get())..fetchRooms(),
       child: Scaffold(
-        extendBody: true,
-
-        body: IndexedStack(
-          index: OwnerSelectedTab.values.indexOf(_selectedTab),
-          children: _pages,
-        ),
-
-        bottomNavigationBar: CrystalNavigationBar(
-          currentIndex: OwnerSelectedTab.values.indexOf(_selectedTab),
-          height: 10,
-          unselectedItemColor: Colors.black,
-          borderWidth: 2,
-          outlineBorderColor: Colors.transparent,
-          backgroundColor: Colors.white,
-          onTap: (i) {
-            setState(() {
-              _selectedTab = OwnerSelectedTab.values[i];
-            });
-          },
-          items: [
-            CrystalNavigationBarItem(
-              icon: Icons.home,
-              unselectedIcon: Icons.home_outlined,
-              selectedColor: AppColors.primary,
+        backgroundColor: Colors.white,
+        body: Center(child: _pages.elementAt(_selectedIndex)),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(blurRadius: 20, color: Colors.white.withAlpha(10)),
+            ],
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15.0,
+                vertical: 8,
+              ),
+              child: GNav(
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.grey[100]!,
+                gap: 8,
+                activeColor: Colors.white,
+                iconSize: 24,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                duration: Duration(milliseconds: 400),
+                tabBackgroundColor: AppColors.primary,
+                color: Colors.black,
+                tabs: [
+                  GButton(icon: Icons.home, text: 'Home'),
+                  GButton(icon: Icons.chat, text: 'chat'),
+                  GButton(icon: Icons.person, text: 'Profile'),
+                ],
+                selectedIndex: _selectedIndex,
+                onTabChange: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+              ),
             ),
-
-            CrystalNavigationBarItem(
-              icon: Icons.chat,
-              unselectedIcon: Icons.chat_outlined,
-              selectedColor: AppColors.primary,
-            ),
-            CrystalNavigationBarItem(
-              icon: Icons.person,
-              unselectedIcon: Icons.person_outline,
-              selectedColor: AppColors.error,
-            ),
-          ],
+          ),
         ),
       ),
     );

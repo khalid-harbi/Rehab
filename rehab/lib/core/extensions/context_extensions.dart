@@ -2,6 +2,7 @@ import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/features/auth/sub/otp/presentation/cubit/otp_cubit.dart';
 import 'package:rehab/features/auth/sub/otp/presentation/pages/otp_feature_widget.dart';
+import 'package:rehab/features/profile/presentation/pages/profile_feature_screen.dart';
 export 'package:easy_localization/easy_localization.dart';
 
 extension ContextExtensions on BuildContext {
@@ -125,8 +126,6 @@ extension ContextExtensions on BuildContext {
                   }
                 },
               ),
-
-              Gap(20),
             ],
           ),
         ),
@@ -339,7 +338,7 @@ Future<void> showImageOptions(BuildContext context) async {
     context: context,
     builder: (_) {
       return SafeArea(
-        child: Wrap(
+        child: Row(
           children: [
             ListTile(
               leading: const Icon(Icons.photo),
@@ -379,6 +378,81 @@ Future<void> showImageOptions(BuildContext context) async {
             ),
           ],
         ),
+      );
+    },
+  );
+}
+
+void showHelpAndSupportDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(
+          children: [
+            const Icon(Icons.support_agent_outlined, color: Colors.blue),
+            const SizedBox(width: 10),
+            Text("help&support".tr()),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "تواصل معنا عبر البريد الإلكتروني لفريق الدعم:",
+              style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+            ),
+            const SizedBox(height: 16),
+
+            InkWell(
+              onTap: () async {
+                Navigator.pop(context);
+                await launchSupportEmail('rehabtuwaiq@gmail.com');
+              },
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50.withAlpha(50),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.blue.shade200),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.email_outlined, color: Colors.blue),
+                    const SizedBox(width: 10),
+                    const Expanded(
+                      child: Text(
+                        'rehabtuwaiq@gmail.com',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.open_in_new,
+                      size: 16,
+                      color: Colors.blue.shade300,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'إغلاق',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
       );
     },
   );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/utils/localization_helper.dart';
-import 'package:rehab/core/widgets/Custom_liquid_progress_indicator.dart';
+import 'package:rehab/core/widgets/custom_liquid_progress_indicator.dart';
 import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:rehab/features/users/presentation/widgets/member_since.dart';
 

@@ -13,6 +13,7 @@ class UsersCubit extends Cubit<UsersState> {
 
   Future<void> loadedUser() async {
     final result = await _usersUseCase.loadUsers();
+    if (isClosed) return;
     result.when(
       (success) {
         emit(UsersSuccessState(users: success));

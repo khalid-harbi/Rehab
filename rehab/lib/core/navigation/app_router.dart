@@ -8,7 +8,7 @@ import 'package:rehab/core/common/sub/favorites/presentation/pages/favorites_fea
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/widgets/owner_root_shell.dart';
-import 'package:rehab/core/widgets/root_shell.dart';
+import 'package:rehab/core/widgets/user_root_shell.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:rehab/features/auth/presentation/cubit/auth_state.dart';
 import 'package:rehab/features/auth/presentation/pages/auth_feature_screen.dart';
@@ -102,7 +102,7 @@ class AppRouter {
         path: Routes.home,
         builder: (context, state) => BlocProvider(
           create: (context) => ProfileCubit(GetIt.I.get()),
-          child: const RootShell(),
+          child: const UserRootShell(),
         ),
       ),
 

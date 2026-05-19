@@ -49,7 +49,6 @@ class LoadingWidgetOverlay {
   }
 }
 
-
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key, this.size = 50});
   final double? size;
