@@ -41,6 +41,7 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.splash,
 
+
     routes: [
       GoRoute(
         path: Routes.splash,
@@ -80,7 +81,6 @@ class AppRouter {
           );
         },
       ),
-
       GoRoute(
         path: Routes.homeDetails,
         builder: (context, state) {
@@ -187,33 +187,47 @@ class AppRouter {
         builder: (context, state) => const AppInfoScreen(),
       ),
 
-      GoRoute(
-        path: Routes.myBookings,
-        builder: (context, state) {
-          return BlocProvider(
-            create: (context) =>
-                GetIt.I<MyBookingsCubit>()..getMyBookingsMethod(),
-            child: const MyBookingsFeatureScreen(),
-          );
-        },
-      ),
-      GoRoute(
-        path: Routes.userDetails,
-        builder: (context, state) {
-          final user = state.extra as UsersEntity?;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => UserDetailsCubit(GetIt.I.get()),
-              ),
-              // Add the UsersCubit provider here!
-              BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
-            ],
-            child: UserDetailsFeatureScreen(fetchedUser: user),
-          );
-        },
-      ),
-    ],
+// <<<<<<< HEAD
+//       GoRoute(
+//         path: Routes.myBookings,
+//         builder: (context, state) {
+//           return BlocProvider(
+//             create: (context) =>
+//                 GetIt.I<MyBookingsCubit>()..getMyBookingsMethod(),
+//             child: const MyBookingsFeatureScreen(),
+//           );
+//         },
+//       ),
+//       GoRoute(
+//         path: Routes.userDetails,
+//         builder: (context, state) {
+//           final user = state.extra as UsersEntity?;
+//           return MultiBlocProvider(
+//             providers: [
+//               BlocProvider(
+//                 create: (context) => UserDetailsCubit(GetIt.I.get()),
+//               ),
+//               // Add the UsersCubit provider here!
+//               BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
+//             ],
+//             child: UserDetailsFeatureScreen(fetchedUser: user),
+//           );
+//         },
+//       ),
+//     ],
+// =======
+        GoRoute(
+          path: Routes.myBookings,
+          builder: (context, state) {
+            return BlocProvider(
+              create: (context) =>
+                  GetIt.I<MyBookingsCubit>()..getMyBookingsMethod(),
+              child: const MyBookingsFeatureScreen(),
+            );
+          },
+        ),
+        ],
+// >>>>>>> origin/leenalsaleh
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),
