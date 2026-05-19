@@ -31,13 +31,13 @@ class HomeCard extends StatelessWidget {
                 SizedBox(
                   height: 250,
                   width: double.infinity,
-                  child:HomeImageCarousel(
-  images: home.imageUrls.isNotEmpty
-      ? home.imageUrls
-      : [home.imageUrl],
-  height: 200,
-  borderRadius: BorderRadius.zero,
-),
+                  child: HomeImageCarousel(
+                    images: home.imageUrls.isNotEmpty
+                        ? home.imageUrls
+                        : [home.imageUrl],
+                    height: 200,
+                    borderRadius: BorderRadius.zero,
+                  ),
                 ),
                 //todo: change it posion based on language
                 if (home.distance != null && home.distance! > 0.1)

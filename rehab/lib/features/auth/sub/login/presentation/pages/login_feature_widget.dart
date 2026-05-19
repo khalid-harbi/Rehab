@@ -82,7 +82,6 @@ class LoginFeatureScreen extends HookWidget {
                     ),
 
                     Gap(1.h),
-                    // todo : add visible and non visible beside the password
                     TextFieldWidget(
                       label: "كلمة المرور",
                       controller: passwordController,

@@ -5,12 +5,16 @@ import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
 import 'package:rehab/features/home/presentation/widgets/home_image_carousel.dart';
 import 'package:rehab/features/home_details/presentation/widgets/circle_icone_buttom.dart';
-import 'package:share_plus/share_plus.dart';
 
 class HeaderImage extends StatelessWidget {
   final HomeEntity home;
+  final VoidCallback onSharePressed;
 
-  const HeaderImage({super.key, required this.home});
+  const HeaderImage({
+    super.key,
+    required this.home,
+    required this.onSharePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +38,6 @@ class HeaderImage extends StatelessWidget {
           ),
         ),
 
-        // Positioned(
-        //   top: 45,
-        //   right: 16,
-        //   child: Row(
-        //     children: [
-        //       FavoriteButton(homeId: home.id),
-        //       const SizedBox(width: 8),
-        //       CircleIconButton(icon: Icons.share_outlined, onTap: () {}),
-        //     ],
-        //   ),
-        // ),
         Positioned(
           top: 45,
           right: 16,
@@ -54,9 +47,7 @@ class HeaderImage extends StatelessWidget {
               const SizedBox(width: 8),
               CircleIconButton(
                 icon: Icons.share_outlined,
-                onTap: () {
-                  // Share.share(HomeDetailsFeatureScreen());
-                },
+                onTap: onSharePressed,
               ),
             ],
           ),

@@ -31,6 +31,7 @@ class SearchCubit extends Cubit<SearchState> {
     double? maxRating,
     int? rooms,
     int? bathrooms,
+    String? sortBy, // for determine ASC & DESC
   }) async {
     emit(SearchLoadingState());
 

@@ -69,6 +69,7 @@ class SearchRemoteDataSource implements BaseSearchRemoteDataSource {
 
     return response.map<HomeModel>((json) => HomeModel.fromJson(json)).toList();
   }
+
   @override
   Future<List<HomeModel>> getNearbyHomes(double lat, double lng) async {
     final response = await _supabase.rpc(

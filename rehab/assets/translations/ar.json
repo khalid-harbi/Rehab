@@ -11,19 +11,49 @@
    "settings":" الإعدادات",
    "help&support":"مساعدة ودعم",
    "logout":" تسجيل الخروج",
-   "facilities":"المرافق" ,
+   "facilities":"المرافق",
    "aboutProperty": "عن هذا العقار",
-   "bedrooms_count": "{} غرف نوم",
-   "bathrooms_count": "{} دورات مياه",
+   "bedrooms_count": {
+      "one": "غرفة نوم واحدة",
+      "two": "غرفتا نوم",
+      "few": "{} غرف نوم",
+      "many": "{} غرفة نوم",
+      "other": "{} غرفة نوم"
+   },
+   "bathrooms_count": {
+      "one": "دورة مياه واحدة",
+      "two": "دورتا مياه",
+      "few": "{} دورات مياه",
+      "many": "{} دورة مياه",
+      "other": "{} دورة مياه"
+   },
    "parking": "مواقف السيارات ",
    "housingRulesAndPolicies":"قواعد وسياسات السكن",
    "memberSinceToday": "عضو منذ اليوم",
-   "memberFor": "عضو منذ",
-   "day": "يوم",
-   "month": "شهر",
-   "and": "و",
-   "year": "سنة",
+   "memberFor": "عضو منذ ",
+   "day": {
+      "zero": "اليوم",
+      "one": "يوم",
+      "two": "يومان",
+      "few": "{} أيام",
+      "many": "{} يوماً",
+      "other": "{} يوم"
+   },
+   "month": {
+      "one": "شهر",
+      "two": "شهران",
+      "few": "{} أشهر",
+      "many": "{} شهراً",
+      "other": "{} شهر"
+   },
+   "year": {
+      "one": "سنة",
+      "two": "سنتان",
+      "few": "{} سنوات",
+      "many": "{} سنة",
+      "other": "{} سنة"
+   },
+   "and": " و ",
    "appInfo": "عن التطبيق",
    "matching": "التطابق"
 }
-

@@ -19,8 +19,12 @@ class ProfileFeatureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("profile".tr(), style: TextStyle(fontSize: 36)),
+        title: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text("profile".tr(), style: TextStyle(fontSize: 42)),
+        ),
         centerTitle: false,
+        backgroundColor: Colors.transparent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -100,16 +104,28 @@ class ProfileFeatureScreen extends StatelessWidget {
                     ProfileWidget(
                       icon: Icon(Icons.dark_mode_outlined),
                       title: "darkMode",
+                      action: Switch(
+                        value: false,
+                        onChanged: (value) {
+                          value = !value;
+                        },
+                      ),
                     ),
                     ProfileWidget(
                       icon: Icon(Icons.language),
                       title: "language",
+                      action: Switch(
+                        value: true,
+                        onChanged: (value) {
+                          value = !value;
+                        },
+                      ),
                     ),
 
-                    ProfileWidget(
-                      icon: Icon(Icons.settings_outlined),
-                      title: "settings",
-                    ),
+                    // ProfileWidget(
+                    //   icon: Icon(Icons.settings_outlined),
+                    //   title: "settings",
+                    // ),
                     Gap(2.sh),
                     ProfileWidget(
                       icon: Icon(Icons.support_agent_outlined),

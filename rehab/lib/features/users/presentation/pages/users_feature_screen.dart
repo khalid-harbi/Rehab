@@ -10,6 +10,7 @@ import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_state.dart';
 import 'package:rehab/features/users/presentation/widgets/users_widget.dart';
+import 'package:sizer/sizer.dart';
 
 class UsersFeatureScreen extends HookWidget {
   const UsersFeatureScreen({super.key});
@@ -21,7 +22,10 @@ class UsersFeatureScreen extends HookWidget {
     // ===================================================================
     return Scaffold(
       appBar: AppBar(
-        title: Text("matching".tr(), style: TextStyle(fontSize: 36)),
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text("matching".tr(), style: TextStyle(fontSize: 42)),
+        ),
         centerTitle: false,
       ),
       body: Padding(
@@ -30,16 +34,16 @@ class UsersFeatureScreen extends HookWidget {
           // ===================================================================
           listenWhen: (previous, current) =>
               current is UsersRoomCreatedState || current is UsersErrorState,
+
           // ===================================================================
           listener: (context, state) async {
             if (state is UsersRoomCreatedState) {
               await context.push(Routes.conversation, extra: state.room);
 
-              // Refresh users when coming back
-              if (context.mounted) {
-                await cubit.loadedUser();
-              }
-              // Refresh rooms
+              await cubit.loadedUser();
+
+              if (!context.mounted) return;
+
               context.read<ChatCubit>().fetchRooms();
             } else if (state is UsersErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -66,7 +70,7 @@ class UsersFeatureScreen extends HookWidget {
                     return Center(
                       child: Icon(
                         Icons.person_off_outlined,
-                        size: 200,
+                        size: 50.sp,
                         color: Colors.grey.withAlpha(50),
                       ),
                     );

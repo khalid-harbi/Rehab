@@ -8,11 +8,44 @@ import 'package:rehab/features/home_details/presentation/widgets/header_image.da
 import 'package:rehab/features/home_details/presentation/widgets/policy_item.dart';
 import 'package:rehab/features/home_details/presentation/widgets/section_title.dart';
 import 'package:rehab/features/home_details/presentation/widgets/status_badge.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeDetailsFeatureScreen extends StatelessWidget {
   final HomeEntity home;
 
   const HomeDetailsFeatureScreen({super.key, required this.home});
+
+  void _shareHomeDetails(BuildContext context) {
+    final isArabic = context.locale.languageCode == 'ar';
+
+    final String shareText = isArabic
+        ? '''
+🏠 عقار مميز متاح للإيجار ✨
+
+📋 تفاصيل العقار:
+• العنوان: ${home.titleAr}
+• الموقع: ${home.cityAr} - ${home.districtAr}
+• المساحة: ${home.area} م²
+• التقييم: ⭐ ${home.rating}
+• السعر: ${home.price} ريال / الشهر
+'''
+        : '''
+🏠 Premium property available for rent ✨
+
+📋 Property Details:
+• Title: ${home.titleEn}
+• Location: ${home.cityEn} - ${home.districtEn}
+• Area: ${home.area} m²
+• Rating: ⭐ ${home.rating}
+• Price: ${home.price} SAR / Month
+''';
+    SharePlus.instance.share(
+      ShareParams(
+        text: shareText,
+        subject: isArabic ? 'تفاصيل العقار' : 'Property Details',
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +59,10 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HeaderImage(home: home),
+            HeaderImage(
+              home: home,
+              onSharePressed: () => _shareHomeDetails(context),
+            ),
 
             Padding(
               padding: const EdgeInsets.all(18),
@@ -128,15 +164,11 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                     children: [
                       FacilityCard(
                         icon: Icons.bed_outlined,
-                        title: 'bedrooms_count'.tr(
-                          args: [home.rooms.toString()],
-                        ),
+                        title: 'bedrooms_count'.plural(home.rooms),
                       ),
                       FacilityCard(
                         icon: Icons.bathtub_outlined,
-                        title: 'bathrooms_count'.tr(
-                          args: [home.bathrooms.toString()],
-                        ),
+                        title: 'bathrooms_count'.plural(home.bathrooms),
                       ),
 
                       FacilityCard(

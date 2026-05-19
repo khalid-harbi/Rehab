@@ -18,7 +18,10 @@ class ChatFeatureScreen extends StatelessWidget {
     // ===================================================================
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chats".tr(), style: TextStyle(fontSize: 36)),
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text("Chats".tr(), style: TextStyle(fontSize: 42)),
+        ),
         centerTitle: false,
       ),
       // ===================================================================

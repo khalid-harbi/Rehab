@@ -170,24 +170,6 @@ extension ContextExtensions on BuildContext {
                               child: Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  // ClipRRect(
-                                  //   borderRadius: BorderRadius.circular(50.sp),
-                                  //   child: pickedImageFile != null
-                                  //       ? Image.file(
-                                  //           pickedImageFile!,
-                                  //           width: 60.sp,
-                                  //           height: 60.sp,
-                                  //           fit: BoxFit.cover,
-                                  //         )
-                                  //       : AnyImageView(
-                                  //           imagePath:
-                                  //               state.profile.imageUrl ??
-                                  //               "https://placeholder.com/user.png",
-                                  //           width: 60.sp,
-                                  //           height: 60.sp,
-                                  //           fit: BoxFit.cover,
-                                  //         ),
-                                  // ),
                                   InkWell(
                                     borderRadius: BorderRadius.circular(50.sp),
                                     onTap: () => showImageOptionsForDialog(

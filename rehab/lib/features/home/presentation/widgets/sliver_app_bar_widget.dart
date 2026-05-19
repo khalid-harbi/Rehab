@@ -7,6 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:rehab/core/common/sub/search/presentation/widgets/filter_widget.dart';
 import 'package:rehab/core/constants/app_colors.dart';
+import 'package:rehab/core/extensions/orientation_extension.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
@@ -20,6 +21,7 @@ class SliverAppBarWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    //todo: ghayda
     // controllerSearch.addListener(() async {
     //   if (timer != null) {
     //     timer!.cancel();
@@ -59,8 +61,12 @@ class SliverAppBarWidget extends HookWidget {
       actions: [],
       pinned: true,
       floating: true,
-      expandedHeight: 22.sh,
-      toolbarHeight: 22.sh,
+      expandedHeight: context.orientation == Orientation.portrait
+          ? 22.sh
+          : 30.sh,
+      toolbarHeight: context.orientation == Orientation.portrait
+          ? 22.sh
+          : 30.sw,
       shape: RoundedRectangleBorder(
         borderRadius: .only(
           bottomRight: .circular(30),
@@ -143,14 +149,6 @@ class SliverAppBarWidget extends HookWidget {
                                       ),
                                     ],
                                   ),
-                                  IconButton(
-                                    icon: Icon(Icons.near_me),
-                                    onPressed: () {
-                                      context
-                                          .read<SearchCubit>()
-                                          .getNearbyHomesMethod();
-                                    },
-                                  ),
                                 ],
                               );
                             }
@@ -184,35 +182,6 @@ class SliverAppBarWidget extends HookWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {
-                          // ======================================================
-                          final searchCubit = context.read<SearchCubit>();
-                          List<HomeEntity> currentHomes = [];
-                          if (searchCubit.state is SearchSuccessState) {
-                            currentHomes =
-                                (searchCubit.state as SearchSuccessState).homes;
-                          }
-                          // ======================================================
-
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(30),
-                              ),
-                            ),
-                            builder: (context) {
-                              return BlocProvider.value(
-                                value: searchCubit,
-                                child: FilterWidget(homes: currentHomes),
-                              );
-                            },
-                          );
-                        },
-                        icon: Icon(Icons.tune_rounded, color: Colors.white),
-                      ),
-                       IconButton(
                         onPressed: () {
                           // ======================================================
                           final searchCubit = context.read<SearchCubit>();

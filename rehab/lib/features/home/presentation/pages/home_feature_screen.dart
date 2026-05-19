@@ -4,6 +4,7 @@ import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/home/presentation/cubit/home_state.dart';
 import 'package:rehab/features/home/presentation/widgets/home_card.dart';
 import 'package:rehab/features/home/presentation/widgets/sliver_app_bar_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeFeatureScreen extends StatelessWidget {
   const HomeFeatureScreen({super.key});
@@ -22,6 +23,12 @@ class HomeFeatureScreen extends StatelessWidget {
 
         if (state is HomeSuccessState) {
           return Scaffold(
+            floatingActionButton: IconButton(
+              icon: const Icon(Icons.emergency, color: Colors.red),
+              onPressed: () {
+                makeEmergencyCall('0509100076');
+              },
+            ),
             body: Column(
               children: [
                 Expanded(
@@ -40,7 +47,8 @@ class HomeFeatureScreen extends StatelessWidget {
                           if (state is SearchSuccessState) {
                             if (state.homes.isEmpty) {
                               return SliverToBoxAdapter(
-                                child: const Center(
+                                child: const Align(
+                                  alignment: AlignmentGeometry.center,
                                   child: Icon(
                                     Icons.search_off_outlined,
                                     size: 60,
@@ -75,5 +83,15 @@ class HomeFeatureScreen extends StatelessWidget {
         return const SizedBox.shrink();
       },
     );
+  }
+}
+
+Future<void> makeEmergencyCall(String phoneNumber) async {
+  final Uri launchUri = Uri(scheme: 'tel', path: phoneNumber);
+
+  if (await canLaunchUrl(launchUri)) {
+    await launchUrl(launchUri);
+  } else {
+    debugPrint('Could not launch emergency call for $phoneNumber');
   }
 }

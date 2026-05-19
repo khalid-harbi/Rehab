@@ -39,7 +39,7 @@ import 'package:rehab/features/user_details/presentation/cubit/user_details_cubi
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.owner,
+    initialLocation: Routes.splash,
 
     routes: [
       GoRoute(

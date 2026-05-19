@@ -9,23 +9,36 @@
     "darkMode":"Dark Mode",
     "language":"Language",
     "settings":"Settings",
-   "help&support":"Help & Support",
+    "help&support":"Help & Support",
     "logout":"Logout",
     "facilities":"Facilities",
     "aboutProperty": "About Property",
-    "bedrooms_count": "{} Bedrooms",
-    "bathrooms_count": "{} Bathrooms",
-    "parking":"Parking" ,
+    "bedrooms_count": {
+       "one": "1 Bedroom",
+       "other": "{} Bedrooms"
+    },
+    "bathrooms_count": {
+       "one": "1 Bathroom",
+       "other": "{} Bathrooms"
+    },
+    "parking":"Parking",
     "housingRulesAndPolicies":"Housing rules and policies",
     "memberSinceToday": "Member since today",
-    "memberFor": "Member for",
-    "day": "day",
-    "month": "month",
-    "and": "and",
-    "year": "year",
+    "memberFor": "Member for ",
+    "day": {
+       "zero": "today",
+       "one": "1 day",
+       "other": "{} days"
+    },
+    "month": {
+       "one": "1 month",
+       "other": "{} months"
+    },
+    "year": {
+       "one": "1 year",
+       "other": "{} years"
+    },
+    "and": " and ",
     "appInfo": "App Info",
     "matching": "Matching"
-
 }
-
-
