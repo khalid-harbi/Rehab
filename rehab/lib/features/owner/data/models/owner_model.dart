@@ -6,9 +6,7 @@ part 'owner_model.g.dart';
 @freezed
 abstract class OwnerModel with _$OwnerModel {
   const factory OwnerModel({
-    required int id,
-    required String firstName,
-    required String lastName,
+  
     required double totalRevenue,
     
   }) = _OwnerModel;
@@ -20,6 +18,6 @@ abstract class OwnerModel with _$OwnerModel {
 
 extension OwnerModelMapper on OwnerModel {
   OwnerEntity toEntity() {
-    return OwnerEntity(id: id, firstName: firstName, lastName: lastName,totalRevenue: totalRevenue,);
+    return OwnerEntity(totalRevenue: totalRevenue,);
   }
   }

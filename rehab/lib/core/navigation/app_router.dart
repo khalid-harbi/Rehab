@@ -34,7 +34,7 @@ import 'package:rehab/features/my_bookings/presentation/cubit/my_bookings_cubit.
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.home,
+    initialLocation: Routes.owner,
     routes: [
       GoRoute(
         path: Routes.splash,
