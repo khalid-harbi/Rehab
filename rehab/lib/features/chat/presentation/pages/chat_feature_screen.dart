@@ -20,7 +20,7 @@ class ChatFeatureScreen extends StatelessWidget {
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("Chats".tr(), style: TextStyle(fontSize: 42)),
+          child: Text("chats".tr(), style: TextStyle(fontSize: 42)),
         ),
         centerTitle: false,
       ),
@@ -38,7 +38,7 @@ class ChatFeatureScreen extends StatelessWidget {
             // ===================================================================
           } else if (state is ChatLoadedState) {
             if (state.roomPreviews.isEmpty) {
-              return const Center(child: Text("لا توجد محادثات بعد"));
+              return const Center(child: Text("ليس لديك محادثات بعد"));
             }
             return ListView.builder(
               itemCount: state.roomPreviews.length,

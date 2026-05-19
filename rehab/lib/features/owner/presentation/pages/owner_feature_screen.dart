@@ -46,16 +46,6 @@ class OwnerFeatureScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'لوحة التحكم',
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-
-                        const SizedBox(height: 6),
-
                         BlocBuilder<ProfileCubit, ProfileState>(
                           builder: (context, state) {
                             if (state is ProfileLoadingState) {
@@ -129,16 +119,18 @@ class OwnerFeatureScreen extends StatelessWidget {
                                           'الأرباح الشهرية',
                                           style: theme.textTheme.bodySmall
                                               ?.copyWith(
-                                            fontSize: 20,
-                                            color: Colors.white.withAlpha(200),
-                                          ),
+                                                fontSize: 20,
+                                                color: Colors.white.withAlpha(
+                                                  200,
+                                                ),
+                                              ),
                                         ),
                                         const SizedBox(height: 6),
-                                       Text(
-                                      '${state.owner.totalRevenue.toStringAsFixed(0)} ريال',
-                                      style: theme.textTheme.titleLarge?.copyWith(
-                                        color:Colors.white
-                                      ),),
+                                        Text(
+                                          '${state.owner.totalRevenue.toStringAsFixed(0)} ريال',
+                                          style: theme.textTheme.titleLarge
+                                              ?.copyWith(color: Colors.white),
+                                        ),
                                       ],
                                     ),
                                     const Icon(
