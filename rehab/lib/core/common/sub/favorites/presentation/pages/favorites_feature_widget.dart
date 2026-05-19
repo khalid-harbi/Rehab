@@ -20,8 +20,7 @@ class FavoritesFeatureWidget extends StatelessWidget {
               return ListView.separated(
                 padding: const EdgeInsets.all(16),
                 itemCount: state.homes.length,
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 12),
+                separatorBuilder: (context, index) => Gap(12),
                 itemBuilder: (context, index) {
                   final home = state.homes[index];
 
@@ -58,7 +57,7 @@ class FavoritesFeatureWidget extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(width: 12),
+                        Gap(12),
 
                         Expanded(
                           child: Column(
@@ -76,7 +75,7 @@ class FavoritesFeatureWidget extends StatelessWidget {
                                     ?.copyWith(fontWeight: FontWeight.bold),
                               ),
 
-                              const SizedBox(height: 6),
+                              Gap(6),
 
                               Text(
                                 titleForLocale(
@@ -89,7 +88,7 @@ class FavoritesFeatureWidget extends StatelessWidget {
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
 
-                              const SizedBox(height: 8),
+                              Gap(8),
 
                               Text(
                                 '${home.price.toStringAsFixed(0)} ريال / شهر',

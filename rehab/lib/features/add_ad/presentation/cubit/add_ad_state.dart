@@ -8,7 +8,10 @@ abstract class AddAdState extends Equatable {
 }
 
 class AddAdInitialState extends AddAdState {}
+
 class AddAdSuccessState extends AddAdState {}
+
+class AddAdLoadingState extends AddAdState {}
 
 class AddAdErrorState extends AddAdState {
   final String message;
@@ -16,4 +19,3 @@ class AddAdErrorState extends AddAdState {
   @override
   List<Object?> get props => [message];
 }
-

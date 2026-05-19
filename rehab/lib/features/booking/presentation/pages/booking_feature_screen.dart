@@ -17,8 +17,10 @@ class BookingFeatureScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Hooks for state management
     final selectedMonths = useState<int>(6);
-
+    final moveInDate = useState<DateTime?>(null);
+    final dateController = useTextEditingController();
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
 
@@ -53,7 +55,7 @@ class BookingFeatureScreen extends HookWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const SizedBox(height: 20),
+                    Gap(20),
 
                     Text(
                       'إتمام الحجز',
@@ -81,15 +83,47 @@ class BookingFeatureScreen extends HookWidget {
                 children: [
                   PropertyCard(home: home),
 
-                  const SizedBox(height: 24),
+                  Gap(24),
 
                   Text('تاريخ الانتقال', style: theme.textTheme.titleMedium),
 
-                  const SizedBox(height: 8),
+                  Gap(8),
 
                   TextFormField(
+                    controller: dateController,
                     textAlign: TextAlign.right,
                     readOnly: true,
+                    onTap: () async {
+                      // Get the current date to prevent booking in the past
+                      final now = DateTime.now();
+
+                      final pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: moveInDate.value ?? now,
+                        firstDate: now,
+                        // Allow booking up to 2 years in advance
+                        lastDate: DateTime(now.year + 2),
+                        builder: (context, child) {
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                              colorScheme: ColorScheme.light(
+                                primary: colors.primary,
+                                onPrimary: Colors.white,
+                                onSurface: colors.onSurface,
+                              ),
+                            ),
+                            child: child!,
+                          );
+                        },
+                      );
+
+                      if (pickedDate != null) {
+                        moveInDate.value = pickedDate;
+                        // Format the date to match the hint text style (DD / MM / YYYY)
+                        dateController.text =
+                            '${pickedDate.day} / ${pickedDate.month} / ${pickedDate.year}';
+                      }
+                    },
                     decoration: const InputDecoration(
                       hintText: 'اليوم / الشهر / السنة',
                       suffixIcon: Icon(Icons.calendar_month_outlined),
@@ -97,11 +131,12 @@ class BookingFeatureScreen extends HookWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  // ==========================================
+                  Gap(20),
 
                   Text('مدة الإقامة', style: theme.textTheme.titleMedium),
 
-                  const SizedBox(height: 12),
+                  Gap(12),
 
                   Row(
                     children: [
@@ -114,7 +149,7 @@ class BookingFeatureScreen extends HookWidget {
                         },
                       ),
 
-                      const SizedBox(width: 12),
+                      Gap(12),
 
                       MonthButton(
                         title: '6 شهور',
@@ -125,7 +160,7 @@ class BookingFeatureScreen extends HookWidget {
                         },
                       ),
 
-                      const SizedBox(width: 12),
+                      Gap(12),
 
                       MonthButton(
                         title: '12 شهور',
@@ -138,7 +173,7 @@ class BookingFeatureScreen extends HookWidget {
                     ],
                   ),
 
-                  const SizedBox(height: 24),
+                  Gap(24),
 
                   Container(
                     padding: const EdgeInsets.all(18),
@@ -191,37 +226,37 @@ class BookingFeatureScreen extends HookWidget {
                   ),
                 ),
                 onPressed: () {
-  context.showPaymentBottomSheet(
-    amount: total,
-    description: 'Booking for ${home.titleAr}',
-    onPaid: () async {
-      debugPrint(' ON PAID STARTED');
+                  context.showPaymentBottomSheet(
+                    amount: total,
+                    description: 'Booking for ${home.titleAr}',
+                    onPaid: () async {
+                      debugPrint(' ON PAID STARTED');
 
-      try {
-        await context.read<BookingCubit>().createBookingMethod(
-          homeId: home.id,
-          amount: total,
-          durationMonths: selectedMonths.value,
-          paymentId: 'moyasar_test_payment',
-        );
+                      try {
+                        await context.read<BookingCubit>().createBookingMethod(
+                          homeId: home.id,
+                          amount: total,
+                          durationMonths: selectedMonths.value,
+                          paymentId: 'moyasar_test_payment',
+                        );
 
-        debugPrint(' BOOKING SAVED');
+                        debugPrint(' BOOKING SAVED');
 
-        if (context.mounted) {
-          context.showSnackBar('تم الدفع وإتمام الحجز بنجاح');
-          context.pop();
-        }
-      } catch (error) {
-        debugPrint(' BOOKING ERROR: $error');
+                        if (context.mounted) {
+                          context.showSnackBar('تم الدفع وإتمام الحجز بنجاح');
+                          context.pop();
+                        }
+                      } catch (error) {
+                        debugPrint(' BOOKING ERROR: $error');
 
-        if (context.mounted) {
-          context.showSnackBar('فشل حفظ الحجز', isError: true);
-        }
-      }
-    },
-  );
-},
-               child: Text("اتمام الحجز "),
+                        if (context.mounted) {
+                          context.showSnackBar('فشل حفظ الحجز', isError: true);
+                        }
+                      }
+                    },
+                  );
+                },
+                child: Text("اتمام الحجز "),
               ),
             ),
           ),

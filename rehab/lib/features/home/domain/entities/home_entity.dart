@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class HomeEntity extends Equatable {
   final int id;
+  final String ownerId;
   final String titleAr;
   final String titleEn;
   final String cityAr;
@@ -30,6 +31,7 @@ class HomeEntity extends Equatable {
 
   const HomeEntity({
     required this.id,
+    required this.ownerId,
     required this.titleAr,
     required this.titleEn,
     required this.cityAr,
@@ -60,6 +62,7 @@ class HomeEntity extends Equatable {
   @override
   List<Object?> get props => [
     id,
+    ownerId,
     titleAr,
     titleEn,
     cityAr,

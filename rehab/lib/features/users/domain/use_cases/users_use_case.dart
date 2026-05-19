@@ -21,7 +21,7 @@ class UsersUseCase {
   // "Room" is a Dart object that represents a chat session
   // types. means use the class model defined in that library, to avoid confusion
   Future<Result<types.Room, Failure>> createRoom(
-    UsersEntity otherUserId,
+    String otherUserId,
   ) async {
     return await _repositoryData.createChatRoom(otherUserId);
   }

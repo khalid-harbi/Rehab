@@ -20,13 +20,13 @@ import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart'
 import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
 import 'package:rehab/features/conversation/presentation/pages/conversation_feature_screen.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/app_info_screen.dart';
 import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'routers.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
-import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/booking/presentation/pages/booking_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/pages/lifestyle_feature_screen.dart';
 import 'package:rehab/features/lifestyle/presentation/cubit/lifestyle_cubit.dart';
@@ -87,10 +87,11 @@ class AppRouter {
           final home = state.extra as HomeEntity;
           return MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) => HomeDetailsCubit(GetIt.I.get()),
-              ),
+              // BlocProvider(
+              //   create: (context) => HomeDetailsCubit(GetIt.I.get()),
+              // ),
               BlocProvider(create: (context) => GetIt.I<FavoritesCubit>()),
+              BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
             ],
             child: HomeDetailsFeatureScreen(home: home),
           );

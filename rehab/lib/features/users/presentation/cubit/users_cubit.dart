@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:rehab/features/users/domain/use_cases/users_use_case.dart';
 import 'package:rehab/features/users/presentation/cubit/users_state.dart';
 
@@ -27,7 +26,7 @@ class UsersCubit extends Cubit<UsersState> {
   // ===================================================================
   // ===================================================================
 
-  Future<void> createRoom(UsersEntity otherUser) async {
+  Future<void> createRoom(String otherUser) async {
     // loading state
     emit(UsersLoadingState());
     final result = await _usersUseCase.createRoom(otherUser);

@@ -8,7 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseUsersRemoteDataSource {
   Future<List<UsersModel>> loadUsers();
-  Future<types.Room> createChatRoom(UsersEntity otherUser);
+  Future<types.Room> createChatRoom(String otherUserId);
 }
 
 // ===================================================================
@@ -149,11 +149,11 @@ class UsersRemoteDataSource implements BaseUsersRemoteDataSource {
   // ===================================================================
 
   @override
-  Future<types.Room> createChatRoom(UsersEntity otherUser) async {
+  Future<types.Room> createChatRoom(String otherUserId) async {
     try {
       // ---------------------
       final currentUserId = _supabase.auth.currentUser!.id;
-      final List<String> participants = [currentUserId, otherUser.id];
+      final List<String> participants = [currentUserId, otherUserId];
       // ---------------------
 
       // Take raw database response
@@ -174,7 +174,7 @@ class UsersRemoteDataSource implements BaseUsersRemoteDataSource {
         // if (true), the existing room object will be returned to existingDirectRoom
         return userIds.length == 2 &&
             userIds.contains(currentUserId) &&
-            userIds.contains(otherUser.id);
+            userIds.contains(otherUserId);
         // If no such room is found, return an empty map
       }, orElse: () => <String, dynamic>{});
 

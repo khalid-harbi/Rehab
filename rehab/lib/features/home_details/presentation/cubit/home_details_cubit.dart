@@ -7,21 +7,6 @@ class HomeDetailsCubit extends Cubit<HomeDetailsState> {
 
   HomeDetailsCubit(this._homeDetailsUseCase) : super(HomeDetailsInitialState());
 
-  Future<void> getHomeDetailsMethod() async {
-    final result = await _homeDetailsUseCase.getHomeDetails();
-    result.when(
-      (success) {
-        emit(HomeDetailsSuccessState(homeDetails: success));
-      },
-      (whenError) {
-       emit(HomeDetailsErrorState(message: whenError.message));
-      },
-    );
-  }
-
-  @override
-  Future<void> close() {
-    //here is when close cubit
-    return super.close();
-  }
+  // =======================================================
+  // =======================================================
 }

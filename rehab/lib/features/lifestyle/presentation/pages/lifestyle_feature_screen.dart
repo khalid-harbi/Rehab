@@ -27,9 +27,12 @@ class LifestyleFeatureScreen extends StatelessWidget {
         },
         // ==================================================================
         listener: (context, state) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(const SnackBar(content: Text('Saved')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.green,
+              content: Text('Saved'),
+            ),
+          );
         },
         // ==================================================================
         builder: (context, state) {
