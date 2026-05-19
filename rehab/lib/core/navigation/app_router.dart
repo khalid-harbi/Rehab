@@ -32,11 +32,9 @@ import 'package:rehab/features/add_ad/presentation/cubit/add_ad_cubit.dart';
 import 'package:rehab/features/my_bookings/presentation/pages/my_bookings_feature_screen.dart';
 import 'package:rehab/features/my_bookings/presentation/cubit/my_bookings_cubit.dart';
 
-
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.owner,
-
+    initialLocation: Routes.home,
     routes: [
       GoRoute(
         path: Routes.splash,
@@ -76,7 +74,6 @@ class AppRouter {
           );
         },
       ),
-
       GoRoute(
         path: Routes.homeDetails,
         builder: (context, state) {
@@ -92,7 +89,6 @@ class AppRouter {
           );
         },
       ),
-
 
       GoRoute(
         path: Routes.home,
@@ -180,17 +176,17 @@ class AppRouter {
       ),
     
 
-GoRoute(
-  path: Routes.myBookings,
-  builder: (context, state) {
-    return BlocProvider(
-      create: (context) =>
-          GetIt.I<MyBookingsCubit>()..getMyBookingsMethod(),
-      child: const MyBookingsFeatureScreen(),
-    );
-  },
-),
-],
+        GoRoute(
+          path: Routes.myBookings,
+          builder: (context, state) {
+            return BlocProvider(
+              create: (context) =>
+                  GetIt.I<MyBookingsCubit>()..getMyBookingsMethod(),
+              child: const MyBookingsFeatureScreen(),
+            );
+          },
+        ),
+        ],
 
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),
