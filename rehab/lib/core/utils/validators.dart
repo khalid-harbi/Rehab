@@ -14,19 +14,17 @@ class Validators {
     return null;
   }
 
-  // static String? validatePassword(String? value) {
-  //   if (value == null || value.isEmpty) {
-  //     return 'Password is required';
-  //   }
-  //   if (value.length < 8) {
-  //     return 'Password must be at least 8 characters';
-  //   }
-  //   return null;
-  // }
-
-    static String? validatePassword(String? value) {
-    if (value == null || value.trim().isEmpty) {
+  static String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
       return 'Password is required';
+    }
+
+    if (value.contains(' ')) {
+      return 'Password must not contain spaces';
+    }
+
+    if (RegExp(r'(.)\1{3,}').hasMatch(value)) {
+      return 'Too many repeated characters';
     }
 
     final password = value.trim();
@@ -34,7 +32,6 @@ class Validators {
     if (password.length < 12) {
       return 'Password must be at least 12 characters';
     }
-
     if (!RegExp(r'[A-Z]').hasMatch(password)) {
       return 'Must contain uppercase letter';
     }
@@ -67,9 +64,7 @@ class Validators {
       'welcome',
     ];
 
-    if (weakPasswords.any(
-      (weak) => password.toLowerCase().contains(weak),
-    )) {
+    if (weakPasswords.any((weak) => password.toLowerCase().contains(weak))) {
       return 'Password is too common';
     }
 
@@ -114,16 +109,6 @@ class Validators {
   static String? validateRequired(String? value, {String? fieldName}) {
     if (value == null || value.isEmpty) {
       return '${fieldName ?? 'This field'} is required';
-    }
-    return null;
-  }
-
-  static String? validateMinLength(String? value, int minLength) {
-    if (value == null || value.isEmpty) {
-      return 'This field is required';
-    }
-    if (value.length < minLength) {
-      return 'Must be at least $minLength characters';
     }
     return null;
   }

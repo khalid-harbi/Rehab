@@ -119,7 +119,6 @@ class SignUpFeatureScreen extends HookWidget {
                       ),
                     ),
                   ),
-                  Gap(3.h),
                 ],
               ),
             ),

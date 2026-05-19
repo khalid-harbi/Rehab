@@ -10,6 +10,7 @@ import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile/profile_state.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
@@ -35,7 +36,6 @@ class SliverAppBarWidget extends HookWidget {
     // });
     final cubit = context.read<SearchCubit>();
     final controllerSearch = useTextEditingController();
- 
 
     Timer? timer;
 
@@ -145,7 +145,6 @@ class SliverAppBarWidget extends HookWidget {
                                       ),
                                     ],
                                   ),
-                                  
                                 ],
                               );
                             }
@@ -206,6 +205,16 @@ class SliverAppBarWidget extends HookWidget {
                           );
                         },
                         icon: Icon(Icons.tune_rounded, color: Colors.white),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          context.read<HomeCubit>().resetFilters();
+                        },
+                        icon: const Icon(
+                          Icons.refresh,
+                          color: Colors.white,
+                          size: 18,
+                        ),
                       ),
                     ],
                   ),

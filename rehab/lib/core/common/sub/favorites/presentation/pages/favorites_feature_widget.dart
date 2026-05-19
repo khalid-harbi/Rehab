@@ -9,12 +9,12 @@ class FavoritesFeatureWidget extends StatelessWidget {
     return BlocProvider(
       create: (context) => GetIt.I<FavoritesCubit>()..getFavoriteHomesMethod(),
       child: Scaffold(
-        appBar: AppBar(title: const Text('الإعجابات')),
+        appBar: AppBar(title: const Text('المفضلة')),
         body: BlocBuilder<FavoritesCubit, FavoritesState>(
           builder: (context, state) {
             if (state is FavoritesHomesSuccessState) {
               if (state.homes.isEmpty) {
-                return const Center(child: Text('لا توجد إعجابات حالياً'));
+                return const Center(child: Text('ليس لديك تفضيلات بعد'));
               }
 
               return ListView.separated(
@@ -72,9 +72,7 @@ class FavoritesFeatureWidget extends StatelessWidget {
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
+                                style: Theme.of(context).textTheme.titleMedium
                                     ?.copyWith(fontWeight: FontWeight.bold),
                               ),
 
@@ -95,9 +93,7 @@ class FavoritesFeatureWidget extends StatelessWidget {
 
                               Text(
                                 '${home.price.toStringAsFixed(0)} ريال / شهر',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
+                                style: Theme.of(context).textTheme.bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
                             ],

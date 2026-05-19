@@ -26,7 +26,7 @@ class HomeFeatureScreen extends StatelessWidget {
             floatingActionButton: IconButton(
               icon: const Icon(Icons.emergency, color: Colors.red),
               onPressed: () {
-                makeEmergencyCall('0509100076');
+                makeEmergencyCall('0554080481');
               },
             ),
             body: Column(

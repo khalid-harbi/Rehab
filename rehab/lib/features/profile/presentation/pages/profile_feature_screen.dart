@@ -78,7 +78,7 @@ class ProfileFeatureScreen extends HookWidget {
                     ),
                     if (state.profile.role.toUserRole() != UserRole.owner)
                       ProfileWidget(
-                        icon: Icon(Icons.favorite_border),
+                        icon: const Icon(Icons.favorite_border),
                         title: "favorites",
                         onTap: () {
                           context.push(Routes.favorites);
@@ -86,7 +86,7 @@ class ProfileFeatureScreen extends HookWidget {
                       ),
                     if (state.profile.role.toUserRole() != UserRole.owner)
                       ProfileWidget(
-                        icon: Icon(Icons.attach_money),
+                        icon: const Icon(Icons.attach_money),
                         title: "bookings",
                         onTap: () {
                           context.push(Routes.myBookings);

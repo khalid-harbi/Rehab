@@ -1,19 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rehab/core/constants/app_colors.dart';
-import 'package:rehab/core/exports/app_exports.dart';
-import 'package:rehab/core/extensions/context_extensions.dart';
-import 'package:rehab/features/add_ad/presentation/widgets/custom_text_field.dart';
-import 'package:rehab/features/profile/presentation/pages/profile_feature_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:rehab/core/exports/app_exports.dart';
+import 'package:rehab/features/add_ad/presentation/widgets/custom_text_field.dart';
+import 'package:rehab/features/add_ad/presentation/widgets/image_picker_widget.dart';
 
 class AddAdFeatureScreen extends HookWidget {
   const AddAdFeatureScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    File? pickedImageFile;
     final theme = Theme.of(context);
 
     final titleController = useTextEditingController();
@@ -25,7 +21,24 @@ class AddAdFeatureScreen extends HookWidget {
     final bathroomsController = useTextEditingController();
     final priceController = useTextEditingController();
     final areaController = useTextEditingController();
-    final imageUrlController = useTextEditingController();
+
+    // Location controllers
+    final latController = useTextEditingController();
+    final langController = useTextEditingController();
+
+    // Pre-declare controllers to obey hook rules (no hooks inside loops)
+    final policyControllers = [
+      useTextEditingController(),
+      useTextEditingController(),
+      useTextEditingController(),
+    ];
+    final policyCount = useState(1);
+
+    final amenityControllers = [
+      useTextEditingController(),
+      useTextEditingController(),
+    ];
+    final amenityCount = useState(1);
 
     Future<void> addHome() async {
       final userId = Supabase.instance.client.auth.currentUser?.id;
@@ -37,6 +50,19 @@ class AddAdFeatureScreen extends HookWidget {
         return;
       }
 
+      // Extract text from visible controllers and filter out empty strings
+      final policies = policyControllers
+          .take(policyCount.value)
+          .map((c) => c.text.trim())
+          .where((text) => text.isNotEmpty)
+          .toList();
+
+      final amenities = amenityControllers
+          .take(amenityCount.value)
+          .map((c) => c.text.trim())
+          .where((text) => text.isNotEmpty)
+          .toList();
+
       await Supabase.instance.client.from('home').insert({
         'title': titleController.text.trim(),
         'city': cityController.text.trim(),
@@ -47,18 +73,22 @@ class AddAdFeatureScreen extends HookWidget {
         'bathrooms': int.tryParse(bathroomsController.text.trim()) ?? 0,
         'price': double.tryParse(priceController.text.trim()) ?? 0,
         'area': double.tryParse(areaController.text.trim()) ?? 0,
-        'image_url': imageUrlController.text.trim(),
+        'lat': double.tryParse(latController.text.trim()) ?? 0.0,
+        'lang': double.tryParse(langController.text.trim()) ?? 0.0,
         'owner_id': userId,
         'rating': 0,
         'is_available': true,
-        'policy': '',
+        'policy': policies,
+        'amenities': amenities,
       });
 
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('تمت إضافة الإعلان بنجاح')));
 
-      context.pop();
+      if (context.mounted) {
+        context.pop();
+      }
     }
 
     return Scaffold(
@@ -79,63 +109,47 @@ class AddAdFeatureScreen extends HookWidget {
                     icon: const Icon(Icons.arrow_back),
                   ),
                 ),
-
                 const SizedBox(height: 16),
-
                 Text(
                   'إضافة إعلان جديد',
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
                 const SizedBox(height: 4),
-
-                Text('أضيفي تفاصيل عقارك', style: theme.textTheme.bodyMedium),
-
+                Text('أضف تفاصيل عقارك', style: theme.textTheme.bodyMedium),
                 const SizedBox(height: 24),
-
                 CustomTextField(
                   label: 'عنوان الإعلان',
                   hint: 'مثال: شقة فسيحة في حي النرجس',
                   controller: titleController,
                 ),
-
                 const SizedBox(height: 16),
-
                 CustomTextField(
                   label: 'المدينة',
                   hint: 'مثال: الرياض',
                   controller: cityController,
                 ),
-
                 const SizedBox(height: 16),
-
                 CustomTextField(
-                  label: 'الموقع',
+                  label: 'الحي',
                   hint: 'الرياض، حي الياسمين',
                   controller: districtController,
                 ),
-
                 const SizedBox(height: 16),
-
                 CustomTextField(
                   label: 'نوع السكن',
                   hint: 'شقة خاصة، شقة مشتركة',
                   controller: propertyTypeController,
                 ),
-
                 const SizedBox(height: 16),
-
                 CustomTextField(
                   label: 'الوصف',
-                  hint: 'اكتبي وصف العقار',
+                  hint: 'وصف العقار',
                   maxLines: 5,
                   controller: descriptionController,
                 ),
-
                 const SizedBox(height: 16),
-
                 Row(
                   children: [
                     Expanded(
@@ -157,14 +171,12 @@ class AddAdFeatureScreen extends HookWidget {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 16),
-
                 Row(
                   children: [
                     Expanded(
                       child: CustomTextField(
-                        label: 'السعر',
+                        label: 'السعر بالشهر',
                         hint: 'مثال: 2500',
                         controller: priceController,
                         keyboardType: TextInputType.number,
@@ -181,69 +193,123 @@ class AddAdFeatureScreen extends HookWidget {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 16),
 
-                CustomTextField(
-                  label: 'رابط الصورة',
-                  hint: 'ضعي رابط صورة الإعلان',
-                  controller: imageUrlController,
+                // Location Fields (Lat / Lang)
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextField(
+                        label: 'خط العرض (Lat)',
+                        hint: 'مثال: 24.7136',
+                        controller: latController,
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: CustomTextField(
+                        label: 'خط الطول (Lang)',
+                        hint: 'مثال: 46.6753',
+                        controller: langController,
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 24),
+
+                // Policies Section
+                Text(
+                  'قواعد وسياسات السكن',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                for (int i = 0; i < policyCount.value; i++) ...[
+                  CustomTextField(
+                    label: i == 1
+                        ? 'السياسة الثانية'
+                        : i == 2
+                        ? 'السياسة الثالثة'
+                        : 'السياسة الأولى',
+                    hint: 'مثال: يمنع التدخين',
+                    controller: policyControllers[i],
+                  ),
+                  const SizedBox(height: 8),
+                ],
+                if (policyCount.value < 3)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        policyCount.value++;
+                      },
+                      icon: const Icon(Icons.add, size: 20),
+                      label: const Text('إضافة سياسة'),
+                    ),
+                  ),
+                const SizedBox(height: 16),
+
+                // Amenities Section
+                Text(
+                  'المرافق',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                for (int i = 0; i < amenityCount.value; i++) ...[
+                  CustomTextField(
+                    label: i == 1 ? 'المرفق الثاني' : 'المرفق الأول',
+                    hint: 'مثال: موقف سيارة خاص',
+                    controller: amenityControllers[i],
+                  ),
+                  const SizedBox(height: 8),
+                ],
+                if (amenityCount.value < 2)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        amenityCount.value++;
+                      },
+                      icon: const Icon(Icons.add, size: 20),
+                      label: const Text('إضافة مرفق'),
+                    ),
+                  ),
 
                 const SizedBox(height: 24),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'اضيفي صورة',
+                      'الصور',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     const SizedBox(height: 8),
-
-                    StatefulBuilder(
-                      builder: (context, setDialogState) {
-                        return Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            color: AppColors.background,
-                            borderRadius: BorderRadius.circular(12),
+                    const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: ImagePickerWidget(),
                           ),
-                          child: InkWell(
-                            onTap: () async {
-                              final picker = ImagePicker();
-                              final image = await picker.pickImage(
-                                source: ImageSource.gallery,
-                                imageQuality: 70,
-                              );
-
-                              if (image != null) {
-                                setDialogState(() {
-                                  pickedImageFile = File(image.path);
-                                });
-                              }
-                            },
-                            child: pickedImageFile != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Image.file(
-                                      pickedImageFile!,
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : const Icon(
-                                    Icons.camera_alt,
-                                    size: 18,
-                                    color: Colors.black,
-                                  ),
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: ImagePickerWidget(),
                           ),
-                        );
-                      },
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: ImagePickerWidget(),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
