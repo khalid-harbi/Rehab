@@ -22,6 +22,9 @@ import 'package:rehab/features/owner/presentation/pages/properties_feature_scree
 import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/app_info_screen.dart';
+import 'package:rehab/features/user_details/presentation/cubit/user_details_cubit.dart';
+import 'package:rehab/features/user_details/presentation/pages/user_details_feature_screen.dart';
+import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'routers.dart';
 import 'package:rehab/features/home_details/presentation/pages/home_details_feature_screen.dart';
@@ -190,22 +193,22 @@ class AppRouter {
       //           );
       //         },
       //       ),
-      //       GoRoute(
-      //         path: Routes.userDetails,
-      //         builder: (context, state) {
-      //           final user = state.extra as UsersEntity?;
-      //           return MultiBlocProvider(
-      //             providers: [
-      //               BlocProvider(
-      //                 create: (context) => UserDetailsCubit(GetIt.I.get()),
-      //               ),
-      //               // Add the UsersCubit provider here!
-      //               BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
-      //             ],
-      //             child: UserDetailsFeatureScreen(fetchedUser: user),
-      //           );
-      //         },
-      //       ),
+            GoRoute(
+              path: Routes.userDetails,
+              builder: (context, state) {
+                final user = state.extra as UsersEntity?;
+                return MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => UserDetailsCubit(GetIt.I.get()),
+                    ),
+                    // Add the UsersCubit provider here!
+                    BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
+                  ],
+                  child: UserDetailsFeatureScreen(fetchedUser: user),
+                );
+              },
+            ),
       //     ],
       // =======
       GoRoute(

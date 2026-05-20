@@ -120,7 +120,7 @@ class ProfileFeatureScreen extends HookWidget {
                           const SizedBox(height: 4),
 
                           Text(
-                            "مرحباً بك في رحاب",
+                            "مرحبًا بك في رحاب",
                             style: theme.textTheme.bodyLarge?.copyWith(
                               color: Colors.grey.shade600,
                             ),
