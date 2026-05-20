@@ -1,20 +1,15 @@
-import 'dart:async';
 import 'package:any_image_view/any_image_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:rehab/core/common/sub/search/presentation/widgets/filter_widget.dart';
 import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
-import 'package:rehab/core/common/sub/search/presentation/cubit/search_state.dart';
-import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_state.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile/profile_state.dart';
-import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 class OwnerSliverAppBarWidget extends HookWidget {
@@ -134,7 +129,8 @@ class OwnerSliverAppBarWidget extends HookWidget {
                   Gap(2.sh),
                   BlocBuilder<OwnerCubit, OwnerState>(
                     builder: (context, state) {
-                      if (state is OwnerInitialState) {
+                      if (state is OwnerInitialState ||
+                          state is OwnerLoadingState) {
                         return const Center(child: CircularProgressIndicator());
                       }
 
@@ -177,15 +173,7 @@ class OwnerSliverAppBarWidget extends HookWidget {
                           ),
                         );
                       }
-
-                      if (state is OwnerErrorState) {
-                        return Text(
-                          state.message,
-                          style: const TextStyle(color: Colors.red),
-                        );
-                      }
-
-                      return const SizedBox.shrink();
+                      return SizedBox.shrink();
                     },
                   ),
                 ],

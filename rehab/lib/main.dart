@@ -1,11 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rehab/core/exports/app_exports.dart';
-import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/theme/Theme_switcher_cubit.dart';
-import 'package:sizer/sizer.dart';
 import 'core/setup.dart';
 import 'core/theme/app_theme.dart';
 import 'core/di/configure_dependencies.dart';
