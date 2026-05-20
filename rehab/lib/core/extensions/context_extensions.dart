@@ -221,11 +221,11 @@ extension ContextExtensions on BuildContext {
                         },
                       ),
                       Gap(24),
-                      buildTextField(
-                        controller: nameController,
-                        label: "name".tr(),
-                        icon: Icons.person_outline,
-                      ),
+                      // buildTextField(
+                      //   controller: nameController,
+                      //   label: "name".tr(),
+                      //   icon: Icons.person_outline,
+                      // ),
                       Gap(24),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -280,11 +280,11 @@ extension ContextExtensions on BuildContext {
               title: Text("gallery".tr()),
               onTap: () {
                 Navigator.pop(modalContext);
-                pickImageLocal(
-                  ImageSource.gallery,
-                  setDialogState,
-                  onFilePicked,
-                );
+                // pickImageLocal(
+                //   ImageSource.gallery,
+                //   setDialogState,
+                //   onFilePicked,
+                // );
               },
             ),
             ListTile(
@@ -292,11 +292,11 @@ extension ContextExtensions on BuildContext {
               title: Text("camera".tr()),
               onTap: () {
                 Navigator.pop(modalContext);
-                pickImageLocal(
-                  ImageSource.camera,
-                  setDialogState,
-                  onFilePicked,
-                );
+                // pickImageLocal(
+                //   ImageSource.camera,
+                //   setDialogState,
+                //   onFilePicked,
+                // );
               },
             ),
           ],
@@ -409,7 +409,7 @@ void showHelpAndSupportDialog(BuildContext context) {
             InkWell(
               onTap: () async {
                 Navigator.pop(context);
-                await launchSupportEmail('rehabtuwaiq@gmail.com');
+                // await launchSupportEmail('rehabtuwaiq@gmail.com');
               },
               borderRadius: BorderRadius.circular(12),
               child: Container(

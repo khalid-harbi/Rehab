@@ -20,7 +20,7 @@ import 'package:rehab/features/profile/domain/repositories/profile_repository_do
 import 'package:rehab/features/profile/domain/use_cases/profile_use_case.dart'
     as _i659;
 import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart'
-    as _i834;
+    as _i879;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -40,8 +40,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i659.ProfileUseCase>(
       () => _i659.ProfileUseCase(gh<_i855.ProfileRepositoryDomain>()),
     );
-    gh.factory<_i834.ProfileCubit>(
-      () => _i834.ProfileCubit(gh<_i659.ProfileUseCase>()),
+    gh.factory<_i879.ProfileCubit>(
+      () => _i879.ProfileCubit(gh<_i659.ProfileUseCase>()),
     );
     return this;
   }

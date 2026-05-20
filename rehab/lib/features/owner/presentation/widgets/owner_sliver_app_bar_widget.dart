@@ -149,7 +149,7 @@ class OwnerSliverAppBarWidget extends HookWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'الأرباح الشهرية',
+                                    'مجموع الأرباح ',
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       fontSize: 20,
                                       color: Colors.white.withAlpha(200),

@@ -32,31 +32,31 @@ class BookingFeatureScreen extends HookWidget {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(20),
+            // padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: colors.primary,
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(24),
               ),
             ),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white.withAlpha(26),
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new),
-                    color: Colors.white,
-                    onPressed: () => context.pop(),
-                  ),
-                ),
-
-                const Spacer(),
-
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
                   children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.white.withAlpha(26),
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back_ios_new),
+                        color: Colors.white,
+                        onPressed: () => context.pop(),
+                      ),
+                    ),
+                
+                    const Spacer(),
+                
                     Gap(20),
-
+                    
                     Text(
                       'إتمام الحجز',
                       style: theme.textTheme.titleLarge?.copyWith(
@@ -64,14 +64,9 @@ class BookingFeatureScreen extends HookWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
-                    const Text(
-                      'الخطوة 1 من 3',
-                      style: TextStyle(color: Colors.white),
-                    ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
 

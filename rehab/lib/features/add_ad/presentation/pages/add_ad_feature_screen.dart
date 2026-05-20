@@ -325,28 +325,31 @@ class AddAdFeatureScreen extends HookWidget {
                         Gap(8),
                         Padding(
                           padding: const EdgeInsets.all(16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(3, (index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: ImagePickerWidget(
-                                  onFileChanged: (File? file) {
-                                    final currentImages = List<File>.from(
-                                      selectedImages.value,
-                                    );
-                                    if (file != null) {
-                                      if (index < currentImages.length) {
-                                        currentImages[index] = file;
-                                      } else {
-                                        currentImages.add(file);
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: List.generate(3, (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: ImagePickerWidget(
+                                    onFileChanged: (File? file) {
+                                      final currentImages = List<File>.from(
+                                        selectedImages.value,
+                                      );
+                                      if (file != null) {
+                                        if (index < currentImages.length) {
+                                          currentImages[index] = file;
+                                        } else {
+                                          currentImages.add(file);
+                                        }
                                       }
-                                    }
-                                    selectedImages.value = currentImages;
-                                  },
-                                ),
-                              );
-                            }),
+                                      selectedImages.value = currentImages;
+                                    },
+                                  ),
+                                );
+                              }),
+                            ),
                           ),
                         ),
                       ],

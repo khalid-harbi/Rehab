@@ -13,6 +13,4 @@ abstract class Env {
   @EnviedField(varName: 'key_payment')
   static final String paymentKey = _Env.paymentKey;
 
-  @EnviedField(varName: 'ios_clientId')
-  static final String iosClientId = _Env.iosClientId;
 }

@@ -18,4 +18,5 @@ class Routes {
   static const String appInfo = '/app_info_screen';
   static const String myBookings = '/myBookings';
   static const String userDetails = '/userDetails';
+  static const String properties = '/properties';
 }

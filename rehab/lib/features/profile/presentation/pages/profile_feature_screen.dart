@@ -13,6 +13,7 @@ class ProfileFeatureScreen extends HookWidget {
   const ProfileFeatureScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Padding(
@@ -41,41 +42,101 @@ class ProfileFeatureScreen extends HookWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50.sp),
-                        child: InkWell(
-                          onTap: () => showImageOptions(context),
-                          child: AnyImageView(
-                            imagePath:
-                                state.profile.imageUrl ??
-                                "https://placeholder.com/user.png",
-                            width: 60.sp,
-                            height: 60.sp,
-                            fit: BoxFit.cover,
-                            errorWidget: Icon(Icons.person, size: 30.sp),
+                    Center(
+                      child: Column(
+                        children: [
+                          Stack(
+                            alignment: Alignment.bottomRight,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: theme.colorScheme.primary.withAlpha(
+                                      20,
+                                    ),
+                                    width: 4,
+                                  ),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: InkWell(
+                                    onTap: () => showImageOptions(context),
+                                    child: AnyImageView(
+                                      imagePath:
+                                          state.profile.imageUrl ??
+                                          "https://placeholder.com/user.png",
+                                      width: 25.sw,
+                                      height: 25.w,
+                                      fit: BoxFit.cover,
+                                      errorWidget: Icon(
+                                        Icons.person,
+                                        size: 12.w,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  context.showEditProfileDialog(
+                                    context,
+                                    state.profile.name,
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: theme.colorScheme.primary,
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: theme.colorScheme.primary
+                                            .withAlpha(30),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.edit_rounded,
+                                    size: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        context.showEditProfileDialog(
-                          context,
-                          state.profile.name,
-                        );
-                      },
-                      icon: const Icon(Icons.edit),
-                    ),
+                          const SizedBox(height: 16),
 
-                    Text(
-                      state.profile.name,
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                          Text(
+                            state.profile.name,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+
+                          Text(
+                            "مرحباً بك في رحاب",
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    const SizedBox(height: 24),
+                    if (state.profile.role.toUserRole() == UserRole.owner)
+                      ProfileWidget(
+                        icon: const Icon(Icons.apartment_outlined),
+                        title: "عقاراتي", //TODO: Translate it
+                        onTap: () {
+                          context.push(Routes.properties);
+                        },
+                      ),
                     if (state.profile.role.toUserRole() != UserRole.owner)
                       ProfileWidget(
                         icon: const Icon(Icons.favorite_border),
@@ -119,7 +180,6 @@ class ProfileFeatureScreen extends HookWidget {
                       action: LanguageSwitchWidget(),
                     ),
 
-                    Gap(2.sh),
                     ProfileWidget(
                       icon: const Icon(Icons.support_agent_outlined),
                       title: "help&support",

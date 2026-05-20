@@ -27,17 +27,6 @@ class TextFieldWidget extends HookWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Padding(
-        //   padding: EdgeInsets.only(bottom: 8.sp, left: 4.sp),
-        //   child: Text(
-        //     label,
-        //     style: const TextStyle(
-        //       fontSize: 14,
-        //       fontWeight: FontWeight.w600,
-        //       color: Colors.black87,
-        //     ),
-        //   ),
-        // ),
         // todo: add keyboard type
         TextFormField(
           controller: controller,
@@ -45,7 +34,7 @@ class TextFieldWidget extends HookWidget {
           validator: validator,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+            hintStyle: const TextStyle(color: AppColors.primary, fontSize: 14),
             prefixIcon: Icon(icon, color: AppColors.primary),
 
             suffixIcon: isPassword
@@ -63,7 +52,7 @@ class TextFieldWidget extends HookWidget {
                 : null,
 
             // filled: true,
-            fillColor: Colors.grey.shade300,
+            fillColor: Colors.white54,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
               borderSide: BorderSide.none,
@@ -75,7 +64,7 @@ class TextFieldWidget extends HookWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
               borderSide: const BorderSide(
-                color: Color(0xFF6A1B9A),
+                color: AppColors.secondary,
                 width: 1.5,
               ),
             ),

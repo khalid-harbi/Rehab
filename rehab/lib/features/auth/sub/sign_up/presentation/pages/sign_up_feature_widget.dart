@@ -92,7 +92,7 @@ class SignUpFeatureScreen extends HookWidget {
                   Gap(6.h),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.background,
+                      backgroundColor: Colors.white,
                       foregroundColor: Colors.white,
                       minimumSize: Size(double.infinity, 60),
                       elevation: 8,

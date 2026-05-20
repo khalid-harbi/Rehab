@@ -9,14 +9,13 @@ abstract class AppTheme {
     useMaterial3: true,
     brightness: Brightness.light,
     fontFamily: 'Estedad',
-    // fontFamily: GoogleFonts.tajawal().fontFamily,
 
     //  Colors
     colorScheme: const ColorScheme.light(
       primary: AppColors.primary,
       secondary: AppColors.secondary,
       surface: AppColors.surface,
-      error: AppColors.secondary, //! todo: change it
+      error: AppColors.secondary,
     ),
 
     scaffoldBackgroundColor: AppColors.background,

@@ -107,8 +107,7 @@ class LoginFeatureScreen extends HookWidget {
                         child: const Text(
                           "نسيت كلمة المرور ؟",
                           style: TextStyle(
-                            color: AppColors.background,
-
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -117,7 +116,7 @@ class LoginFeatureScreen extends HookWidget {
 
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.background,
+                        backgroundColor: Colors.white,
                         foregroundColor: Colors.white,
                         minimumSize: Size(double.infinity, 60),
                         elevation: 8,
@@ -147,15 +146,25 @@ class LoginFeatureScreen extends HookWidget {
 
                     Row(
                       children: [
-                        Expanded(child: Divider(thickness: 1)),
+                        Expanded(
+                          child: Divider(
+                            thickness: 1,
+                            color: Colors.grey.shade500,
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
                             "أو عبر",
-                            style: TextStyle(color: Colors.grey),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        Expanded(child: Divider(thickness: 1)),
+                        Expanded(
+                          child: Divider(
+                            thickness: 1,
+                            color: Colors.grey.shade500,
+                          ),
+                        ),
                       ],
                     ),
 
