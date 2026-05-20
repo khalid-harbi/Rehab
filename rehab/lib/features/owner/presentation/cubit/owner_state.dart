@@ -12,6 +12,8 @@ class OwnerInitialState extends OwnerState {
   const OwnerInitialState();
 }
 
+class OwnerLoadingState extends OwnerState {}
+
 class OwnerSuccessState extends OwnerState {
   final OwnerEntity owner;
 

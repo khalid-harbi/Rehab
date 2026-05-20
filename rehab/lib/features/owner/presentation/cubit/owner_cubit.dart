@@ -6,18 +6,19 @@ class OwnerCubit extends Cubit<OwnerState> {
   final OwnerUseCase _ownerUseCase;
 
   OwnerCubit(this._ownerUseCase) : super(OwnerInitialState());
+Future<void> getOwnerMethod() async {
+  emit(OwnerLoadingState());
+  final result = await _ownerUseCase.getOwner();
 
-  Future<void> getOwnerMethod() async {
-    final result = await _ownerUseCase.getOwner();
-    result.when(
-      (success) {
-       emit(OwnerSuccessState(owner: success));
-      },
-      (whenError) {
-       //here is when error result
-      },
-    );
-  }
+  result.when(
+    (success) {
+      emit(OwnerSuccessState(owner: success));
+    },
+    (error) {
+      emit(OwnerErrorState(message: error.message));
+    },
+  );
+}
 
   @override
   Future<void> close() {

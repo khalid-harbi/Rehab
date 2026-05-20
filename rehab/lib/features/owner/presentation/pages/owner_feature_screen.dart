@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/widgets/loading_widget.dart';
@@ -103,7 +102,8 @@ class OwnerFeatureScreen extends StatelessWidget {
 
                         BlocBuilder<OwnerCubit, OwnerState>(
                           builder: (context, state) {
-                            if (state is OwnerInitialState) {
+                            if (state is OwnerInitialState ||
+                                state is OwnerLoadingState) {
                               return const Center(
                                 child: CircularProgressIndicator(),
                               );
@@ -129,16 +129,18 @@ class OwnerFeatureScreen extends StatelessWidget {
                                           'الأرباح الشهرية',
                                           style: theme.textTheme.bodySmall
                                               ?.copyWith(
-                                            fontSize: 20,
-                                            color: Colors.white.withAlpha(200),
-                                          ),
+                                                fontSize: 20,
+                                                color: Colors.white.withAlpha(
+                                                  200,
+                                                ),
+                                              ),
                                         ),
                                         const SizedBox(height: 6),
-                                       Text(
-                                      '${state.owner.totalRevenue.toStringAsFixed(0)} ريال',
-                                      style: theme.textTheme.titleLarge?.copyWith(
-                                        color:Colors.white
-                                      ),),
+                                        Text(
+                                          '${state.owner.totalRevenue.toStringAsFixed(0)} ريال',
+                                          style: theme.textTheme.titleLarge
+                                              ?.copyWith(color: Colors.white),
+                                        ),
                                       ],
                                     ),
                                     const Icon(
