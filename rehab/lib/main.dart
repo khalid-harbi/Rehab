@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rehab/core/exports/app_exports.dart';
+import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
 import 'package:rehab/features/profile/presentation/cubit/theme/Theme_switcher_cubit.dart';
 import 'package:sizer/sizer.dart';
 import 'core/setup.dart';
@@ -34,8 +36,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ThemeSwitcherCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ThemeSwitcherCubit()),
+        BlocProvider(create: (_) => ProfileCubit(GetIt.I.get())),
+
+        // BlocProvider(create: (context) => GetIt.I<ProfileCubit>()..getProfileMethod()),
+      ],
       child: BlocBuilder<ThemeSwitcherCubit, bool>(
         builder: (context, state) {
           return Sizer(

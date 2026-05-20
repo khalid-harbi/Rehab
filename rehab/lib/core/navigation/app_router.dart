@@ -106,13 +106,13 @@ class AppRouter {
         ),
       ),
 
-      GoRoute(
-        path: Routes.chat,
-        builder: (context, state) => BlocProvider(
-          create: (context) => ChatCubit(GetIt.I.get()),
-          child: const ChatFeatureScreen(),
-        ),
-      ),
+      // GoRoute(
+      //   path: Routes.chat,
+      //   builder: (context, state) => BlocProvider(
+      //     create: (context) => ChatCubit(GetIt.I.get()),
+      //     child: const ChatFeatureScreen(),
+      //   ),
+      // ),
       GoRoute(
         path: Routes.conversation,
         builder: (context, state) {
