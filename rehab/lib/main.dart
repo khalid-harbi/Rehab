@@ -31,7 +31,6 @@ Future<void> main() async {
 }
 
 // ======================================================
-// ======================================================
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -42,11 +41,8 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeSwitcherCubit()),
         BlocProvider(create: (_) => ProfileCubit(GetIt.I.get())),
-
-        // BlocProvider(create: (context) => GetIt.I<ProfileCubit>()..getProfileMethod()),
       ],
 
-      // ======================================================
       // ======================================================
       child: BlocBuilder<ThemeSwitcherCubit, bool>(
         builder: (context, state) {

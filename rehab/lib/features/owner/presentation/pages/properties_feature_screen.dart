@@ -1,5 +1,4 @@
 import 'package:rehab/core/exports/app_exports.dart';
-import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_state.dart';
 
@@ -24,15 +23,25 @@ class PropertiesFeatureScreen extends StatelessWidget {
                 itemCount: state.homes.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 12),
                 itemBuilder: (context, index) {
-                  final booking = state.homes[index];
                   final home = state.homes[index];
                   return Card(
                     child: ListTile(
                       leading: Image.network(
-                        home.imageUrl,
+                        home.imageUrls[0],
                         width: 60,
                         height: 60,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            width: 60,
+                            height: 60,
+                            color: Colors.grey[200],
+                            child: const Icon(
+                              Icons.image_not_supported,
+                              color: Colors.grey,
+                            ),
+                          );
+                        },
                       ),
 
                       //TODO: make it multi language
@@ -49,7 +58,7 @@ class PropertiesFeatureScreen extends StatelessWidget {
               return Center(child: Text(state.message));
             }
 
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: LoadingWidget());
           },
         ),
       ),

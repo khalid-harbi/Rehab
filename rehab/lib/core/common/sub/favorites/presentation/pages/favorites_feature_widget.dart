@@ -42,16 +42,19 @@ class FavoritesFeatureWidget extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(14),
                           child: Image.network(
-                            home.imageUrl,
+                            home.imageUrls[0],
                             width: 90,
                             height: 90,
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
-                                width: 90,
-                                height: 90,
-                                color: Colors.grey.shade200,
-                                child: const Icon(Icons.image_not_supported),
+                                width: 60,
+                                height: 60,
+                                color: Colors.grey[200],
+                                child: const Icon(
+                                  Icons.image_not_supported,
+                                  color: Colors.grey,
+                                ),
                               );
                             },
                           ),
