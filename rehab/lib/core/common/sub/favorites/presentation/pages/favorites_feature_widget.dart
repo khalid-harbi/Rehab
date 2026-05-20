@@ -42,7 +42,7 @@ class FavoritesFeatureWidget extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(14),
                           child: Image.network(
-                            home.imageUrl,
+                            home.imageUrls[0],
                             width: 90,
                             height: 90,
                             fit: BoxFit.cover,

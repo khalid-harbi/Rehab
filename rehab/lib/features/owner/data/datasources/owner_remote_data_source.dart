@@ -6,6 +6,7 @@ import 'package:rehab/core/errors/network_exceptions.dart';
 abstract class BaseOwnerRemoteDataSource {
   Future<OwnerModel> getOwner();
   Future<List<Map<String, dynamic>>> getOwnerProperties();
+  Future<void> togglePropertyAvailability(int propertyId, bool isAvailable);
 }
 
 @LazySingleton(as: BaseOwnerRemoteDataSource)
@@ -67,6 +68,28 @@ class OwnerRemoteDataSource implements BaseOwnerRemoteDataSource {
           .eq('owner_id', userId);
 
       return response;
+    } catch (error) {
+      throw FailureExceptions.getException(error);
+    }
+  }
+
+  @override
+  Future<void> togglePropertyAvailability(
+    int propertyId,
+    bool isAvailable,
+  ) async {
+    try {
+      final userId = _supabase.auth.currentUser?.id;
+
+      if (userId == null) {
+        throw Exception('User is not logged in');
+      }
+
+      await _supabase
+          .from('home')
+          .update({'is_available': isAvailable})
+          .eq('id', propertyId)
+          .eq('owner_id', userId);
     } catch (error) {
       throw FailureExceptions.getException(error);
     }

@@ -42,8 +42,6 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeSwitcherCubit()),
         BlocProvider(create: (_) => ProfileCubit(GetIt.I.get())),
-
-        // BlocProvider(create: (context) => GetIt.I<ProfileCubit>()..getProfileMethod()),
       ],
 
       // ======================================================

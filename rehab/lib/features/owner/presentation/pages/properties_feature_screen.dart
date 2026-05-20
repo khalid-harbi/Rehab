@@ -28,17 +28,55 @@ class PropertiesFeatureScreen extends StatelessWidget {
                   final home = state.homes[index];
                   return Card(
                     child: ListTile(
-                      leading: Image.network(
-                        home.imageUrl,
-                        width: 60,
-                        height: 60,
-                        fit: BoxFit.cover,
+                      leading: ClipRRect(
+                        borderRadius: BorderRadiusGeometry.all(
+                          Radius.circular(8),
+                        ),
+                        child: Image.network(
+                          home.imageUrls[0],
+                          width: 55,
+                          height: 55,
+                          fit: BoxFit.cover,
+                        ),
                       ),
 
-                      //TODO: make it multi language
-                      title: Text(home.titleAr),
-                      subtitle: Text(home.descriptionAr),
-                      trailing: Text('${home.price} ريال'),
+                      title: Text(
+                        titleForLocale(context, home.titleEn, home.titleAr),
+                        style: TextStyle(fontWeight: .bold),
+                      ),
+                      subtitle: Text(
+                        titleForLocale(
+                          context,
+                          home.descriptionEn,
+                          home.descriptionAr,
+                        ),
+                      ),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${home.price} ريال',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 4),
+                          SizedBox(
+                            height: 24,
+                            child: Switch(
+                              value: home.isAvailable,
+                              activeThumbColor: AppColors.primary,
+                              onChanged: (bool value) {
+                                context
+                                    .read<OwnerCubit>()
+                                    .togglePropertyAvailabilityMethod(
+                                      home.id,
+                                      home.isAvailable,
+                                    );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
