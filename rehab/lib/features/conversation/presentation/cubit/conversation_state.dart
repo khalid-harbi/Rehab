@@ -8,18 +8,9 @@ abstract class ConversationState extends Equatable {
   List<Object?> get props => [];
 }
 
-// ===================================================================
-// ===================================================================
-
 class ConversationInitialState extends ConversationState {}
 
-// ===================================================================
-// ===================================================================
-
 class ConversationSuccessState extends ConversationState {}
-
-// ===================================================================
-// ===================================================================
 
 class ConversationMessagesLoadedState extends ConversationState {
   final List<types.Message> messages;
@@ -27,9 +18,6 @@ class ConversationMessagesLoadedState extends ConversationState {
   @override
   List<Object?> get props => [messages];
 }
-
-// ===================================================================
-// ===================================================================
 
 class ConversationErrorState extends ConversationState {
   final String message;

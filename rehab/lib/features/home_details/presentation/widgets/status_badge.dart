@@ -16,7 +16,7 @@ class StatusBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
-        isAvailable ? 'متاح للحجز الآن' : 'غير متاح حالياً',
+        isAvailable ? 'متاح للحجز الآن' : 'غير متاح حاليًا',
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,

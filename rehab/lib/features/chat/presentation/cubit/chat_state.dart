@@ -8,23 +8,11 @@ abstract class ChatState extends Equatable {
   List<Object?> get props => [];
 }
 
-// ===================================================================
-// ===================================================================
-
 class ChatInitialState extends ChatState {}
-
-// ===================================================================
-// ===================================================================
 
 class ChatSuccessState extends ChatState {}
 
-// ===================================================================
-// ===================================================================
-
 class ChatLoadingState extends ChatState {}
-
-// ===================================================================
-// ===================================================================
 
 class ChatErrorState extends ChatState {
   final String message;
@@ -33,15 +21,9 @@ class ChatErrorState extends ChatState {
   List<Object?> get props => [message];
 }
 
-// ===================================================================
-// ===================================================================
-
 class ChatLoadedState extends ChatState {
   final List<RoomPreviewEntity> roomPreviews;
   const ChatLoadedState({required this.roomPreviews});
   @override
   List<Object?> get props => [roomPreviews];
 }
-
-// ===================================================================
-// ===================================================================

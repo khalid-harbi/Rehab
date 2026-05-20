@@ -20,19 +20,10 @@ class ConversationRemoteDataSource implements BaseConversationRemoteDataSource {
 
   ConversationRemoteDataSource(this._supabase);
 
-  // ===================================================================
-  // ===================================================================
-
   int _messageTime(types.Message message) => message.createdAt ?? 0;
-
-  // ===================================================================
-  // ===================================================================
 
   @override
   Stream<List<types.Message>> getMessages(types.Room room) {
-    //! I had to search for this
-    // ------------------------------------------
-
     return _supabase
         .from('messages')
         .stream(primaryKey: ['id'])
@@ -40,8 +31,6 @@ class ConversationRemoteDataSource implements BaseConversationRemoteDataSource {
         .order('createdAt', ascending: false)
         .map((maps) {
           final List<types.Message> parsedMessages = [];
-
-          // ------------------------------------------
 
           for (final map in maps) {
             try {
@@ -181,7 +170,4 @@ class ConversationRemoteDataSource implements BaseConversationRemoteDataSource {
     // Convert the map back into the model
     return UsersModel.fromJson(userMap);
   }
-
-  // ===================================================================
-  // ===================================================================
 }

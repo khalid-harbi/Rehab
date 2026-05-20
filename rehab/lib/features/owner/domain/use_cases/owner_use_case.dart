@@ -18,4 +18,14 @@ class OwnerUseCase {
   Future<Result<List<HomeEntity>, Failure>> getOwnerProperties() async {
     return _repositoryData.getOwnerProperties();
   }
+
+  Future<Result<void, Failure>> togglePropertyAvailability(
+    int propertyId,
+    bool isAvailable,
+  ) async {
+    return await _repositoryData.togglePropertyAvailability(
+      propertyId,
+      isAvailable,
+    );
+  }
 }

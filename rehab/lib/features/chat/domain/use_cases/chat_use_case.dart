@@ -4,7 +4,6 @@ import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/features/chat/domain/entities/room_preview_entity.dart';
 import 'package:rehab/features/chat/domain/repositories/chat_repository_domain.dart';
 
-
 @lazySingleton
 class ChatUseCase {
   final ChatRepositoryDomain _repositoryData;

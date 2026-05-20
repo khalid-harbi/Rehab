@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/features/owner/domain/entities/owner_entity.dart';
 
@@ -18,7 +17,17 @@ class OwnerLoadingState extends OwnerState {}
 class OwnerSuccessState extends OwnerState {
   final OwnerEntity? owner;
   final List<HomeEntity> homes;
+
   const OwnerSuccessState({this.owner, this.homes = const []});
+
+  // Add this copyWith method to allow the Cubit to update fields without wiping existing data
+  OwnerSuccessState copyWith({OwnerEntity? owner, List<HomeEntity>? homes}) {
+    return OwnerSuccessState(
+      owner: owner ?? this.owner,
+      homes: homes ?? this.homes,
+    );
+  }
+
   @override
   List<Object?> get props => [owner, homes];
 }

@@ -39,4 +39,20 @@ class OwnerRepositoryData implements OwnerRepositoryDomain {
       return Error(FailureExceptions.getException(error));
     }
   }
+
+  @override
+  Future<Result<void, Failure>> togglePropertyAvailability(
+    int propertyId,
+    bool isAvailable,
+  ) async {
+    try {
+      await remoteDataSource.togglePropertyAvailability(
+        propertyId,
+        isAvailable,
+      );
+      return const Success(null);
+    } catch (error) {
+      return Error(FailureExceptions.getException(error));
+    }
+  }
 }

@@ -13,9 +13,7 @@ class ChatFeatureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ===================================================================
     final cubit = context.read<ChatCubit>();
-    // ===================================================================
     return Scaffold(
       appBar: AppBar(
         title: Padding(
@@ -24,18 +22,13 @@ class ChatFeatureScreen extends StatelessWidget {
         ),
         centerTitle: false,
       ),
-      // ===================================================================
-      // ===================================================================
+
       body: BlocBuilder<ChatCubit, ChatState>(
         builder: (context, state) {
-          // ===================================================================
-
           if (state is ChatLoadingState) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ChatErrorState) {
             return Center(child: Text(state.message));
-            // ===================================================================
-            // ===================================================================
           } else if (state is ChatLoadedState) {
             if (state.roomPreviews.isEmpty) {
               return const Center(child: Text("ليس لديك محادثات بعد"));
@@ -45,7 +38,6 @@ class ChatFeatureScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final preview = state.roomPreviews[index];
                 final room = preview.room;
-                // ===================================================================
 
                 return Slidable(
                   key: ValueKey(room.id),
@@ -95,12 +87,9 @@ class ChatFeatureScreen extends StatelessWidget {
                     },
                   ),
                 );
-                // ===================================================================
               },
             );
           }
-          // ===================================================================
-          // ===================================================================
 
           return const SizedBox.shrink();
         },
