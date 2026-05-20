@@ -17,6 +17,9 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  // ======================================================
+  // ======================================================
+
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
@@ -26,6 +29,9 @@ Future<void> main() async {
     ),
   );
 }
+
+// ======================================================
+// ======================================================
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -39,6 +45,9 @@ class MainApp extends StatelessWidget {
 
         // BlocProvider(create: (context) => GetIt.I<ProfileCubit>()..getProfileMethod()),
       ],
+
+      // ======================================================
+      // ======================================================
       child: BlocBuilder<ThemeSwitcherCubit, bool>(
         builder: (context, state) {
           return Sizer(

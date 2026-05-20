@@ -9,9 +9,7 @@ class MyBookingsFeatureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('حجوزاتي'),
-      ),
+      appBar: AppBar(title: const Text('حجوزاتي')),
       body: BlocBuilder<MyBookingsCubit, MyBookingsState>(
         builder: (context, state) {
           if (state is MyBookingsLoadingState) {
@@ -37,17 +35,34 @@ class MyBookingsFeatureScreen extends StatelessWidget {
 
                 return Card(
                   child: ListTile(
-                    leading: Image.network(
-                      home.imageUrl,
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: Image.network(
+                        home.imageUrls[0],
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            width: 60,
+                            height: 60,
+                            color: Colors.grey[200],
+                            child: const Icon(
+                              Icons.image_not_supported,
+                              color: Colors.grey,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     title: Text(home.titleAr),
                     subtitle: Text(
                       '${booking.durationMonths} شهور - ${booking.amount.toStringAsFixed(0)} ريال',
                     ),
-                    trailing: Text(booking.status),
+                    trailing: Text(
+                      booking.status,
+                      style: TextStyle(color: Colors.green, fontWeight: .bold),
+                    ),
                   ),
                 );
               },

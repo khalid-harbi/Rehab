@@ -23,11 +23,29 @@ class HomeFeatureScreen extends StatelessWidget {
 
         if (state is HomeSuccessState) {
           return Scaffold(
-            floatingActionButton: IconButton(
-              icon: const Icon(Icons.emergency, color: Colors.red),
-              onPressed: () {
-                makeEmergencyCall('0554080481');
-              },
+            floatingActionButton: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.redAccent,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(30),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                iconSize: 40,
+                icon: const Icon(Icons.sos, color: Colors.white70),
+                onPressed: () {
+                  makeEmergencyCall('0554080481');
+                },
+              ),
             ),
             body: Column(
               children: [

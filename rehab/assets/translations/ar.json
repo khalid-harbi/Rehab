@@ -55,7 +55,7 @@
    },
    "and": " و ",
    "appInfo": "عن التطبيق",
-   "matching": "التطابق",
+   "matching": "التوافق",
    "chats": "المحادثات",
    "getInTouch": "تواصل معي",
    "askAboutProperty": "عندك أي سؤال ؟",
@@ -94,6 +94,8 @@
    "privateParkingHint": "مثال: موقف سيارة خاص",
    "addFacility": "إضافة مرفق",
    "images": "الصور",
-   "submitListing": "إضافة الإعلان"
+   "submitListing": "إضافة الإعلان",
+   "home": "الرئيسية",
+   "chat": "المحادثة"
 
 }

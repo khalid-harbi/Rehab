@@ -79,7 +79,11 @@
     "privateParkingHint": "e.g., Private parking spot",
     "addFacility": "Add Amenity",
     "images": "Images",
-    "submitListing": "Submit Listing"
+    "submitListing": "Submit Listing",
+    "home": "Home",
+    "chat": "Chat"
+
+
     
 
 }

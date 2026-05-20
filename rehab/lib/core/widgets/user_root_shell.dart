@@ -1,6 +1,7 @@
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
 import 'package:rehab/core/exports/app_exports.dart';
+import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/services/location_service.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
@@ -76,10 +77,10 @@ class _UserRootShellState extends State<UserRootShell> {
                 tabBackgroundColor: AppColors.primary,
                 color: Colors.black,
                 tabs: [
-                  GButton(icon: Icons.home, text: 'Home'),
-                  GButton(icon: Icons.chat, text: 'chat'),
-                  GButton(icon: Icons.people, text: 'matching'),
-                  GButton(icon: Icons.person, text: 'Profile'),
+                  GButton(icon: Icons.home, text: "home".tr()),
+                  GButton(icon: Icons.chat, text: "chat".tr()),
+                  GButton(icon: Icons.people, text: "matching".tr()),
+                  GButton(icon: Icons.person, text: "profile".tr()),
                 ],
                 selectedIndex: _selectedIndex,
                 onTabChange: (index) {

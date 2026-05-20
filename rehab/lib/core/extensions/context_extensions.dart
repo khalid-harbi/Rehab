@@ -139,14 +139,11 @@ extension ContextExtensions on BuildContext {
     final theme = Theme.of(context);
     File? pickedImageFile;
 
-    // 🎨 الألوان المتناسقة مع هويتك البصرية الجديدة
     const Color burgundyColor = Color(0xFF4A1227);
-    const Color warmBeigeColor = Color(0xFFD4BE9F);
 
     showDialog(
       context: context,
-      barrierDismissible:
-          true, // السماح بالإغلاق عند الضغط خارج النافذة لمرونة أفضل
+      barrierDismissible: true,
       builder: (dialogContext) => StatefulBuilder(
         builder: (context, setDialogState) {
           return BlocProvider.value(
@@ -155,9 +152,7 @@ extension ContextExtensions on BuildContext {
               backgroundColor: theme.cardColor,
               elevation: 8,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  28,
-                ), // حواف دائرية ناعمة وعصرية للـ Dialog
+                borderRadius: BorderRadius.circular(28),
               ),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -179,7 +174,6 @@ extension ContextExtensions on BuildContext {
                       ),
                       const SizedBox(height: 24),
 
-                      // قسم الصورة الشخصية المطور
                       BlocBuilder<ProfileCubit, ProfileState>(
                         builder: (context, state) {
                           if (state is ProfileSuccessState) {
@@ -222,7 +216,6 @@ extension ContextExtensions on BuildContext {
                                       ),
                                     ),
                                   ),
-                                  // زر الكاميرا العائم المطور والمحسن للضغط
                                   GestureDetector(
                                     onTap: () => showImageOptionsForDialog(
                                       context,
@@ -260,7 +253,6 @@ extension ContextExtensions on BuildContext {
                       ),
                       const SizedBox(height: 28),
 
-                      // حقل إدخال الاسم
                       buildTextField(
                         controller: nameController,
                         label: "name".tr(),
@@ -268,10 +260,8 @@ extension ContextExtensions on BuildContext {
                       ),
                       const SizedBox(height: 32),
 
-                      // أزرار التحكم والعمليات (تأخذ عرضاً كاملاً أو منسقاً بجانب بعضها)
                       Row(
                         children: [
-                          // زر الإلغاء (شفاف وهادئ)
                           Expanded(
                             child: OutlinedButton(
                               style: OutlinedButton.styleFrom(
@@ -295,7 +285,6 @@ extension ContextExtensions on BuildContext {
                           ),
                           const SizedBox(width: 12),
 
-                          // زر الحفظ (بارز وملون بلون البراند الفخم)
                           Expanded(
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
