@@ -32,11 +32,11 @@ extension ContextExtensions on BuildContext {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Text(
           "تسجيل الخروج",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         content: const Text(
           "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-          style: TextStyle(color: Colors.white70),
+          style: TextStyle(color: Colors.black54),
         ),
         actions: [
           TextButton(

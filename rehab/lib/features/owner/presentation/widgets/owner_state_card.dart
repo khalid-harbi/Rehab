@@ -25,11 +25,7 @@ class OwnerStatCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            icon,
-            color: theme.colorScheme.primary,
-            size: 28,
-          ),
+          Icon(icon, color: theme.colorScheme.primary, size: 28),
 
           const Spacer(),
 
@@ -42,10 +38,7 @@ class OwnerStatCard extends StatelessWidget {
 
           const SizedBox(height: 4),
 
-          Text(
-            title,
-            style: theme.textTheme.bodyMedium,
-          ),
+          Text(title, style: theme.textTheme.bodyMedium),
         ],
       ),
     );

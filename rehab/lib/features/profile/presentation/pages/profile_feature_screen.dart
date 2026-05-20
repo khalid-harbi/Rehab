@@ -13,7 +13,6 @@ class ProfileFeatureScreen extends HookWidget {
   const ProfileFeatureScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final isArabic = useState(context.locale.languageCode == 'ar');
     return Scaffold(
       appBar: AppBar(
         title: Padding(

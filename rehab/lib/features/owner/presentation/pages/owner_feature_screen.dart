@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/owner/presentation/widgets/owner_sliver_app_bar_widget.dart';
@@ -63,6 +64,7 @@ class OwnerFeatureScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    Gap(2.sh),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
