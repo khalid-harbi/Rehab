@@ -16,10 +16,6 @@ class HomeCard extends StatelessWidget {
       onTap: () {
         context.push(Routes.homeDetails, extra: home);
       },
-      //todo : add shadow "leen"
-      // todo: and change to container instead of card
-      // todo: fix ريال/شهريا
-      //todo: why the image separated from the card ???
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         clipBehavior: Clip.antiAlias,
@@ -39,7 +35,6 @@ class HomeCard extends StatelessWidget {
                     borderRadius: BorderRadius.zero,
                   ),
                 ),
-                //todo: change it posion based on language
                 if (home.distance != null && home.distance! > 0.1)
                   Positioned(
                     top: 15,
