@@ -20,6 +20,7 @@ import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart'
 import 'package:rehab/features/conversation/presentation/cubit/conversation_cubit.dart';
 import 'package:rehab/features/conversation/presentation/pages/conversation_feature_screen.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
+import 'package:rehab/features/owner/presentation/pages/properties_feature_screen.dart';
 import 'package:rehab/features/profile/presentation/cubit/profile/profile_cubit.dart';
 import 'package:rehab/features/home_details/presentation/cubit/home_details_cubit.dart';
 import 'package:rehab/features/profile/presentation/pages/app_info_screen.dart';
@@ -178,9 +179,9 @@ class AppRouter {
         path: Routes.appInfo,
         builder: (context, state) => const AppInfoScreen(),
       ),
-        GoRoute(
+      GoRoute(
         path: Routes.properties,
-        builder: (context, state) => const PropertiesFeatureWidget(),
+        builder: (context, state) => const PropertiesFeatureScreen(),
       ),
       //TODO: delete it
       // <<<<<<< HEAD

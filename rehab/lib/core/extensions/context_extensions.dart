@@ -136,32 +136,50 @@ extension ContextExtensions on BuildContext {
   void showEditProfileDialog(BuildContext context, String currentName) {
     final nameController = TextEditingController(text: currentName);
     final profileCubit = context.read<ProfileCubit>();
+    final theme = Theme.of(context);
     File? pickedImageFile;
+
+    // 🎨 الألوان المتناسقة مع هويتك البصرية الجديدة
+    const Color burgundyColor = Color(0xFF4A1227);
+    const Color warmBeigeColor = Color(0xFFD4BE9F);
 
     showDialog(
       context: context,
+      barrierDismissible:
+          true, // السماح بالإغلاق عند الضغط خارج النافذة لمرونة أفضل
       builder: (dialogContext) => StatefulBuilder(
         builder: (context, setDialogState) {
           return BlocProvider.value(
             value: profileCubit,
             child: Dialog(
+              backgroundColor: theme.cardColor,
+              elevation: 8,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(
+                  28,
+                ), // حواف دائرية ناعمة وعصرية للـ Dialog
               ),
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 28,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      // العنوان الرئيسي
                       Text(
                         "edit profile".tr(),
-                        style: const TextStyle(
-                          fontSize: 20,
+                        style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                       ),
-                      Gap(20),
+                      const SizedBox(height: 24),
+
+                      // قسم الصورة الشخصية المطور
                       BlocBuilder<ProfileCubit, ProfileState>(
                         builder: (context, state) {
                           if (state is ProfileSuccessState) {
@@ -169,46 +187,66 @@ extension ContextExtensions on BuildContext {
                               child: Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  InkWell(
-                                    borderRadius: BorderRadius.circular(50.sp),
+                                  // حاوية الصورة الدائرية مع إطار خفيف
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: burgundyColor.withOpacity(0.15),
+                                        width: 3,
+                                      ),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: InkWell(
+                                        onTap: () => showImageOptionsForDialog(
+                                          context,
+                                          setDialogState,
+                                          (file) => pickedImageFile = file,
+                                        ),
+                                        child: pickedImageFile != null
+                                            ? Image.file(
+                                                pickedImageFile!,
+                                                width: 22.w,
+                                                height: 22.w,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : AnyImageView(
+                                                imagePath:
+                                                    state.profile.imageUrl ??
+                                                    "https://placeholder.com/user.png",
+                                                width: 22.w,
+                                                height: 22.w,
+                                                fit: BoxFit.cover,
+                                              ),
+                                      ),
+                                    ),
+                                  ),
+                                  // زر الكاميرا العائم المطور والمحسن للضغط
+                                  GestureDetector(
                                     onTap: () => showImageOptionsForDialog(
                                       context,
                                       setDialogState,
                                       (file) => pickedImageFile = file,
                                     ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(
-                                        50.sp,
-                                      ),
-                                      child: pickedImageFile != null
-                                          ? Image.file(
-                                              pickedImageFile!,
-                                              width: 60.sp,
-                                              height: 60.sp,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : AnyImageView(
-                                              imagePath:
-                                                  state.profile.imageUrl ??
-                                                  "https://placeholder.com/user.png",
-                                              width: 60.sp,
-                                              height: 60.sp,
-                                              fit: BoxFit.cover,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: burgundyColor,
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: burgundyColor.withOpacity(
+                                              0.3,
                                             ),
-                                    ),
-                                  ),
-                                  CircleAvatar(
-                                    radius: 15,
-                                    child: IconButton(
-                                      onPressed: () =>
-                                          showImageOptionsForDialog(
-                                            context,
-                                            setDialogState,
-                                            (file) => pickedImageFile = file,
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
                                           ),
-                                      icon: const Icon(
-                                        Icons.camera_alt,
-                                        size: 18,
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.camera_alt_rounded,
+                                        size: 16,
                                         color: Colors.white,
                                       ),
                                     ),
@@ -220,34 +258,75 @@ extension ContextExtensions on BuildContext {
                           return const SizedBox.shrink();
                         },
                       ),
-                      Gap(24),
-                      // buildTextField(
-                      //   controller: nameController,
-                      //   label: "name".tr(),
-                      //   icon: Icons.person_outline,
-                      // ),
-                      Gap(24),
+                      const SizedBox(height: 28),
+
+                      // حقل إدخال الاسم
+                      buildTextField(
+                        controller: nameController,
+                        label: "name".tr(),
+                        icon: Icons.person_outline_rounded,
+                      ),
+                      const SizedBox(height: 32),
+
+                      // أزرار التحكم والعمليات (تأخذ عرضاً كاملاً أو منسقاً بجانب بعضها)
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(dialogContext),
-                            child: Text("cancel".tr()),
+                          // زر الإلغاء (شفاف وهادئ)
+                          Expanded(
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 14,
+                                ),
+                                side: BorderSide(color: Colors.grey.shade300),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                              ),
+                              onPressed: () => Navigator.pop(dialogContext),
+                              child: Text(
+                                "cancel".tr(),
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
                           ),
-                          Gap(8),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (pickedImageFile != null) {
-                                profileCubit.updateProfileImage(
-                                  pickedImageFile!,
+                          const SizedBox(width: 12),
+
+                          // زر الحفظ (بارز وملون بلون البراند الفخم)
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: burgundyColor,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 14,
+                                ),
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                              ),
+                              onPressed: () {
+                                if (pickedImageFile != null) {
+                                  profileCubit.updateProfileImage(
+                                    pickedImageFile!,
+                                  );
+                                }
+                                profileCubit.updateProfileName(
+                                  nameController.text,
                                 );
-                              }
-                              profileCubit.updateProfileName(
-                                nameController.text,
-                              );
-                              Navigator.pop(dialogContext);
-                            },
-                            child: Text("save".tr()),
+                                Navigator.pop(dialogContext);
+                              },
+                              child: Text(
+                                "save".tr(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -280,11 +359,11 @@ extension ContextExtensions on BuildContext {
               title: Text("gallery".tr()),
               onTap: () {
                 Navigator.pop(modalContext);
-                // pickImageLocal(
-                //   ImageSource.gallery,
-                //   setDialogState,
-                //   onFilePicked,
-                // );
+                pickImageLocal(
+                  ImageSource.gallery,
+                  setDialogState,
+                  onFilePicked,
+                );
               },
             ),
             ListTile(
@@ -292,11 +371,11 @@ extension ContextExtensions on BuildContext {
               title: Text("camera".tr()),
               onTap: () {
                 Navigator.pop(modalContext);
-                // pickImageLocal(
-                //   ImageSource.camera,
-                //   setDialogState,
-                //   onFilePicked,
-                // );
+                pickImageLocal(
+                  ImageSource.camera,
+                  setDialogState,
+                  onFilePicked,
+                );
               },
             ),
           ],
@@ -409,7 +488,7 @@ void showHelpAndSupportDialog(BuildContext context) {
             InkWell(
               onTap: () async {
                 Navigator.pop(context);
-                // await launchSupportEmail('rehabtuwaiq@gmail.com');
+                await launchSupportEmail('rehabtuwaiq@gmail.com');
               },
               borderRadius: BorderRadius.circular(12),
               child: Container(

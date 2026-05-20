@@ -78,7 +78,7 @@ class ProfileFeatureScreen extends HookWidget {
                                   ),
                                 ),
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   context.showEditProfileDialog(
                                     context,
@@ -121,7 +121,7 @@ class ProfileFeatureScreen extends HookWidget {
 
                           Text(
                             "مرحباً بك في رحاب",
-                            style: theme.textTheme.bodyMedium?.copyWith(
+                            style: theme.textTheme.bodyLarge?.copyWith(
                               color: Colors.grey.shade600,
                             ),
                           ),

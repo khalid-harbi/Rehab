@@ -19,6 +19,8 @@ import 'package:rehab/features/owner/domain/repositories/owner_repository_domain
     as _i1029;
 import 'package:rehab/features/owner/domain/use_cases/owner_use_case.dart'
     as _i572;
+import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart'
+    as _i1045;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -36,6 +38,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i572.OwnerUseCase>(
       () => _i572.OwnerUseCase(gh<_i1029.OwnerRepositoryDomain>()),
+    );
+    gh.factory<_i1045.OwnerCubit>(
+      () => _i1045.OwnerCubit(gh<_i572.OwnerUseCase>()),
     );
     return this;
   }

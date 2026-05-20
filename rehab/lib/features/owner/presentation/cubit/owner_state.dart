@@ -16,11 +16,9 @@ class OwnerInitialState extends OwnerState {
 class OwnerLoadingState extends OwnerState {}
 
 class OwnerSuccessState extends OwnerState {
-  final OwnerEntity owner;
-  final HomeEntity homes;
-
-  const OwnerSuccessState({required this.owner, required this.homes});
-
+  final OwnerEntity? owner;
+  final List<HomeEntity> homes;
+  const OwnerSuccessState({this.owner, this.homes = const []});
   @override
   List<Object?> get props => [owner, homes];
 }

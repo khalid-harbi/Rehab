@@ -5,4 +5,5 @@ import 'package:rehab/features/owner/domain/entities/owner_entity.dart';
 
 abstract class OwnerRepositoryDomain {
   Future<Result<OwnerEntity, Failure>> getOwner();
- Future<Result<List<HomeEntity>, Failure>> getOwnerProperties() }
+  Future<Result<List<HomeEntity>, Failure>> getOwnerProperties();
+}

@@ -74,7 +74,7 @@ class OwnerFeatureScreen extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            '${ownerData.propertyCount}',
+                                            '${ownerData!.propertyCount}',
                                             style: theme
                                                 .textTheme
                                                 .headlineMedium

@@ -157,7 +157,7 @@ class OwnerSliverAppBarWidget extends HookWidget {
                                   ),
                                   const SizedBox(height: 6),
                                   Text(
-                                    '${state.owner.totalRevenue.toStringAsFixed(0)} ريال',
+                                    '${state.owner!.totalRevenue.toStringAsFixed(0)} ريال',
                                     style: theme.textTheme.titleLarge?.copyWith(
                                       color: Colors.white,
                                     ),

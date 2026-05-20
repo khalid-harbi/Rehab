@@ -21,19 +21,6 @@ class SliverAppBarWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    //todo: ghayda
-    // controllerSearch.addListener(() async {
-    //   if (timer != null) {
-    //     timer!.cancel();
-    //   }
-
-    //   timer = Timer.periodic(Duration(milliseconds: 500), (timer) async {
-    //     if (timer.tick == 1) {
-    //       cubit.getSearchMethod(title: controllerSearch.text);
-    //       timer.cancel();
-    //     }
-    //   });
-    // });
     final cubit = context.read<SearchCubit>();
     final controllerSearch = useTextEditingController();
 
