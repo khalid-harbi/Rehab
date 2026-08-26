@@ -33,76 +33,76 @@ class FavoritesRemoteDataSource implements BaseFavoritesRemoteDataSource {
       throw FailureExceptions.getException(error);
     }
   }
-      @override
-      Future<List<FavoritesModel>> getFavorites() async {
-        try {
-          final userId = _supabase.auth.currentUser?.id;
 
-          if (userId == null) {
-            return [];
-          }
+  @override
+  Future<List<FavoritesModel>> getFavorites() async {
+    try {
+      final userId = _supabase.auth.currentUser?.id;
 
-          final response = await _supabase
-              .from('favorites')
-              .select()
-              .eq('user_id', userId);
-
-          return response
-              .map<FavoritesModel>((json) => FavoritesModel.fromJson(json))
-              .toList();
-        } catch (error) {
-          throw FailureExceptions.getException(error);
-        }
+      if (userId == null) {
+        return [];
       }
 
-      @override
-      Future<bool> isFavorite({required int homeId}) async {
-        try {
-          final userId = _supabase.auth.currentUser?.id;
+      final response = await _supabase
+          .from('favorites')
+          .select()
+          .eq('user_id', userId);
 
-          if (userId == null) {
-            return false;
-          }
-
-          final response = await _supabase
-              .from('favorites')
-              .select('id')
-              .eq('user_id', userId)
-              .eq('home_id', homeId)
-              .maybeSingle();
-
-          return response != null;
-        } catch (error) {
-          throw FailureExceptions.getException(error);
-        }
-      }
-
-      @override
-      Future<void> toggleFavorite({required int homeId}) async {
-        try {
-          final userId = _supabase.auth.currentUser?.id;
-
-          if (userId == null) {
-            return;
-          }
-
-          final exists = await isFavorite(homeId: homeId);
-
-          if (exists) {
-            await _supabase
-                .from('favorites')
-                .delete()
-                .eq('user_id', userId)
-                .eq('home_id', homeId);
-          } else {
-            await _supabase.from('favorites').insert({
-              'user_id': userId,
-              'home_id': homeId,
-            });
-          }
-        } catch (error) {
-          throw FailureExceptions.getException(error);
-        }
-      }
+      return response
+          .map<FavoritesModel>((json) => FavoritesModel.fromJson(json))
+          .toList();
+    } catch (error) {
+      throw FailureExceptions.getException(error);
     }
- 
+  }
+
+  @override
+  Future<bool> isFavorite({required int homeId}) async {
+    try {
+      final userId = _supabase.auth.currentUser?.id;
+
+      if (userId == null) {
+        return false;
+      }
+
+      final response = await _supabase
+          .from('favorites')
+          .select('id')
+          .eq('user_id', userId)
+          .eq('home_id', homeId)
+          .maybeSingle();
+
+      return response != null;
+    } catch (error) {
+      throw FailureExceptions.getException(error);
+    }
+  }
+
+  @override
+  Future<void> toggleFavorite({required int homeId}) async {
+    try {
+      final userId = _supabase.auth.currentUser?.id;
+
+      if (userId == null) {
+        return;
+      }
+
+      final exists = await isFavorite(homeId: homeId);
+
+      if (exists) {
+        await _supabase
+            .from('favorites')
+            .delete()
+            .eq('user_id', userId)
+            .eq('home_id', homeId);
+      } else {
+        await _supabase.from('favorites').insert({
+          'user_id': userId,
+          'home_id': homeId,
+        });
+      }
+    } catch (error) {
+      throw FailureExceptions.getException(error);
+    }
+  }
+}

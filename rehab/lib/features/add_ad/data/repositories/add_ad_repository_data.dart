@@ -32,20 +32,20 @@ class AddAdRepositoryData implements AddAdRepositoryDomain {
 
   @override
   Future<Result<void, Failure>> addHome({
-  required String title, // Renamed from titleAr
-  required String city,
-  required String district,
-  required String propertyType,
-  required String description,
-  required int rooms,
-  required int bathrooms,
-  required double price,
-  required double area,
-  required double lat,
-  required double lng,
-  required List<String> policies,
-  required List<String> amenities,
-  required List<File> images,
+    required String title, // Renamed from titleAr
+    required String city,
+    required String district,
+    required String propertyType,
+    required String description,
+    required int rooms,
+    required int bathrooms,
+    required double price,
+    required double area,
+    required double lat,
+    required double lng,
+    required List<String> policies,
+    required List<String> amenities,
+    required List<File> images,
   }) async {
     try {
       await remoteDataSource.addHome(

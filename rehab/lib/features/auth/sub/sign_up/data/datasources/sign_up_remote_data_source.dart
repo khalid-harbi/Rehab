@@ -101,20 +101,18 @@ class SignUpRemoteDataSource implements BaseSignUpRemoteDataSource {
     required String password,
   }) async {
     try {
-    
       final authResponse = await _supabase.auth.signUp(
         email: email,
         password: password,
-        
+
         // data: {
-        //   'name': name, 
+        //   'name': name,
         // },
       );
 
       return authResponse.user != null;
     } catch (error) {
       throw FailureExceptions.getException(error);
-
     }
   }
 }

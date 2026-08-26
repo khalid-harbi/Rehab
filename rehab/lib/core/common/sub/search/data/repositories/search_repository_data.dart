@@ -48,13 +48,22 @@ class SearchRepositoryData implements SearchRepositoryDomain {
       return Error(failure);
     }
   }
-   @override
-  Future<Result<List<HomeEntity>, Failure>> getNearbyHomes(double lat, double lng) async {
+
+  @override
+  Future<Result<List<HomeEntity>, Failure>> getNearbyHomes(
+    double lat,
+    double lng,
+  ) async {
     try {
-      final List<HomeModel> models = await remoteDataSource.getNearbyHomes(lat, lng);
-      final List<HomeEntity> entities = models.map((model) => model.toEntity()).toList();
+      final List<HomeModel> models = await remoteDataSource.getNearbyHomes(
+        lat,
+        lng,
+      );
+      final List<HomeEntity> entities = models
+          .map((model) => model.toEntity())
+          .toList();
       return Success(entities);
-    }on Failure catch (failure) {
+    } on Failure catch (failure) {
       return Error(failure);
     }
   }

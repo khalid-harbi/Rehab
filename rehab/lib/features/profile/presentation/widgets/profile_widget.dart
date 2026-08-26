@@ -6,7 +6,7 @@ class ProfileWidget extends StatelessWidget {
     super.key,
     required this.icon,
     required this.title,
-    this.action, 
+    this.action,
     this.onTap,
   });
   final Widget icon;

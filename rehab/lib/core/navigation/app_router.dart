@@ -193,22 +193,22 @@ class AppRouter {
       //           );
       //         },
       //       ),
-            GoRoute(
-              path: Routes.userDetails,
-              builder: (context, state) {
-                final user = state.extra as UsersEntity?;
-                return MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => UserDetailsCubit(GetIt.I.get()),
-                    ),
-                    // Add the UsersCubit provider here!
-                    BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
-                  ],
-                  child: UserDetailsFeatureScreen(fetchedUser: user),
-                );
-              },
-            ),
+      GoRoute(
+        path: Routes.userDetails,
+        builder: (context, state) {
+          final user = state.extra as UsersEntity?;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => UserDetailsCubit(GetIt.I.get()),
+              ),
+              // Add the UsersCubit provider here!
+              BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
+            ],
+            child: UserDetailsFeatureScreen(fetchedUser: user),
+          );
+        },
+      ),
       //     ],
       // =======
       GoRoute(

@@ -1,17 +1,17 @@
 {
-   "hi":"مرحبًا",
-   "howAreYou":" كيف حالك اليوم؟",
-   "welcomeBack":"مرحبا بعودتك",
-   "profile":"حسابي",
-   "favorites":" المفضلة",
-   "bookings":"حجوزاتي",
-   "lifestyle":"نمط الحياة",
-   "darkMode":" الوضع الداكن",
-   "language":"اللغة",
-   "settings":" الإعدادات",
-   "help&support":"مساعدة ودعم",
-   "logout":" تسجيل الخروج",
-   "facilities":"المرافق",
+   "hi": "مرحبًا",
+   "howAreYou": " كيف حالك اليوم؟",
+   "welcomeBack": "مرحبا بعودتك",
+   "profile": "حسابي",
+   "favorites": " المفضلة",
+   "bookings": "حجوزاتي",
+   "lifestyle": "نمط الحياة",
+   "darkMode": " الوضع الداكن",
+   "language": "اللغة",
+   "settings": " الإعدادات",
+   "help&support": "مساعدة ودعم",
+   "logout": " تسجيل الخروج",
+   "facilities": "المرافق",
    "aboutProperty": "عن هذا العقار",
    "bedrooms_count": {
       "one": "غرفة نوم واحدة",
@@ -28,7 +28,7 @@
       "other": "{} دورة مياه"
    },
    "parking": "مواقف السيارات ",
-   "housingRulesAndPolicies":"قواعد وسياسات السكن",
+   "housingRulesAndPolicies": "قواعد وسياسات السكن",
    "memberSinceToday": "عضو منذ اليوم",
    "memberFor": "عضو منذ ",
    "day": {
@@ -96,6 +96,50 @@
    "images": "الصور",
    "submitListing": "إضافة الإعلان",
    "home": "الرئيسية",
-   "chat": "المحادثة"
-
+   "chat": "المحادثة",
+   "search": "بحث",
+   "filters": "الفلاتر",
+   "searchHint": "ابحثي عن شقة، مدينة، أو حي...",
+   "showMore": "عرض المزيد",
+   "showResults": "عرض النتائج",
+   "properties": "العقارات",
+   "mostContacted": "الأكثر تواصلًا",
+   "noResults": "لا توجد نتائج",
+   "noChatsYet": "ليس لديك محادثات بعد",
+   "noMatchesYet": "لا توجد توافقات بعد",
+   "resultsCount": {
+      "zero": "لا توجد نتائج",
+      "one": "نتيجة واحدة",
+      "two": "نتيجتان",
+      "few": "{} نتائج",
+      "many": "{} نتيجة",
+      "other": "{} نتيجة"
+   },
+   "nearby": "بالقرب مني",
+   "reset": "إعادة الضبط",
+   "allChats": "كل المحادثات",
+   "noMessagesYet": "لا توجد رسائل بعد",
+   "delete": "حذف",
+   "now": "الآن",
+   "minutesAgo": {
+      "one": "منذ دقيقة",
+      "two": "منذ دقيقتين",
+      "few": "منذ {} دقائق",
+      "many": "منذ {} دقيقة",
+      "other": "منذ {} دقيقة"
+   },
+   "hoursAgo": {
+      "one": "منذ ساعة",
+      "two": "منذ ساعتين",
+      "few": "منذ {} ساعات",
+      "many": "منذ {} ساعة",
+      "other": "منذ {} ساعة"
+   },
+   "daysAgo": {
+      "one": "منذ يوم",
+      "two": "منذ يومين",
+      "few": "منذ {} أيام",
+      "many": "منذ {} يوماً",
+      "other": "منذ {} يوم"
+   }
 }

@@ -2,9 +2,9 @@ import 'package:injectable/injectable.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
-import 'package:rehab/features/auth/sub/forget_password/data/datasources/forget_password_remote_data_source.dart' show BaseForgetPasswordRemoteDataSource;
+import 'package:rehab/features/auth/sub/forget_password/data/datasources/forget_password_remote_data_source.dart'
+    show BaseForgetPasswordRemoteDataSource;
 import 'package:rehab/features/auth/sub/forget_password/domain/repositories/forget_password_repository_domain.dart';
-
 
 @LazySingleton(as: ForgetPasswordRepositoryDomain)
 class ForgetPasswordRepositoryData implements ForgetPasswordRepositoryDomain {

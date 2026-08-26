@@ -7,7 +7,6 @@ import 'login_di.config.dart';
   // Optional: specify the directory to scan for injectable annotations
   generateForDir: ['lib/features/auth/sub/login'],
 )
-
 void configureLogin(GetIt getIt) {
   getIt.initLogin();
 }

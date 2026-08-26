@@ -15,9 +15,7 @@ class MyBookingsLoadingState extends MyBookingsState {}
 class MyBookingsSuccessState extends MyBookingsState {
   final List<MyBookingsEntity> bookings;
 
-  const MyBookingsSuccessState({
-    required this.bookings,
-  });
+  const MyBookingsSuccessState({required this.bookings});
 
   @override
   List<Object?> get props => [bookings];
@@ -26,9 +24,7 @@ class MyBookingsSuccessState extends MyBookingsState {
 class MyBookingsErrorState extends MyBookingsState {
   final String message;
 
-  const MyBookingsErrorState({
-    required this.message,
-  });
+  const MyBookingsErrorState({required this.message});
 
   @override
   List<Object?> get props => [message];

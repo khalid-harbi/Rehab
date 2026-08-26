@@ -9,16 +9,14 @@ abstract class AddAdModel with _$AddAdModel {
     required int id,
     required String firstName,
     required String lastName,
-    
   }) = _AddAdModel;
 
-  factory AddAdModel.fromJson(Map<String, Object?> json) => _$AddAdModelFromJson(json);
+  factory AddAdModel.fromJson(Map<String, Object?> json) =>
+      _$AddAdModelFromJson(json);
 }
-
-
 
 extension AddAdModelMapper on AddAdModel {
   AddAdEntity toEntity() {
     return AddAdEntity(id: id, firstName: firstName, lastName: lastName);
   }
-  }
+}

@@ -1,13 +1,13 @@
- import 'package:rehab/core/exports/app_exports.dart';
+import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:share_plus/share_plus.dart';
 
 void shareHomeDetails(BuildContext context, HomeEntity home) {
-    final isArabic = context.locale.languageCode == 'ar';
+  final isArabic = context.locale.languageCode == 'ar';
 
-    final String shareText = isArabic
-        ? '''
+  final String shareText = isArabic
+      ? '''
 🏠 عقار مميز متاح للإيجار ✨
 
 📋 تفاصيل العقار:
@@ -17,7 +17,7 @@ void shareHomeDetails(BuildContext context, HomeEntity home) {
 • التقييم: ⭐ ${home.rating}
 • السعر: ${home.price} ريال / الشهر
 '''
-        : '''
+      : '''
 🏠 Premium property available for rent ✨
 
 📋 Property Details:
@@ -27,10 +27,10 @@ void shareHomeDetails(BuildContext context, HomeEntity home) {
 • Rating: ⭐ ${home.rating}
 • Price: ${home.price} SAR / Month
 ''';
-    SharePlus.instance.share(
-      ShareParams(
-        text: shareText,
-        subject: isArabic ? 'تفاصيل العقار' : 'Property Details',
-      ),
-    );
-  }
+  SharePlus.instance.share(
+    ShareParams(
+      text: shareText,
+      subject: isArabic ? 'تفاصيل العقار' : 'Property Details',
+    ),
+  );
+}

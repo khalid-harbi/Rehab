@@ -41,7 +41,7 @@ class BookingRemoteDataSource implements BaseBookingRemoteDataSource {
       throw FailureExceptions.getException(error);
     }
   }
-  
+
   @override
   Future<BookingModel> createBooking({
     required int homeId,

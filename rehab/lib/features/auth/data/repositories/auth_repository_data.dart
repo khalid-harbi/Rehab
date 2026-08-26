@@ -7,7 +7,6 @@ import 'package:rehab/features/auth/data/models/auth_model.dart';
 import 'package:rehab/features/auth/domain/entities/auth_entity.dart';
 import 'package:rehab/features/auth/domain/repositories/auth_repository_domain.dart';
 
-
 @LazySingleton(as: AuthRepositoryDomain)
 class AuthRepositoryData implements AuthRepositoryDomain {
   final BaseAuthRemoteDataSource remoteDataSource;

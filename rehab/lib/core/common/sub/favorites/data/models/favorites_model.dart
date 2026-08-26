@@ -10,16 +10,19 @@ abstract class FavoritesModel with _$FavoritesModel {
     required String userId,
     required int homeId,
     required DateTime createdAt,
-
   }) = _FavoritesModel;
 
-  factory FavoritesModel.fromJson(Map<String, Object?> json) => _$FavoritesModelFromJson(json);
+  factory FavoritesModel.fromJson(Map<String, Object?> json) =>
+      _$FavoritesModelFromJson(json);
 }
-
-
 
 extension FavoritesModelMapper on FavoritesModel {
   FavoritesEntity toEntity() {
-    return FavoritesEntity(id: id, userId: userId, homeId: homeId, createdAt: createdAt);
+    return FavoritesEntity(
+      id: id,
+      userId: userId,
+      homeId: homeId,
+      createdAt: createdAt,
+    );
   }
-  }
+}

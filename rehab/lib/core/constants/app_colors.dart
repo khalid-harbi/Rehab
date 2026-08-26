@@ -13,7 +13,7 @@ abstract class AppColors {
   static const Color tertiary = Color(0xFFF5E6CA);
 
   //  Background
-  static const Color background = Color.fromARGB(255, 255, 241, 222);
+  static const Color background = Color(0xfff9fafb);
 
   // static const Color background = Color(0xFFFFF8F6);
   static const Color darkBackground = Colors.black;

@@ -10,7 +10,9 @@ import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_cubit.dart';
 import 'package:rehab/features/users/presentation/cubit/users_state.dart';
 import 'package:rehab/features/users/presentation/widgets/users_widget.dart';
-import 'package:sizer/sizer.dart';
+import 'package:rehab/core/constants/app_dimensions.dart';
+import 'package:rehab/core/widgets/app_top_bar.dart';
+import 'package:rehab/core/constants/app_colors.dart';
 
 class UsersFeatureScreen extends HookWidget {
   const UsersFeatureScreen({super.key});
@@ -21,15 +23,12 @@ class UsersFeatureScreen extends HookWidget {
     final cubit = context.read<UsersCubit>();
     // ===================================================================
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text("matching".tr(), style: TextStyle(fontSize: 42)),
-        ),
-        centerTitle: false,
-      ),
+      backgroundColor: AppColors.background,
+      appBar: AppTopBar(title: "matching".tr()),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.screenPadding,
+        ),
         child: BlocListener<UsersCubit, UsersState>(
           // ===================================================================
           listenWhen: (previous, current) =>
@@ -68,26 +67,35 @@ class UsersFeatureScreen extends HookWidget {
                   // ==========================================
                   if (displayUsers.isEmpty) {
                     return Center(
-                      child: Icon(
-                        Icons.person_off_outlined,
-                        size: 50.sp,
-                        color: Colors.grey.withAlpha(50),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.person_off_outlined,
+                            size: 44,
+                            color: AppColors.textSecondary.withAlpha(120),
+                          ),
+                          const SizedBox(height: AppDimensions.spaceMd),
+                          Text(
+                            "noMatchesYet".tr(),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   }
-                  return Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: displayUsers.length,
 
-                          itemBuilder: (context, index) {
-                            final user = displayUsers[index];
-                            return UsersWidget(user: user);
-                          },
-                        ),
-                      ),
-                    ],
+                  return ListView.builder(
+                    padding: const EdgeInsets.only(
+                      top: AppDimensions.spaceSm,
+                      bottom: AppDimensions.spaceXl,
+                    ),
+                    itemCount: displayUsers.length,
+                    itemBuilder: (context, index) =>
+                        UsersWidget(user: displayUsers[index]),
                   );
 
                 case UsersErrorState _:

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/constants/app_colors.dart';
@@ -31,14 +30,11 @@ class BookingBar extends StatelessWidget {
           backgroundColor: AppColors.secondary,
           foregroundColor: AppColors.textPrimary,
         ),
-       onPressed: home.isAvailable
-    ? () {
-        context.push(
-          Routes.booking,
-          extra: home,
-        );
-      }
-    : null,
+        onPressed: home.isAvailable
+            ? () {
+                context.push(Routes.booking, extra: home);
+              }
+            : null,
         child: const Text('احجز الآن'),
       ),
     );

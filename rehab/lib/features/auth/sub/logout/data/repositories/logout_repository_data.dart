@@ -5,8 +5,6 @@ import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:rehab/features/auth/sub/logout/data/datasources/logout_remote_data_source.dart';
 import 'package:rehab/features/auth/sub/logout/domain/repositories/logout_repository_domain.dart';
 
-
-
 @LazySingleton(as: LogoutRepositoryDomain)
 class LogoutRepositoryData implements LogoutRepositoryDomain {
   final BaseLogoutRemoteDataSource remoteDataSource;

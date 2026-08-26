@@ -14,7 +14,7 @@ class UserDetailsCubit extends Cubit<UserDetailsState> {
         //here is when success result
       },
       (whenError) {
-       //here is when error result
+        //here is when error result
       },
     );
   }

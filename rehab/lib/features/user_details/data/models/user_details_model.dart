@@ -9,16 +9,14 @@ abstract class UserDetailsModel with _$UserDetailsModel {
     required int id,
     required String firstName,
     required String lastName,
-    
   }) = _UserDetailsModel;
 
-  factory UserDetailsModel.fromJson(Map<String, Object?> json) => _$UserDetailsModelFromJson(json);
+  factory UserDetailsModel.fromJson(Map<String, Object?> json) =>
+      _$UserDetailsModelFromJson(json);
 }
-
-
 
 extension UserDetailsModelMapper on UserDetailsModel {
   UserDetailsEntity toEntity() {
     return UserDetailsEntity(id: id, firstName: firstName, lastName: lastName);
   }
-  }
+}

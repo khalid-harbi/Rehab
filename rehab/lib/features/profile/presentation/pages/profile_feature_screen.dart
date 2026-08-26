@@ -3,6 +3,7 @@ import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/extensions/user_role_extension.dart';
 import 'package:rehab/core/navigation/routers.dart';
+import 'package:rehab/core/widgets/app_top_bar.dart';
 import 'package:rehab/features/auth/sub/logout/presentation/pages/logout_feature_widget.dart';
 import 'package:rehab/features/profile/presentation/cubit/theme/Theme_switcher_cubit.dart';
 import 'package:rehab/features/profile/presentation/widgets/language_switch_widhet.dart';
@@ -15,14 +16,8 @@ class ProfileFeatureScreen extends HookWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text("profile".tr(), style: TextStyle(fontSize: 42)),
-        ),
-        centerTitle: false,
-        backgroundColor: Colors.transparent,
-      ),
+      backgroundColor: AppColors.background,
+      appBar: AppTopBar(title: "profile".tr()),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: BlocConsumer<ProfileCubit, ProfileState>(

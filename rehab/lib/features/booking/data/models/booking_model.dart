@@ -9,22 +9,17 @@ abstract class BookingModel with _$BookingModel {
   const factory BookingModel({
     required String id,
 
-    @JsonKey(name: 'seeker_id')
-    required String seekerId,
+    @JsonKey(name: 'seeker_id') required String seekerId,
 
-    @JsonKey(name: 'owner_id')
-    required String ownerId,
+    @JsonKey(name: 'owner_id') required String ownerId,
 
-    @JsonKey(name: 'home_id')
-    required int homeId,
+    @JsonKey(name: 'home_id') required int homeId,
 
     required double amount,
 
-    @JsonKey(name: 'duration_months')
-    required int durationMonths,
+    @JsonKey(name: 'duration_months') required int durationMonths,
 
-    @JsonKey(name: 'payment_id')
-    required String paymentId,
+    @JsonKey(name: 'payment_id') required String paymentId,
 
     required String status,
   }) = _BookingModel;

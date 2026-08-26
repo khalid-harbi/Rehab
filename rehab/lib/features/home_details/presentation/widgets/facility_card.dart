@@ -28,9 +28,7 @@ class FacilityCard extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
               ),

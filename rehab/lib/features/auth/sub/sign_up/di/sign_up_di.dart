@@ -7,7 +7,6 @@ import 'sign_up_di.config.dart';
   // Optional: specify the directory to scan for injectable annotations
   generateForDir: ['lib/features/auth/sub/sign_up'],
 )
-
 void configureSignUp(GetIt getIt) {
   getIt.initSignUp();
 }

@@ -52,11 +52,11 @@ class BookingFeatureScreen extends HookWidget {
                         onPressed: () => context.pop(),
                       ),
                     ),
-                
+
                     const Spacer(),
-                
+
                     Gap(20),
-                    
+
                     Text(
                       'إتمام الحجز',
                       style: theme.textTheme.titleLarge?.copyWith(

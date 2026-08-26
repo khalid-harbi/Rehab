@@ -5,9 +5,6 @@ class SearchFeatureWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-       
-      ],
-    );
+    return Column(children: []);
   }
 }

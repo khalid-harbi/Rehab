@@ -1,8 +1,11 @@
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:rehab/core/common/sub/search/presentation/cubit/search_cubit.dart';
+import 'package:rehab/core/common/sub/search/presentation/pages/search_feature_screen.dart';
+import 'package:rehab/core/constants/app_dimensions.dart';
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/services/location_service.dart';
+import 'package:rehab/features/ads/presentation/cubit/ads_cubit.dart';
 import 'package:rehab/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:rehab/features/chat/presentation/pages/chat_feature_screen.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
@@ -21,9 +24,15 @@ class UserRootShell extends StatefulWidget {
 class _UserRootShellState extends State<UserRootShell> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    MultiBlocProvider(
+  void _goToTab(int index) => setState(() => _selectedIndex = index);
+
+  @override
+  Widget build(BuildContext context) {
+    // كل الكيوبتس على مستوى الشل عشان الهوم وتبويب البحث يشتغلان
+    // على نفس الحالة، وما تنعاد التحميلات مع كل تنقّل بين التبويبات.
+    return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => ChatCubit(GetIt.I.get())),
         BlocProvider(
           create: (context) => GetIt.I<HomeCubit>()..getHomeMethod(),
         ),
@@ -31,65 +40,81 @@ class _UserRootShellState extends State<UserRootShell> {
           create: (context) => SearchCubit(
             GetIt.I.get<SearchUseCase>(),
             GetIt.I.get<BaseLocationService>(),
-          ),
+          )..getSearchMethod(title: ''),
         ),
+        BlocProvider(create: (context) => GetIt.I<AdsCubit>()..getAdsMethod()),
+        BlocProvider(create: (context) => UsersCubit(GetIt.I.get())),
       ],
-      child: const HomeFeatureScreen(),
-    ),
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        // IndexedStack يحافظ على حالة كل تبويب (السكرول، نص البحث) عند التنقّل.
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            HomeFeatureScreen(onNavigateToTab: _goToTab),
+            const SearchFeatureScreen(),
+            const ChatFeatureScreen(),
+            const UsersFeatureScreen(),
+            const ProfileFeatureScreen(),
+          ],
+        ),
+        bottomNavigationBar: _BottomNavBar(
+          selectedIndex: _selectedIndex,
+          onTabChange: _goToTab,
+        ),
+      ),
+    );
+  }
+}
 
-    const ChatFeatureScreen(),
-    BlocProvider(
-      create: (context) => UsersCubit(GetIt.I.get()),
-      child: const UsersFeatureScreen(),
-    ),
+class _BottomNavBar extends StatelessWidget {
+  const _BottomNavBar({required this.selectedIndex, required this.onTabChange});
 
-    const ProfileFeatureScreen(),
-  ];
+  final int selectedIndex;
+  final ValueChanged<int> onTabChange;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ChatCubit(GetIt.I.get())..fetchRooms(),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(child: _pages.elementAt(_selectedIndex)),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(blurRadius: 20, color: Colors.white.withAlpha(10)),
-            ],
+    return Container(
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x14000000),
+            blurRadius: 20,
+            offset: Offset(0, -4),
           ),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15.0,
-                vertical: 8,
-              ),
-              child: GNav(
-                rippleColor: Colors.grey[300]!,
-                hoverColor: Colors.grey[100]!,
-                gap: 8,
-                activeColor: Colors.white,
-                iconSize: 24,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                duration: Duration(milliseconds: 400),
-                tabBackgroundColor: AppColors.primary,
-                color: Colors.black,
-                tabs: [
-                  GButton(icon: Icons.home, text: "home".tr()),
-                  GButton(icon: Icons.chat, text: "chat".tr()),
-                  GButton(icon: Icons.people, text: "matching".tr()),
-                  GButton(icon: Icons.person, text: "profile".tr()),
-                ],
-                selectedIndex: _selectedIndex,
-                onTabChange: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
-              ),
+        ],
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.spaceSm,
+            vertical: AppDimensions.spaceSm,
+          ),
+          child: GNav(
+            rippleColor: AppColors.primary.withAlpha(20),
+            hoverColor: AppColors.primary.withAlpha(15),
+            gap: 6,
+            activeColor: Colors.white,
+            iconSize: 20,
+            textSize: 12,
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.spaceMd,
+              vertical: AppDimensions.spaceMd,
             ),
+            duration: const Duration(milliseconds: 320),
+            tabBackgroundColor: AppColors.primary,
+            color: AppColors.textSecondary,
+            tabs: [
+              GButton(icon: Icons.home_rounded, text: "home".tr()),
+              GButton(icon: Icons.search_rounded, text: "search".tr()),
+              GButton(icon: Icons.chat_bubble_rounded, text: "chat".tr()),
+              GButton(icon: Icons.people_alt_rounded, text: "matching".tr()),
+              GButton(icon: Icons.person_rounded, text: "profile".tr()),
+            ],
+            selectedIndex: selectedIndex,
+            onTabChange: onTabChange,
           ),
         ),
       ),

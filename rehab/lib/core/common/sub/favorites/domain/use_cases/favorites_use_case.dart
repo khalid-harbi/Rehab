@@ -19,6 +19,6 @@ class FavoritesUseCase {
   }
 
   Future<Result<List<HomeEntity>, Failure>> getFavoriteHomes() async {
-  return _repositoryData.getFavoriteHomes();
-}
+    return _repositoryData.getFavoriteHomes();
+  }
 }

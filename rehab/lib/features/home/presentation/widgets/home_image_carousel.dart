@@ -8,11 +8,15 @@ class HomeImageCarousel extends HookWidget {
   final double height;
   final BorderRadius borderRadius;
 
+  /// إخفاء نقاط المؤشر عند استخدام الكاروسيل داخل Stack بارتفاع ثابت.
+  final bool showIndicator;
+
   const HomeImageCarousel({
     super.key,
     required this.images,
     required this.height,
     required this.borderRadius,
+    this.showIndicator = true,
   });
 
   @override
@@ -39,24 +43,22 @@ class HomeImageCarousel extends HookWidget {
           items: images.map((image) {
             return ClipRRect(
               borderRadius: borderRadius,
-              child:Image.network(
-              image,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey.shade200,
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported),
-                  ),
-                );
-              },
-            ),
+              child: Image.network(
+                image,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey.shade200,
+                    child: const Center(child: Icon(Icons.image_not_supported)),
+                  );
+                },
+              ),
             );
           }).toList(),
         ),
 
-        if (images.length > 1) ...[
+        if (showIndicator && images.length > 1) ...[
           const SizedBox(height: 10),
 
           DotsIndicator(

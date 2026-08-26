@@ -14,5 +14,5 @@ class FavoritesEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id , userId, homeId, createdAt];
+  List<Object?> get props => [id, userId, homeId, createdAt];
 }

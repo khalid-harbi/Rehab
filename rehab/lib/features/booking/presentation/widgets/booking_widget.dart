@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class BookingWidget extends StatelessWidget {
   const BookingWidget({super.key});
@@ -7,4 +7,4 @@ class BookingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Placeholder();
   }
-  }
+}

@@ -13,19 +13,14 @@ class FavoritesSuccessState extends FavoritesState {
   final bool isFavorite;
   final int homeId;
   const FavoritesSuccessState({required this.isFavorite, required this.homeId});
-    @override
-  List<Object?> get props => [
-        isFavorite,
-        homeId,
-      ];
+  @override
+  List<Object?> get props => [isFavorite, homeId];
 }
 
 class FavoritesHomesSuccessState extends FavoritesState {
   final List<HomeEntity> homes;
 
-  const FavoritesHomesSuccessState({
-    required this.homes,
-  });
+  const FavoritesHomesSuccessState({required this.homes});
 
   @override
   List<Object?> get props => [homes];
@@ -37,4 +32,3 @@ class FavoritesErrorState extends FavoritesState {
   @override
   List<Object?> get props => [message];
 }
-

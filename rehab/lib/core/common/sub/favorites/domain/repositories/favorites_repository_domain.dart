@@ -6,6 +6,6 @@ abstract class FavoritesRepositoryDomain {
   Future<Result<List<FavoritesEntity>, Failure>> getFavorites();
 
   Future<Result<bool, Failure>> isFavorite({required int homeId});
-  
+
   Future<Result<List<HomeEntity>, Failure>> getFavoriteHomes();
 }

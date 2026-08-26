@@ -8,9 +8,8 @@ import 'package:rehab/features/chat/domain/entities/room_preview_entity.dart';
 import 'package:rehab/features/chat/domain/repositories/chat_repository_domain.dart';
 
 @LazySingleton(as: ChatRepositoryDomain)
-class ChatRepositoryData implements ChatRepositoryDomain{
+class ChatRepositoryData implements ChatRepositoryDomain {
   final BaseChatRemoteDataSource remoteDataSource;
-
 
   ChatRepositoryData(this.remoteDataSource);
 

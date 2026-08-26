@@ -7,8 +7,7 @@ import 'package:rehab/features/my_bookings/presentation/cubit/my_bookings_state.
 class MyBookingsCubit extends Cubit<MyBookingsState> {
   final MyBookingsUseCase _myBookingsUseCase;
 
-  MyBookingsCubit(this._myBookingsUseCase)
-      : super(MyBookingsInitialState());
+  MyBookingsCubit(this._myBookingsUseCase) : super(MyBookingsInitialState());
 
   Future<void> getMyBookingsMethod() async {
     emit(MyBookingsLoadingState());
@@ -24,7 +23,6 @@ class MyBookingsCubit extends Cubit<MyBookingsState> {
       },
     );
   }
-
 
   @override
   Future<void> close() {

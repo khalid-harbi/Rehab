@@ -25,8 +25,7 @@ abstract class MyBookingsModel with _$MyBookingsModel {
 
     required String status,
 
-    @JsonKey(name: 'home')
-    required HomeModel home,
+    @JsonKey(name: 'home') required HomeModel home,
   }) = _MyBookingsModel;
 
   factory MyBookingsModel.fromJson(Map<String, Object?> json) =>

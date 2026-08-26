@@ -25,7 +25,7 @@ class AddAdCubit extends Cubit<AddAdState> {
     required List<File> images,
   }) async {
     emit(AddAdLoadingState());
-    
+
     final result = await _addAdUseCase(
       title: title,
       city: city,
@@ -42,14 +42,14 @@ class AddAdCubit extends Cubit<AddAdState> {
       amenities: amenities,
       images: images,
     );
-    
+
     result.when(
       (success) {
         emit(AddAdSuccessState());
       },
       (error) {
         // Adjust the error message extraction based on your Failure class implementation
-        emit(AddAdErrorState(message: error.message)); 
+        emit(AddAdErrorState(message: error.message));
       },
     );
   }

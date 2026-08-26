@@ -13,4 +13,3 @@ abstract class AppImages {
   static const String error = '$_basePath/error.png';
   static const String noInternet = '$_basePath/no_internet.png';
 }
-

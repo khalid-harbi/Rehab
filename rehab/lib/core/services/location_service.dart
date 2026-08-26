@@ -37,8 +37,7 @@ class LocationServiceImpl implements BaseLocationService {
     try {
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else {
-      }
+      } else {}
     } catch (e) {
       print("Map Error: $e"); //!
     }

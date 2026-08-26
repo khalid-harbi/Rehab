@@ -8,6 +8,7 @@ abstract class UserDetailsState extends Equatable {
 }
 
 class UserDetailsInitialState extends UserDetailsState {}
+
 class UserDetailsSuccessState extends UserDetailsState {}
 
 class UserDetailsErrorState extends UserDetailsState {
@@ -16,4 +17,3 @@ class UserDetailsErrorState extends UserDetailsState {
   @override
   List<Object?> get props => [message];
 }
-

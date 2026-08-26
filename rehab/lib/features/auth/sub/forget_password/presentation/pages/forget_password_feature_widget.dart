@@ -26,110 +26,110 @@ class ForgetPasswordFeatureWidget extends HookWidget {
               } else {
                 context.hideLoading();
               }
-          
+
               if (state is ForgetPasswordSuccess) {
                 context.showSnackBar(
                   "تم إرسال رابط استعادة كلمة المرور إلى بريدك الإلكتروني 📩",
                 );
                 context.pop();
               }
-          
+
               if (state is ForgetPasswordError) {
                 context.showSnackBar(state.message, isError: true);
               }
-
             },
             //! todo: solve this error
             // child: Directionality(
-              // textDirection: TextDirection.rtl,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Icon(
-                      Icons.lock_reset_rounded,
-                      size: 80,
-                      color: AppColors.primary,
+            // textDirection: TextDirection.rtl,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Icon(
+                    Icons.lock_reset_rounded,
+                    size: 80,
+                    color: AppColors.primary,
+                  ),
+                  const SizedBox(height: 24),
+
+                  const Text(
+                    "نسيت كلمة المرور؟",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    "أدخل بريدك الإلكتروني لإرسال رابط تعيين كلمة المرور الجديدة.",
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 32),
+
+                  TextField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: "البريد الإلكتروني",
+                      hintText: "example@mail.com",
+                      prefixIcon: const Icon(Icons.email_outlined),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
-                    const SizedBox(height: 24),
-          
-                    const Text(
-                      "نسيت كلمة المرور؟",
+                  ),
+                  const SizedBox(height: 24),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      if (emailController.text.isNotEmpty) {
+                        context
+                            .read<ForgetPasswordCubit>()
+                            .sendResetPasswordEmail(emailController.text);
+                      } else {
+                        context.showSnackBar(
+                          "يرجى إدخال البريد الإلكتروني أولاً",
+                          isError: true,
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text(
+                      "إرسال رابط الاستعادة",
                       style: TextStyle(
-                        
-                        fontSize: 22, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      "أدخل بريدك الإلكتروني لإرسال رابط تعيين كلمة المرور الجديدة.",
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 32),
-          
-                    TextField(
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: "البريد الإلكتروني",
-                        hintText: "example@mail.com",
-                        prefixIcon: const Icon(Icons.email_outlined),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 24),
-          
-                    ElevatedButton(
-                      onPressed: () {
-                        if (emailController.text.isNotEmpty) {
-                          context
-                              .read<ForgetPasswordCubit>()
-                              .sendResetPasswordEmail(emailController.text);
-                        } else {
-                          context.showSnackBar(
-                            "يرجى إدخال البريد الإلكتروني أولاً",
-                            isError: true,
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.white,
-                      ),
-                      child: const Text(
-                        "إرسال رابط الاستعادة",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  TextButton(
+                    onPressed: () => context.pop(),
+                    child: const Text(
+                      "العودة لتسجيل الدخول",
+                      style: TextStyle(
+                        fontWeight: .bold,
+                        fontSize: 16,
+                        color: AppColors.textSecondary,
                       ),
                     ),
-          
-                    const SizedBox(height: 16),
-          
-                    TextButton(
-                      onPressed: () => context.pop(),
-                      child: const Text(
-                        "العودة لتسجيل الدخول",
-                        style: TextStyle(
-                          fontWeight: .bold,
-                          fontSize: 16,
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+            ),
             // ),
           );
-        }
+        },
       ),
     );
   }
