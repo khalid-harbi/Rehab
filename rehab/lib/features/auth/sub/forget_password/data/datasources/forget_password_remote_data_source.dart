@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -21,9 +22,9 @@ class ForgetPasswordRemoteDataSource
         email,
         redirectTo: 'rehab://reset-password',
       );
-      print("RESET EMAIL SENT");
+      debugPrint("RESET EMAIL SENT");
     } catch (error) {
-      print("ERROR SENDING RESET EMAIL: $error");
+      debugPrint("ERROR SENDING RESET EMAIL: $error");
       throw FailureExceptions.getException(error);
     }
   }

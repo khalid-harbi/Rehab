@@ -127,7 +127,7 @@ class ProfileFeatureScreen extends HookWidget {
                     if (state.profile.role.toUserRole() == UserRole.owner)
                       ProfileWidget(
                         icon: const Icon(Icons.apartment_outlined),
-                        title: "عقاراتي", //TODO: Translate it
+                        title: "myProperties",
                         onTap: () {
                           context.push(Routes.properties);
                         },
@@ -184,7 +184,7 @@ class ProfileFeatureScreen extends HookWidget {
                     ),
                     ProfileWidget(
                       icon: Icon(Icons.info_outline),
-                      title: "appInfo".tr(),
+                      title: "appInfo",
                       onTap: () => context.push(Routes.appInfo),
                     ),
                     LogoutFeatureWidget(),

@@ -1,7 +1,3 @@
-import 'package:injectable/injectable.dart';
-import 'package:multiple_result/multiple_result.dart';
-import 'package:rehab/core/errors/network_exceptions.dart';
-import 'package:rehab/core/errors/failure.dart';
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/features/owner/domain/entities/owner_entity.dart';
 
@@ -50,6 +46,16 @@ class OwnerRepositoryData implements OwnerRepositoryDomain {
         propertyId,
         isAvailable,
       );
+      return const Success(null);
+    } catch (error) {
+      return Error(FailureExceptions.getException(error));
+    }
+  }
+
+  @override
+  Future<Result<void, Failure>> deleteProperty(int propertyId) async {
+    try {
+      await remoteDataSource.deleteProperty(propertyId);
       return const Success(null);
     } catch (error) {
       return Error(FailureExceptions.getException(error));

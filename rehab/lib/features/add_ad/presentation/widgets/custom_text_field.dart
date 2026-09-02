@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:rehab/core/constants/app_dimensions.dart';
 
+/// حقل إدخال موحّد لنموذج إضافة الإعلان.
+///
+/// يعتمد على `inputDecorationTheme` في الثيم بدل أن يفرض ألوانه، فيتبدّل
+/// مع الوضع الداكن تلقائيًا. ولا يفرض محاذاة يمين حتى لا ينكسر في الإنجليزية.
 class CustomTextField extends StatelessWidget {
-  final String label;
-  final String hint;
-  final int maxLines;
-  final TextEditingController? controller;
-  final TextInputType? keyboardType;
-
   const CustomTextField({
     super.key,
     required this.label,
@@ -14,31 +13,58 @@ class CustomTextField extends StatelessWidget {
     this.maxLines = 1,
     this.controller,
     this.keyboardType,
+    this.validator,
+    this.isRequired = false,
+    this.textInputAction,
   });
+
+  final String label;
+  final String hint;
+  final int maxLines;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
+
+  /// يضيف نجمة إلى التسمية ويمنع تخطّي الحقل عند التحقق.
+  final bool isRequired;
+
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: Theme.of(
-            context,
-          ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+        Text.rich(
+          TextSpan(
+            text: label,
+            children: isRequired
+                ? [
+                    TextSpan(
+                      text: ' *',
+                      style: TextStyle(color: theme.colorScheme.error),
+                    ),
+                  ]
+                : null,
+          ),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+            color: theme.textTheme.bodyLarge?.color,
+          ),
         ),
-        const SizedBox(height: 8),
-        TextField(
+
+        const SizedBox(height: AppDimensions.spaceSm),
+
+        TextFormField(
           controller: controller,
           keyboardType: keyboardType,
           maxLines: maxLines,
-          textAlign: TextAlign.right,
-          decoration: InputDecoration(
-            hintText: hint,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-            filled: true,
-            fillColor: Colors.white,
-          ),
+          textInputAction: textInputAction,
+          validator: validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(hintText: hint),
         ),
       ],
     );

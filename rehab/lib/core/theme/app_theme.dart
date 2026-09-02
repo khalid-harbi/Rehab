@@ -149,8 +149,12 @@ abstract class AppTheme {
     ),
 
     // Cards
+    //
+    // كان اللون AppColors.border — بيج فاتح (0xFFEADFD9) — بينما نص الثيم
+    // الداكن أبيض. أي بطاقة في الوضع الداكن كانت نصًّا أبيض على بيج فاتح:
+    // تباين مكسور تمامًا. الصحيح سطح الثيم الداكن نفسه.
     cardTheme: CardThemeData(
-      color: AppColors.border,
+      color: const Color(0xFF1A1612),
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),

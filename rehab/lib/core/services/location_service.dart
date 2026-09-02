@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -37,9 +38,9 @@ class LocationServiceImpl implements BaseLocationService {
     try {
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else {}
+      }
     } catch (e) {
-      print("Map Error: $e"); //!
+      debugPrint('Map Error: $e');
     }
   }
 }

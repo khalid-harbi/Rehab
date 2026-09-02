@@ -15,7 +15,7 @@ class AuthCubit extends Cubit<AuthState> {
     final result = await _authUseCase.getAuth();
     result.when(
       (success) {
-        emit(AuthSuccessState(isLogin: success.isLogin));
+        emit(AuthSuccessState(isLogin: success.isLogin, role: success.role));
       },
       (whenError) {
         emit(AuthErrorState(message: whenError.message));

@@ -42,7 +42,7 @@ class OtpFeatureScreen extends HookWidget {
         }
 
         if (state is OtpResendSuccessState) {
-          context.showSnackBar('Code sent again', isError: false);
+          context.showSnackBar('codeSentAgain'.tr(), isError: false);
         }
 
         if (state is OtpErrorState) {
@@ -231,9 +231,9 @@ class OtpFeatureScreen extends HookWidget {
 
                   Center(
                     child: GestureDetector(
-                      onTap: () {
-                        // cubit.resendOtpMethod(email: email);
-                      },
+                      // كان الاستدعاء معلّقًا لأن الدالة كانت غير قابلة
+                      // للوصول — الزر كان يبدو فعّالًا ولا يفعل شيئًا.
+                      onTap: () => cubit.resendOtpMethod(email: email),
                       child: Text(
                         'Resend Code',
                         style: TextStyle(

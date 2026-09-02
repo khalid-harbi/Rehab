@@ -15,7 +15,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthModel {
 
-@JsonKey(defaultValue: false) bool get isLogin; bool? get isUser;
+@JsonKey(defaultValue: false) bool get isLogin; bool? get isUser;/// الدور كما هو مخزّن نصًّا في عمود `profiles.role`.
+ String? get role;
 /// Create a copy of AuthModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +29,16 @@ $AuthModelCopyWith<AuthModel> get copyWith => _$AuthModelCopyWithImpl<AuthModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthModel&&(identical(other.isLogin, isLogin) || other.isLogin == isLogin)&&(identical(other.isUser, isUser) || other.isUser == isUser));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthModel&&(identical(other.isLogin, isLogin) || other.isLogin == isLogin)&&(identical(other.isUser, isUser) || other.isUser == isUser)&&(identical(other.role, role) || other.role == role));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isLogin,isUser);
+int get hashCode => Object.hash(runtimeType,isLogin,isUser,role);
 
 @override
 String toString() {
-  return 'AuthModel(isLogin: $isLogin, isUser: $isUser)';
+  return 'AuthModel(isLogin: $isLogin, isUser: $isUser, role: $role)';
 }
 
 
@@ -48,7 +49,7 @@ abstract mixin class $AuthModelCopyWith<$Res>  {
   factory $AuthModelCopyWith(AuthModel value, $Res Function(AuthModel) _then) = _$AuthModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(defaultValue: false) bool isLogin, bool? isUser
+@JsonKey(defaultValue: false) bool isLogin, bool? isUser, String? role
 });
 
 
@@ -65,11 +66,12 @@ class _$AuthModelCopyWithImpl<$Res>
 
 /// Create a copy of AuthModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLogin = null,Object? isUser = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLogin = null,Object? isUser = freezed,Object? role = freezed,}) {
   return _then(_self.copyWith(
 isLogin: null == isLogin ? _self.isLogin : isLogin // ignore: cast_nullable_to_non_nullable
 as bool,isUser: freezed == isUser ? _self.isUser : isUser // ignore: cast_nullable_to_non_nullable
-as bool?,
+as bool?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -154,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(defaultValue: false)  bool isLogin,  bool? isUser)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(defaultValue: false)  bool isLogin,  bool? isUser,  String? role)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthModel() when $default != null:
-return $default(_that.isLogin,_that.isUser);case _:
+return $default(_that.isLogin,_that.isUser,_that.role);case _:
   return orElse();
 
 }
@@ -175,10 +177,10 @@ return $default(_that.isLogin,_that.isUser);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(defaultValue: false)  bool isLogin,  bool? isUser)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(defaultValue: false)  bool isLogin,  bool? isUser,  String? role)  $default,) {final _that = this;
 switch (_that) {
 case _AuthModel():
-return $default(_that.isLogin,_that.isUser);case _:
+return $default(_that.isLogin,_that.isUser,_that.role);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +197,10 @@ return $default(_that.isLogin,_that.isUser);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(defaultValue: false)  bool isLogin,  bool? isUser)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(defaultValue: false)  bool isLogin,  bool? isUser,  String? role)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthModel() when $default != null:
-return $default(_that.isLogin,_that.isUser);case _:
+return $default(_that.isLogin,_that.isUser,_that.role);case _:
   return null;
 
 }
@@ -210,11 +212,13 @@ return $default(_that.isLogin,_that.isUser);case _:
 @JsonSerializable()
 
 class _AuthModel implements AuthModel {
-  const _AuthModel({@JsonKey(defaultValue: false) required this.isLogin, this.isUser});
+  const _AuthModel({@JsonKey(defaultValue: false) required this.isLogin, this.isUser, this.role});
   factory _AuthModel.fromJson(Map<String, dynamic> json) => _$AuthModelFromJson(json);
 
 @override@JsonKey(defaultValue: false) final  bool isLogin;
 @override final  bool? isUser;
+/// الدور كما هو مخزّن نصًّا في عمود `profiles.role`.
+@override final  String? role;
 
 /// Create a copy of AuthModel
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthModel&&(identical(other.isLogin, isLogin) || other.isLogin == isLogin)&&(identical(other.isUser, isUser) || other.isUser == isUser));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthModel&&(identical(other.isLogin, isLogin) || other.isLogin == isLogin)&&(identical(other.isUser, isUser) || other.isUser == isUser)&&(identical(other.role, role) || other.role == role));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isLogin,isUser);
+int get hashCode => Object.hash(runtimeType,isLogin,isUser,role);
 
 @override
 String toString() {
-  return 'AuthModel(isLogin: $isLogin, isUser: $isUser)';
+  return 'AuthModel(isLogin: $isLogin, isUser: $isUser, role: $role)';
 }
 
 
@@ -249,7 +253,7 @@ abstract mixin class _$AuthModelCopyWith<$Res> implements $AuthModelCopyWith<$Re
   factory _$AuthModelCopyWith(_AuthModel value, $Res Function(_AuthModel) _then) = __$AuthModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(defaultValue: false) bool isLogin, bool? isUser
+@JsonKey(defaultValue: false) bool isLogin, bool? isUser, String? role
 });
 
 
@@ -266,11 +270,12 @@ class __$AuthModelCopyWithImpl<$Res>
 
 /// Create a copy of AuthModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLogin = null,Object? isUser = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLogin = null,Object? isUser = freezed,Object? role = freezed,}) {
   return _then(_AuthModel(
 isLogin: null == isLogin ? _self.isLogin : isLogin // ignore: cast_nullable_to_non_nullable
 as bool,isUser: freezed == isUser ? _self.isUser : isUser // ignore: cast_nullable_to_non_nullable
-as bool?,
+as bool?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

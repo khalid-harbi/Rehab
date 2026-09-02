@@ -1,151 +1,115 @@
+import 'package:go_router/go_router.dart';
+import 'package:rehab/core/constants/app_dimensions.dart';
 import 'package:rehab/core/exports/app_exports.dart';
-import 'package:rehab/core/utils/localization_helper.dart';
+import 'package:rehab/core/extensions/context_extensions.dart';
+import 'package:rehab/core/navigation/routers.dart';
+import 'package:rehab/core/widgets/app_top_bar.dart';
+import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_cubit.dart';
 import 'package:rehab/features/owner/presentation/cubit/owner_state.dart';
+import 'package:rehab/features/owner/presentation/widgets/owner_message_view.dart';
+import 'package:rehab/features/owner/presentation/widgets/owner_property_card.dart';
 
+/// كل عقارات المالكة — امتداد لقسم «عقاراتي» في اللوحة، بنفس الكارد تمامًا.
+///
+/// كانت تستخدم `AppBar` عاديًا وكاردًا خاصًا بها، فتبدو صفحة من تطبيق آخر.
+/// الآن: `AppTopBar` الموحّد ونفس `OwnerPropertyCard`.
 class PropertiesFeatureScreen extends StatelessWidget {
   const PropertiesFeatureScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIt.I<OwnerCubit>()..getOwnerPropertiesMethod(),
-      child: Scaffold(
-        appBar: AppBar(title: const Text('عقارات')),
-        body: BlocBuilder<OwnerCubit, OwnerState>(
-          builder: (context, state) {
-            if (state is OwnerSuccessState) {
-              if (state.homes.isEmpty) {
-                return const Center(child: Text('ليس لديك عقارات بعد'));
-              }
-              return ListView.separated(
-                padding: const EdgeInsets.all(16),
-                itemCount: state.homes.length,
-                separatorBuilder: (_, __) => Gap(12),
-                itemBuilder: (context, index) {
-                  final home = state.homes[index];
-                  return Card(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  home.imageUrls[0],
-                                  width: 80,
-                                  height: 80,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Gap(14),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: .start,
-                                  children: [
-                                    Text(
-                                      titleForLocale(
-                                        context,
-                                        home.titleEn,
-                                        home.titleAr,
-                                      ),
-                                      style: const TextStyle(
-                                        fontWeight: .bold,
-                                        fontSize: 16,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: .ellipsis,
-                                    ),
-                                    Gap(4),
-                                    Text(
-                                      titleForLocale(
-                                        context,
-                                        home.descriptionEn,
-                                        home.descriptionAr,
-                                      ),
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontSize: 13,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: .ellipsis,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Gap(12),
-                              Text(
-                                '${home.price.toInt()} ريال/\n شهريًا',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: AppColors.primary,
-                                ),
-                              ),
-                            ],
-                          ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => GetIt.I<OwnerCubit>()..getOwnerPropertiesMethod(),
+        ),
 
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12.0),
-                            child: Divider(color: Colors.grey[200], height: 1),
-                          ),
-                          Row(
-                            mainAxisAlignment: .spaceBetween,
-                            children: [
-                              Text(
-                                home.isAvailable
-                                    ? 'متاح للحجز الآن'
-                                    : 'غير متاح للحجز حاليًا',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  color: home.isAvailable
-                                      ? Colors.green[700]
-                                      : Colors.red[700],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 28,
-                                child: Transform.scale(
-                                  scale: 0.9,
-                                  child: Switch(
-                                    value: home.isAvailable,
-                                    activeThumbColor: AppColors.primary,
-                                    onChanged: (bool value) {
-                                      context
-                                          .read<OwnerCubit>()
-                                          .togglePropertyAvailabilityMethod(
-                                            home.id,
-                                            home.isAvailable,
-                                          );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+        // زر الخريطة داخل كارد العقار المشترك يقرأ HomeCubit.
+        BlocProvider(create: (_) => GetIt.I<HomeCubit>()),
+      ],
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        appBar: AppTopBar(
+          title: "myProperties".tr(),
+          showBack: true,
+          actions: [
+            IconButton(
+              onPressed: () => context.push(Routes.addAd),
+              tooltip: "addNewListing".tr(),
+              icon: const Icon(Icons.add_rounded, color: Colors.white),
+            ),
+          ],
+        ),
+        body: BlocConsumer<OwnerCubit, OwnerState>(
+          listenWhen: (_, state) =>
+              state is OwnerSuccessState && state.toggleError != null,
+          listener: (context, state) => context.showSnackBar(
+            (state as OwnerSuccessState).toggleError!,
+            isError: true,
+          ),
+          builder: (context, state) {
+            if (state is OwnerErrorState) {
+              return _Centered(
+                child: OwnerMessageView(
+                  icon: Icons.cloud_off_rounded,
+                  title: "somethingWentWrong".tr(),
+                  body: state.message,
+                  actionLabel: "retry".tr(),
+                  onAction: () =>
+                      context.read<OwnerCubit>().getOwnerPropertiesMethod(),
+                ),
               );
             }
-            if (state is OwnerErrorState) {
-              return Center(child: Text(state.message));
+
+            if (state is! OwnerSuccessState) {
+              return const Center(child: LoadingWidget());
             }
 
-            return const Center(child: LoadingWidget());
+            if (state.homes.isEmpty) {
+              return _Centered(
+                child: OwnerMessageView(
+                  icon: Icons.add_home_work_outlined,
+                  title: "noPropertiesYet".tr(),
+                  body: "noPropertiesHint".tr(),
+                  actionLabel: "addNewListing".tr(),
+                  onAction: () => context.push(Routes.addAd),
+                ),
+              );
+            }
+
+            return RefreshIndicator(
+              color: AppColors.primary,
+              onRefresh: () =>
+                  context.read<OwnerCubit>().getOwnerPropertiesMethod(),
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppDimensions.spaceSm,
+                ),
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: state.homes.length,
+                itemBuilder: (context, index) =>
+                    OwnerPropertyCard(home: state.homes[index]),
+              ),
+            );
           },
         ),
+      ),
+    );
+  }
+}
+
+class _Centered extends StatelessWidget {
+  const _Centered({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppDimensions.screenPadding),
+        child: child,
       ),
     );
   }

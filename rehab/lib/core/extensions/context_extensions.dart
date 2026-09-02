@@ -1,3 +1,4 @@
+import 'package:rehab/core/constants/app_dimensions.dart';
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/features/auth/sub/otp/presentation/cubit/otp_cubit.dart';
@@ -8,12 +9,28 @@ export 'package:easy_localization/easy_localization.dart';
 extension ContextExtensions on BuildContext {
   // Snackbar
   void showSnackBar(String message, {bool isError = false}) {
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: isError ? Colors.red : Colors.green,
-      ),
-    );
+    // كانت Colors.red / Colors.green الخام — لونان لا علاقة لهما بهوية
+    // التطبيق. الآن لون الخطأ من الثيم، والنجاح بلون العلامة.
+    final scheme = Theme.of(this).colorScheme;
+
+    ScaffoldMessenger.of(this)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            message,
+            style: TextStyle(
+              color: isError ? scheme.onError : scheme.onPrimary,
+            ),
+          ),
+          backgroundColor: isError ? scheme.error : scheme.primary,
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.all(AppDimensions.screenPadding),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
+          ),
+        ),
+      );
   }
 
   void showLoading() {
@@ -27,37 +44,31 @@ extension ContextExtensions on BuildContext {
   void showLogoutDialog(BuildContext context, LogoutCubit cubit) {
     showDialog(
       context: context,
+      // كان الحوار كله عربيًا مكتوبًا يدويًا بألوان سوداء ورمادية ثابتة:
+      // يظهر عربيًا في الواجهة الإنجليزية، ويختفي نصّه في الوضع الداكن.
       builder: (dialogContext) => AlertDialog(
-        backgroundColor: AppColors.background,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text(
-          "تسجيل الخروج",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusXl),
         ),
-        content: const Text(
-          "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-          style: TextStyle(color: Colors.black54),
+        title: Text(
+          "logout".tr(),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
+        content: Text("logoutConfirm".tr()),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text("إلغاء", style: TextStyle(color: Colors.grey)),
+            child: Text("cancel".tr()),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.redAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: Theme.of(dialogContext).colorScheme.error,
             ),
             onPressed: () {
               Navigator.pop(dialogContext);
               cubit.getLogoutMethod();
             },
-            child: const Text(
-              "تسجيل الخروج",
-              style: TextStyle(color: Colors.white),
-            ),
+            child: Text("logout".tr()),
           ),
         ],
       ),
@@ -86,6 +97,11 @@ extension ContextExtensions on BuildContext {
     required String description,
     required VoidCallback onPaid,
   }) {
+    // يُلتقط قبل الـ await: استعمال this بعد فجوة async قد يقع بعد إزالة
+    // الشاشة من الشجرة.
+    final messenger = ScaffoldMessenger.of(this);
+    final scheme = Theme.of(this).colorScheme;
+
     showModalBottomSheet(
       context: this,
       isScrollControlled: true,
@@ -103,9 +119,12 @@ extension ContextExtensions on BuildContext {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                "الدفع الآمن",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                "securePayment".tr(),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
 
               Gap(20),
@@ -119,10 +138,17 @@ extension ContextExtensions on BuildContext {
                   final isPaid = await Payment().onPaymentResult(result);
 
                   if (isPaid) {
-                    Navigator.pop(bottomSheetContext);
+                    if (bottomSheetContext.mounted) {
+                      Navigator.pop(bottomSheetContext);
+                    }
                     onPaid();
                   } else {
-                    showSnackBar('فشلت عملية الدفع', isError: true);
+                    messenger.showSnackBar(
+                      SnackBar(
+                        content: Text('paymentFailed'.tr()),
+                        backgroundColor: scheme.error,
+                      ),
+                    );
                   }
                 },
               ),
@@ -166,7 +192,7 @@ extension ContextExtensions on BuildContext {
                     children: [
                       // العنوان الرئيسي
                       Text(
-                        "edit profile".tr(),
+                        "editProfile".tr(),
                         style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -186,7 +212,9 @@ extension ContextExtensions on BuildContext {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: burgundyColor.withOpacity(0.15),
+                                        color: burgundyColor.withValues(
+                                          alpha: 0.15,
+                                        ),
                                         width: 3,
                                       ),
                                     ),
@@ -229,8 +257,8 @@ extension ContextExtensions on BuildContext {
                                         shape: BoxShape.circle,
                                         boxShadow: [
                                           BoxShadow(
-                                            color: burgundyColor.withOpacity(
-                                              0.3,
+                                            color: burgundyColor.withValues(
+                                              alpha: 0.3,
                                             ),
                                             blurRadius: 6,
                                             offset: const Offset(0, 2),
@@ -469,7 +497,7 @@ void showHelpAndSupportDialog(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "تواصل معنا عبر البريد الإلكتروني لفريق الدعم:",
+              "supportEmailHint".tr(),
               style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
             ),
             const SizedBox(height: 16),
@@ -515,9 +543,9 @@ void showHelpAndSupportDialog(BuildContext context) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'إغلاق',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            child: Text(
+              'close'.tr(),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],

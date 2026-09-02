@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:rehab/core/services/local_keys_service.dart';
 import 'package:rehab/features/user_details/data/models/user_details_model.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
 

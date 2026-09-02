@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:rehab/core/errors/network_exceptions.dart';
 import 'package:rehab/core/utils/supabase_users_map.dart';
 import 'package:rehab/features/users/data/models/users_model/users_model.dart';
-import 'package:rehab/features/users/domain/entities/users_entity.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class BaseUsersRemoteDataSource {

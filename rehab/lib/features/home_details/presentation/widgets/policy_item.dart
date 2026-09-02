@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// سطر سياسة في تفاصيل العقار.
+///
+/// كان `Text` عاريًا داخل `Row` بلا `Expanded`، فلا حدّ لعرضه: أي سياسة
+/// تتجاوز سطرًا واحدًا تخرج عن الشاشة وتظهر أشرطة التجاوز الصفراء.
+/// الآن يلتف النص على أسطر، والأيقونة تُحاذي أوّل سطر لا وسط الفقرة.
 class PolicyItem extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -8,15 +13,26 @@ class PolicyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: colors.primary, size: 20),
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Icon(icon, color: theme.colorScheme.primary, size: 20),
+          ),
+
           const SizedBox(width: 10),
-          Text(title),
+
+          Expanded(
+            child: Text(
+              title,
+              style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
+            ),
+          ),
         ],
       ),
     );

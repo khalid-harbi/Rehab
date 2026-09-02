@@ -7,6 +7,7 @@ abstract class BaseOwnerRemoteDataSource {
   Future<OwnerModel> getOwner();
   Future<List<Map<String, dynamic>>> getOwnerProperties();
   Future<void> togglePropertyAvailability(int propertyId, bool isAvailable);
+  Future<void> deleteProperty(int propertyId);
 }
 
 @LazySingleton(as: BaseOwnerRemoteDataSource)
@@ -88,6 +89,26 @@ class OwnerRemoteDataSource implements BaseOwnerRemoteDataSource {
       await _supabase
           .from('home')
           .update({'is_available': isAvailable})
+          .eq('id', propertyId)
+          .eq('owner_id', userId);
+    } catch (error) {
+      throw FailureExceptions.getException(error);
+    }
+  }
+
+  @override
+  Future<void> deleteProperty(int propertyId) async {
+    try {
+      final userId = _supabase.auth.currentUser?.id;
+
+      if (userId == null) {
+        throw Exception('User is not logged in');
+      }
+
+      // شرط المالك يمنع حذف عقار لا يملكه المستخدم الحالي.
+      await _supabase
+          .from('home')
+          .delete()
           .eq('id', propertyId)
           .eq('owner_id', userId);
     } catch (error) {

@@ -8,6 +8,11 @@ class Formatters {
     return '$symbol${amount.toStringAsFixed(2)}';
   }
 
+  /// مبلغ بفواصل الآلاف وبأرقام لاتينية — تبقى الأرقام موحّدة في العربية
+  /// والإنجليزية بدل أن تتحوّل إلى الأرقام الهندية في اللغة العربية.
+  static String formatAmount(num value) =>
+      NumberFormat.decimalPattern('en').format(value);
+
   static String formatDate(DateTime date) {
     return DateFormat('yyyy-MM-dd').format(date);
   }

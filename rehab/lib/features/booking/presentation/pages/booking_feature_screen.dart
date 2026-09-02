@@ -1,14 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rehab/core/constants/app_colors.dart';
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/features/booking/presentation/cubit/booking_cubit.dart';
 import 'package:rehab/features/booking/presentation/widgets/month_buttom.dart';
 import 'package:rehab/features/booking/presentation/widgets/price_row.dart';
 import 'package:rehab/features/booking/presentation/widgets/property_card.dart';
-import 'package:rehab/features/home/domain/entities/home_entity.dart';
 
 class BookingFeatureScreen extends HookWidget {
   final HomeEntity home;

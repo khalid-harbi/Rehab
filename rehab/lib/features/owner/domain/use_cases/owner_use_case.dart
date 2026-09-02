@@ -28,4 +28,8 @@ class OwnerUseCase {
       isAvailable,
     );
   }
+
+  Future<Result<void, Failure>> deleteProperty(int propertyId) async {
+    return _repositoryData.deleteProperty(propertyId);
+  }
 }

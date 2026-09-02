@@ -24,12 +24,20 @@ class LoginRemoteDataSource implements BaseLoginRemoteDataSource {
         password: password,
         email: email,
       );
+
+      // كان `single()` يرمي استثناءً حين لا صف في `profiles` — وهذه حال كل
+      // حساب أُنشئ قبل إصلاح التسجيل. فتنجح المصادقة ثم يفشل تسجيل الدخول
+      // برسالة خطأ تقنية، ويصير الحساب غير قابل للاستخدام نهائيًا.
+      // `maybeSingle` يرجع null، ونعامل الدور المفقود كمستخدمة عادية.
       final data = await _supabase
           .from('profiles')
           .select('role')
           .eq('id', response.user!.id)
-          .single();
-      return (data['role'] as String).toUserRole();
+          .maybeSingle();
+
+      final role = data?['role'] as String?;
+
+      return role?.toUserRole() ?? UserRole.user;
     } catch (error) {
       throw FailureExceptions.getException(error);
     }

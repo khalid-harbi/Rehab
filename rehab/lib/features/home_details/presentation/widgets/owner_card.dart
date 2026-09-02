@@ -44,42 +44,48 @@ Widget buildOwnerContactCard(
           ),
         ),
 
-        BlocBuilder<UsersCubit, UsersState>(
-          builder: (context, state) {
-            final isLoading = state is UsersLoadingState;
+        // الزر كان بعرضه الطبيعي كاملًا: مع تسمية طويلة أو خط نظام مكبّر
+        // يضغط الصف حتى يتجاوز. Flexible يسمح له بالانكماش.
+        Flexible(
+          child: BlocBuilder<UsersCubit, UsersState>(
+            builder: (context, state) {
+              final isLoading = state is UsersLoadingState;
 
-            return ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: colors.primary,
-                foregroundColor: colors.onPrimary,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+              return ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colors.primary,
+                  foregroundColor: colors.onPrimary,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
+                onPressed: isLoading
+                    ? null
+                    : () => cubit.createRoom(home.ownerId),
+                icon: isLoading
+                    ? SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: colors.onPrimary,
+                        ),
+                      )
+                    : const Icon(Icons.chat_bubble_outline, size: 18),
+                label: Text(
+                  "getInTouch".tr(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-              ),
-              onPressed: isLoading
-                  ? null
-                  : () => cubit.createRoom(home.ownerId),
-              icon: isLoading
-                  ? SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: colors.onPrimary,
-                      ),
-                    )
-                  : const Icon(Icons.chat_bubble_outline, size: 18),
-              label: Text(
-                "getInTouch".tr(),
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ],
     ),

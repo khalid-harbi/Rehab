@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rehab/core/constants/app_dimensions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -169,37 +170,10 @@ class LoginFeatureScreen extends HookWidget {
                     ),
 
                     Gap(2.h),
-                    Center(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF329691),
-                          foregroundColor: Colors.white, // لون النص والأيقونة
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 75,
-                            vertical: 8,
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Image.asset(
-                              'assets/icons/nafath_icon.png',
-                              height: 40,
-                              color: Colors.white,
-                            ),
-                            Gap(2.sw),
-                            const Text(
-                              'تسجيل الدخول عبر ',
-                              style: TextStyle(fontSize: 16, fontWeight: .bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // نفاذ لم يُفعَّل بعد. كان الزر يبدو فعّالًا وonPressed فارغ،
+                    // فتضغط المستخدمة ولا يحدث شيء فتظن التطبيق معطّلًا.
+                    // الآن يظهر بوضوح أنه قريبًا، ويشرح البديل عند الضغط.
+                    const Center(child: _NafathComingSoonButton()),
                   ],
                 ),
               ),
@@ -252,6 +226,87 @@ class SocialAuthButton extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// زر نفاذ — معطّل بصريًا مع وسم «قريبًا»، ويشرح البديل عند الضغط.
+class _NafathComingSoonButton extends StatelessWidget {
+  const _NafathComingSoonButton();
+
+  static const Color _nafathTeal = Color(0xFF329691);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Semantics(
+      button: true,
+      enabled: false,
+      label: '${'loginWithNafath'.tr()} — ${'comingSoon'.tr()}',
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: _nafathTeal,
+          side: BorderSide(color: _nafathTeal.withAlpha(120)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.spaceXl,
+            vertical: AppDimensions.spaceMd,
+          ),
+        ),
+        onPressed: () {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text('nafathComingSoon'.tr())));
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Opacity(
+              opacity: 0.75,
+              child: Image.asset(
+                'assets/icons/nafath_icon.png',
+                height: 28,
+                color: _nafathTeal,
+              ),
+            ),
+
+            const Gap(AppDimensions.spaceSm),
+
+            Flexible(
+              child: Text(
+                'loginWithNafath'.tr(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const Gap(AppDimensions.spaceSm),
+
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: _nafathTeal.withAlpha(30),
+                borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+              ),
+              child: Text(
+                'comingSoon'.tr(),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: _nafathTeal,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

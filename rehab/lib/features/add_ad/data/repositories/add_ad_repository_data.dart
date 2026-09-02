@@ -69,4 +69,48 @@ class AddAdRepositoryData implements AddAdRepositoryDomain {
       return Error(FailureExceptions.getException(error));
     }
   }
+
+  @override
+  Future<Result<void, Failure>> updateHome({
+    required int id,
+    required String title,
+    required String city,
+    required String district,
+    required String propertyType,
+    required String description,
+    required int rooms,
+    required int bathrooms,
+    required double price,
+    required double area,
+    required double lat,
+    required double lng,
+    required List<String> policies,
+    required List<String> amenities,
+    required List<String> keptImageUrls,
+    required List<File> newImages,
+  }) async {
+    try {
+      await remoteDataSource.updateHome(
+        id: id,
+        title: title,
+        city: city,
+        district: district,
+        propertyType: propertyType,
+        description: description,
+        rooms: rooms,
+        bathrooms: bathrooms,
+        price: price,
+        area: area,
+        lat: lat,
+        lng: lng,
+        policies: policies,
+        amenities: amenities,
+        keptImageUrls: keptImageUrls,
+        newImages: newImages,
+      );
+      return const Success(null);
+    } catch (error) {
+      return Error(FailureExceptions.getException(error));
+    }
+  }
 }

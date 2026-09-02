@@ -27,6 +27,15 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
     final colors = theme.colorScheme;
     final textTheme = theme.textTheme;
 
+    // القوائم تُختار بلغة الواجهة مع بديل تلقائي، لأن كل إعلان يحمل لغة
+    // واحدة فقط من الأعمدة (طريقة إدخاله في add_ad).
+    final amenities = listForLocale(
+      context,
+      home.amenitiesEn,
+      home.amenitiesAr,
+    );
+    final policies = listForLocale(context, home.policyEn, home.policyAr);
+
     return Scaffold(
       backgroundColor: colors.surface,
       bottomNavigationBar: BookingBar(home: home),
@@ -40,7 +49,8 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
             context.read<ChatCubit>().fetchRooms();
           } else if (state is UsersErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("حدث خطأ: ${state.message}")),
+              // كان يعرض رسالة تقنية عربية ثابتة مع نص الخطأ الخام.
+              SnackBar(content: Text("somethingWentWrong".tr())),
             );
           }
         },
@@ -154,17 +164,10 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                           icon: Icons.bathtub_outlined,
                           title: 'bathrooms_count'.plural(home.bathrooms),
                         ),
-                        for (int i = 0; i < home.amenitiesEn.length; i++)
-                          FacilityCard(
-                            icon: Icons.star_border,
-                            title: titleForLocale(
-                              context,
-                              home.amenitiesEn[i],
-                              home.amenitiesAr.length > i
-                                  ? home.amenitiesAr[i]
-                                  : '',
-                            ),
-                          ),
+                        // كان الدوران على amenitiesEn: الإعلان المضاف
+                        // بالعربية لا تظهر مرافقه إطلاقًا.
+                        for (final amenity in amenities)
+                          FacilityCard(icon: Icons.star_border, title: amenity),
                       ],
                     ),
 
@@ -172,15 +175,8 @@ class HomeDetailsFeatureScreen extends StatelessWidget {
                     SectionTitle(title: 'housingRulesAndPolicies'.tr()),
                     const SizedBox(height: 24),
 
-                    for (int i = 0; i < home.policyEn.length; i++)
-                      PolicyItem(
-                        icon: Icons.info_outline,
-                        title: titleForLocale(
-                          context,
-                          home.policyEn[i],
-                          home.policyAr.length > i ? home.policyAr[i] : '',
-                        ),
-                      ),
+                    for (final policy in policies)
+                      PolicyItem(icon: Icons.info_outline, title: policy),
 
                     const SizedBox(height: 24),
                     buildOwnerContactCard(context, cubit, colors, home),

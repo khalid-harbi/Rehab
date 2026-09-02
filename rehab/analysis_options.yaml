@@ -1,3 +1,5 @@
+include: package:flutter_lints/flutter.yaml
+
 analyzer:
   exclude:
     - build/**
@@ -7,4 +9,7 @@ analyzer:
     - windows/**
     - macos/**
     - linux/**
-include: package:flutter_lints/flutter.yaml
+  errors:
+    # freezed يضع @JsonSerializable على المصنع لا على الصنف، فيشتكي المحلّل
+    # من ثمانية نماذج بلا خطأ حقيقي. هذا التجاهل هو ما توصي به وثائق freezed.
+    invalid_annotation_target: ignore

@@ -10,4 +10,5 @@ abstract class OwnerRepositoryDomain {
     int propertyId,
     bool isAvailable,
   );
+  Future<Result<void, Failure>> deleteProperty(int propertyId);
 }

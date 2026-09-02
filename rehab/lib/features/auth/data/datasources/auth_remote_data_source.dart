@@ -36,21 +36,28 @@ class AuthRemoteDataSource implements BaseAuthRemoteDataSource {
         return AuthModel(isLogin: true, isUser: false);
       }
 
-      return AuthModel(isLogin: true, isUser: true);
+      return AuthModel(isLogin: true, isUser: true, role: await _role(user.id));
     } catch (error) {
       throw FailureExceptions.getException(error);
     }
   }
 
-  Future<void> restAuth() async {
-    if (_supabase.auth.currentSession == null) {
-      await _supabase.auth.signInAnonymously();
-    }
+  /// دور المستخدمة من `profiles`.
+  ///
+  /// `maybeSingle` لا `single`: الحسابات التي أُنشئت قبل إصلاح التسجيل لا صف
+  /// لها، و`single` كان يرمي استثناءً فتتحوّل شاشة السبلاش إلى خطأ.
+  /// فشل قراءة الدور وحده لا يمنع الدخول — نرجع null وتُعامل كمستخدمة عادية.
+  Future<String?> _role(String userId) async {
+    try {
+      final profile = await _supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', userId)
+          .maybeSingle();
 
-    if (_supabase.auth.currentSession!.isExpired) {
-      await _supabase.auth.refreshSession(
-        _supabase.auth.currentSession!.refreshToken,
-      );
+      return profile?['role'] as String?;
+    } catch (_) {
+      return null;
     }
   }
 }

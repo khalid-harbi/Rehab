@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:rehab/core/constants/app_dimensions.dart';
 import 'package:rehab/core/exports/app_exports.dart';
+import 'package:rehab/core/extensions/context_extensions.dart';
 import 'package:rehab/core/navigation/routers.dart';
 import 'package:rehab/core/utils/localization_helper.dart';
 import 'package:rehab/features/home/presentation/cubit/home_cubit.dart';
@@ -87,7 +88,9 @@ class _TopBadges extends StatelessWidget {
           if (home.distance != null && home.distance! > 0.1)
             _Pill(
               icon: Icons.near_me_rounded,
-              label: '${home.distance!.toStringAsFixed(1)} كم',
+              // كانت «كم» مكتوبة عربيةً ثابتة فتظهر كما هي في الواجهة
+              // الإنجليزية.
+              label: '${home.distance!.toStringAsFixed(1)} ${"km".tr()}',
             ),
         ],
       ),
@@ -160,7 +163,8 @@ class _BottomInfo extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
                 ),
                 child: Text(
-                  '${home.price.toStringAsFixed(0)} ريال/شهريًا',
+                  // كان النص «ريال/شهريًا» ثابتًا بالعربية في كل اللغات.
+                  '${home.price.toStringAsFixed(0)} ${"riyalPerMonth".tr()}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 11,

@@ -28,6 +28,10 @@ class FacilityCard extends StatelessWidget {
           Expanded(
             child: Text(
               title,
+              // خلية الشبكة نسبتها ثابتة (childAspectRatio)، فبلا حدّ أسطر
+              // يتجاوز المرفق الطويل ارتفاعها.
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,

@@ -49,6 +49,9 @@ dependencies:
   dots_indicator: ^4.0.1
   google_nav_bar: ^5.0.7
 
+  # مستخدمة في core/utils/formatters.dart ولم تكن معلنة
+  intl: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

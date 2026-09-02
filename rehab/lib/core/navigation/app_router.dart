@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:rehab/core/constants/app_enums.dart';
 import 'package:rehab/core/common/sub/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:rehab/core/common/sub/favorites/presentation/pages/favorites_feature_widget.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
@@ -51,16 +53,27 @@ class AppRouter {
                 listener: (context, state) {
                   switch (state) {
                     case AuthSuccessState _:
-                      if (state.isLogin) {
-                        context.go(Routes.home);
+                      // كان السطر يوجّه كل جلسة محفوظة إلى Routes.home بلا
+                      // قراءة الدور، فتهبط المالكة على شاشة المستخدمة في كل
+                      // تشغيل — ولا تصل لوحتها إلا بتسجيل دخول جديد.
+                      if (!state.isLogin) {
+                        context.go(Routes.auth);
+                      } else {
+                        context.go(
+                          state.role == UserRole.owner
+                              ? Routes.owner
+                              : Routes.home,
+                        );
                       }
-                      context.go(Routes.auth);
                     case AuthErrorState _:
+                      // كان الخطأ يُعرض في SnackBar وتبقى الشاشة تدور بلا
+                      // مخرج. الآن ننقلها إلى شاشة الدخول بعد التنبيه.
                       context.showSnackBar(state.message, isError: true);
+                      context.go(Routes.auth);
                     default:
                   }
                 },
-                child: Center(child: LoadingWidget()),
+                child: const _SplashBody(),
               ),
             ),
           );
@@ -163,9 +176,11 @@ class AppRouter {
 
       GoRoute(
         path: Routes.addAd,
+        // نفس المسار للإضافة وللتعديل: تمرير عقار في extra يفتح النموذج
+        // في وضع التحرير.
         builder: (context, state) => BlocProvider(
           create: (context) => AddAdCubit(GetIt.I.get()),
-          child: const AddAdFeatureScreen(),
+          child: AddAdFeatureScreen(home: state.extra as HomeEntity?),
         ),
       ),
 
@@ -227,4 +242,45 @@ class AppRouter {
     errorBuilder: (context, state) =>
         Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),
   );
+}
+
+/// جسم شاشة البداية.
+///
+/// لو تعذّر على التطبيق تحديد حالة تسجيل الدخول لأي سبب (انقطاع الشبكة،
+/// أو تعليق طلب الجلسة)، كانت الشاشة تبقى تدور إلى الأبد. الآن تنتقل
+/// تلقائيًا إلى شاشة الدخول بعد مهلة، فلا يعلق التطبيق أبدًا.
+class _SplashBody extends StatefulWidget {
+  const _SplashBody();
+
+  @override
+  State<_SplashBody> createState() => _SplashBodyState();
+}
+
+class _SplashBodyState extends State<_SplashBody> {
+  // مخرج أخير فقط: حالة الخطأ تنقل المستخدمة بنفسها، وهذه المهلة
+  // تحسبًا لطلب لا يعود أبدًا. طويلة عمدًا حتى لا تطرد مستخدمة
+  // جلستها صالحة على شبكة بطيئة.
+  static const Duration _timeout = Duration(seconds: 15);
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer(_timeout, () {
+      if (!mounted) return;
+      final router = GoRouter.of(context);
+      if (router.state.uri.toString() == Routes.splash) {
+        router.go(Routes.auth);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => const Center(child: LoadingWidget());
 }

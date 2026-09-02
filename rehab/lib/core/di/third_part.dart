@@ -12,10 +12,10 @@ abstract class ThirdPartyConfig {
   @lazySingleton
   SupabaseClient get supabaseClient => Supabase.instance.client;
   //----------------------------------------------------------------------------
-  AndroidOptions _getAndroidOptions() =>
-      const AndroidOptions(encryptedSharedPreferences: true);
+  // encryptedSharedPreferences مهجور وسيُحذف في v11، والبيانات تُرحَّل
+  // تلقائيًا إلى تشفير مخصّص عند أول وصول — فالوسيط صار بلا أثر.
   @lazySingleton
   FlutterSecureStorage get flutterSecureStorage =>
-      FlutterSecureStorage(aOptions: _getAndroidOptions());
+      const FlutterSecureStorage(aOptions: AndroidOptions());
   //----------------------------------------------------------------------------
 }

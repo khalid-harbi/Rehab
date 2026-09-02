@@ -1,6 +1,5 @@
 import 'package:rehab/core/exports/app_exports.dart';
 import 'package:rehab/core/extensions/context_extensions.dart';
-import 'package:rehab/features/home/domain/entities/home_entity.dart';
 import 'package:share_plus/share_plus.dart';
 
 void shareHomeDetails(BuildContext context, HomeEntity home) {

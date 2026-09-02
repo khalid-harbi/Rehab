@@ -31,9 +31,4 @@ class BookingCubit extends Cubit<BookingState> {
       },
     );
   }
-
-  @override
-  Future<void> close() {
-    return super.close();
-  }
 }

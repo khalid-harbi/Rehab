@@ -53,4 +53,50 @@ class AddAdCubit extends Cubit<AddAdState> {
       },
     );
   }
+
+  /// حفظ تعديلات إعلان قائم — نفس حالات الإضافة، فالشاشة واحدة.
+  Future<void> updateAd({
+    required int id,
+    required String title,
+    required String city,
+    required String district,
+    required String propertyType,
+    required String description,
+    required int rooms,
+    required int bathrooms,
+    required double price,
+    required double area,
+    required double lat,
+    required double lng,
+    required List<String> policies,
+    required List<String> amenities,
+    required List<String> keptImageUrls,
+    required List<File> newImages,
+  }) async {
+    emit(AddAdLoadingState());
+
+    final result = await _addAdUseCase.update(
+      id: id,
+      title: title,
+      city: city,
+      district: district,
+      propertyType: propertyType,
+      description: description,
+      rooms: rooms,
+      bathrooms: bathrooms,
+      price: price,
+      area: area,
+      lat: lat,
+      lng: lng,
+      policies: policies,
+      amenities: amenities,
+      keptImageUrls: keptImageUrls,
+      newImages: newImages,
+    );
+
+    result.when(
+      (success) => emit(AddAdSuccessState()),
+      (error) => emit(AddAdErrorState(message: error.message)),
+    );
+  }
 }

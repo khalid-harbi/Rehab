@@ -119,14 +119,22 @@ extension StringExtensions on String {
   bool get isNotNullOrEmpty => trim().isNotEmpty;
 
   /// Check if string contains any digit
-  bool get containsNumber => RegExp(r'd').hasMatch(this);
+  ///
+  /// كان التعبير r'd' — أي حرف d اللاتيني لا رقمًا. فـ "abcd" تُعدّ محتوية
+  /// على رقم و "123" لا تُعدّ. الصحيح r'\d'.
+  bool get containsNumber => RegExp(r'\d').hasMatch(this);
 
   /// Check if string contains emojis
+  ///
+  /// كانت النطاقات مكتوبة بالإيموجي مباشرة، وهي أزواج بديلة (surrogate
+  /// pairs) لا يقبلها محرك التعابير في دارت بلا وضع unicode — فالتعبير
+  /// كان غير صالح نحويًا أصلًا.
   bool get containsEmoji => RegExp(
-    r'[😀-🙏]|' // Emoticons
-    r'[🌀-🗿]|' // Symbols & Pictographs
-    r'[🚀-🛿]|' // Transport & Map
-    r'[🇠-🇿]', // Flags
+    r'[\u{1F600}-\u{1F64F}]|' // Emoticons
+    r'[\u{1F300}-\u{1F5FF}]|' // Symbols & Pictographs
+    r'[\u{1F680}-\u{1F6FF}]|' // Transport & Map
+    r'[\u{1F1E6}-\u{1F1FF}]', // Flags
+    unicode: true,
   ).hasMatch(this);
 
   /// Convert from "YYYY-MM-DD" → "DD/MM/YYYY"
