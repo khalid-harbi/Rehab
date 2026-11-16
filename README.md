@@ -63,7 +63,21 @@ Find accommodation near important destinations, including:
 
 ---
 
-## 📸 App Preview
+## 🎨 UI Design & User Flow
+
+The initial UI draft outlining the application's screens, navigation flow, and user journeys across different account roles.
+
+<div align="center">
+
+<img src="screenshots/initial_ui_draft.png" alt="Rehab Initial UI Design and User Flow" width="100%" />
+
+</div>
+
+---
+
+## 📱 App Preview
+
+A look at the Rehab application interface.
 
 <div align="center">
 
