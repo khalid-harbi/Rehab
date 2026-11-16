@@ -1,7 +1,7 @@
 <div align="center">
 
 
-<img width="400" height="400" alt="Geometric Arabic Wordmark Logo" src="https://github.com/user-attachments/assets/edff86c7-73c6-4ee5-91de-a0edf3430c30" />
+<img width="200" height="200" alt="Geometric Arabic Wordmark Logo" src="https://github.com/user-attachments/assets/edff86c7-73c6-4ee5-91de-a0edf3430c30" />
 
 
 </div>
