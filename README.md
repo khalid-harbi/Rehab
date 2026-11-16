@@ -67,12 +67,11 @@ Find accommodation near important destinations, including:
 
 The initial UI draft outlining the application's screens, navigation flow, and user journeys across different account roles.
 
-<img width="4222" height="2802" alt="rehab" src="https://github.com/user-attachments/assets/e77d35b9-a87e-440b-a20a-c821d8039f74" />
 
 
 <div align="center">
 
-<img src="screenshots/initial_ui_draft.png" alt="Rehab Initial UI Design and User Flow" width="100%" />
+<img width="4222" height="2802" alt="rehab" src="https://github.com/user-attachments/assets/e77d35b9-a87e-440b-a20a-c821d8039f74" />
 
 </div>
 
