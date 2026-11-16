@@ -1,4 +1,4 @@
-# 🏡 رحاب | Rehab
+# 🏡 Rehab
 
 <div align="center">
 
@@ -10,121 +10,128 @@
 ![GoRouter](https://img.shields.io/badge/GoRouter-EA4335?style=for-the-badge)
 ![Moyasar](https://img.shields.io/badge/Moyasar-5B2EFF?style=for-the-badge)
 
-### ✨ منصة ذكية وآمنة تساعد الفتيات في إيجاد السكن المناسب بالقرب من الفرص التعليمية والمهنية والفعاليات التقنية.
+### ✨ A smart and secure platform that helps women find suitable accommodation near educational, professional, and technology-related opportunities.
 
 </div>
 
 ---
 
-# 📖 نبذة عن المشروع
+## 📖 About the Project
 
-**رحاب** هو تطبيق مخصص للفتيات يساعدهن على إيجاد سكن مناسب وآمن عند الانتقال إلى مدينة أخرى من أجل:
+**Rehab** is a mobile application designed to help women find safe and suitable accommodation when traveling to another city for:
 
-- المعسكرات التقنية
-- الهاكاثونات
-- الوظائف
-- الورش والفعاليات
-- الدراسة والتدريب
+- Technology bootcamps
+- Hackathons
+- Job opportunities
+- Workshops and events
+- Education and training programs
 
-ويهدف التطبيق إلى تسهيل الوصول للفرص بدون أن يكون السكن عائقًا.
+The goal is to make accommodation more accessible so that housing does not become a barrier to pursuing new opportunities.
 
-كما يوفّر التطبيق إمكانية:
+The application aims to provide:
 
-- 🏠 البحث عن السكن الأقرب للموقع المطلوب
-- 👭 السكن مع شريكة مناسبة
-- 📊 حساب نسبة التطابق بين الشريكات
-- 🔐 التحقق من الهوية عبر نفاذ (مستقبلاً)
-- 💳 الدفع الإلكتروني عبر ميسر
-- ⭐ تقييمات وتجارب المستخدمين
-
----
-
-# 🚨 المشكلة التي يحلها المشروع
-
-الكثير من الفتيات يحصلن على فرص قوية في مدن مختلفة، لكن يواجهن تحديات مثل:
-
-- صعوبة إيجاد سكن مناسب
-- ارتفاع الأسعار
-- القلق من الأمان والموثوقية
-- عدم معرفة المناطق القريبة
-- عدم وجود شريكة سكن مناسبة
-
-ومن هنا جاءت فكرة **رحاب** لتوفير تجربة سكن أكثر أمانًا وسهولة ومرونة.
+- 🏠 Accommodation search based on proximity to a desired location
+- 👭 Roommate matching
+- 📊 Compatibility scores between potential roommates
+- 🔐 Identity verification through Nafath (planned)
+- 💳 Online payments through Moyasar
+- ⭐ User reviews and ratings
 
 ---
 
-# 🎯 أهداف المشروع
+## 🚨 Problem Statement
 
-- تسهيل الوصول للفرص خارج المدن
-- توفير بيئة سكن آمنة للفتيات
-- تقليل تكاليف السكن عبر مشاركة السكن
-- ربط التقنية بحلول الحياة الواقعية
-- تحسين تجربة الانتقال والسكن المؤقت
+Many women receive valuable opportunities in cities different from their own but face challenges such as:
 
----
+- Difficulty finding suitable accommodation
+- High accommodation costs
+- Safety and trust concerns
+- Limited knowledge of nearby areas
+- Difficulty finding a compatible roommate
 
-# ✨ المميزات الرئيسية
-
-## 🔍 البحث عن السكن
-- استعراض العقارات والسكن المتاح
-- تصفية النتائج حسب:
-  - المدينة
-  - السعر
-  - عدد الغرف
-  - نوع السكن
-
-## 👭 نظام الشريكة الذكية
-- اقتراح شريكات سكن مناسبين
-- نسبة تطابق بناءً على:
-  - الاهتمامات
-  - نمط الحياة
-  - أوقات النوم
-  - الدراسة والعمل
-
-## 📍 السكن الأقرب لك
-- اقتراح السكن القريب من:
-  - المعسكرات
-  - الجامعات
-  - مقرات العمل
-  - الفعاليات التقنية
-
-## 💳 الدفع الإلكتروني
-- ربط الدفع عبر Moyasar
-- تجربة دفع سهلة وآمنة
-
-## 🔐 الأمان والتحقق
-- توثيق المستخدمين
-- التخطيط لربط التطبيق مع منصة نفاذ
-
-## 📱 تجربة مستخدم حديثة
-- واجهات سلسة وعصرية
-- تصميم مريح وسهل الاستخدام
-- دعم قابلية التوسع مستقبلًا
+**Rehab** aims to address these challenges by providing a safer, easier, and more flexible accommodation experience.
 
 ---
 
-# 🧠 التقنيات المستخدمة
+## 🎯 Project Goals
 
-| التقنية | الاستخدام |
+- Make opportunities outside one's home city more accessible.
+- Provide a safer accommodation environment for women.
+- Reduce accommodation costs through shared housing.
+- Connect technology with real-world problems.
+- Improve the temporary housing and relocation experience.
+
+---
+
+## ✨ Key Features
+
+### 🔍 Accommodation Search
+
+- Browse available properties and accommodation options.
+- Filter search results by:
+  - City
+  - Price
+  - Number of rooms
+  - Accommodation type
+
+### 👭 Smart Roommate Matching
+
+- Suggest compatible potential roommates.
+- Calculate compatibility based on:
+  - Interests
+  - Lifestyle
+  - Sleeping schedules
+  - Study and work routines
+
+### 📍 Location-Based Accommodation
+
+Find accommodation near:
+
+- Technology bootcamps
+- Universities
+- Workplaces
+- Technology events
+
+### 💳 Online Payments
+
+- Payment integration through Moyasar.
+- Simple and convenient payment experience.
+
+### 🔐 Security and Verification
+
+- User verification.
+- Planned integration with Nafath for identity verification.
+
+### 📱 Modern User Experience
+
+- Smooth and modern interfaces.
+- Clean and user-friendly design.
+- Scalable architecture for future development.
+
+---
+
+## 🧠 Technologies Used
+
+| Technology | Purpose |
 |---|---|
-| Flutter | تطوير التطبيق |
-| Dart | لغة البرمجة |
-| Supabase | قاعدة البيانات والمصادقة |
-| Clean Architecture | تنظيم هيكلة المشروع |
-| BLoC / Cubit | إدارة الحالة |
-| GoRouter | التنقل بين الصفحات |
-| GetIt + Injectable | Dependency Injection |
-| Freezed | بناء Models و States |
-| Json Serializable | تحويل البيانات JSON |
-| Dio | API Requests |
-| Moyasar | بوابة الدفع الإلكتروني |
-| Trello | إدارة المشروع والمهام |
-| Git & GitHub | إدارة الإصدارات والعمل الجماعي |
-| Figma | تصميم الواجهات وتجربة المستخدم |
+| Flutter | Cross-platform mobile development |
+| Dart | Programming language |
+| Supabase | Database and authentication |
+| Clean Architecture | Application architecture |
+| BLoC / Cubit | State management |
+| GoRouter | Navigation and routing |
+| GetIt + Injectable | Dependency injection |
+| Freezed | Model and state generation |
+| Json Serializable | JSON serialization |
+| Dio | API requests |
+| Moyasar | Payment gateway |
+| Trello | Project and task management |
+| Git & GitHub | Version control and collaboration |
+| Figma | UI/UX design |
 
 ---
 
-# 🏗️ هيكلة المشروع
+## 🏗️ Project Structure
 
 ```bash
 lib/
@@ -149,3 +156,23 @@ lib/
 ├── presentation/
 │
 └── main.dart
+```
+
+---
+
+## 📸 Preview
+
+<div align="center">
+
+<img width="1920" height="1080" alt="Rehab Preview" src="https://github.com/user-attachments/assets/e27a18c6-e587-42c2-a363-07e962566b7b" />
+
+</div>
+
+
+
+---
+
+## 👩‍💻 Project Purpose
+
+Rehab was developed to explore how technology can solve real-world accommodation challenges and make educational and professional opportunities more accessible.
+
